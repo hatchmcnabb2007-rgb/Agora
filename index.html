@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Represent — Know Your Candidates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F8F6F2;
+            --text-primary: #1A1A1A;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --border: #E5E1D8;
+            --accent: #8B6914;
+            --dark: #1F2937;
+            --concern-bg: #FEF9F0;
+            --concern-border: #F59E0B;
+
+            --c-small:    #059669;
+            --c-large:    #34D399;
+            --c-super:    #DC2626;
+            --c-labor:    #2563EB;
+            --c-corp:     #D97706;
+            --c-party:    #7C3AED;
+            --c-other:    #9CA3AF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; }
+
+        /* ── Header ── */
+        header {
+            background: var(--dark); padding: 16px 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 50;
+        }
+        .wordmark { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; letter-spacing: .05em; font-weight: 700; cursor: pointer; }
+        .wordmark span { color: #D4A853; }
+        .tagline { font-size: 11px; color: #9CA3AF; letter-spacing: .1em; text-transform: uppercase; }
+
+        /* ── Home ── */
+        #home-view { display: flex; flex-direction: column; align-items: center; padding: 72px 24px 60px; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 900; color: var(--dark); text-align: center; line-height: 1.15; margin-bottom: 14px; max-width: 540px; }
+        .hero-sub { font-size: 16px; color: var(--text-secondary); text-align: center; max-width: 480px; line-height: 1.65; margin-bottom: 44px; }
+
+        /* ── Search ── */
+        .search-wrap { width: 100%; max-width: 560px; position: relative; margin-bottom: 56px; }
+        .search-wrap input { width: 100%; padding: 16px 20px 16px 48px; font-size: 16px; font-family: 'Inter', sans-serif; border: 2px solid var(--border); border-radius: 8px; background: white; outline: none; color: var(--text-primary); transition: border-color .2s; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+        .search-wrap input:focus { border-color: var(--accent); }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 17px; pointer-events: none; }
+        .search-results { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: white; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 28px rgba(0,0,0,.1); display: none; z-index: 100; overflow: hidden; }
+        .search-result-item { padding: 13px 18px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background .12s; display: flex; align-items: center; gap: 12px; }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover { background: var(--bg); }
+        .result-name { font-weight: 600; font-size: 15px; }
+        .result-meta { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+        /* ── Avatar ── */
+        .avatar { flex-shrink: 0; border-radius: 50%; overflow: hidden; background: var(--dark); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; letter-spacing: .02em; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        .avatar-sm { width: 38px; height: 38px; font-size: 13px; }
+        .avatar-lg { width: 88px; height: 88px; font-size: 28px; }
+
+        /* ── Featured Grid ── */
+        .section-label { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; width: 100%; max-width: 880px; }
+        .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; width: 100%; max-width: 880px; }
+        .candidate-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 22px; cursor: pointer; transition: box-shadow .2s, transform .15s; position: relative; }
+        .candidate-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.08); transform: translateY(-2px); }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .card-header-text { flex: 1; min-width: 0; }
+        .card-party { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+        .party-D { color: #2563EB; } .party-R { color: #DC2626; } .party-I { color: #7C3AED; }
+        .card-name { font-weight: 700; font-size: 17px; margin-bottom: 4px; }
+        .card-title { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.4; }
+        .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; color: var(--text-secondary); }
+
+        /* ── Profile ── */
+        #profile-view { display: none; }
+        .profile-hero { background: var(--dark); color: white; padding: 32px 24px 30px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #9CA3AF; cursor: pointer; margin-bottom: 22px; background: none; border: none; font-family: 'Inter', sans-serif; padding: 0; transition: color .15s; }
+        .back-btn:hover { color: white; }
+        .profile-hero-content { display: flex; align-items: flex-start; gap: 22px; }
+        .profile-name { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; margin-bottom: 6px; line-height: 1.2; }
+        .profile-meta { font-size: 15px; color: #D1D5DB; line-height: 1.5; }
+        .profile-party-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 4px; margin-top: 12px; }
+        .badge-D { background: rgba(37,99,235,.2); color: #93C5FD; }
+        .badge-R { background: rgba(220,38,38,.2); color: #FCA5A5; }
+        .badge-I { background: rgba(124,58,237,.2); color: #C4B5FD; }
+        .profile-body { max-width: 760px; margin: 0 auto; padding: 40px 24px 60px; }
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        .highlight-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .highlight-list li { padding-left: 22px; position: relative; line-height: 1.6; font-size: 15px; }
+        .highlight-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+        .position-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .position-item { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+        .position-topic { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
+        .position-stance { font-size: 14px; font-weight: 500; line-height: 1.4; }
+        .concern-card { background: var(--concern-bg); border-left: 3px solid var(--concern-border); border-radius: 0 8px 8px 0; padding: 16px 18px; margin-bottom: 12px; }
+        .concern-card p { font-size: 14px; line-height: 1.65; }
+        .concern-card cite { display: block; font-size: 12px; color: var(--text-secondary); margin-top: 8px; font-style: normal; font-weight: 500; }
+        .no-concerns { font-size: 14px; color: var(--text-muted); font-style: italic; }
+
+        /* ── Campaign Finance ── */
+        .finance-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .cycle-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .cycle-tab {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all .15s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cycle-tab:hover { border-color: var(--accent); color: var(--accent); }
+        .cycle-tab.active { background: var(--dark); color: white; border-color: var(--dark); }
+
+        .finance-totals {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+.finance-total-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+        .finance-total-value { font-size: 22px; font-weight: 700; color: var(--dark); font-family: 'Playfair Display', serif; }
+        .finance-total-sub { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+        .finance-quickstats {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .quickstat {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .quickstat-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+        .quickstat-value { font-size: 20px; font-weight: 700; }
+        .quickstat-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+        .qs-green { color: var(--c-small); }
+        .qs-red { color: var(--c-super); }
+        .qs-blue { color: var(--c-labor); }
+
+        .stacked-bar-wrap { margin-bottom: 20px; }
+        .stacked-bar-label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+
+        .stacked-bar {
+            display: flex;
+            height: 24px;
+            border-radius: 6px;
+            overflow: hidden;
+            gap: 2px;
+        }
+
+        .bar-segment {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            transition: opacity .15s;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .bar-segment:hover { opacity: .85; }
+
+        .finance-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legend-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .legend-label { font-size: 13px; color: var(--text-primary); flex: 1; }
+        .legend-bar-wrap { flex: 2; background: var(--bg); border-radius: 4px; height: 6px; overflow: hidden; }
+        .legend-bar-fill { height: 100%; border-radius: 4px; }
+        .legend-pct { font-size: 13px; font-weight: 600; color: var(--text-primary); width: 38px; text-align: right; }
+        .legend-amt { font-size: 12px; color: var(--text-secondary); width: 60px; text-align: right; }
+
+        /* ── Profile Nav ── */
+        .profile-nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 54px;
+            z-index: 40;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .profile-nav::-webkit-scrollbar { display: none; }
+
+        .profile-nav-inner {
+            display: flex;
+            gap: 0;
+            padding: 0 20px;
+            min-width: max-content;
+        }
+
+        .nav-item {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 14px 16px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: color .15s, border-color .15s;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .nav-item:hover { color: var(--text-primary); }
+        .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+        /* ── Controversial Issues ── */
+        .issue-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .issue-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .issue-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            cursor: pointer;
+            gap: 12px;
+            user-select: none;
+        }
+
+        .issue-header:hover { background: var(--bg); }
+
+        .issue-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+
+        .issue-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stance-badge {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .stance-supports       { background: #D1FAE5; color: #065F46; }
+        .stance-strongly-supports { background: #065F46; color: white; }
+        .stance-opposes        { background: #FEE2E2; color: #991B1B; }
+        .stance-strongly-opposes { background: #991B1B; color: white; }
+        .stance-mixed          { background: #FEF3C7; color: #92400E; }
+        .stance-evolving       { background: #EDE9FE; color: #4C1D95; }
+        .stance-critical       { background: #FFEDD5; color: #9A3412; }
+        .stance-former-cabinet { background: #E0F2FE; color: #075985; }
+
+        .issue-chevron {
+            color: var(--text-muted);
+            font-size: 12px;
+            transition: transform .2s;
+            flex-shrink: 0;
+        }
+
+        .issue-chevron.open { transform: rotate(180deg); }
+
+        .issue-body {
+            display: none;
+            padding: 0 18px 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        .issue-body.open { display: block; }
+
+        .issue-description {
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--text-primary);
+            padding-top: 14px;
+            margin-bottom: 12px;
+        }
+
+        .issue-actions {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .issue-actions li {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .issue-actions li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 11px;
+        }
+
+        .issue-quote {
+            background: var(--bg);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+
+        .issue-quote p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+
+        .issue-quote cite {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-style: normal;
+        }
+
+        .issue-source {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ── Trump Record ── */
+        .trump-header-card {
+            background: var(--dark);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .trump-rel-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #9CA3AF;
+            margin-bottom: 6px;
+        }
+
+        .trump-rel-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .trump-summary {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #D1D5DB;
+        }
+
+        .trump-rel-badge {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .trump-ally     { background: rgba(5,150,105,.3);  color: #6EE7B7; }
+        .trump-opponent { background: rgba(220,38,38,.3);  color: #FCA5A5; }
+        .trump-cabinet  { background: rgba(37,99,235,.3);  color: #93C5FD; }
+        .trump-rival    { background: rgba(217,119,6,.3);  color: #FCD34D; }
+
+        .trump-moments {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .trump-moment {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+
+        .trump-moment-event {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .trump-moment-action {
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--text-secondary);
+        }
+
+        .trump-moment-source {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .trump-votes-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .trump-votes-table th {
+            text-align: left;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 8px 12px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trump-votes-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            vertical-align: top;
+        }
+
+        .trump-votes-table tr:last-child td { border-bottom: none; }
+
+        .vote-yes   { font-weight: 700; color: #059669; }
+        .vote-no    { font-weight: 700; color: #DC2626; }
+        .vote-mixed { font-weight: 700; color: #D97706; }
+
+        /* ── Ethics Section ── */
+        .ethics-sub {
+            margin-bottom: 28px;
+        }
+
+        .ethics-sub-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ethics-sub-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Stock summary */
+        .stock-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .stock-stat { min-width: 120px; }
+        .stock-stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+        .stock-stat-value { font-size: 22px; font-weight: 700; color: var(--dark); font-family: 'Playfair Display', serif; }
+        .stock-stat-sub { font-size: 12px; color: var(--text-secondary); margin-top: 3px; line-height: 1.4; }
+
+        .stock-note {
+            flex: 1;
+            min-width: 200px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            border-left: 2px solid var(--border);
+            padding-left: 16px;
+        }
+
+        .stock-source {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        /* Vote shifts */
+        .shift-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .shift-header {
+            padding: 12px 16px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .shift-issue {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--dark);
+        }
+
+        .shift-when {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .shift-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .shift-side {
+            padding: 14px 16px;
+        }
+
+        .shift-side:first-child {
+            border-right: 1px solid var(--border);
+        }
+
+        .shift-side-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .shift-before .shift-side-label { color: #DC2626; }
+        .shift-after  .shift-side-label { color: #059669; }
+
+        .shift-side p {
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--text-primary);
+        }
+
+        .shift-source {
+            padding: 8px 16px;
+            font-size: 11px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+            font-style: italic;
+        }
+
+        /* Flagged dealings */
+        .dealing-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-left: 3px solid #6B7280;
+            border-radius: 0 8px 8px 0;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+        }
+
+        .dealing-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .dealing-card p {
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--text-primary);
+        }
+
+        .dealing-card cite {
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        /* ── Epstein Record ── */
+        .epstein-sub { margin-bottom: 24px; }
+
+        .epstein-sub-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .epstein-sub-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        .epstein-stance-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .epstein-stance-badge {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .epstein-supports  { background: #D1FAE5; color: #065F46; }
+        .epstein-opposes   { background: #FEE2E2; color: #991B1B; }
+        .epstein-silent    { background: #F3F4F6; color: #4B5563; }
+        .epstein-mixed     { background: #FEF3C7; color: #92400E; }
+
+        .epstein-stance-body { flex: 1; }
+        .epstein-stance-body p { font-size: 14px; line-height: 1.65; color: var(--text-primary); margin-bottom: 8px; }
+        .epstein-stance-source { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+        .epstein-statements { display: flex; flex-direction: column; gap: 10px; }
+
+        .epstein-statement {
+            background: var(--bg);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 16px;
+        }
+
+        .epstein-statement p { font-size: 13px; line-height: 1.6; font-style: italic; color: var(--text-primary); }
+        .epstein-statement cite { display: block; font-size: 11px; color: var(--text-muted); margin-top: 6px; font-style: normal; }
+
+        .epstein-affiliations-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+
+        .affil-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .affil-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .affil-dot-none    { background: #059669; }
+        .affil-dot-noted   { background: #D97706; }
+        .affil-dot-serious { background: #DC2626; }
+
+        .affil-label { font-size: 13px; font-weight: 700; color: var(--dark); }
+
+        .epstein-affiliations-card p { font-size: 14px; line-height: 1.65; color: var(--text-primary); margin-bottom: 8px; }
+        .epstein-affiliations-card cite { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+        /* ── Policy Vision ── */
+        .vision-core {
+            background: var(--dark);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .vision-core-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #D4A853;
+            margin-bottom: 10px;
+        }
+
+        .vision-core-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.3;
+            color: white;
+        }
+
+        .vision-core-body {
+            font-size: 14px;
+            line-height: 1.75;
+            color: #D1D5DB;
+        }
+
+        .vision-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .vision-pillar {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .pillar-header {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
+        }
+
+        .pillar-topic {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .pillar-headline {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        .pillar-body {
+            padding: 14px 16px;
+        }
+
+        .pillar-description {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .pillar-proposals {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 12px;
+        }
+
+        .pillar-proposals li {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .pillar-proposals li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 11px;
+        }
+
+        .pillar-quote {
+            background: var(--bg);
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 12px;
+            line-height: 1.55;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .pillar-source {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ── Compare Toggle ── */
+        .compare-toggle {
+            position: absolute; top: 12px; right: 12px;
+            font-size: 11px; font-weight: 600; letter-spacing: .04em;
+            color: var(--text-muted); cursor: pointer;
+            padding: 4px 10px; border-radius: 4px;
+            border: 1px solid var(--border); background: white;
+            transition: all .15s; z-index: 2; font-family: 'Inter', sans-serif;
+        }
+        .compare-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .compare-toggle.selected { background: var(--accent); color: white; border-color: var(--accent); }
+        .compare-toggle:disabled { opacity: .35; cursor: default; pointer-events: none; }
+
+        /* ── Compare Bar ── */
+        #compare-bar {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--dark); color: white; z-index: 200;
+            border-top: 2px solid var(--accent);
+            box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+        }
+        .compare-bar-inner {
+            max-width: 880px; margin: 0 auto; padding: 12px 24px;
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+        }
+        .compare-bar-label {
+            font-size: 11px; font-weight: 700; letter-spacing: .1em;
+            text-transform: uppercase; color: #9CA3AF; white-space: nowrap;
+        }
+        .compare-bar-candidates { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+        .compare-bar-chip {
+            display: flex; align-items: center; gap: 7px;
+            background: rgba(255,255,255,.1); border-radius: 20px;
+            padding: 4px 12px 4px 6px; font-size: 13px; font-weight: 600;
+        }
+        .compare-bar-chip .avatar { width: 22px; height: 22px; font-size: 8px; }
+        .compare-bar-vs { color: var(--accent); font-weight: 700; font-size: 13px; }
+        .compare-bar-actions { display: flex; gap: 8px; }
+        .cmp-btn-primary {
+            background: var(--accent); color: white; border: none; border-radius: 6px;
+            padding: 8px 18px; font-size: 13px; font-weight: 600;
+            cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity .15s;
+        }
+        .cmp-btn-primary:hover { opacity: .85; }
+        .cmp-btn-ghost {
+            background: transparent; color: #9CA3AF; cursor: pointer;
+            border: 1px solid rgba(255,255,255,.15); border-radius: 6px;
+            padding: 8px 14px; font-size: 13px; font-family: 'Inter', sans-serif; transition: color .15s;
+        }
+        .cmp-btn-ghost:hover { color: white; }
+
+        /* ── Compare View ── */
+        #compare-view { display: none; padding-bottom: 80px; }
+        .compare-hero { background: var(--dark); color: white; padding: 24px 24px 0; }
+        .compare-view-title {
+            font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+            text-align: center; margin-bottom: 24px; color: white;
+        }
+        .compare-header-cols {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+            max-width: 880px; margin: 0 auto;
+        }
+        .compare-hero-col {
+            padding: 24px; text-align: center;
+            border-radius: 10px 10px 0 0; background: rgba(255,255,255,.06);
+        }
+        .compare-hero-col .avatar-lg { margin: 0 auto 12px; }
+        .compare-hero-name {
+            font-family: 'Playfair Display', serif; font-size: 19px;
+            font-weight: 700; margin-bottom: 4px; color: white;
+        }
+        .compare-hero-meta { font-size: 12px; color: #9CA3AF; }
+        .compare-body { max-width: 880px; margin: 0 auto; padding: 36px 24px; }
+        .compare-section-title {
+            font-size: 10px; font-weight: 700; letter-spacing: .14em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+        }
+        .compare-finance-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+        .compare-finance-col {
+            background: white; border: 1px solid var(--border);
+            border-radius: 10px; padding: 20px;
+        }
+        .compare-col-name {
+            font-size: 11px; font-weight: 700; letter-spacing: .08em;
+            text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;
+        }
+        .compare-total { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .compare-total-sub { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; }
+        .compare-issue-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+        .compare-issue-table th {
+            font-size: 10px; font-weight: 700; letter-spacing: .08em;
+            text-transform: uppercase; color: var(--text-muted);
+            padding: 8px 12px; background: var(--bg); border-bottom: 1px solid var(--border);
+        }
+        .compare-issue-table th:first-child { text-align: left; }
+        .compare-issue-table th:last-child { text-align: right; }
+        .compare-issue-table th:nth-child(2) { text-align: center; }
+        .compare-issue-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .compare-issue-table tr:last-child td { border-bottom: none; }
+        .cmp-topic-cell { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--dark); }
+        .cmp-stance-left { text-align: left; }
+        .cmp-stance-right { text-align: right; }
+        .compare-position-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* ── Live FEC Badge ── */
+        .live-badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+            background: #D1FAE5; color: #065F46; padding: 2px 8px;
+            border-radius: 20px; margin-left: 8px; vertical-align: middle;
+        }
+        .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #059669; }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .hero-title { font-size: 30px; }
+            .position-grid { grid-template-columns: 1fr; }
+            .featured-grid { grid-template-columns: 1fr; }
+            .profile-name { font-size: 26px; }
+            .avatar-lg { width: 64px; height: 64px; font-size: 22px; }
+            .finance-quickstats { flex-direction: column; }
+            .legend-bar-wrap { display: none; }
+            .vision-pillars { grid-template-columns: 1fr; }
+            .shift-body { grid-template-columns: 1fr; }
+            .compare-header-cols { grid-template-columns: 1fr; gap: 0; }
+            .compare-finance-cols { grid-template-columns: 1fr; }
+            .compare-position-cols { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="wordmark" onclick="showHome()">REPRE<span>SENT</span></div>
+    <div class="tagline">Know Your Candidates</div>
+</header>
+
+<!-- HOME -->
+<div id="home-view">
+    <h1 class="hero-title">Know who you're voting for.</h1>
+    <p class="hero-sub">Search any U.S. politician. Get a clear, sourced breakdown of their career, positions, and record — no spin, no agenda.</p>
+    <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search by name, state, or office…" autocomplete="off">
+        <div class="search-results" id="search-results"></div>
+    </div>
+    <div class="section-label">Featured Profiles</div>
+    <div class="featured-grid" id="featured-grid"></div>
+</div>
+
+<!-- PROFILE -->
+<div id="profile-view">
+    <div class="profile-hero">
+        <button class="back-btn" onclick="showHome()">← Back to search</button>
+        <div class="profile-hero-content">
+            <div class="avatar avatar-lg" id="p-photo"></div>
+            <div>
+                <div class="profile-name" id="p-name"></div>
+                <div class="profile-meta" id="p-meta"></div>
+                <div class="profile-party-badge" id="p-badge"></div>
+            </div>
+        </div>
+    </div>
+    <nav class="profile-nav" id="profile-nav">
+        <div class="profile-nav-inner">
+            <div class="nav-item active" onclick="scrollToSection('sec-highlights')">Highlights</div>
+            <div class="nav-item" onclick="scrollToSection('sec-vision')">Policy Vision</div>
+            <div class="nav-item" onclick="scrollToSection('sec-positions')">Positions</div>
+            <div class="nav-item" onclick="scrollToSection('sec-finance')">Finances</div>
+            <div class="nav-item" onclick="scrollToSection('sec-controversial')">Issues</div>
+            <div class="nav-item" onclick="scrollToSection('sec-trump')">Trump Record</div>
+            <div class="nav-item" onclick="scrollToSection('sec-ethics')">Ethics</div>
+            <div class="nav-item" onclick="scrollToSection('sec-epstein')">Epstein</div>
+            <div class="nav-item" onclick="scrollToSection('sec-concerns')">Concerns</div>
+        </div>
+    </nav>
+    <div class="profile-body">
+        <div class="section" id="sec-highlights">
+            <div class="section-title">Career Highlights</div>
+            <ul class="highlight-list" id="p-highlights"></ul>
+        </div>
+        <div class="section" id="sec-vision">
+            <div class="section-title">Policy Vision</div>
+            <div id="p-vision"></div>
+        </div>
+        <div class="section" id="sec-positions">
+            <div class="section-title">Key Positions</div>
+            <div class="position-grid" id="p-positions"></div>
+        </div>
+        <div class="section" id="sec-finance">
+            <div class="section-title">Campaign Finance</div>
+            <div class="finance-disclaimer">Data sourced from FEC filings · Representative figures for demonstration</div>
+            <div class="cycle-tabs" id="p-cycle-tabs"></div>
+            <div class="finance-totals" id="p-finance-totals"></div>
+            <div class="finance-quickstats" id="p-quickstats"></div>
+            <div class="stacked-bar-wrap">
+                <div class="stacked-bar-label">Contribution Breakdown</div>
+                <div class="stacked-bar" id="p-stacked-bar"></div>
+            </div>
+            <div class="finance-legend" id="p-finance-legend"></div>
+        </div>
+        <div class="section" id="sec-controversial">
+            <div class="section-title">Controversial Issues</div>
+            <div id="p-controversial"></div>
+        </div>
+        <div class="section" id="sec-trump">
+            <div class="section-title">Trump Administration Record</div>
+            <div id="p-trump"></div>
+        </div>
+        <div class="section" id="sec-ethics">
+            <div class="section-title">Ethics Record</div>
+            <div id="p-ethics"></div>
+        </div>
+        <div class="section" id="sec-epstein">
+            <div class="section-title">Epstein Record</div>
+            <div id="p-epstein"></div>
+        </div>
+        <div class="section" id="sec-concerns">
+            <div class="section-title">Points of Concern</div>
+            <div id="p-concerns"></div>
+        </div>
+    </div>
+</div>
+
+<!-- COMPARE BAR -->
+<div id="compare-bar">
+    <div class="compare-bar-inner">
+        <div class="compare-bar-label">Compare</div>
+        <div class="compare-bar-candidates" id="compare-bar-candidates"></div>
+        <div class="compare-bar-actions">
+            <button class="cmp-btn-primary" onclick="showCompare()">View Side-by-Side →</button>
+            <button class="cmp-btn-ghost" onclick="clearCompare()">Clear</button>
+        </div>
+    </div>
+</div>
+
+<!-- COMPARE VIEW -->
+<div id="compare-view">
+    <div class="compare-hero">
+        <button class="back-btn" onclick="showHome()">← Back to search</button>
+        <div class="compare-view-title">Side-by-Side Comparison</div>
+        <div class="compare-header-cols" id="compare-header-cols"></div>
+    </div>
+    <div class="compare-body" id="compare-body"></div>
+</div>
+
+<script>
+const CATEGORIES = [
+    { key: "small_individual", label: "Small Donors (under $200)",  color: "var(--c-small)", type: "individual" },
+    { key: "large_individual", label: "Large Donors (over $200)",   color: "var(--c-large)", type: "individual" },
+    { key: "super_pac",        label: "Super PACs",                  color: "var(--c-super)", type: "superpac"  },
+    { key: "labor_pac",        label: "Labor & Ethical PACs",        color: "var(--c-labor)", type: "labor"     },
+    { key: "corporate_pac",    label: "Corporate PACs",              color: "var(--c-corp)",  type: "corporate" },
+    { key: "party",            label: "Party Committees",            color: "var(--c-party)", type: "party"     },
+    { key: "other",            label: "Other",                       color: "var(--c-other)", type: "other"     },
+];
+
+const candidates = [
+    {
+        id: "bernie-sanders",
+        fecId: "S0VT00023",
+        name: "Bernie Sanders",
+        initials: "BS",
+        photo: null,
+        party: "I",
+        title: "U.S. Senator — Vermont",
+        state: "Vermont",
+        office: "U.S. Senate",
+        tags: ["Healthcare", "Economy", "Environment"],
+        highlights: [
+            "Served as Mayor of Burlington, VT from 1981–1989 — the longest-serving independent mayor of a U.S. city at the time.",
+            "Elected to the U.S. House of Representatives in 1990, serving 16 years before winning his Senate seat.",
+            "Ran for the Democratic presidential nomination in 2016 and 2020, winning 23 states in 2016.",
+            "Chaired the Senate Budget Committee and the Senate Health, Education, Labor & Pensions Committee.",
+            "Author of the Medicare for All Act, proposing a single-payer national health insurance system.",
+        ],
+        positions: [
+            { topic: "Healthcare",     stance: "Medicare for All — single-payer system" },
+            { topic: "Minimum Wage",   stance: "Federal $15/hr floor" },
+            { topic: "Climate",        stance: "Green New Deal supporter" },
+            { topic: "Education",      stance: "Tuition-free public college; debt cancellation" },
+            { topic: "Trade",          stance: "Opposed NAFTA and TPP" },
+            { topic: "Foreign Policy", stance: "Non-interventionist; skeptical of military spending" },
+        ],
+        finance: [
+            {
+                year: "2024", office: "U.S. Senate", total: 8200000,
+                small_individual: 65, large_individual: 28, super_pac: 0,
+                labor_pac: 5, corporate_pac: 0, party: 0, other: 2
+            },
+            {
+                year: "2020", office: "Presidential", total: 180000000,
+                small_individual: 57, large_individual: 35, super_pac: 0,
+                labor_pac: 2, corporate_pac: 0, party: 0, other: 6
+            },
+            {
+                year: "2018", office: "U.S. Senate", total: 10400000,
+                small_individual: 60, large_individual: 30, super_pac: 0,
+                labor_pac: 7, corporate_pac: 0, party: 0, other: 3
+            },
+        ],
+        vision: {
+            coreHeadline: "A Political Revolution Against Billionaire Control",
+            coreBody: "Sanders believes the United States is an oligarchy in which billionaires and large corporations have purchased the political system, and that only a mass political movement — not incremental reform — can reclaim it. His vision is a Scandinavian-style social democracy where healthcare, education, housing, and a living wage are guaranteed rights. He sees climate change as an existential threat requiring the same scale of mobilization as World War II, and economic inequality as the defining moral issue of our time.",
+            pillars: [
+                {
+                    topic: "Tax Policy",
+                    headline: "Aggressive Wealth Redistribution",
+                    description: "Sanders believes the wealthiest Americans pay nowhere near their fair share and that targeted taxes on extreme wealth and income are the primary mechanism for funding public goods and reducing inequality.",
+                    proposals: [
+                        "70% marginal income tax rate on income above $10 million",
+                        "2% annual wealth tax on wealth over $50M; 3% over $1B",
+                        "77% top marginal estate tax on estates over $1 billion",
+                        "Eliminate the stepped-up basis loophole that shields capital gains at death",
+                        "Financial transaction tax of 0.5% on stock trades to fund free college",
+                    ],
+                    quote: "The very rich are getting much richer while the middle class shrinks. That's not an accident — it's the result of deliberate policy choices.",
+                    source: "Sanders Senate platform; Tax Policy Center analysis, 2020"
+                },
+                {
+                    topic: "Healthcare",
+                    headline: "Medicare for All",
+                    description: "Sanders has championed a single-payer, government-run healthcare system for over 30 years. Under his plan, private insurance for covered services would be eliminated and every American would receive comprehensive coverage with no premiums, copays, or deductibles.",
+                    proposals: [
+                        "Replace all private insurance with a single federal program",
+                        "Cover medical, dental, vision, hearing, and mental health",
+                        "No premiums, deductibles, or copays for covered services",
+                        "Funded through new taxes on the wealthy and employers",
+                        "Negotiate drug prices directly with pharmaceutical companies",
+                    ],
+                    quote: "Healthcare is a human right, not a privilege for those who can afford it.",
+                    source: "Medicare for All Act (S.1129); CBO analysis, 2022"
+                },
+                {
+                    topic: "Education",
+                    headline: "Free College & Full Debt Cancellation",
+                    description: "Sanders argues that a college degree in the 21st century is equivalent to a high school diploma in the 20th — a baseline that should be publicly funded. He supports canceling all $1.7 trillion in outstanding student debt and making public college tuition-free.",
+                    proposals: [
+                        "Eliminate tuition at all public colleges and universities",
+                        "Cancel all outstanding student loan debt (~$1.7 trillion)",
+                        "Universal pre-K for all children ages 3–4",
+                        "Triple Title I funding for schools in low-income areas",
+                        "Raise minimum teacher pay to $60,000 nationwide",
+                    ],
+                    quote: "We live in a highly competitive global economy. If we are going to have the best workforce, we need the best educated workforce.",
+                    source: "College for All Act (S.1573); Sanders Senate platform, 2024"
+                },
+            ]
+        },
+        epstein: {
+            file_release: {
+                stance: "supports",
+                stanceLabel: "Supports Full Release",
+                description: "Sanders has broadly supported government transparency and declassification of records. He has not introduced specific Epstein-related legislation but has not opposed calls for the files to be released. His office has not issued a formal statement on the 2025 document releases.",
+                source: "Congressional record; Sanders Senate office communications"
+            },
+            statements: [
+                {
+                    text: "Sanders has not made Epstein a prominent campaign issue, consistent with his focus on economic and healthcare policy. No major campaign statements specifically addressing Epstein have been recorded.",
+                    source: "Sanders campaign communications review, 2019–2024"
+                }
+            ],
+            affiliations: {
+                status: "none",
+                dotClass: "affil-dot-none",
+                label: "No Documented Connection Found",
+                description: "No documented connection between Sanders and Jeffrey Epstein has been identified in public court filings, FBI records, flight logs from Epstein's aircraft, or financial disclosure records reviewed as of 2025. Sanders does not appear in any published list of Epstein associates or clients.",
+                source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); Senate financial disclosures"
+            }
+        },
+        controversial: [
+            {
+                topic: "Israel & Gaza",
+                stance: "critical",
+                stanceLabel: "Critical of Israeli Military Operations",
+                description: "Sanders has been one of the most outspoken senators critical of Israel's military campaign in Gaza, calling it disproportionate and a violation of international humanitarian law. He has attempted to block U.S. arms sales to Israel and was among those who did not attend Netanyahu's 2024 address to Congress.",
+                actions: [
+                    "Introduced joint resolutions to block arms sales to Israel under the Foreign Assistance Act.",
+                    "Skipped Netanyahu's address to a joint session of Congress in July 2024.",
+                    "Called for an immediate ceasefire and the unrestricted flow of humanitarian aid into Gaza.",
+                ],
+                quote: { text: "What Netanyahu's government is doing is not only morally unacceptable, it is in violation of international law and it must end.", source: "Senate floor statement, 2024" },
+                source: "Senate vote record; C-SPAN, 2024"
+            },
+            {
+                topic: "Abortion",
+                stance: "strongly-supports",
+                stanceLabel: "Strongly Supports Abortion Rights",
+                description: "Sanders has consistently supported abortion rights throughout his career. He supports codifying Roe v. Wade into federal law and has voted against every piece of legislation that would restrict abortion access.",
+                actions: [
+                    "Co-sponsored the Women's Health Protection Act to codify federal abortion protections.",
+                    "Voted against the Pain-Capable Unborn Child Protection Act.",
+                    "Has called the Dobbs decision 'an outrage' and called for federal action.",
+                ],
+                source: "Senate vote record; NARAL Pro-Choice America scorecard"
+            },
+            {
+                topic: "Gun Control",
+                stance: "supports",
+                stanceLabel: "Supports Gun Control (Evolved Position)",
+                description: "Sanders' gun record evolved significantly after representing rural Vermont in Congress. He now supports comprehensive background checks, red flag laws, and an assault weapons ban — positions he once opposed or avoided.",
+                actions: [
+                    "Voted for the Bipartisan Safer Communities Act (2022).",
+                    "Voted against the Brady Bill in 1993 and supported some gun manufacturer liability protections.",
+                    "Now supports banning assault-style weapons and high-capacity magazines.",
+                ],
+                source: "Washington Post fact-check, October 2015; Senate vote record"
+            },
+            {
+                topic: "Immigration",
+                stance: "supports",
+                stanceLabel: "Supports Comprehensive Reform",
+                description: "Sanders supports a path to citizenship for undocumented immigrants and humane treatment of asylum seekers. He has historically opposed some guest worker programs as exploitative of labor, putting him at odds with some immigration advocates.",
+                actions: [
+                    "Supports the Dream Act and a path to citizenship for DACA recipients.",
+                    "Voted against the 2007 comprehensive immigration reform bill, citing guest-worker provisions he said would undercut American wages.",
+                    "Has called for ending family separation and large-scale detention of asylum seekers.",
+                ],
+                source: "Senate vote record; The Nation, April 2016"
+            },
+            {
+                topic: "ICE & Border Enforcement",
+                stance: "mixed",
+                stanceLabel: "Supports Restructuring ICE",
+                description: "Sanders has not explicitly called for abolishing ICE but has called for a fundamental restructuring of immigration enforcement. He supports ending large-scale deportations of people with no criminal record and closing private detention facilities.",
+                actions: [
+                    "Opposed the deportation of undocumented immigrants who have lived in the U.S. for years without criminal records.",
+                    "Called for closing for-profit immigration detention centers.",
+                    "Has not co-sponsored Abolish ICE legislation.",
+                ],
+                source: "Sanders campaign platform, 2020; Senate statements"
+            },
+        ],
+        trump: {
+            relationship: "Consistent Opponent",
+            badge: "trump-opponent",
+            summary: "Sanders has been among Trump's most persistent and vocal critics, opposing virtually every major Trump initiative from tax cuts to immigration policy to healthcare. He led Senate Democratic opposition to Trump's budget proposals and has remained a consistent critic through both Trump administrations.",
+            moments: [
+                { event: "Tax Cuts and Jobs Act (2017)", action: "Voted against. Called it 'a massive tax break for the very rich' that would increase the national debt by $1.5 trillion.", source: "Senate vote record, December 2017" },
+                { event: "ACA Repeal Attempts (2017)", action: "Voted against all Republican ACA repeal-and-replace bills. Held town halls across the country to build opposition.", source: "Senate vote record, July 2017" },
+                { event: "Trump Cabinet Votes", action: "Voted against the vast majority of Trump's cabinet nominees, including Betsy DeVos (Education), Rex Tillerson (State), and Scott Pruitt (EPA).", source: "Senate vote record, 2017" },
+                { event: "First Impeachment (2020)", action: "Voted to convict Trump on both articles of impeachment — abuse of power and obstruction of Congress.", source: "Senate vote record, February 2020" },
+                { event: "Second Impeachment (2021)", action: "Voted to convict Trump on the charge of incitement of insurrection following January 6th.", source: "Senate vote record, February 2021" },
+            ]
+        },
+        ethics: {
+            stock: {
+                tenure: "1991–present",
+                trades: "Minimal",
+                description: "Senate financial disclosures indicate Sanders holds primarily mutual funds, treasury securities, and index funds. Individual stock trades during his congressional tenure have been among the lowest of any long-serving senator.",
+                source: "Senate STOCK Act financial disclosures"
+            },
+            shifts: [
+                {
+                    issue: "Gun Control",
+                    when: "Shifted 2015–2016",
+                    before: "Voted against the Brady Bill in 1993. Opposed mandatory waiting periods and supported some gun manufacturer liability protections as a congressman representing rural Vermont.",
+                    after: "Supports universal background checks, red flag laws, and an assault weapons ban. Voted for the Bipartisan Safer Communities Act in 2022.",
+                    source: "Washington Post fact-check, October 2015; Senate vote record"
+                },
+                {
+                    issue: "1994 Crime Bill",
+                    when: "Reversed 2015",
+                    before: "Voted in favor of the Violent Crime Control and Law Enforcement Act of 1994, which critics say contributed to mass incarceration.",
+                    after: "Has called it a mistake and apologized for supporting it. Made criminal justice reform a centerpiece of his presidential campaigns.",
+                    source: "The Atlantic, February 2016; C-SPAN vote record"
+                }
+            ],
+            dealings: [
+                {
+                    title: "Burlington College Land Deal",
+                    text: "VTDigger reported in 2016 that Sanders' wife, Jane O'Meara Sanders, served as president of Burlington College when it took out an $10 million loan to purchase land, allegedly based on misrepresented donor commitments. The college closed in 2017 citing debt. The FBI reportedly opened an inquiry; no charges were filed against either Sanders.",
+                    source: "VTDigger, January 2016; Seven Days Vermont, 2017"
+                }
+            ]
+        },
+        concerns: [
+            {
+                text: "The Washington Post reported in April 2019 that Sanders honeymooned in the Soviet Union in 1988 and has at various points praised aspects of socialist governments — a record critics have cited as raising concerns about his foreign policy judgment.",
+                source: "The Washington Post, April 2019"
+            },
+            {
+                text: "The Guardian reported in July 2019 that some Sanders campaign workers were earning below the $15/hr minimum wage Sanders publicly advocates for, a discrepancy the campaign later said it addressed by adjusting hours.",
+                source: "The Guardian, July 2019"
+            }
+        ]
+    },
+    {
+        id: "ted-cruz",
+        fecId: "S2TX00325",
+        name: "Ted Cruz",
+        initials: "TC",
+        photo: null,
+        party: "R",
+        title: "U.S. Senator — Texas",
+        state: "Texas",
+        office: "U.S. Senate",
+        tags: ["Courts", "Energy", "National Security"],
+        highlights: [
+            "Served as Solicitor General of Texas from 2003–2008, arguing multiple cases before the U.S. Supreme Court.",
+            "Elected to the U.S. Senate in 2012 as part of the Tea Party wave.",
+            "Ran for the Republican presidential nomination in 2016, winning 11 states before suspending his campaign.",
+            "Argued District of Columbia v. Heller — the landmark Second Amendment Supreme Court case — on behalf of 31 state attorneys general.",
+            "Serves on the Senate Judiciary Committee and the Senate Commerce Committee.",
+        ],
+        positions: [
+            { topic: "2nd Amendment", stance: "Strongly opposes new gun restrictions" },
+            { topic: "Abortion",      stance: "Opposes abortion rights; supports restrictions" },
+            { topic: "Energy",        stance: "Pro-oil and gas; opposes climate regulations" },
+            { topic: "Immigration",   stance: "Stricter border enforcement; opposes amnesty" },
+            { topic: "Taxes",         stance: "Supports broad tax cuts" },
+            { topic: "Courts",        stance: "Advocates for originalist judicial appointments" },
+        ],
+        finance: [
+            {
+                year: "2024", office: "U.S. Senate", total: 35000000,
+                small_individual: 16, large_individual: 38, super_pac: 30,
+                labor_pac: 0, corporate_pac: 11, party: 2, other: 3
+            },
+            {
+                year: "2018", office: "U.S. Senate", total: 45000000,
+                small_individual: 13, large_individual: 40, super_pac: 32,
+                labor_pac: 0, corporate_pac: 11, party: 1, other: 3
+            },
+            {
+                year: "2016", office: "Presidential", total: 92000000,
+                small_individual: 20, large_individual: 35, super_pac: 36,
+                labor_pac: 0, corporate_pac: 5, party: 1, other: 3
+            },
+        ],
+        vision: {
+            coreHeadline: "Constitutional Conservatism and the Return of Individual Liberty",
+            coreBody: "Cruz believes the federal government has grown far beyond the limits the Constitution intended, and that restoring American greatness means returning power to states, individuals, and free markets. He sees Washington as captured by a bipartisan 'establishment' of career politicians, lobbyists, and regulators who benefit from big government at the expense of ordinary citizens. His vision is an America where bureaucrats don't run healthcare, parents control education, taxes are low and simple, and the military is overwhelmingly strong.",
+            pillars: [
+                {
+                    topic: "Tax Policy",
+                    headline: "Flat Tax & IRS Abolition",
+                    description: "Cruz has long advocated for replacing the current tax code with a simple flat tax that every American could file on a single postcard. He believes the complexity of the tax code is itself a form of power the government holds over citizens and businesses.",
+                    proposals: [
+                        "Replace the current income tax with a 10% flat tax on all income",
+                        "Abolish the IRS in its current form",
+                        "Eliminate the corporate income tax (replaced by a business flat tax)",
+                        "Repeal the estate ('death') tax entirely",
+                        "End capital gains taxes for middle-income earners",
+                    ],
+                    quote: "The tax code is a massive weapon of oppression. We should be able to fill out our taxes on a postcard.",
+                    source: "Cruz Simple Flat Tax Plan, 2015; Senate Finance Committee statements"
+                },
+                {
+                    topic: "Healthcare",
+                    headline: "Full ACA Repeal, Market Competition",
+                    description: "Cruz views the Affordable Care Act as an unconstitutional government takeover of healthcare that has driven up costs and reduced choice. He supports market-based alternatives that allow insurance competition across state lines and give individuals control over their health spending.",
+                    proposals: [
+                        "Full repeal of the Affordable Care Act",
+                        "Allow insurance to be sold across state lines",
+                        "Expand health savings accounts (HSAs) with higher contribution limits",
+                        "Block-grant Medicaid to states with full flexibility",
+                        "Allow association health plans for small businesses and the self-employed",
+                    ],
+                    quote: "Obamacare is the biggest job-killer in America. The American people want to repeal every single word of it.",
+                    source: "Cruz Senate statements; AHCA vote record, 2017"
+                },
+                {
+                    topic: "Education",
+                    headline: "School Choice, Eliminate Dept. of Education",
+                    description: "Cruz believes education decisions should be made by parents and local communities, not federal bureaucrats. He is a strong advocate for school choice — including vouchers, charter schools, and homeschooling — and has called for abolishing or dramatically shrinking the Department of Education.",
+                    proposals: [
+                        "Eliminate or significantly reduce the U.S. Department of Education",
+                        "Universal school choice: federal funding follows the student",
+                        "Expand Education Savings Accounts (ESAs) for private school and homeschool costs",
+                        "Repeal Common Core standards and any federal curriculum mandates",
+                        "End federal student loan programs and return lending to private markets",
+                    ],
+                    quote: "The Department of Education has never educated a single child. Let's return education to parents and local communities.",
+                    source: "Cruz Senate platform; Senate education committee record"
+                },
+            ]
+        },
+        epstein: {
+            file_release: {
+                stance: "supports",
+                stanceLabel: "Supports Full Release",
+                description: "Cruz has been one of the more vocal Senate voices calling for the full release of Epstein-related documents. Following the Trump administration's moves to declassify files in early 2025, Cruz publicly praised the effort and called for the names of all individuals connected to Epstein's network to be made public.",
+                source: "Cruz Senate press releases, January 2025; Fox News, January 2025"
+            },
+            statements: [
+                {
+                    text: "We should release every single document. The American people deserve to know who was involved with Jeffrey Epstein and his network of child abusers.",
+                    source: "Sen. Ted Cruz, Fox News interview, January 2025"
+                },
+                {
+                    text: "Cruz introduced a resolution calling on the Justice Department to release all records related to Epstein's associates, including any grand jury materials that could be declassified under existing law.",
+                    source: "Senate resolution record, 2025"
+                }
+            ],
+            affiliations: {
+                status: "none",
+                dotClass: "affil-dot-none",
+                label: "No Documented Connection Found",
+                description: "No documented connection between Cruz and Jeffrey Epstein has been identified in public court filings, flight logs from Epstein's aircraft, or financial records reviewed as of 2025. Cruz does not appear in any published list of Epstein associates or clients.",
+                source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); Senate financial disclosures"
+            }
+        },
+        controversial: [
+            {
+                topic: "Israel & Gaza",
+                stance: "strongly-supports",
+                stanceLabel: "Strongly Pro-Israel",
+                description: "Cruz is one of the Senate's most consistently pro-Israel members. He supports unconditional U.S. military aid to Israel, opposed any pause or conditions on weapons shipments, and praised Netanyahu's 2024 address to Congress.",
+                actions: [
+                    "Attended and praised Netanyahu's address to a joint session of Congress in July 2024.",
+                    "Criticized the Biden administration for pausing weapons deliveries to Israel.",
+                    "Has consistently voted against any restrictions on U.S. military aid to Israel.",
+                ],
+                source: "Senate vote record; Cruz Senate statements, 2024"
+            },
+            {
+                topic: "Abortion",
+                stance: "strongly-opposes",
+                stanceLabel: "Strongly Opposes Abortion Rights",
+                description: "Cruz has been a consistent opponent of abortion rights throughout his Senate career. He praised the Supreme Court's Dobbs decision overturning Roe v. Wade and supports federal restrictions on abortion access.",
+                actions: [
+                    "Voted against the Women's Health Protection Act.",
+                    "Praised the Dobbs v. Jackson decision as 'an incredible victory for life.'",
+                    "Has supported a federal 15-week abortion ban.",
+                    "Received a 100% rating from the National Right to Life Committee.",
+                ],
+                source: "Senate vote record; National Right to Life scorecard"
+            },
+            {
+                topic: "Gun Control",
+                stance: "strongly-opposes",
+                stanceLabel: "Strongly Opposes New Restrictions",
+                description: "Cruz is one of the Senate's most vocal opponents of gun control legislation. He has opposed universal background checks, red flag laws, and assault weapons bans. He has received an A+ rating from the NRA and is among the top recipients of NRA campaign support.",
+                actions: [
+                    "Spoke at the NRA annual convention in Houston days after the Uvalde, Texas school shooting in 2022.",
+                    "Voted against the Bipartisan Safer Communities Act (2022).",
+                    "Opposed universal background check legislation and red flag laws.",
+                    "Received millions in career support from gun rights organizations.",
+                ],
+                source: "NRA ratings; Senate vote record; The Guardian, May 2022"
+            },
+            {
+                topic: "Immigration",
+                stance: "strongly-opposes",
+                stanceLabel: "Strict Enforcement / Opposes Amnesty",
+                description: "Cruz supports aggressive border enforcement, completion of a border wall, and opposes any path to citizenship for undocumented immigrants. He has been one of the most restrictionist voices on immigration in the Senate.",
+                actions: [
+                    "Opposes DACA and any amnesty for undocumented immigrants.",
+                    "Supports ending the diversity visa lottery and reducing chain migration.",
+                    "Backed Trump's travel ban and border wall funding demands.",
+                ],
+                source: "Senate vote record; Cruz campaign platform"
+            },
+            {
+                topic: "ICE & Border Enforcement",
+                stance: "strongly-supports",
+                stanceLabel: "Strongly Supports ICE",
+                description: "Cruz is a vocal defender of ICE and has opposed any effort to restructure or abolish the agency. He has backed expanded ICE operations and funding and criticized calls to defund or restructure immigration enforcement.",
+                actions: [
+                    "Introduced legislation to increase ICE funding and staffing.",
+                    "Opposed any effort to limit ICE's detention authority.",
+                    "Has been critical of sanctuary city policies that limit ICE cooperation.",
+                ],
+                source: "Senate statements; Cruz press releases, 2018–2024"
+            },
+        ],
+        trump: {
+            relationship: "Close Ally (After 2018)",
+            badge: "trump-ally",
+            summary: "After a bitter personal rivalry during the 2016 primary — in which Cruz called Trump a 'pathological liar' and 'sniveling coward' — Cruz made a full pivot and became one of Trump's closest Senate allies. He voted to confirm the vast majority of Trump cabinet picks, objected to the 2020 election results on January 6th, and has been a consistent surrogate for both Trump terms.",
+            moments: [
+                { event: "2016 Primary Rivalry", action: "Cruz refused to endorse Trump at the 2016 RNC, telling delegates to 'vote your conscience.' Trump had called his wife ugly and suggested his father was involved in JFK's assassination.", source: "CNN, July 2016; The Atlantic" },
+                { event: "2018 Endorsement", action: "Cruz endorsed Trump for re-election and invited him to campaign in Texas, beginning a full realignment with Trump's political orbit.", source: "Reuters, October 2018" },
+                { event: "January 6th, 2021", action: "Cruz led a group of senators in objecting to certifying the 2020 presidential election results, citing unsubstantiated fraud claims. He pressed forward with the objection even after the Capitol attack.", source: "Senate vote record; NBC News, January 2021" },
+                { event: "Cabinet Confirmations (2017–2021)", action: "Voted to confirm the vast majority of Trump's cabinet picks, including Betsy DeVos, Rex Tillerson, Scott Pruitt, and Mike Pompeo.", source: "Senate vote record, 2017–2021" },
+            ]
+        },
+        ethics: {
+            stock: {
+                tenure: "2013–present",
+                trades: "Moderate",
+                description: "Senate financial disclosures show Cruz holds a mix of individual stocks and funds across energy, technology, and financial services — sectors where he regularly votes on legislation. His wife Heidi Cruz's senior role at Goldman Sachs has prompted ongoing questions about potential conflicts on financial regulation votes.",
+                source: "Senate STOCK Act disclosures; OpenSecrets.org"
+            },
+            shifts: [
+                {
+                    issue: "Donald Trump",
+                    when: "Reversed 2018",
+                    before: "During the 2016 primary, Cruz publicly called Trump \"a pathological liar,\" \"a narcissist at a level I don't think this country has ever seen,\" and \"a sniveling coward.\" He refused to endorse him at the 2016 Republican National Convention.",
+                    after: "Endorsed Trump in 2018, campaigned for him in 2020 and 2024, and became one of his most prominent Senate allies — including objecting to the 2020 election certification on January 6th.",
+                    source: "CNN, May 2016; The Atlantic, August 2016; Senate vote record, January 2021"
+                },
+                {
+                    issue: "Net Neutrality",
+                    when: "Consistent opposition, 2014–present",
+                    before: "Called net neutrality \"Obamacare for the internet\" in 2014 and led Senate opposition to FCC open-internet rules.",
+                    after: "Voted to repeal net neutrality protections in 2017. Received over $1.4 million in career contributions from the telecom industry, per OpenSecrets.",
+                    source: "The Verge, November 2014; OpenSecrets donor records"
+                }
+            ],
+            dealings: [
+                {
+                    title: "Undisclosed Goldman Sachs Campaign Loans",
+                    text: "The New York Times reported in January 2016 that Cruz failed to disclose loans from Goldman Sachs and Citibank — totaling nearly $1 million — used to fund his 2012 Senate campaign, as required by FEC rules. Cruz called it a \"paperwork error.\" His wife was a managing director at Goldman Sachs at the time.",
+                    source: "The New York Times, January 13, 2016"
+                },
+                {
+                    title: "Energy Industry Contributions and ERCOT Failure",
+                    text: "OpenSecrets reported that Cruz has received millions in career contributions from oil, gas, and energy companies — many of which operate under ERCOT, the Texas power grid authority that failed catastrophically during the 2021 winter storm Cruz left Texas to avoid. Critics raised conflict-of-interest concerns about his resistance to ERCOT reform legislation.",
+                    source: "OpenSecrets.org, 2021; The Texas Tribune, March 2021"
+                }
+            ]
+        },
+        concerns: [
+            {
+                text: "The New York Times reported in February 2021 that Cruz traveled to Cancún, Mexico as a catastrophic winter storm struck Texas, leaving hundreds dead and millions without power or heat. Cruz later stated he made the trip to accompany his daughters.",
+                source: "The New York Times, February 2021"
+            },
+            {
+                text: "NBC News reported in January 2021 that Cruz was among the senators who formally objected to certifying the 2020 presidential election results on January 6, 2021 — a position that drew criticism from members of both parties.",
+                source: "NBC News, January 2021"
+            }
+        ]
+    },
+    {
+        id: "nikki-haley",
+        fecId: "P00014530",
+        name: "Nikki Haley",
+        initials: "NH",
+        photo: null,
+        party: "R",
+        title: "Former U.S. Ambassador to the UN · Former Governor, South Carolina",
+        state: "South Carolina",
+        office: "Former",
+        tags: ["Foreign Policy", "Fiscal Policy", "Education"],
+        highlights: [
+            "Served as the first female and first minority Governor of South Carolina (2011–2017).",
+            "Appointed U.S. Ambassador to the United Nations by President Trump (2017–2018).",
+            "Ran for the 2024 Republican presidential nomination — the last major challenger to Donald Trump.",
+            "Led the removal of the Confederate battle flag from the South Carolina State House grounds after the 2015 Charleston church shooting.",
+            "Daughter of Indian immigrants; her election as governor was a historic first for South Carolina.",
+        ],
+        positions: [
+            { topic: "Foreign Policy", stance: "Hawkish; strong support for Israel and Ukraine" },
+            { topic: "China",          stance: "Hardline; advocates decoupling" },
+            { topic: "Fiscal",         stance: "Balanced budget; aggressive spending cuts" },
+            { topic: "Immigration",    stance: "Secure border first; legal immigration reform" },
+            { topic: "Social",         stance: "Opposes abortion rights; pro-school choice" },
+            { topic: "Defense",        stance: "Increased defense spending" },
+        ],
+        finance: [
+            {
+                year: "2024", office: "Presidential", total: 62000000,
+                small_individual: 11, large_individual: 43, super_pac: 37,
+                labor_pac: 0, corporate_pac: 6, party: 1, other: 2
+            },
+            {
+                year: "2022", office: "Governor (SC)", total: 15500000,
+                small_individual: 18, large_individual: 55, super_pac: 16,
+                labor_pac: 0, corporate_pac: 8, party: 1, other: 2
+            },
+        ],
+        vision: {
+            coreHeadline: "Competent, Strong, and Fiscally Responsible America",
+            coreBody: "Haley positions herself as a pragmatic conservative who can translate conservative principles into actual governance results. She believes American leadership on the world stage is indispensable, that fiscal irresponsibility in Washington is the greatest threat to future generations, and that a new generation of conservative leaders must offer competence and results — not just culture war. She has tried to stake out a lane between Trumpian populism and traditional Reaganite conservatism.",
+            pillars: [
+                {
+                    topic: "Tax Policy",
+                    headline: "Spending Cuts and a Balanced Budget",
+                    description: "Haley's tax vision centers less on new cuts and more on reining in federal spending, which she argues is the root cause of inflation and long-term debt. She supports a balanced budget amendment and has been unusually willing to discuss entitlement reform.",
+                    proposals: [
+                        "Constitutional balanced budget amendment",
+                        "Raise the retirement age for Social Security for younger workers",
+                        "Means-test Medicare benefits for higher earners",
+                        "Extend and make permanent the 2017 individual tax cuts",
+                        "Reduce corporate tax rate further from current 21%",
+                    ],
+                    quote: "We have to have an honest conversation with the American people about entitlements, or we are going to go bankrupt as a country.",
+                    source: "Haley 2024 presidential platform; Republican primary debates, 2023"
+                },
+                {
+                    topic: "Healthcare",
+                    headline: "Market Competition with Medicaid Flexibility",
+                    description: "Haley opposes the ACA but, unusually among Republican governors, expanded Medicaid in South Carolina through a work-requirement waiver program. She supports market competition and state flexibility rather than a federal mandate in either direction.",
+                    proposals: [
+                        "Repeal and replace the ACA with state-based solutions",
+                        "Give states full Medicaid block grants with spending flexibility",
+                        "Expand health savings accounts and price transparency requirements",
+                        "Allow insurance sales across state lines",
+                        "Reform drug pricing through Medicare negotiation for limited drug classes",
+                    ],
+                    quote: "Healthcare should be about patients and doctors — not bureaucrats in Washington or insurance company boardrooms.",
+                    source: "Haley 2024 platform; South Carolina Medicaid expansion records, 2023"
+                },
+                {
+                    topic: "Education",
+                    headline: "School Choice and Parental Control",
+                    description: "Haley is a strong school choice advocate who signed South Carolina's first charter school expansion and supports a national school choice framework. She frames education as a parental rights issue and opposes federal curriculum mandates.",
+                    proposals: [
+                        "National school choice program: federal K-12 funding follows the student",
+                        "Expand charter schools and education savings accounts nationally",
+                        "Eliminate federal student loan forgiveness programs",
+                        "Return curriculum decisions entirely to states and local school boards",
+                        "Reform accreditation systems to allow more competition in higher education",
+                    ],
+                    quote: "Every child deserves a quality education, and that means letting parents — not government — decide what school is right for their child.",
+                    source: "Haley 2024 presidential platform; South Carolina education record, 2011–2017"
+                },
+            ]
+        },
+        epstein: {
+            file_release: {
+                stance: "mixed",
+                stanceLabel: "Has Not Taken a Clear Position",
+                description: "Haley has not made the release of Epstein files a prominent public issue. During her 2024 presidential campaign she did not address the Epstein files specifically in any documented debate appearances or major interviews.",
+                source: "2024 Republican primary debate transcripts; Haley campaign communications review"
+            },
+            statements: [
+                {
+                    text: "No major public statements specifically addressing the Epstein files or Epstein-connected individuals have been recorded from Haley during her tenure as Governor, UN Ambassador, or 2024 presidential campaign.",
+                    source: "Haley communications review, 2011–2024"
+                }
+            ],
+            affiliations: {
+                status: "none",
+                dotClass: "affil-dot-none",
+                label: "No Documented Connection Found",
+                description: "No documented connection between Haley and Jeffrey Epstein has been identified in public court filings, flight logs from Epstein's aircraft, financial records, or published accounts reviewed as of 2025. Haley does not appear in any published list of Epstein associates or clients.",
+                source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); state and federal ethics disclosures"
+            }
+        },
+        controversial: [
+            {
+                topic: "Israel & Gaza",
+                stance: "strongly-supports",
+                stanceLabel: "Strongly Pro-Israel",
+                description: "As U.S. Ambassador to the United Nations, Haley was known as one of the most forcefully pro-Israel representatives in U.S. history. She moved the U.S. embassy to Jerusalem alongside the Trump administration and repeatedly vetoed UN Security Council resolutions critical of Israel.",
+                actions: [
+                    "Withdrew the U.S. from the UN Human Rights Council in 2018, citing anti-Israel bias.",
+                    "Vetoed multiple UN Security Council resolutions critical of Israeli settlement activity.",
+                    "Supported relocating the U.S. embassy from Tel Aviv to Jerusalem in 2018.",
+                ],
+                source: "UN Security Council records; State Department archives, 2017–2018"
+            },
+            {
+                topic: "Abortion",
+                stance: "opposes",
+                stanceLabel: "Opposes Abortion Rights (Evolving Messaging)",
+                description: "Haley opposes abortion rights and signed abortion restrictions as Governor of South Carolina. During the 2024 presidential race, she called for a 'national consensus' on abortion — a framing critics said was deliberately vague to avoid taking a firm federal position.",
+                actions: [
+                    "Signed a 20-week abortion ban as Governor of South Carolina.",
+                    "Declined to commit to a specific federal abortion ban week limit during the 2024 primary.",
+                    "Stated she would sign a federal abortion restriction 'if it crossed her desk,' without specifying what restrictions she would support.",
+                ],
+                source: "South Carolina state records; CNN debate transcript, November 2023"
+            },
+            {
+                topic: "Gun Control",
+                stance: "opposes",
+                stanceLabel: "Opposes New Restrictions",
+                description: "Haley opposes new federal gun control measures. As Governor, she signed permitless carry legislation in South Carolina. She has received endorsements from gun rights organizations and has consistently opposed expanded background checks and assault weapons restrictions.",
+                actions: [
+                    "Signed South Carolina's permitless concealed carry bill as Governor.",
+                    "Opposes a federal assault weapons ban and universal background check legislation.",
+                ],
+                source: "South Carolina state records; Haley campaign statements, 2024"
+            },
+            {
+                topic: "Immigration",
+                stance: "mixed",
+                stanceLabel: "Secure Border First / Bipartisan Reform",
+                description: "Haley has taken a complicated position on immigration. She supports stronger border enforcement but also negotiated a bipartisan border security deal in the Senate — which Trump then publicly opposed and killed before it could pass.",
+                actions: [
+                    "Supported the bipartisan Senate border security deal negotiated in early 2024.",
+                    "Criticized Trump for urging senators to reject the deal for political reasons.",
+                    "Supports a merit-based legal immigration system and a path forward for DACA recipients.",
+                ],
+                source: "Politico, February 2024; The Hill, January 2024"
+            },
+            {
+                topic: "ICE & Border Enforcement",
+                stance: "supports",
+                stanceLabel: "Supports ICE and Border Enforcement",
+                description: "Haley supports robust ICE enforcement and a well-funded border security apparatus. She has not called for restructuring or abolishing ICE and supports deportation of undocumented immigrants with criminal records.",
+                actions: [
+                    "Supports increased funding for ICE and border patrol operations.",
+                    "Backed the Trump administration's zero-tolerance border policies during her tenure as UN Ambassador.",
+                ],
+                source: "Haley campaign platform, 2024"
+            },
+        ],
+        trump: {
+            relationship: "Former Cabinet Member / Primary Rival",
+            badge: "trump-cabinet",
+            summary: "Haley served as Trump's UN Ambassador from 2017 to 2018, departing on relatively positive terms. She later became a vocal critic, ran against him in the 2024 primary, and then endorsed him after suspending her campaign — a trajectory that drew criticism from observers across the political spectrum.",
+            moments: [
+                { event: "UN Ambassador (2017–2018)", action: "Served as Trump's UN Ambassador for nearly two years. Was seen as an effective advocate for administration positions while occasionally expressing independent views on Russia and other issues.", source: "State Department records; Politico profile, 2018" },
+                { event: "Resignation (October 2018)", action: "Departed on positive terms, with Trump calling her 'fantastic.' She stated she had no future political plans, though she later ran for president against him.", source: "The New York Times, October 2018" },
+                { event: "Post-January 6th (2021)", action: "Said Trump 'let us down' and that 'there's a place in hell' for those who attacked the Capitol. Later walked back these remarks and said the party should not 'move on' from Trump.", source: "Politico, February 2021; Politico, February 2023" },
+                { event: "2024 Presidential Primary", action: "Ran against Trump in the 2024 Republican primary, criticizing his character and fitness for office. Suspended her campaign in March 2024 after losing most states.", source: "NBC News, March 2024" },
+                { event: "2024 Endorsement", action: "Endorsed Trump for president in April 2024 after suspending her campaign, despite his months of personal attacks against her during the primary.", source: "CNN, April 2024" },
+            ]
+        },
+        ethics: {
+            stock: {
+                tenure: "2011–2018 (Governor & Ambassador)",
+                trades: "Post-govt board income: ~$2M+",
+                description: "As Governor and UN Ambassador, Haley was subject to state and federal ethics disclosure requirements with limited individual stock trading. After leaving government in 2018, she joined the boards of Boeing and several other major corporations, earning over $2 million in board compensation — companies with significant interests in policies she had overseen.",
+                source: "Federal ethics disclosures; Boeing 2019 proxy statement; SEC filings"
+            },
+            shifts: [
+                {
+                    issue: "Confederate Flag",
+                    when: "Reversed June 2015",
+                    before: "Defended the Confederate battle flag flying at the South Carolina State House as recently as 2014, stating it was \"not something that is racist\" and that major companies hadn't raised concerns about it.",
+                    after: "Called for its removal in June 2015 following the Charleston church shooting that killed nine Black worshippers, stating it had become \"a deeply offensive symbol of a brutally offensive past.\"",
+                    source: "Mother Jones, June 2015; The Post and Courier, June 2015"
+                },
+                {
+                    issue: "Donald Trump",
+                    when: "Reversed 2024",
+                    before: "Called Trump's comments \"race-baiting, xenophobic\" in 2016. After January 6th, said \"there's a special place in hell\" for those who stormed the Capitol and that Trump had let the country down.",
+                    after: "Endorsed Trump for president in 2024 after dropping out of the primary race he'd attacked her in, calling him the best candidate despite his months of personal attacks against her during the campaign.",
+                    source: "Politico, February 2023; CNN, March 2024"
+                }
+            ],
+            dealings: [
+                {
+                    title: "Boeing Board Appointment After UN Ambassador Role",
+                    text: "The Intercept reported in 2019 that Haley joined Boeing's board of directors shortly after leaving her position as UN Ambassador — a role in which she had overseen international arms sales, including Boeing defense products. Ethics watchdogs raised concerns about the revolving-door nature of the appointment and whether it represented a conflict of interest.",
+                    source: "The Intercept, March 2019; Boeing proxy statement, 2019"
+                }
+            ]
+        },
+        concerns: [
+            {
+                text: "Politico reported in February 2023 that Haley had taken notably different public positions on Donald Trump in the years since January 6th — initially offering praise, then issuing sharp criticism, then endorsing him for 2024 — a pattern observers in both parties characterized as inconsistent.",
+                source: "Politico, February 2023"
+            }
+        ]
+    },
+    {
+        id: "aoc",
+        fecId: "H8NY15148",
+        name: "Alexandria Ocasio-Cortez",
+        initials: "AO",
+        photo: null,
+        party: "D",
+        title: "U.S. Representative — New York (NY-14)",
+        state: "New York",
+        office: "U.S. House",
+        tags: ["Climate", "Healthcare", "Housing"],
+        highlights: [
+            "Elected in 2018 at age 29 — the youngest woman ever elected to Congress at that time.",
+            "Defeated 10-term incumbent Joe Crowley in the 2018 Democratic primary, one of the biggest upsets in recent congressional history.",
+            "Co-introduced the Green New Deal resolution in 2019 alongside Senator Ed Markey.",
+            "Member of the House Financial Services Committee and the House Oversight Committee.",
+            "Former bartender and community organizer from the Bronx, born and raised in New York City.",
+        ],
+        positions: [
+            { topic: "Climate",    stance: "Green New Deal; aggressive emissions targets" },
+            { topic: "Healthcare", stance: "Medicare for All supporter" },
+            { topic: "Housing",    stance: "National rent control; public housing investment" },
+            { topic: "Economy",    stance: "Wealth tax; higher corporate tax rates" },
+            { topic: "Policing",   stance: "Structural reform and community reinvestment" },
+            { topic: "Education",  stance: "Student debt cancellation; free public college" },
+        ],
+        finance: [
+            {
+                year: "2024", office: "U.S. House", total: 10200000,
+                small_individual: 71, large_individual: 21, super_pac: 0,
+                labor_pac: 5, corporate_pac: 0, party: 0, other: 3
+            },
+            {
+                year: "2022", office: "U.S. House", total: 9100000,
+                small_individual: 68, large_individual: 24, super_pac: 0,
+                labor_pac: 6, corporate_pac: 0, party: 0, other: 2
+            },
+            {
+                year: "2020", office: "U.S. House", total: 14100000,
+                small_individual: 66, large_individual: 26, super_pac: 0,
+                labor_pac: 5, corporate_pac: 0, party: 0, other: 3
+            },
+        ],
+        vision: {
+            coreHeadline: "A Fundamental Transformation — Green New Deal America",
+            coreBody: "AOC believes the United States is at a crossroads: without dramatic action on climate change, economic inequality, and racial injustice in the next decade, the window to prevent catastrophe closes permanently. Her signature vehicle is the Green New Deal — a framework that treats climate not just as an environmental issue but as an opportunity to rebuild the American economy from the bottom up, creating millions of union jobs, universal healthcare, and new public infrastructure while decarbonizing the economy. She sees moderate incrementalism as inadequate to the scale of the crisis.",
+            pillars: [
+                {
+                    topic: "Tax Policy",
+                    headline: "70% Top Rate and Taxing Extreme Wealth",
+                    description: "AOC made international headlines with her proposal for a 70% marginal tax rate on income above $10 million — a figure she supports on both economic and moral grounds, citing post-WWII American prosperity when top rates exceeded 90%. She views extreme wealth concentration as a threat to democracy itself.",
+                    proposals: [
+                        "70% marginal income tax rate on income above $10 million",
+                        "Wealth tax on net worth above $50 million",
+                        "Financial transaction tax of 0.1% on stock, bond, and derivative trades",
+                        "Restore the 77% estate tax on billionaire estates",
+                        "Eliminate carried interest loophole benefiting hedge fund managers",
+                    ],
+                    quote: "A 70% marginal rate isn't radical — it's actually grounded in some of the most progressive economic policy of the 20th century, when the U.S. had its highest growth rates.",
+                    source: "AOC interview with Tax Policy Center, January 2019; House bill record"
+                },
+                {
+                    topic: "Healthcare",
+                    headline: "Medicare for All — Non-Negotiable",
+                    description: "AOC views Medicare for All not as one of several acceptable options but as the necessary endpoint of healthcare reform. She has resisted supporting ACA expansions as 'final solutions' and has criticized colleagues for treating M4A as aspirational rather than actionable.",
+                    proposals: [
+                        "Comprehensive single-payer Medicare for All covering all residents",
+                        "Includes dental, vision, hearing, mental health, and reproductive care",
+                        "No premiums, deductibles, or copays",
+                        "Funded by taxes on the wealthy and reallocation of existing healthcare spending",
+                        "Immediate expansion of Medicaid as a transitional step",
+                    ],
+                    quote: "We can't accept a framework where healthcare is contingent on employment. That's not a right — that's a company benefit.",
+                    source: "Medicare for All Act (H.R.1976); AOC House statements, 2019–2024"
+                },
+                {
+                    topic: "Education",
+                    headline: "Free College, Full Debt Cancellation, Universal Pre-K",
+                    description: "AOC views the student debt crisis as a form of economic predation that has trapped a generation of Americans. She supports full cancellation of student debt and free tuition at public institutions, arguing the long-term economic benefit outweighs the cost.",
+                    proposals: [
+                        "Cancel all outstanding federal student loan debt (~$1.7 trillion)",
+                        "Free tuition at all public colleges, universities, and trade schools",
+                        "Universal publicly funded pre-K and childcare for all children",
+                        "Significantly increase Title I funding for underserved school districts",
+                        "Eliminate for-profit college institutions that receive federal funding",
+                    ],
+                    quote: "The student debt crisis isn't a personal failing — it's the result of a policy decision to defund public education and shift the cost to students and families.",
+                    source: "College for All Act (H.R.2707); AOC Senate platform, 2024"
+                },
+            ]
+        },
+        epstein: {
+            file_release: {
+                stance: "supports",
+                stanceLabel: "Supports Full Release and Accountability",
+                description: "AOC has publicly called for the full release of Epstein-related documents and accountability for anyone in his network. She has framed the issue as part of a broader critique of how wealth and power shield connected individuals from consequences.",
+                source: "AOC House floor statements; social media, 2019–2025"
+            },
+            statements: [
+                {
+                    text: "The Epstein case is about the abuse of power. Wealth should not shield anyone from accountability — not Epstein's clients, not his enablers, and not anyone in government who looked the other way.",
+                    source: "AOC, social media statement, 2019"
+                },
+                {
+                    text: "AOC voted in favor of measures to increase transparency around law enforcement records and has been critical of the non-prosecution agreement originally granted to Epstein by federal prosecutors in 2008.",
+                    source: "House vote record; AOC congressional statements, 2019"
+                }
+            ],
+            affiliations: {
+                status: "none",
+                dotClass: "affil-dot-none",
+                label: "No Documented Connection Found",
+                description: "No documented connection between AOC and Jeffrey Epstein has been identified in public court filings, flight logs from Epstein's aircraft, or financial records reviewed as of 2025. AOC does not appear in any published list of Epstein associates or clients. She was 29 years old and working as a bartender when Epstein was arrested in 2019.",
+                source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); House financial disclosures"
+            }
+        },
+        controversial: [
+            {
+                topic: "Israel & Gaza",
+                stance: "critical",
+                stanceLabel: "Critical of Israeli Military Operations",
+                description: "AOC has been one of the most outspoken House members critical of Israel's military campaign in Gaza. She has called the situation 'genocide,' co-sponsored resolutions to restrict U.S. arms to Israel, and skipped Netanyahu's 2024 address to Congress.",
+                actions: [
+                    "Did not attend Netanyahu's address to a joint session of Congress in July 2024.",
+                    "Co-sponsored resolutions to block U.S. arms transfers to Israel.",
+                    "Used the word 'genocide' to describe Israeli military operations in Gaza — a term disputed by the Israeli government and some U.S. officials.",
+                    "Called for an immediate and permanent ceasefire.",
+                ],
+                quote: { text: "This is a genocide being televised... the United States is funding it.", source: "AOC social media statement, November 2023" },
+                source: "House vote record; Congressional Record, 2024"
+            },
+            {
+                topic: "Abortion",
+                stance: "strongly-supports",
+                stanceLabel: "Strongly Supports Abortion Rights",
+                description: "AOC is one of the most vocal advocates for abortion rights in Congress. She has supported codifying federal abortion protections, expanding abortion funding, and has been outspoken in response to the Dobbs decision.",
+                actions: [
+                    "Co-sponsored the Women's Health Protection Act.",
+                    "Introduced legislation to expand Medicaid coverage of abortion.",
+                    "Publicly confronted Republican colleagues on the House floor over abortion rhetoric.",
+                ],
+                source: "House vote record; NARAL Pro-Choice America scorecard"
+            },
+            {
+                topic: "Gun Control",
+                stance: "strongly-supports",
+                stanceLabel: "Strongly Supports Gun Control",
+                description: "AOC is a consistent supporter of comprehensive gun control legislation. She supports universal background checks, a federal assault weapons ban, and has been vocal after mass shootings including Uvalde.",
+                actions: [
+                    "Voted for the Bipartisan Safer Communities Act (2022).",
+                    "Supports a federal assault weapons ban and mandatory buyback program.",
+                    "Walked out of a moment of silence for Uvalde victims, calling it 'inadequate' without legislative action.",
+                ],
+                source: "House vote record; Giffords Law Center scorecard"
+            },
+            {
+                topic: "Immigration",
+                stance: "strongly-supports",
+                stanceLabel: "Strongly Supports Comprehensive Reform",
+                description: "AOC supports a full path to citizenship for undocumented immigrants, protecting DACA recipients, and a humane asylum process. She has visited border detention facilities and was one of the most prominent critics of conditions there.",
+                actions: [
+                    "Visited a border detention facility in Clint, Texas in 2019, describing 'inhumane conditions.'",
+                    "Supports the Dream Act and a path to citizenship for all undocumented immigrants.",
+                    "Opposed the bipartisan border security deal in 2024, calling its asylum restrictions too harsh.",
+                ],
+                source: "Congressional Record; The New York Times, July 2019"
+            },
+            {
+                topic: "ICE & Border Enforcement",
+                stance: "strongly-opposes",
+                stanceLabel: "Supports Abolishing ICE",
+                description: "AOC has been one of the most prominent voices calling to abolish ICE, arguing the agency as structured is fundamentally incompatible with civil rights and due process. She has introduced legislation to dismantle and replace the agency.",
+                actions: [
+                    "Called to 'Abolish ICE' as a central part of her 2018 primary platform.",
+                    "Co-sponsored the Abolish ICE Act to eliminate ICE and transfer its functions to agencies with stronger civil rights oversight.",
+                    "Visited detention centers and publicly criticized conditions inside ICE facilities.",
+                ],
+                source: "AOC 2018 campaign platform; House bill record"
+            },
+        ],
+        trump: {
+            relationship: "Consistent Opponent",
+            badge: "trump-opponent",
+            summary: "AOC has been among the most vocal and consistent critics of both Trump administrations. She voted to impeach Trump twice, has been a target of Trump's public attacks, and has used her public platform to organize opposition to Trump's legislative and executive agenda.",
+            moments: [
+                { event: "First Impeachment Vote (2019)", action: "Voted to impeach Trump on charges of abuse of power and obstruction of Congress related to the Ukraine phone call.", source: "House vote record, December 2019" },
+                { event: "Second Impeachment Vote (2021)", action: "Voted to impeach Trump on the charge of incitement of insurrection following January 6th. Described sheltering in her office during the attack.", source: "House vote record, January 2021; AOC Instagram livestream, February 2021" },
+                { event: "Trump's Personal Attacks", action: "Trump and his allies have repeatedly targeted AOC by name. She has used the attention to fundraise and organize — she was one of the top House fundraisers during the Trump years.", source: "OpenSecrets fundraising data; Reuters, 2019–2024" },
+                { event: "MAGA Agenda Opposition (2025)", action: "Has been one of the most prominent House voices opposing Trump's second-term agenda, including executive orders on immigration, federal workforce reductions, and agency restructuring.", source: "Congressional Record, 2025" },
+            ]
+        },
+        ethics: {
+            stock: {
+                tenure: "2019–present",
+                trades: "Minimal — near zero",
+                description: "House financial disclosures show AOC holds very limited personal investments, consistent with her public advocacy for banning congressional stock trading. She has been among the most vocal supporters of legislation that would require members of Congress to divest individual stock holdings.",
+                source: "House STOCK Act disclosures; Quiver Quantitative congressional trading tracker"
+            },
+            shifts: [
+                {
+                    issue: "Infrastructure Bill",
+                    when: "November 2021",
+                    before: "Joined the progressive caucus in threatening to block the Bipartisan Infrastructure Bill unless it was paired with a guarantee that the larger Build Back Better social spending package would also pass. Called the two bills \"linked.\"",
+                    after: "Ultimately voted for the infrastructure bill after it was decoupled from Build Back Better — the exact outcome progressives had originally vowed to prevent.",
+                    source: "The Hill, November 2021; Politico, November 5, 2021"
+                },
+                {
+                    issue: "Israel–Palestine",
+                    when: "Shifted post-October 2023",
+                    before: "Took a relatively measured public stance on the Israeli-Palestinian conflict during her first terms, focusing primarily on domestic issues.",
+                    after: "Became one of the most vocal congressional critics of Israel's military operations in Gaza following the October 2023 Hamas attack, calling for a ceasefire and co-sponsoring resolutions to restrict U.S. arms transfers to Israel.",
+                    source: "The New York Times, November 2023; Congressional Record, 2024"
+                }
+            ],
+            dealings: [
+                {
+                    title: "Campaign Fund Routing Through PACs",
+                    text: "The Washington Post reported in March 2019, citing FEC filings, that AOC's then-chief of staff Saikat Chakrabarti had routed approximately $1 million in campaign contributions through outside PACs in a manner that may have obscured the ultimate recipients of the funds. A complaint was filed with the FEC. No charges were filed against AOC directly, and Chakrabarti later resigned.",
+                    source: "The Washington Post, March 2019; FEC complaint records"
+                }
+            ]
+        },
+        concerns: [
+            {
+                text: "The Washington Post reported in March 2019, citing FEC filings, that AOC's then-chief of staff had routed approximately $1 million in campaign contributions through outside PACs in a manner that may have obscured the ultimate recipients. No charges were filed against AOC directly.",
+                source: "The Washington Post, March 2019"
+            },
+            {
+                text: "The New York Times reported in February 2019 that AOC was among the lawmakers who opposed Amazon's planned HQ2 development in New York City — a project that state and city officials had projected would bring approximately 25,000 jobs and billions in tax revenue to the area.",
+                source: "The New York Times, February 2019"
+            }
+        ]
+    }
+];
+
+// ── Helpers ──────────────────────────────────────────────
+function partyLabel(p) {
+    return { D: "Democrat", R: "Republican", I: "Independent" }[p] || p;
+}
+
+function formatMoney(n) {
+    if (n >= 1000000) return "$" + (n / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+    if (n >= 1000)    return "$" + Math.round(n / 1000) + "K";
+    return "$" + n;
+}
+
+function makeAvatar(c, sizeClass) {
+    if (c.photo) {
+        return `<div class="avatar ${sizeClass}"><img src="${c.photo}" alt="${c.name}" onerror="this.parentElement.textContent='${c.initials}'"></div>`;
+    }
+    return `<div class="avatar ${sizeClass}">${c.initials}</div>`;
+}
+
+// ── Policy Vision renderer ───────────────────────────────
+function renderVision(c) {
+    const v = c.vision;
+    if (!v) { document.getElementById("p-vision").innerHTML = `<p class="no-concerns">No data on file.</p>`; return; }
+
+    document.getElementById("p-vision").innerHTML = `
+        <div class="vision-core">
+            <div class="vision-core-label">Core Political Philosophy</div>
+            <div class="vision-core-headline">${v.coreHeadline}</div>
+            <div class="vision-core-body">${v.coreBody}</div>
+        </div>
+        <div class="vision-pillars">
+            ${v.pillars.map(p => `
+                <div class="vision-pillar">
+                    <div class="pillar-header">
+                        <div class="pillar-topic">${p.topic}</div>
+                        <div class="pillar-headline">${p.headline}</div>
+                    </div>
+                    <div class="pillar-body">
+                        <p class="pillar-description">${p.description}</p>
+                        <ul class="pillar-proposals">
+                            ${p.proposals.map(prop => `<li>${prop}</li>`).join("")}
+                        </ul>
+                        ${p.quote ? `<div class="pillar-quote">"${p.quote}"</div>` : ""}
+                        <div class="pillar-source">Source: ${p.source}</div>
+                    </div>
+                </div>`).join("")}
+        </div>`;
+}
+
+// ── Epstein renderer ─────────────────────────────────────
+function renderEpstein(c) {
+    const e = c.epstein;
+    if (!e) { document.getElementById("p-epstein").innerHTML = `<p class="no-concerns">No data on file.</p>`; return; }
+
+    let html = "";
+
+    // File release stance
+    if (e.file_release) {
+        const f = e.file_release;
+        html += `
+        <div class="epstein-sub">
+            <div class="epstein-sub-title">File Release Record</div>
+            <div class="epstein-stance-card">
+                <div class="epstein-stance-badge epstein-${f.stance}">${f.stanceLabel}</div>
+                <div class="epstein-stance-body">
+                    <p>${f.description}</p>
+                    <div class="epstein-stance-source">Source: ${f.source}</div>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    // Public statements
+    if (e.statements && e.statements.length) {
+        html += `<div class="epstein-sub"><div class="epstein-sub-title">Public Statements</div><div class="epstein-statements">`;
+        html += e.statements.map(s => `
+            <div class="epstein-statement">
+                <p>"${s.text}"</p>
+                <cite>${s.source}</cite>
+            </div>`).join("");
+        html += `</div></div>`;
+    }
+
+    // Affiliations
+    if (e.affiliations) {
+        const a = e.affiliations;
+        html += `
+        <div class="epstein-sub">
+            <div class="epstein-sub-title">Documented Connections</div>
+            <div class="epstein-affiliations-card">
+                <div class="affil-status">
+                    <div class="affil-dot ${a.dotClass}"></div>
+                    <div class="affil-label">${a.label}</div>
+                </div>
+                <p>${a.description}</p>
+                <cite>Sources reviewed: ${a.source}</cite>
+            </div>
+        </div>`;
+    }
+
+    document.getElementById("p-epstein").innerHTML = html;
+}
+
+// ── Controversial Issues renderer ────────────────────────
+function toggleIssue(el) {
+    const body = el.nextElementSibling;
+    const chev = el.querySelector(".issue-chevron");
+    body.classList.toggle("open");
+    chev.classList.toggle("open");
+}
+
+function renderControversial(c) {
+    if (!c.controversial || !c.controversial.length) {
+        document.getElementById("p-controversial").innerHTML = `<p class="no-concerns">No data on file.</p>`;
+        return;
+    }
+
+    document.getElementById("p-controversial").innerHTML = `
+        <div class="issue-grid">
+            ${c.controversial.map(issue => `
+                <div class="issue-card">
+                    <div class="issue-header" onclick="toggleIssue(this)">
+                        <div class="issue-left">
+                            <div class="issue-title">${issue.topic}</div>
+                            <div class="stance-badge stance-${issue.stance}">${issue.stanceLabel}</div>
+                        </div>
+                        <div class="issue-chevron">▼</div>
+                    </div>
+                    <div class="issue-body">
+                        <p class="issue-description">${issue.description}</p>
+                        ${issue.actions && issue.actions.length ? `
+                            <ul class="issue-actions">
+                                ${issue.actions.map(a => `<li>${a}</li>`).join("")}
+                            </ul>` : ""}
+                        ${issue.quote ? `
+                            <div class="issue-quote">
+                                <p>"${issue.quote.text}"</p>
+                                <cite>— ${issue.quote.source}</cite>
+                            </div>` : ""}
+                        <div class="issue-source">Source: ${issue.source}</div>
+                    </div>
+                </div>
+            `).join("")}
+        </div>`;
+}
+
+// ── Trump Record renderer ─────────────────────────────────
+function renderTrump(c) {
+    const t = c.trump;
+    if (!t) {
+        document.getElementById("p-trump").innerHTML = `<p class="no-concerns">No data on file.</p>`;
+        return;
+    }
+
+    document.getElementById("p-trump").innerHTML = `
+        <div class="trump-header-card">
+            <div style="flex:1">
+                <div class="trump-rel-label">Relationship with Trump</div>
+                <div class="trump-rel-value">${t.relationship}</div>
+                <div class="trump-summary">${t.summary}</div>
+            </div>
+            <div class="trump-rel-badge ${t.badge}">${t.relationship}</div>
+        </div>
+        <div class="trump-moments">
+            ${t.moments.map(m => `
+                <div class="trump-moment">
+                    <div class="trump-moment-event">${m.event}</div>
+                    <div class="trump-moment-action">${m.action}</div>
+                    <div class="trump-moment-source">Source: ${m.source}</div>
+                </div>`).join("")}
+        </div>`;
+}
+
+// ── Ethics renderer ──────────────────────────────────────
+function renderEthics(c) {
+    const e = c.ethics;
+    if (!e) { document.getElementById("p-ethics").innerHTML = `<p class="no-concerns">No ethics record on file.</p>`; return; }
+
+    let html = "";
+
+    // Stock trading
+    if (e.stock) {
+        const s = e.stock;
+        html += `
+        <div class="ethics-sub">
+            <div class="ethics-sub-title">Stock Trading &amp; Financial Activity</div>
+            <div class="stock-card">
+                <div class="stock-stat">
+                    <div class="stock-stat-label">Tenure Covered</div>
+                    <div class="stock-stat-value" style="font-size:16px">${s.tenure}</div>
+                </div>
+                <div class="stock-stat">
+                    <div class="stock-stat-label">Trading Activity</div>
+                    <div class="stock-stat-value" style="font-size:16px">${s.trades}</div>
+                </div>
+                <div class="stock-note">
+                    ${s.description}
+                    <div class="stock-source">Source: ${s.source}</div>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    // Vote / position shifts
+    if (e.shifts && e.shifts.length) {
+        html += `<div class="ethics-sub"><div class="ethics-sub-title">Position Shifts</div>`;
+        html += e.shifts.map(s => `
+            <div class="shift-card">
+                <div class="shift-header">
+                    <div class="shift-issue">${s.issue}</div>
+                    <div class="shift-when">${s.when}</div>
+                </div>
+                <div class="shift-body">
+                    <div class="shift-side shift-before">
+                        <div class="shift-side-label">Before</div>
+                        <p>${s.before}</p>
+                    </div>
+                    <div class="shift-side shift-after">
+                        <div class="shift-side-label">After</div>
+                        <p>${s.after}</p>
+                    </div>
+                </div>
+                <div class="shift-source">Source: ${s.source}</div>
+            </div>`).join("");
+        html += `</div>`;
+    }
+
+    // Flagged dealings
+    if (e.dealings && e.dealings.length) {
+        html += `<div class="ethics-sub"><div class="ethics-sub-title">Flagged Dealings</div>`;
+        html += e.dealings.map(d => `
+            <div class="dealing-card">
+                <div class="dealing-title">${d.title}</div>
+                <p>${d.text}</p>
+                <cite>Source: ${d.source}</cite>
+            </div>`).join("");
+        html += `</div>`;
+    }
+
+    document.getElementById("p-ethics").innerHTML = html;
+}
+
+// ── Finance renderer ─────────────────────────────────────
+let currentFinanceCycle = 0;
+
+function renderFinance(c, cycleIndex) {
+    const cycle = c.finance[cycleIndex];
+
+    // Tabs
+    document.getElementById("p-cycle-tabs").innerHTML = c.finance.map((f, i) => `
+        <button class="cycle-tab ${i === cycleIndex ? "active" : ""}"
+                onclick="renderFinance(currentCandidate, ${i})">
+            ${f.year} · ${f.office}
+        </button>
+    `).join("");
+
+    // Totals row
+    document.getElementById("p-finance-totals").innerHTML = `
+        <div class="finance-total-item">
+            <div class="finance-total-label">Total Raised</div>
+            <div class="finance-total-value">${formatMoney(cycle.total)}</div>
+            <div class="finance-total-sub">${cycle.year} ${cycle.office} campaign</div>
+        </div>
+    `;
+
+    // Quick stats
+    const indPct  = (cycle.small_individual + cycle.large_individual);
+    const supPct  = cycle.super_pac;
+    const labPct  = cycle.labor_pac;
+    const corpPct = cycle.corporate_pac;
+
+    document.getElementById("p-quickstats").innerHTML = `
+        <div class="quickstat">
+            <div class="quickstat-label">From Individuals</div>
+            <div class="quickstat-value qs-green">${indPct}%</div>
+            <div class="quickstat-sub">${formatMoney(Math.round(cycle.total * indPct / 100))} total</div>
+        </div>
+        <div class="quickstat">
+            <div class="quickstat-label">Super PAC Money</div>
+            <div class="quickstat-value ${supPct > 0 ? "qs-red" : "qs-green"}">${supPct}%</div>
+            <div class="quickstat-sub">${supPct === 0 ? "None accepted" : formatMoney(Math.round(cycle.total * supPct / 100)) + " total"}</div>
+        </div>
+        <div class="quickstat">
+            <div class="quickstat-label">Labor & Ethical PACs</div>
+            <div class="quickstat-value qs-blue">${labPct}%</div>
+            <div class="quickstat-sub">${labPct === 0 ? "None" : formatMoney(Math.round(cycle.total * labPct / 100)) + " total"}</div>
+        </div>
+        <div class="quickstat">
+            <div class="quickstat-label">Corporate PACs</div>
+            <div class="quickstat-value ${corpPct > 0 ? "qs-red" : "qs-green"}">${corpPct}%</div>
+            <div class="quickstat-sub">${corpPct === 0 ? "None accepted" : formatMoney(Math.round(cycle.total * corpPct / 100)) + " total"}</div>
+        </div>
+    `;
+
+    // Stacked bar
+    document.getElementById("p-stacked-bar").innerHTML = CATEGORIES
+        .filter(cat => cycle[cat.key] > 0)
+        .map(cat => {
+            const pct = cycle[cat.key];
+            return `<div class="bar-segment" style="width:${pct}%;background:${cat.color}" title="${cat.label}: ${pct}%">${pct >= 8 ? pct + "%" : ""}</div>`;
+        }).join("");
+
+    // Legend
+    document.getElementById("p-finance-legend").innerHTML = CATEGORIES
+        .filter(cat => cycle[cat.key] >= 0)
+        .map(cat => {
+            const pct = cycle[cat.key];
+            const amt = Math.round(cycle.total * pct / 100);
+            return `
+                <div class="legend-row">
+                    <div class="legend-dot" style="background:${cat.color}"></div>
+                    <div class="legend-label">${cat.label}</div>
+                    <div class="legend-bar-wrap">
+                        <div class="legend-bar-fill" style="width:${pct}%;background:${cat.color}"></div>
+                    </div>
+                    <div class="legend-pct">${pct}%</div>
+                    <div class="legend-amt">${pct > 0 ? formatMoney(amt) : "—"}</div>
+                </div>`;
+        }).join("");
+}
+
+// ── Profile renderer ─────────────────────────────────────
+let currentCandidate = null;
+
+function showProfile(id) {
+    const c = candidates.find(x => x.id === id);
+    if (!c) return;
+    currentCandidate = c;
+
+    const photoEl = document.getElementById("p-photo");
+    photoEl.innerHTML = c.photo
+        ? `<img src="${c.photo}" alt="${c.name}" onerror="this.parentElement.textContent='${c.initials}'">`
+        : c.initials;
+
+    document.getElementById("p-name").textContent = c.name;
+    document.getElementById("p-meta").textContent = c.title;
+
+    const badge = document.getElementById("p-badge");
+    badge.textContent = partyLabel(c.party);
+    badge.className = `profile-party-badge badge-${c.party}`;
+
+    document.getElementById("p-highlights").innerHTML =
+        c.highlights.map(h => `<li>${h}</li>`).join("");
+
+    document.getElementById("p-positions").innerHTML =
+        c.positions.map(p => `
+            <div class="position-item">
+                <div class="position-topic">${p.topic}</div>
+                <div class="position-stance">${p.stance}</div>
+            </div>`).join("");
+
+    renderVision(c);
+    renderFinance(c, 0);
+    renderControversial(c);
+    renderTrump(c);
+    renderEthics(c);
+    renderEpstein(c);
+
+    const concerns = document.getElementById("p-concerns");
+    concerns.innerHTML = (c.concerns && c.concerns.length)
+        ? c.concerns.map(con => `
+            <div class="concern-card">
+                <p>${con.text}</p>
+                <cite>Source: ${con.source}</cite>
+            </div>`).join("")
+        : `<p class="no-concerns">No major concerns on record at this time.</p>`;
+
+    document.getElementById("home-view").style.display = "none";
+    document.getElementById("compare-view").style.display = "none";
+    document.getElementById("profile-view").style.display = "block";
+    window.scrollTo(0, 0);
+    // reset active nav item then start spy
+    document.querySelectorAll(".nav-item").forEach((n, i) => n.classList.toggle("active", i === 0));
+    setTimeout(initScrollSpy, 100);
+    fetchFECData(c);
+}
+
+function showHome() {
+    document.getElementById("home-view").style.display = "flex";
+    document.getElementById("profile-view").style.display = "none";
+    document.getElementById("compare-view").style.display = "none";
+}
+
+// ── Compare logic ────────────────────────────────────────
+let selectedToCompare = new Set();
+
+function toggleCompare(id, event) {
+    event.stopPropagation();
+    if (selectedToCompare.has(id)) {
+        selectedToCompare.delete(id);
+    } else {
+        if (selectedToCompare.size >= 2) return;
+        selectedToCompare.add(id);
+    }
+    updateCompareUI();
+}
+
+function clearCompare() {
+    selectedToCompare.clear();
+    updateCompareUI();
+}
+
+function updateCompareUI() {
+    const ids = [...selectedToCompare];
+    const bar = document.getElementById("compare-bar");
+
+    document.querySelectorAll(".compare-toggle").forEach(btn => {
+        const btnId = btn.dataset.id;
+        const sel = selectedToCompare.has(btnId);
+        btn.classList.toggle("selected", sel);
+        btn.textContent = sel ? "✓ Selected" : "+ Compare";
+        btn.disabled = !sel && ids.length >= 2;
+    });
+
+    if (ids.length === 0) { bar.style.display = "none"; return; }
+
+    bar.style.display = "block";
+    document.getElementById("compare-bar-candidates").innerHTML = ids.map((cid, i) => {
+        const c = candidates.find(x => x.id === cid);
+        return `${i > 0 ? '<span class="compare-bar-vs">vs</span>' : ''}
+            <div class="compare-bar-chip">${makeAvatar(c, "avatar")} ${c.name}</div>`;
+    }).join("");
+}
+
+function showCompare() {
+    const ids = [...selectedToCompare];
+    if (ids.length < 2) return;
+    const c1 = candidates.find(x => x.id === ids[0]);
+    const c2 = candidates.find(x => x.id === ids[1]);
+
+    document.getElementById("home-view").style.display = "none";
+    document.getElementById("profile-view").style.display = "none";
+    document.getElementById("compare-view").style.display = "block";
+    renderComparison(c1, c2);
+    window.scrollTo(0, 0);
+}
+
+function buildFinanceBar(cycle) {
+    const bar = CATEGORIES.filter(cat => cycle[cat.key] > 0).map(cat => {
+        const pct = cycle[cat.key];
+        return `<div class="bar-segment" style="width:${pct}%;background:${cat.color}" title="${cat.label}: ${pct}%">${pct >= 10 ? pct + "%" : ""}</div>`;
+    }).join("");
+
+    const legend = CATEGORIES.filter(cat => cycle[cat.key] > 0).map(cat => {
+        const pct = cycle[cat.key];
+        return `<div class="legend-row" style="margin-top:7px">
+            <div class="legend-dot" style="background:${cat.color}"></div>
+            <div class="legend-label" style="font-size:12px">${cat.label}</div>
+            <div class="legend-pct">${pct}%</div>
+        </div>`;
+    }).join("");
+
+    return `<div class="stacked-bar" style="margin-bottom:12px">${bar}</div>
+            <div class="finance-legend">${legend}</div>`;
+}
+
+function renderComparison(c1, c2) {
+    document.getElementById("compare-header-cols").innerHTML = [c1, c2].map(c => `
+        <div class="compare-hero-col">
+            ${makeAvatar(c, "avatar-lg")}
+            <div class="compare-hero-name">${c.name}</div>
+            <div class="compare-hero-meta">${c.title}</div>
+            <div class="profile-party-badge badge-${c.party}" style="margin-top:10px;display:inline-block">${partyLabel(c.party)}</div>
+        </div>`).join("");
+
+    const f1 = c1.finance[0];
+    const f2 = c2.finance[0];
+
+    let html = `
+    <div class="compare-section-title">Campaign Finance — Most Recent Cycle</div>
+    <div class="compare-finance-cols">
+        <div class="compare-finance-col">
+            <div class="compare-col-name">${c1.name}</div>
+            <div class="compare-total" id="cmp-total-${c1.id}">${formatMoney(f1.total)}</div>
+            <div class="compare-total-sub">${f1.year} ${f1.office} campaign</div>
+            ${buildFinanceBar(f1)}
+        </div>
+        <div class="compare-finance-col">
+            <div class="compare-col-name">${c2.name}</div>
+            <div class="compare-total" id="cmp-total-${c2.id}">${formatMoney(f2.total)}</div>
+            <div class="compare-total-sub">${f2.year} ${f2.office} campaign</div>
+            ${buildFinanceBar(f2)}
+        </div>
+    </div>`;
+
+    // Issue stances table — find all topics across both candidates
+    const allTopics = [...new Set([
+        ...(c1.controversial || []).map(x => x.topic),
+        ...(c2.controversial || []).map(x => x.topic)
+    ])];
+
+    if (allTopics.length > 0) {
+        const rows = allTopics.map(topic => {
+            const i1 = (c1.controversial || []).find(x => x.topic === topic);
+            const i2 = (c2.controversial || []).find(x => x.topic === topic);
+            const badge = (item) => item
+                ? `<span class="stance-badge stance-${item.stance}">${item.stanceLabel}</span>`
+                : `<span style="color:var(--text-muted);font-size:12px">—</span>`;
+            return `<tr>
+                <td class="cmp-stance-left">${badge(i1)}</td>
+                <td class="cmp-topic-cell">${topic}</td>
+                <td class="cmp-stance-right">${badge(i2)}</td>
+            </tr>`;
+        }).join("");
+
+        html += `
+        <div class="compare-section-title">Issue Stances</div>
+        <table class="compare-issue-table">
+            <thead><tr>
+                <th>${c1.name}</th><th>Issue</th><th>${c2.name}</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+        </table>`;
+    }
+
+    // Key positions
+    html += `
+    <div class="compare-section-title">Key Positions</div>
+    <div class="compare-position-cols">
+        <div>
+            <div class="compare-col-name">${c1.name}</div>
+            <div class="position-grid">
+                ${c1.positions.map(p => `<div class="position-item"><div class="position-topic">${p.topic}</div><div class="position-stance">${p.stance}</div></div>`).join("")}
+            </div>
+        </div>
+        <div>
+            <div class="compare-col-name">${c2.name}</div>
+            <div class="position-grid">
+                ${c2.positions.map(p => `<div class="position-item"><div class="position-topic">${p.topic}</div><div class="position-stance">${p.stance}</div></div>`).join("")}
+            </div>
+        </div>
+    </div>`;
+
+    document.getElementById("compare-body").innerHTML = html;
+}
+
+// ── FEC live data ─────────────────────────────────────────
+const FEC_KEY = "DEMO_KEY";
+
+async function fetchFECData(candidate) {
+    if (!candidate.fecId) return;
+    try {
+        const url = `https://api.open.fec.gov/v1/candidate/${candidate.fecId}/totals/?api_key=${FEC_KEY}&sort=-cycle&per_page=1`;
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data.results || !data.results.length) return;
+
+        const live = data.results[0];
+        const liveTotal = live.receipts;
+        const liveCycle = live.cycle;
+
+        // Only update if user is still viewing this candidate
+        if (!currentCandidate || currentCandidate.id !== candidate.id) return;
+        const totalsEl = document.getElementById("p-finance-totals");
+        if (!totalsEl) return;
+
+        const matchedCycle = candidate.finance.find(f => String(f.year) === String(liveCycle)) || candidate.finance[0];
+        totalsEl.innerHTML = `
+            <div class="finance-total-item">
+                <div class="finance-total-label">Total Raised <span class="live-badge"><span class="live-dot"></span>Live FEC</span></div>
+                <div class="finance-total-value">${formatMoney(liveTotal)}</div>
+                <div class="finance-total-sub">${liveCycle} ${matchedCycle.office} campaign</div>
+            </div>`;
+    } catch (e) { /* silently fall back to curated data */ }
+}
+
+// ── Home grid ────────────────────────────────────────────
+function renderFeatured() {
+    document.getElementById("featured-grid").innerHTML = candidates.map(c => `
+        <div class="candidate-card" onclick="showProfile('${c.id}')">
+            <button class="compare-toggle" data-id="${c.id}" onclick="toggleCompare('${c.id}', event)">+ Compare</button>
+            <div class="card-header" style="margin-right:80px">
+                ${makeAvatar(c, "avatar-sm")}
+                <div class="card-header-text">
+                    <div class="card-party party-${c.party}">${partyLabel(c.party)}</div>
+                    <div class="card-name">${c.name}</div>
+                </div>
+            </div>
+            <div class="card-title">${c.title}</div>
+            <div class="card-tags">${c.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        </div>`).join("");
+}
+
+// ── Search ───────────────────────────────────────────────
+document.getElementById("search-input").addEventListener("input", function () {
+    const q = this.value.trim().toLowerCase();
+    const box = document.getElementById("search-results");
+    if (!q) { box.style.display = "none"; return; }
+
+    const matches = candidates.filter(c =>
+        c.name.toLowerCase().includes(q) ||
+        c.state.toLowerCase().includes(q) ||
+        c.office.toLowerCase().includes(q)
+    );
+
+    box.innerHTML = matches.length
+        ? matches.map(c => `
+            <div class="search-result-item" onclick="showProfile('${c.id}')">
+                ${makeAvatar(c, "avatar-sm")}
+                <div>
+                    <div class="result-name">${c.name}</div>
+                    <div class="result-meta">${c.title}</div>
+                </div>
+            </div>`).join("")
+        : `<div class="search-result-item"><div class="result-name" style="color:#9CA3AF">No results — more profiles coming soon</div></div>`;
+
+    box.style.display = "block";
+});
+
+document.addEventListener("click", function (e) {
+    if (!e.target.closest(".search-wrap"))
+        document.getElementById("search-results").style.display = "none";
+});
+
+// ── Section nav ──────────────────────────────────────────
+function getStickyOffset() {
+    const header = document.querySelector("header");
+    const nav = document.getElementById("profile-nav");
+    return (header ? header.offsetHeight : 0) + (nav ? nav.offsetHeight : 0) + 8;
+}
+
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = getStickyOffset();
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+}
+
+let spyObserver = null;
+
+function initScrollSpy() {
+    if (spyObserver) spyObserver.disconnect();
+
+    const sections = ["sec-highlights","sec-vision","sec-positions","sec-finance","sec-controversial","sec-trump","sec-ethics","sec-epstein","sec-concerns"];
+    const navItems = document.querySelectorAll(".nav-item");
+    const profileNav = document.getElementById("profile-nav");
+    const offset = getStickyOffset();
+
+    spyObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const idx = sections.indexOf(entry.target.id);
+            if (idx === -1) return;
+            navItems.forEach(n => n.classList.remove("active"));
+            navItems[idx].classList.add("active");
+            // scroll nav bar horizontally so active item is visible
+            const item = navItems[idx];
+            const navCenter = profileNav.offsetWidth / 2;
+            profileNav.scrollLeft = item.offsetLeft - navCenter + item.offsetWidth / 2;
+        });
+    }, {
+        rootMargin: `-${offset}px 0px -55% 0px`,
+        threshold: 0
+    });
+
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) spyObserver.observe(el);
+    });
+}
+
+renderFeatured();
+</script>
+</body>
+</html>
