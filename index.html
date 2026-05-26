@@ -1196,7 +1196,7 @@
             <div id="p-epstein"></div>
         </div>
         <div class="section" id="sec-concerns">
-            <div class="section-title">Points of Concern</div>
+            <div class="section-title">Controversies</div>
             <div id="p-concerns"></div>
         </div>
     </div>
@@ -1350,68 +1350,18 @@ const candidates = [
                 source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); Senate financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Israel & Gaza",
-                stance: "critical",
-                stanceLabel: "Critical of Israeli Military Operations",
-                description: "Sanders has been one of the most outspoken senators critical of Israel's military campaign in Gaza, calling it disproportionate and a violation of international humanitarian law. He has attempted to block U.S. arms sales to Israel and was among those who did not attend Netanyahu's 2024 address to Congress.",
-                actions: [
-                    "Introduced joint resolutions to block arms sales to Israel under the Foreign Assistance Act.",
-                    "Skipped Netanyahu's address to a joint session of Congress in July 2024.",
-                    "Called for an immediate ceasefire and the unrestricted flow of humanitarian aid into Gaza.",
-                ],
-                quote: { text: "What Netanyahu's government is doing is not only morally unacceptable, it is in violation of international law and it must end.", source: "Senate floor statement, 2024" },
-                source: "Senate vote record; C-SPAN, 2024"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Abortion Rights",
-                description: "Sanders has consistently supported abortion rights throughout his career. He supports codifying Roe v. Wade into federal law and has voted against every piece of legislation that would restrict abortion access.",
-                actions: [
-                    "Co-sponsored the Women's Health Protection Act to codify federal abortion protections.",
-                    "Voted against the Pain-Capable Unborn Child Protection Act.",
-                    "Has called the Dobbs decision 'an outrage' and called for federal action.",
-                ],
-                source: "Senate vote record; NARAL Pro-Choice America scorecard"
-            },
-            {
-                topic: "Gun Control",
-                stance: "supports",
-                stanceLabel: "Supports Gun Control (Evolved Position)",
-                description: "Sanders' gun record evolved significantly after representing rural Vermont in Congress. He now supports comprehensive background checks, red flag laws, and an assault weapons ban — positions he once opposed or avoided.",
-                actions: [
-                    "Voted for the Bipartisan Safer Communities Act (2022).",
-                    "Voted against the Brady Bill in 1993 and supported some gun manufacturer liability protections.",
-                    "Now supports banning assault-style weapons and high-capacity magazines.",
-                ],
-                source: "Washington Post fact-check, October 2015; Senate vote record"
-            },
-            {
-                topic: "Immigration",
-                stance: "supports",
-                stanceLabel: "Supports Comprehensive Reform",
-                description: "Sanders supports a path to citizenship for undocumented immigrants and humane treatment of asylum seekers. He has historically opposed some guest worker programs as exploitative of labor, putting him at odds with some immigration advocates.",
-                actions: [
-                    "Supports the Dream Act and a path to citizenship for DACA recipients.",
-                    "Voted against the 2007 comprehensive immigration reform bill, citing guest-worker provisions he said would undercut American wages.",
-                    "Has called for ending family separation and large-scale detention of asylum seekers.",
-                ],
-                source: "Senate vote record; The Nation, April 2016"
-            },
-            {
-                topic: "ICE & Border Enforcement",
-                stance: "mixed",
-                stanceLabel: "Supports Restructuring ICE",
-                description: "Sanders has not explicitly called for abolishing ICE but has called for a fundamental restructuring of immigration enforcement. He supports ending large-scale deportations of people with no criminal record and closing private detention facilities.",
-                actions: [
-                    "Opposed the deportation of undocumented immigrants who have lived in the U.S. for years without criminal records.",
-                    "Called for closing for-profit immigration detention centers.",
-                    "Has not co-sponsored Abolish ICE legislation.",
-                ],
-                source: "Sanders campaign platform, 2020; Senate statements"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "strongly-supports", stanceLabel: "Medicare for All", description: "Sanders has championed a single-payer, government-run healthcare system for over 30 years, introducing the Medicare for All Act. He would eliminate private insurance for covered services and guarantee comprehensive coverage with no premiums or deductibles.", actions: ["Introduced the Medicare for All Act (S.1129) multiple times.", "Led Senate opposition to all ACA repeal attempts.", "Negotiated prescription drug pricing provisions into the Inflation Reduction Act."], source: "Medicare for All Act (S.1129); CBO analysis, 2022" },
+            { topic: "Climate & Energy", stance: "strongly-supports", stanceLabel: "Green New Deal Supporter", description: "Sanders supports the most aggressive climate action in Congress, backing the Green New Deal and calling for a WWII-scale mobilization against climate change. He opposes all fossil fuel expansion and supports 100% renewable energy.", actions: ["Co-sponsored the Green New Deal resolution.", "Opposed all new fossil fuel permits on federal land.", "Called climate change 'the greatest threat facing humanity'."], source: "Sanders Senate platform; Green New Deal resolution, 2019" },
+            { topic: "Immigration & Border", stance: "supports", stanceLabel: "Comprehensive Reform", description: "Sanders supports a path to citizenship and humane treatment of asylum seekers, but has historically opposed guest worker programs he views as exploitative to American labor. He opposes mass deportation and large-scale detention.", actions: ["Supports the Dream Act and citizenship for DACA recipients.", "Voted against 2007 immigration bill citing guest-worker provisions.", "Called for ending family separation and closing private detention facilities."], source: "Senate vote record; The Nation, April 2016" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Strongly Supports Abortion Rights", description: "Sanders has consistently supported abortion rights throughout his career, backing codification of Roe v. Wade into federal law and voting against every piece of legislation restricting abortion access.", actions: ["Co-sponsored the Women's Health Protection Act.", "Voted against the Pain-Capable Unborn Child Protection Act.", "Called the Dobbs decision 'an outrage' and called for federal action."], source: "Senate vote record; NARAL Pro-Choice America scorecard" },
+            { topic: "Gun Control", stance: "supports", stanceLabel: "Supports Gun Control (Evolved)", description: "Sanders' gun record evolved significantly after representing rural Vermont. He now supports background checks, red flag laws, and an assault weapons ban — positions he once opposed while representing a rural hunting state.", actions: ["Voted for the Bipartisan Safer Communities Act (2022).", "Voted against the Brady Bill in 1993.", "Now supports banning assault-style weapons and high-capacity magazines."], source: "Washington Post fact-check, October 2015; Senate vote record" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Aggressive Progressive Taxation", description: "Sanders advocates for dramatic wealth redistribution through a 70% marginal rate on income above $10M, a 2% annual wealth tax, and a 77% estate tax on billionaire estates. He views economic inequality as the defining moral issue of our time.", actions: ["Proposed 70% marginal income tax rate on income above $10 million.", "Introduced the For the 99.5% Act with aggressive estate and wealth taxes.", "Led Senate Budget Committee to negotiate the largest social spending package in decades."], source: "Sanders Senate platform; Tax Policy Center analysis, 2020" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Non-Interventionist", description: "Sanders is skeptical of military intervention and excessive defense spending, opposing most U.S. military engagements abroad. He supports diplomacy and foreign aid over force, while still backing NATO and defending democracy abroad.", actions: ["Voted against the Iraq War authorization in 2002.", "Introduced resolutions to end U.S. support for Saudi Arabia's war in Yemen.", "Supports NATO but calls for restraint in military deployments."], source: "Senate vote record; Sanders foreign policy platform" },
+            { topic: "Education", stance: "strongly-supports", stanceLabel: "Free College & Debt Cancellation", description: "Sanders argues a college degree is the 21st century equivalent of a high school diploma and must be publicly funded. He supports canceling all $1.7 trillion in student debt and making public college tuition-free.", actions: ["Introduced the College for All Act (S.1573).", "Proposed canceling all outstanding student loan debt.", "Advocates tripling Title I funding for low-income schools."], source: "College for All Act (S.1573); Sanders Senate platform, 2024" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Supports Reform & Reinvestment", description: "Sanders supports significant reform of the criminal justice system, including ending mandatory minimum sentences, legalizing marijuana, and reinvesting in communities. He opposes for-profit prisons and calls for demilitarizing police.", actions: ["Introduced the Justice and Safety Act to invest in community-based policing alternatives.", "Supports legalizing marijuana and expunging prior convictions.", "Opposes private prison contracts and police militarization."], source: "Sanders Senate platform; Justice and Safety Act" },
+            { topic: "Israel & Gaza", stance: "critical", stanceLabel: "Critical of Israeli Military Operations", description: "Sanders has been one of the most outspoken senators critical of Israel's military campaign in Gaza, calling it disproportionate and a violation of international humanitarian law. He attempted to block U.S. arms sales to Israel.", actions: ["Introduced joint resolutions to block arms sales to Israel under the Foreign Assistance Act.", "Skipped Netanyahu's address to Congress in July 2024.", "Called for an immediate ceasefire and unrestricted humanitarian aid."], quote: { text: "What Netanyahu's government is doing is not only morally unacceptable, it is in violation of international law and it must end.", source: "Senate floor statement, 2024" }, source: "Senate vote record; C-SPAN, 2024" },
+            { topic: "Trade & China", stance: "mixed", stanceLabel: "Fair Trade, Not Free Trade", description: "Sanders opposes trade deals he views as benefiting corporations over workers — he voted against NAFTA and TPP — but his opposition differs from Trump's in that he emphasizes labor and environmental standards rather than tariffs and nationalism.", actions: ["Voted against NAFTA and the Trans-Pacific Partnership.", "Supports trade agreements only with strong labor and environmental protections.", "Opposed Trump-era tariffs as hurting working families rather than corporations."], source: "Senate vote record; Sanders trade platform" },
         ],
         trump: {
             relationship: "Consistent Opponent",
@@ -1456,15 +1406,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "The Washington Post reported in April 2019 that Sanders honeymooned in the Soviet Union in 1988 and has at various points praised aspects of socialist governments — a record critics have cited as raising concerns about his foreign policy judgment.",
-                source: "The Washington Post, April 2019"
-            },
-            {
-                text: "The Guardian reported in July 2019 that some Sanders campaign workers were earning below the $15/hr minimum wage Sanders publicly advocates for, a discrepancy the campaign later said it addressed by adjusting hours.",
-                source: "The Guardian, July 2019"
-            }
+        controversies: [
+            { title: "Soviet Honeymoon (1988)", description: "Sanders honeymooned in the Soviet Union in 1988 and has at various points praised aspects of socialist governments in Cuba and Nicaragua — a record critics have used to question his foreign policy judgment and electability.", source: "The Washington Post, April 2019" },
+            { title: "Campaign Staff Paid Below $15/hr (2019)", description: "Some Sanders campaign workers were earning below the $15/hr minimum wage he publicly advocates for. The campaign said it addressed the discrepancy by adjusting hours rather than raising wages.", source: "The Guardian, July 2019" },
+            { title: "Owns Three Homes", description: "Sanders owns three homes — including a lakefront vacation house in Vermont — a fact critics cite as inconsistent with his anti-wealth messaging, though supporters note his net worth is far below that of most senators.", source: "The Washington Post, June 2019" },
+            { title: "2020 Campaign Infighting", description: "The Sanders 2020 campaign was marked by documented internal tension and public attacks from surrogates on other Democratic candidates, including a social media campaign targeting Elizabeth Warren that Sanders eventually disavowed.", source: "Politico, February 2020" },
         ]
     },
     {
@@ -1583,69 +1529,18 @@ const candidates = [
                 source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); Senate financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Israel & Gaza",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Pro-Israel",
-                description: "Cruz is one of the Senate's most consistently pro-Israel members. He supports unconditional U.S. military aid to Israel, opposed any pause or conditions on weapons shipments, and praised Netanyahu's 2024 address to Congress.",
-                actions: [
-                    "Attended and praised Netanyahu's address to a joint session of Congress in July 2024.",
-                    "Criticized the Biden administration for pausing weapons deliveries to Israel.",
-                    "Has consistently voted against any restrictions on U.S. military aid to Israel.",
-                ],
-                source: "Senate vote record; Cruz Senate statements, 2024"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-opposes",
-                stanceLabel: "Strongly Opposes Abortion Rights",
-                description: "Cruz has been a consistent opponent of abortion rights throughout his Senate career. He praised the Supreme Court's Dobbs decision overturning Roe v. Wade and supports federal restrictions on abortion access.",
-                actions: [
-                    "Voted against the Women's Health Protection Act.",
-                    "Praised the Dobbs v. Jackson decision as 'an incredible victory for life.'",
-                    "Has supported a federal 15-week abortion ban.",
-                    "Received a 100% rating from the National Right to Life Committee.",
-                ],
-                source: "Senate vote record; National Right to Life scorecard"
-            },
-            {
-                topic: "Gun Control",
-                stance: "strongly-opposes",
-                stanceLabel: "Strongly Opposes New Restrictions",
-                description: "Cruz is one of the Senate's most vocal opponents of gun control legislation. He has opposed universal background checks, red flag laws, and assault weapons bans. He has received an A+ rating from the NRA and is among the top recipients of NRA campaign support.",
-                actions: [
-                    "Spoke at the NRA annual convention in Houston days after the Uvalde, Texas school shooting in 2022.",
-                    "Voted against the Bipartisan Safer Communities Act (2022).",
-                    "Opposed universal background check legislation and red flag laws.",
-                    "Received millions in career support from gun rights organizations.",
-                ],
-                source: "NRA ratings; Senate vote record; The Guardian, May 2022"
-            },
-            {
-                topic: "Immigration",
-                stance: "strongly-opposes",
-                stanceLabel: "Strict Enforcement / Opposes Amnesty",
-                description: "Cruz supports aggressive border enforcement, completion of a border wall, and opposes any path to citizenship for undocumented immigrants. He has been one of the most restrictionist voices on immigration in the Senate.",
-                actions: [
-                    "Opposes DACA and any amnesty for undocumented immigrants.",
-                    "Supports ending the diversity visa lottery and reducing chain migration.",
-                    "Backed Trump's travel ban and border wall funding demands.",
-                ],
-                source: "Senate vote record; Cruz campaign platform"
-            },
-            {
-                topic: "ICE & Border Enforcement",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports ICE",
-                description: "Cruz is a vocal defender of ICE and has opposed any effort to restructure or abolish the agency. He has backed expanded ICE operations and funding and criticized calls to defund or restructure immigration enforcement.",
-                actions: [
-                    "Introduced legislation to increase ICE funding and staffing.",
-                    "Opposed any effort to limit ICE's detention authority.",
-                    "Has been critical of sanctuary city policies that limit ICE cooperation.",
-                ],
-                source: "Senate statements; Cruz press releases, 2018–2024"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Repeal ACA; Free Market", description: "Cruz led the Senate fight to repeal the Affordable Care Act and supports replacing it with a free-market system. He filibustered the Senate for 21 hours in 2013 opposing ACA funding and remains one of its most vocal opponents.", actions: ["Led a 21-hour filibuster opposing ACA funding in 2013.", "Voted for all ACA repeal-and-replace bills in 2017.", "Supports allowing insurers to sell plans across state lines with fewer federal mandates."], source: "Senate vote record; Cruz Senate platform" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Opposes Climate Regulations", description: "Cruz is a prominent climate skeptic who has questioned the scientific consensus on human-caused climate change and opposed all major climate legislation. He supports expanding oil, gas, and coal production with minimal regulation.", actions: ["Called climate change 'not science but politics' at a Senate hearing.", "Opposed the Inflation Reduction Act's clean energy provisions.", "Supports opening federal lands to oil and gas drilling."], source: "Senate hearings; Cruz Senate platform" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Strict Enforcement / Opposes Amnesty", description: "Cruz supports aggressive border enforcement and completion of a border wall, and opposes any path to citizenship for undocumented immigrants. He is among the most restrictionist voices on immigration in the Senate.", actions: ["Opposes DACA and any amnesty for undocumented immigrants.", "Supports ending the diversity visa lottery and reducing chain migration.", "Backed Trump's travel ban and border wall funding demands."], source: "Senate vote record; Cruz campaign platform" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Strongly Opposes Abortion Rights", description: "Cruz has been a consistent opponent of abortion rights throughout his Senate career. He praised the Supreme Court's Dobbs decision and supports federal restrictions on abortion access, receiving a 100% rating from the National Right to Life Committee.", actions: ["Voted against the Women's Health Protection Act.", "Praised the Dobbs v. Jackson decision as 'an incredible victory for life.'", "Has supported a federal 15-week abortion ban."], source: "Senate vote record; National Right to Life scorecard" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Strongly Opposes New Restrictions", description: "Cruz is one of the Senate's most vocal opponents of gun control legislation. He has opposed universal background checks, red flag laws, and assault weapons bans, receiving an A+ from the NRA.", actions: ["Spoke at the NRA convention days after the Uvalde school shooting (2022).", "Voted against the Bipartisan Safer Communities Act (2022).", "Opposed universal background checks and red flag laws."], source: "NRA ratings; Senate vote record; The Guardian, May 2022" },
+            { topic: "Tax Policy & Economy", stance: "strongly-opposes", stanceLabel: "Broad Tax Cuts; Anti-Regulation", description: "Cruz supports sweeping tax cuts across all income levels, elimination of the IRS (replaced with a flat tax), and aggressive deregulation. He backed the 2017 Tax Cuts and Jobs Act and has proposed a 16% flat tax.", actions: ["Voted for the 2017 Tax Cuts and Jobs Act.", "Has proposed abolishing the IRS and replacing the tax code with a 16% flat tax.", "Opposes corporate taxes and capital gains taxes."], source: "Senate vote record; Cruz tax platform" },
+            { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Hawkish; Strong Military Advocate", description: "Cruz takes a hawkish foreign policy posture, supporting a large defense budget, unconditional support for Israel, and aggressive posture toward Iran, China, and Russia. He has generally supported military intervention and opposes what he calls 'dovish' approaches.", actions: ["Supports increasing defense spending above current levels.", "Backed military action against Iran following attacks on U.S. forces.", "Opposes nuclear negotiations with Iran without preconditions."], source: "Senate vote record; Cruz foreign policy platform" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "School Choice; Abolish Dept. of Education", description: "Cruz supports school choice, charter schools, and homeschooling rights, and has proposed abolishing the U.S. Department of Education entirely. He opposes Common Core and federal curriculum mandates.", actions: ["Introduced legislation to abolish the Department of Education.", "Supports expanding charter schools and school voucher programs.", "Opposes Common Core and federal education standards."], source: "Cruz Senate platform; education legislation record" },
+            { topic: "Criminal Justice & Policing", stance: "opposes", stanceLabel: "Law and Order; Opposes Reform", description: "Cruz opposes most criminal justice reform efforts and is a strong supporter of law enforcement. He has pushed back against sentencing reform and calls to restructure or defund police departments.", actions: ["Opposed the First Step Act's broader sentencing reform provisions.", "Has called defunding or restructuring police 'dangerous radicalism.'", "Supports mandatory minimum sentences and the death penalty."], source: "Senate vote record; Cruz press releases" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Unconditional Support for Israel", description: "Cruz is one of the Senate's most consistently pro-Israel members. He supports unconditional U.S. military aid to Israel, opposed any pause on weapons shipments, and praised Netanyahu's 2024 address to Congress.", actions: ["Attended and praised Netanyahu's address to Congress in July 2024.", "Criticized the Biden administration for pausing weapons deliveries.", "Has consistently voted against any restrictions on U.S. military aid to Israel."], source: "Senate vote record; Cruz Senate statements, 2024" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "Hawkish on China; Supports Tariffs", description: "Cruz takes a hardline posture toward China, supporting tariffs, economic decoupling, and military containment. He also supports targeted industrial policy to counter Chinese dominance in critical sectors like semiconductors.", actions: ["Supports broad tariffs on Chinese goods as a national security measure.", "Introduced legislation targeting Chinese ownership of U.S. farmland.", "Backs decoupling U.S. supply chains from Chinese manufacturers."], source: "Senate vote record; Cruz China policy statements" },
         ],
         trump: {
             relationship: "Close Ally (After 2018)",
@@ -1694,15 +1589,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "The New York Times reported in February 2021 that Cruz traveled to Cancún, Mexico as a catastrophic winter storm struck Texas, leaving hundreds dead and millions without power or heat. Cruz later stated he made the trip to accompany his daughters.",
-                source: "The New York Times, February 2021"
-            },
-            {
-                text: "NBC News reported in January 2021 that Cruz was among the senators who formally objected to certifying the 2020 presidential election results on January 6, 2021 — a position that drew criticism from members of both parties.",
-                source: "NBC News, January 2021"
-            }
+        controversies: [
+            { title: "Cancún Trip During Texas Winter Storm (2021)", description: "Cruz flew to Cancún, Mexico as a catastrophic winter storm struck Texas, leaving hundreds dead and millions without power or heat for days. He initially blamed his daughters for suggesting the trip, then claimed he was simply being a good father.", source: "The New York Times, February 2021" },
+            { title: "Objected to 2020 Election Certification on January 6th", description: "Cruz led a group of senators who formally objected to certifying the 2020 presidential election results — and pressed forward with the objection even after the Capitol building was attacked by a mob attempting to stop the count.", source: "NBC News, January 6, 2021" },
+            { title: "Undisclosed Goldman Sachs Campaign Loans", description: "Cruz failed to disclose nearly $1 million in loans from Goldman Sachs and Citibank used to fund his 2012 Senate campaign, as required by FEC rules. His wife was a managing director at Goldman Sachs at the time. Cruz called it a 'paperwork error.'", source: "The New York Times, January 13, 2016" },
+            { title: "Called Trump a 'Pathological Liar' Then Became His Ally", description: "During the 2016 primary, Cruz publicly called Trump 'a pathological liar,' 'a narcissist,' and 'a sniveling coward,' then reversed course entirely after his 2018 Senate race and became one of Trump's most prominent Senate allies.", source: "CNN, May 2016; Reuters, October 2018" },
         ]
     },
     {
@@ -1812,65 +1703,18 @@ const candidates = [
                 source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); state and federal ethics disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Israel & Gaza",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Pro-Israel",
-                description: "As U.S. Ambassador to the United Nations, Haley was known as one of the most forcefully pro-Israel representatives in U.S. history. She moved the U.S. embassy to Jerusalem alongside the Trump administration and repeatedly vetoed UN Security Council resolutions critical of Israel.",
-                actions: [
-                    "Withdrew the U.S. from the UN Human Rights Council in 2018, citing anti-Israel bias.",
-                    "Vetoed multiple UN Security Council resolutions critical of Israeli settlement activity.",
-                    "Supported relocating the U.S. embassy from Tel Aviv to Jerusalem in 2018.",
-                ],
-                source: "UN Security Council records; State Department archives, 2017–2018"
-            },
-            {
-                topic: "Abortion",
-                stance: "opposes",
-                stanceLabel: "Opposes Abortion Rights (Evolving Messaging)",
-                description: "Haley opposes abortion rights and signed abortion restrictions as Governor of South Carolina. During the 2024 presidential race, she called for a 'national consensus' on abortion — a framing critics said was deliberately vague to avoid taking a firm federal position.",
-                actions: [
-                    "Signed a 20-week abortion ban as Governor of South Carolina.",
-                    "Declined to commit to a specific federal abortion ban week limit during the 2024 primary.",
-                    "Stated she would sign a federal abortion restriction 'if it crossed her desk,' without specifying what restrictions she would support.",
-                ],
-                source: "South Carolina state records; CNN debate transcript, November 2023"
-            },
-            {
-                topic: "Gun Control",
-                stance: "opposes",
-                stanceLabel: "Opposes New Restrictions",
-                description: "Haley opposes new federal gun control measures. As Governor, she signed permitless carry legislation in South Carolina. She has received endorsements from gun rights organizations and has consistently opposed expanded background checks and assault weapons restrictions.",
-                actions: [
-                    "Signed South Carolina's permitless concealed carry bill as Governor.",
-                    "Opposes a federal assault weapons ban and universal background check legislation.",
-                ],
-                source: "South Carolina state records; Haley campaign statements, 2024"
-            },
-            {
-                topic: "Immigration",
-                stance: "mixed",
-                stanceLabel: "Secure Border First / Bipartisan Reform",
-                description: "Haley has taken a complicated position on immigration. She supports stronger border enforcement but also negotiated a bipartisan border security deal in the Senate — which Trump then publicly opposed and killed before it could pass.",
-                actions: [
-                    "Supported the bipartisan Senate border security deal negotiated in early 2024.",
-                    "Criticized Trump for urging senators to reject the deal for political reasons.",
-                    "Supports a merit-based legal immigration system and a path forward for DACA recipients.",
-                ],
-                source: "Politico, February 2024; The Hill, January 2024"
-            },
-            {
-                topic: "ICE & Border Enforcement",
-                stance: "supports",
-                stanceLabel: "Supports ICE and Border Enforcement",
-                description: "Haley supports robust ICE enforcement and a well-funded border security apparatus. She has not called for restructuring or abolishing ICE and supports deportation of undocumented immigrants with criminal records.",
-                actions: [
-                    "Supports increased funding for ICE and border patrol operations.",
-                    "Backed the Trump administration's zero-tolerance border policies during her tenure as UN Ambassador.",
-                ],
-                source: "Haley campaign platform, 2024"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes ACA; Market-Based Reform", description: "Haley opposes the Affordable Care Act and supports replacing it with a market-driven system emphasizing competition and consumer choice. She has not endorsed Medicare for All or a public option.", actions: ["Called for repealing and replacing the ACA as a gubernatorial and presidential candidate.", "Supports allowing insurers to sell across state lines and expanding Health Savings Accounts.", "Opposes a government-run public health insurance option."], source: "Haley campaign platform, 2024" },
+            { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Skeptical of Climate Regulations", description: "Haley has acknowledged climate change is real while opposing most federal regulatory action to address it. She supports an 'all-of-the-above' energy strategy and opposes mandates that would phase out fossil fuels.", actions: ["Withdrew South Carolina from a regional climate initiative as Governor.", "Opposed the Paris Climate Agreement as UN Ambassador.", "Supports nuclear energy and natural gas as part of a transition strategy."], source: "State Department records; Haley campaign statements, 2024" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Secure Border; Bipartisan Reform", description: "Haley supports stronger border enforcement but was willing to negotiate a bipartisan border deal — which Trump then publicly torpedoed before it could pass, to her criticism.", actions: ["Supported the bipartisan Senate border security deal negotiated in early 2024.", "Criticized Trump for urging senators to reject the deal for political reasons.", "Supports a merit-based immigration system and a path forward for DACA recipients."], source: "Politico, February 2024; The Hill, January 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "opposes", stanceLabel: "Opposes Abortion Rights", description: "Haley opposes abortion rights and signed restrictions as Governor of South Carolina. During the 2024 primary she called for a 'national consensus' — a framing critics called deliberately vague to avoid committing to a specific federal ban.", actions: ["Signed a 20-week abortion ban as Governor of South Carolina.", "Declined to commit to a specific federal ban week limit during the 2024 primary.", "Said she would sign a federal abortion restriction 'if it crossed her desk.'"], source: "South Carolina state records; CNN debate transcript, November 2023" },
+            { topic: "Gun Control", stance: "opposes", stanceLabel: "Opposes New Restrictions", description: "Haley opposes new federal gun control measures. She signed permitless carry legislation as Governor of South Carolina and has consistently opposed expanded background checks and assault weapons restrictions.", actions: ["Signed South Carolina's permitless concealed carry bill as Governor.", "Opposes a federal assault weapons ban and universal background checks."], source: "South Carolina state records; Haley campaign statements, 2024" },
+            { topic: "Tax Policy & Economy", stance: "opposes", stanceLabel: "Pro-Tax Cuts; Anti-Regulation", description: "Haley supports broad tax cuts for individuals and businesses, aggressive deregulation, and balanced budgets. She has proposed Social Security and Medicare reforms as part of deficit reduction.", actions: ["Proposed raising the retirement age for Social Security during the 2024 primary.", "Supports extending the 2017 Trump tax cuts.", "Advocates cutting corporate regulations across all sectors."], source: "Haley campaign platform, 2024" },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", stanceLabel: "Hawkish; Strong Alliances", description: "Haley takes a consistently hawkish foreign policy posture, supporting a large defense budget, NATO alliances, unconditional support for Israel, and aggressive posture toward China and Russia. She has been one of the most outspoken proponents of American global leadership.", actions: ["Supported NATO and called for strong U.S. leadership in Europe.", "Backed U.S. military aid to Ukraine before Trump's opposition made it politically difficult.", "Supports hardline approach toward China and Iran."], source: "UN Security Council records; Haley foreign policy platform" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice; Parental Rights", description: "Haley supports school choice, charter schools, and parental rights in education. She opposes federal curriculum mandates and has been critical of what she describes as ideological content in public schools.", actions: ["Expanded charter school access as Governor of South Carolina.", "Supports school voucher programs allowing public funds to follow students to private schools.", "Opposes federal mandates on school curricula."], source: "South Carolina education record; Haley campaign platform" },
+            { topic: "Criminal Justice & Policing", stance: "opposes", stanceLabel: "Law Enforcement Support; Anti-Reform", description: "Haley supports law enforcement and opposes most criminal justice reform efforts. She has been critical of movements to defund police and supports tough sentencing as a deterrent.", actions: ["Opposed calls to defund or restructure police departments.", "Signed criminal justice legislation as Governor focused on enforcement rather than reform.", "Supports the death penalty."], source: "South Carolina executive record; Haley campaign statements" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Unconditional Support for Israel", description: "As UN Ambassador, Haley was one of the most forcefully pro-Israel representatives in U.S. history. She vetoed multiple UN Security Council resolutions critical of Israel and moved the U.S. embassy to Jerusalem.", actions: ["Withdrew the U.S. from the UN Human Rights Council in 2018 citing anti-Israel bias.", "Vetoed multiple UN Security Council resolutions critical of Israeli settlement activity.", "Supported relocating the U.S. embassy from Tel Aviv to Jerusalem."], source: "UN Security Council records; State Department archives, 2017–2018" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "Hawkish on China; Decoupling", description: "Haley takes a hardline position toward China, supporting economic decoupling, tariffs, and military containment. She has called China the most significant geopolitical threat facing the United States.", actions: ["Supports broad tariffs and trade restrictions on Chinese goods.", "Calls for ending U.S. dependence on Chinese manufacturing in critical sectors.", "Supports military deterrence in the Pacific to counter Chinese expansion."], source: "Haley foreign policy platform; UN Ambassador record" },
         ],
         trump: {
             relationship: "Former Cabinet Member / Primary Rival",
@@ -1915,11 +1759,10 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "Politico reported in February 2023 that Haley had taken notably different public positions on Donald Trump in the years since January 6th — initially offering praise, then issuing sharp criticism, then endorsing him for 2024 — a pattern observers in both parties characterized as inconsistent.",
-                source: "Politico, February 2023"
-            }
+        controversies: [
+            { title: "Described Civil War as 'About Freedom' Without Mentioning Slavery", description: "During the 2024 presidential primary, Haley was asked what caused the Civil War and said it was 'about freedom' and 'how the government was going to run.' She did not mention slavery, drawing widespread criticism. She later acknowledged slavery was 'obviously' the cause but said the question was a 'setup.'", source: "CNN town hall; The New York Times, December 2023" },
+            { title: "Reversed on Trump Multiple Times", description: "Haley called Trump's comments 'race-baiting and xenophobic' in 2016, said there was 'a place in hell' for those who attacked the Capitol in 2021, then endorsed him for president in 2024 after running against him and losing a primary he spent months attacking her in.", source: "Politico, February 2023; CNN, April 2024" },
+            { title: "Boeing Board After UN Role", description: "Haley joined Boeing's board of directors shortly after leaving her position as UN Ambassador — a role overseeing international arms sales that included Boeing defense products. Ethics watchdogs raised revolving-door concerns about the appointment.", source: "The Intercept, March 2019" },
         ]
     },
     {
@@ -2038,69 +1881,18 @@ const candidates = [
                 source: "Southern District of New York court records; Epstein flight log manifests (published by Miami Herald, 2023); House financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Israel & Gaza",
-                stance: "critical",
-                stanceLabel: "Critical of Israeli Military Operations",
-                description: "AOC has been one of the most outspoken House members critical of Israel's military campaign in Gaza. She has called the situation 'genocide,' co-sponsored resolutions to restrict U.S. arms to Israel, and skipped Netanyahu's 2024 address to Congress.",
-                actions: [
-                    "Did not attend Netanyahu's address to a joint session of Congress in July 2024.",
-                    "Co-sponsored resolutions to block U.S. arms transfers to Israel.",
-                    "Used the word 'genocide' to describe Israeli military operations in Gaza — a term disputed by the Israeli government and some U.S. officials.",
-                    "Called for an immediate and permanent ceasefire.",
-                ],
-                quote: { text: "This is a genocide being televised... the United States is funding it.", source: "AOC social media statement, November 2023" },
-                source: "House vote record; Congressional Record, 2024"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Abortion Rights",
-                description: "AOC is one of the most vocal advocates for abortion rights in Congress. She has supported codifying federal abortion protections, expanding abortion funding, and has been outspoken in response to the Dobbs decision.",
-                actions: [
-                    "Co-sponsored the Women's Health Protection Act.",
-                    "Introduced legislation to expand Medicaid coverage of abortion.",
-                    "Publicly confronted Republican colleagues on the House floor over abortion rhetoric.",
-                ],
-                source: "House vote record; NARAL Pro-Choice America scorecard"
-            },
-            {
-                topic: "Gun Control",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Gun Control",
-                description: "AOC is a consistent supporter of comprehensive gun control legislation. She supports universal background checks, a federal assault weapons ban, and has been vocal after mass shootings including Uvalde.",
-                actions: [
-                    "Voted for the Bipartisan Safer Communities Act (2022).",
-                    "Supports a federal assault weapons ban and mandatory buyback program.",
-                    "Walked out of a moment of silence for Uvalde victims, calling it 'inadequate' without legislative action.",
-                ],
-                source: "House vote record; Giffords Law Center scorecard"
-            },
-            {
-                topic: "Immigration",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Comprehensive Reform",
-                description: "AOC supports a full path to citizenship for undocumented immigrants, protecting DACA recipients, and a humane asylum process. She has visited border detention facilities and was one of the most prominent critics of conditions there.",
-                actions: [
-                    "Visited a border detention facility in Clint, Texas in 2019, describing 'inhumane conditions.'",
-                    "Supports the Dream Act and a path to citizenship for all undocumented immigrants.",
-                    "Opposed the bipartisan border security deal in 2024, calling its asylum restrictions too harsh.",
-                ],
-                source: "Congressional Record; The New York Times, July 2019"
-            },
-            {
-                topic: "ICE & Border Enforcement",
-                stance: "strongly-opposes",
-                stanceLabel: "Supports Abolishing ICE",
-                description: "AOC has been one of the most prominent voices calling to abolish ICE, arguing the agency as structured is fundamentally incompatible with civil rights and due process. She has introduced legislation to dismantle and replace the agency.",
-                actions: [
-                    "Called to 'Abolish ICE' as a central part of her 2018 primary platform.",
-                    "Co-sponsored the Abolish ICE Act to eliminate ICE and transfer its functions to agencies with stronger civil rights oversight.",
-                    "Visited detention centers and publicly criticized conditions inside ICE facilities.",
-                ],
-                source: "AOC 2018 campaign platform; House bill record"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "strongly-supports", stanceLabel: "Medicare for All", description: "AOC is a co-sponsor of the Medicare for All Act and one of its most prominent advocates in the House. She supports eliminating private insurance for covered services and guaranteeing universal coverage as a right.", actions: ["Co-sponsored the Medicare for All Act in the House.", "Supports expanding Medicaid to cover abortion services.", "Has called private health insurance companies 'parasitic' on the healthcare system."], source: "House vote record; AOC campaign platform" },
+            { topic: "Climate & Energy", stance: "strongly-supports", stanceLabel: "Green New Deal Author", description: "AOC co-authored and introduced the Green New Deal resolution in 2019, calling for 100% renewable energy, massive public investment in green infrastructure, and treating climate change as a national emergency.", actions: ["Introduced the Green New Deal resolution (H.Res.109) in 2019.", "Opposed approving new fossil fuel permits on federal land.", "Backed the Inflation Reduction Act's clean energy investments as a partial step."], source: "Green New Deal resolution; House vote record" },
+            { topic: "Immigration & Border", stance: "strongly-supports", stanceLabel: "Comprehensive Reform; Abolish ICE", description: "AOC supports a full path to citizenship for undocumented immigrants, protecting DACA recipients, and a humane asylum process. She has called to abolish ICE and has visited border detention facilities, describing inhumane conditions.", actions: ["Called to 'Abolish ICE' as a central part of her 2018 platform.", "Visited a border detention facility in Clint, TX in 2019 describing inhumane conditions.", "Opposed the 2024 bipartisan border deal, calling its asylum restrictions too harsh."], source: "Congressional Record; The New York Times, July 2019" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Strongly Supports Abortion Rights", description: "AOC is one of the most vocal advocates for abortion rights in Congress. She has supported codifying federal abortion protections, expanding funding, and has publicly confronted Republican colleagues over the Dobbs decision.", actions: ["Co-sponsored the Women's Health Protection Act.", "Introduced legislation to expand Medicaid coverage of abortion.", "Publicly confronted Republican colleagues on the House floor over abortion rhetoric."], source: "House vote record; NARAL Pro-Choice America scorecard" },
+            { topic: "Gun Control", stance: "strongly-supports", stanceLabel: "Strongly Supports Gun Control", description: "AOC supports universal background checks, a federal assault weapons ban, and mandatory buyback programs. She has been vocal after mass shootings and walked out of a House moment of silence after Uvalde, calling it inadequate without legislation.", actions: ["Voted for the Bipartisan Safer Communities Act (2022).", "Supports a federal assault weapons ban and mandatory buyback program.", "Walked out of a moment of silence for Uvalde victims in protest."], source: "House vote record; Giffords Law Center scorecard" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Wealth Tax; Corporate Accountability", description: "AOC supports dramatically higher taxes on the wealthy — famously suggesting a 70% marginal rate on income above $10M — and a wealth tax on billionaires. She opposes corporate subsidies and stock buybacks.", actions: ["Proposed a 70% marginal tax rate on income over $10 million.", "Supports the Ultra-Millionaire Tax Act and corporate stock buyback taxes.", "Introduced legislation to ban lawmakers from trading individual stocks."], source: "House bill record; AOC economic platform" },
+            { topic: "Foreign Policy & Military", stance: "opposes", stanceLabel: "Non-Interventionist; Cut Defense Spending", description: "AOC is skeptical of U.S. military intervention abroad and has called for cuts to the defense budget. She opposes U.S. involvement in foreign wars and has been critical of the military-industrial complex.", actions: ["Voted against some defense authorization bills.", "Supports redirecting Pentagon spending to domestic social programs.", "Co-sponsored resolutions to end U.S. support for the Saudi-led war in Yemen."], source: "House vote record; AOC foreign policy platform" },
+            { topic: "Education", stance: "strongly-supports", stanceLabel: "Free College; Cancel Student Debt", description: "AOC supports tuition-free public college, cancellation of all student loan debt, and increased federal investment in K-12 education. She opposed Amazon's HQ2 in New York partly on the basis of subsidies she felt should go to public schools.", actions: ["Supports the College for All Act and full student debt cancellation.", "Advocates for universal pre-K and increased Title I funding.", "Opposes for-profit colleges and predatory student loan practices."], source: "House bill record; AOC education platform" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Supports Defunding; Structural Reform", description: "AOC has supported calls to defund the police and redirect funding to social services. She backs ending mandatory minimum sentences, legalizing marijuana, and a fundamental restructuring of the criminal justice system.", actions: ["Supported the BREATHE Act calling for significant reductions in police funding.", "Backs legalizing marijuana and expunging prior convictions.", "Supports ending qualified immunity for law enforcement officers."], source: "House vote record; AOC criminal justice platform" },
+            { topic: "Israel & Gaza", stance: "critical", stanceLabel: "Critical of Israeli Military Operations", description: "AOC has been one of the most outspoken House members critical of Israel's military campaign in Gaza. She has called the situation 'genocide,' co-sponsored resolutions to restrict U.S. arms to Israel, and skipped Netanyahu's 2024 address to Congress.", actions: ["Did not attend Netanyahu's address to Congress in July 2024.", "Co-sponsored resolutions to block U.S. arms transfers to Israel.", "Called Israeli military operations in Gaza 'genocide.'"], quote: { text: "This is a genocide being televised... the United States is funding it.", source: "AOC social media statement, November 2023" }, source: "House vote record; Congressional Record, 2024" },
+            { topic: "Trade & China", stance: "mixed", stanceLabel: "Fair Trade; Skeptical of Free Trade", description: "AOC supports trade agreements that include strong labor and environmental standards, opposing deals she views as benefiting corporations over workers. She supports strategic industrial policy to counter China but emphasizes worker protections over tariff nationalism.", actions: ["Opposed NAFTA-successor USMCA for insufficient labor protections.", "Supports domestic manufacturing investment through bills like the CHIPS Act.", "Backs trade restrictions on countries with poor labor and environmental records."], source: "House vote record; AOC trade platform" },
         ],
         trump: {
             relationship: "Consistent Opponent",
@@ -2144,15 +1936,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "The Washington Post reported in March 2019, citing FEC filings, that AOC's then-chief of staff had routed approximately $1 million in campaign contributions through outside PACs in a manner that may have obscured the ultimate recipients. No charges were filed against AOC directly.",
-                source: "The Washington Post, March 2019"
-            },
-            {
-                text: "The New York Times reported in February 2019 that AOC was among the lawmakers who opposed Amazon's planned HQ2 development in New York City — a project that state and city officials had projected would bring approximately 25,000 jobs and billions in tax revenue to the area.",
-                source: "The New York Times, February 2019"
-            }
+        controversies: [
+            { title: "Campaign Fund Routing Through PACs", description: "AOC's then-chief of staff Saikat Chakrabarti routed approximately $1 million in campaign contributions through outside PACs in a manner that may have obscured the ultimate recipients. A complaint was filed with the FEC. No charges were filed against AOC directly, and Chakrabarti later resigned.", source: "The Washington Post, March 2019; FEC complaint records" },
+            { title: "Opposed Amazon HQ2 in New York", description: "AOC led opposition to Amazon's planned HQ2 development in NYC — a project officials projected would bring 25,000 jobs and billions in tax revenue. Amazon canceled the project. Critics said she prioritized ideological opposition to corporate subsidies over economic opportunity for her constituents.", source: "The New York Times, February 2019" },
+            { title: "Voted 'Present' on Iron Dome Funding (2021)", description: "AOC voted 'present' — rather than no — on a bill to fund Israel's Iron Dome missile defense system, and was photographed crying on the House floor after the vote. Her vote drew criticism from both sides and attention to her conflicted position on Israel-related legislation.", source: "The New York Times, September 2021" },
+            { title: "Met Gala Attendance (2021)", description: "AOC attended the Met Gala wearing a dress that read 'TAX THE RICH' — a venue with tickets starting around $30,000. Critics noted the apparent tension between her messaging and attendance at one of the most exclusive events in American culture. Supporters argued it was effective political theater.", source: "The Guardian, September 2021" },
         ]
     },
     {
@@ -2267,70 +2055,18 @@ const candidates = [
                 source: "New York magazine, 2002; Miami Herald investigation, 2018; SDNY court records; Trump statements, 2019"
             }
         },
-        controversial: [
-            {
-                topic: "January 6th Capitol Attack",
-                stance: "mixed",
-                stanceLabel: "Impeached for Incitement; Acquitted",
-                description: "Trump delivered a speech on January 6, 2021 urging supporters to march to the Capitol as Congress certified the 2020 election results. A mob then stormed the building, disrupting certification for hours. The House impeached Trump for incitement of insurrection; the Senate acquitted him 57–43 — the most bipartisan impeachment conviction vote in U.S. history.",
-                actions: [
-                    "Delivered rally speech urging supporters to march to the Capitol and 'fight like hell.'",
-                    "Declined for hours to call off supporters after the Capitol breach began.",
-                    "Impeached by the House on January 13, 2021 with 10 Republican votes — the most in any impeachment.",
-                    "Acquitted by the Senate 57–43, short of the 2/3 threshold to convict.",
-                ],
-                quote: { text: "We fight like hell, and if you don't fight like hell, you're not going to have a country anymore.", source: "Trump January 6th rally speech, Washington D.C., January 6, 2021" },
-                source: "House impeachment record; Senate vote record, February 2021; House Select Committee Final Report, December 2022"
-            },
-            {
-                topic: "2020 Election Claims",
-                stance: "strongly-opposes",
-                stanceLabel: "Refused to Concede; Claimed Stolen Election",
-                description: "Trump refused to concede the 2020 election, claiming without substantiated evidence that widespread fraud had cost him the race. More than 60 court cases were dismissed. His efforts led to his second impeachment and a 2023 federal indictment, later dismissed after his 2024 election victory.",
-                actions: [
-                    "Refused to concede after the election was called for Biden on November 7, 2020.",
-                    "Pressured Vice President Pence to refuse to certify Electoral College results.",
-                    "Indicted by a federal grand jury in August 2023 on four counts related to efforts to overturn the results.",
-                    "Federal charges were dismissed in November 2024 following his re-election.",
-                ],
-                source: "Federal indictment, August 2023; DOJ motion to dismiss, November 2024"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Pro-Israel",
-                description: "Trump has been unconditionally supportive of Israel across both administrations — moving the U.S. embassy to Jerusalem, brokering the Abraham Accords, and in his second term backing Israel's military campaign in Gaza while proposing a controversial population relocation plan.",
-                actions: [
-                    "Moved U.S. embassy from Tel Aviv to Jerusalem in 2018.",
-                    "Brokered the Abraham Accords normalizing Israel's relations with the UAE, Bahrain, Sudan, and Morocco (2020).",
-                    "Proposed relocating Palestinians from Gaza to Egypt and Jordan — a plan widely rejected internationally.",
-                ],
-                source: "State Department records; White House statements, 2018–2025"
-            },
-            {
-                topic: "Abortion",
-                stance: "mixed",
-                stanceLabel: "Appointed Justices Who Overturned Roe; Opposes Federal Ban",
-                description: "Trump's three Supreme Court appointees provided the decisive votes in Dobbs v. Jackson (2022), overturning Roe v. Wade. He has said he is 'proud' of that outcome but declined to support a federal abortion ban, calling it a states' rights issue — a position that drew criticism from anti-abortion conservatives.",
-                actions: [
-                    "Appointed Gorsuch, Kavanaugh, and Barrett — all three voted with the Dobbs majority.",
-                    "Declined to support a federal abortion ban during the 2024 campaign.",
-                    "Called Florida's 6-week abortion ban 'too extreme' during the primary.",
-                ],
-                source: "Dobbs v. Jackson (2022); Trump campaign statements, 2024"
-            },
-            {
-                topic: "Immigration",
-                stance: "strongly-opposes",
-                stanceLabel: "Mass Deportation / Strict Enforcement",
-                description: "Trump's immigration record spans travel bans, family separation, and second-term mass deportation operations — the most aggressive immigration enforcement agenda in modern U.S. history.",
-                actions: [
-                    "Signed travel bans targeting majority-Muslim countries (2017); upheld by the Supreme Court.",
-                    "Implemented the 'zero tolerance' family separation policy at the border (2018).",
-                    "Declared a national emergency at the southern border and deployed military (2019 and 2025).",
-                ],
-                source: "DHS records; ACLU litigation; White House executive orders, 2017–2025"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Repeal ACA; Market-Based", description: "Trump repeatedly attempted to repeal the Affordable Care Act during his first term, coming within one Senate vote of success. He has supported market-based healthcare reforms and opposes a government-run public option.", actions: ["Led efforts to repeal and replace the ACA in 2017 — failed by one vote.", "Signed executive orders expanding short-term health plans that don't meet ACA standards.", "Proposed eliminating the ACA's individual mandate via the tax code in 2017."], source: "Senate vote record, 2017; Tax Cuts and Jobs Act, 2017" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Withdrew from Paris Agreement; Pro-Fossil Fuels", description: "Trump withdrew the U.S. from the Paris Climate Agreement twice — once in his first term and again immediately upon returning to office in 2025. He has called climate change a 'hoax,' expanded fossil fuel production, and dismantled environmental regulations.", actions: ["Withdrew from the Paris Climate Agreement in 2017 (rejoined by Biden; withdrew again in 2025).", "Declared energy emergencies and expanded oil, gas, and coal production.", "Dismantled dozens of EPA regulations and rolled back clean water and air standards."], source: "White House executive orders; EPA deregulation records" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Mass Deportation; Strict Enforcement", description: "Trump's immigration record includes travel bans, family separation, construction of border wall sections, and in his second term the most aggressive mass deportation operation in modern U.S. history.", actions: ["Signed travel bans targeting majority-Muslim countries (2017); upheld by the Supreme Court.", "Implemented the 'zero tolerance' family separation policy at the border (2018).", "Declared a national emergency and deployed military to the southern border."], source: "DHS records; ACLU litigation; White House executive orders, 2017–2025" },
+            { topic: "Abortion & Reproductive Rights", stance: "mixed", stanceLabel: "Overturned Roe; Opposes Federal Ban", description: "Trump's three Supreme Court appointees provided the decisive votes to overturn Roe v. Wade in Dobbs (2022). He says he is 'proud' of that outcome but opposes a federal abortion ban, calling it a states' rights issue — drawing criticism from both sides.", actions: ["Appointed Gorsuch, Kavanaugh, and Barrett — all three voted with the Dobbs majority.", "Declined to support a federal abortion ban during the 2024 campaign.", "Called Florida's 6-week ban 'too extreme' during the primary."], source: "Dobbs v. Jackson (2022); Trump campaign statements, 2024" },
+            { topic: "Gun Control", stance: "mixed", stanceLabel: "Generally Opposes; Some Exceptions", description: "Trump generally opposes new gun control legislation and has an A rating from the NRA. However, he signed a ban on bump stocks after the Las Vegas shooting — which he later reversed — and has made statements suggesting openness to red flag laws that he did not follow through on.", actions: ["Signed an executive order banning bump stocks after the Las Vegas shooting (2018); later reversed.", "Expressed support for red flag laws following mass shootings but did not push legislation.", "Generally opposes universal background checks and assault weapons bans."], source: "NRA ratings; Trump executive orders; Senate vote record" },
+            { topic: "Tax Policy & Economy", stance: "strongly-opposes", stanceLabel: "Sweeping Tax Cuts; Tariff Nationalism", description: "Trump signed the 2017 Tax Cuts and Jobs Act — the largest tax overhaul since 1986 — cutting the corporate rate from 35% to 21% and reducing individual rates. He also imposed sweeping tariffs on China and trading partners, framing them as economic nationalism.", actions: ["Signed the Tax Cuts and Jobs Act (2017), adding an estimated $1.5–1.9T to the national debt.", "Imposed 25% tariffs on $250B in Chinese goods and broad tariffs on trading partners in 2025.", "Proposed eliminating income taxes and replacing with tariff revenue."], source: "CBO analysis; Treasury Department; White House trade records" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "America First; Skeptical of NATO", description: "Trump's 'America First' foreign policy prioritized bilateral deals over multilateral alliances, questioned NATO's value, pulled troops from Syria and other regions, and pursued personal diplomacy with North Korea and Russia — while maintaining hawkish positions on Iran and China.", actions: ["Questioned the U.S. commitment to NATO Article 5 collective defense obligations.", "Brokered the Abraham Accords between Israel and Arab nations (2020).", "Met with North Korea's Kim Jong-un — the first sitting U.S. president to do so."], source: "State Department records; White House foreign policy record" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice; Anti-DEI", description: "Trump supports school choice through vouchers and charter schools, and has been a prominent opponent of what he calls 'woke' ideology in education. His second term included executive orders targeting DEI programs and directing scrutiny of university diversity offices.", actions: ["Signed executive orders targeting DEI programs at universities and federal contractors.", "Supports school voucher programs and charter school expansion.", "Called for eliminating the Department of Education in his 2024 campaign."], source: "White House executive orders, 2025; Trump campaign platform" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-opposes", stanceLabel: "Law and Order; Opposes Reform", description: "Trump has consistently opposed criminal justice reform efforts, called for law and order, and expressed support for the death penalty — including for drug dealers. In his second term he issued pardons for January 6th rioters and reversed First Step Act implementation measures.", actions: ["Pardoned over 1,500 January 6th defendants upon returning to office in 2025.", "Signed the First Step Act (2018) — a bipartisan sentencing reform — but later undermined its implementation.", "Supports reinstating the federal death penalty for drug trafficking."], source: "White House pardon records; First Step Act; Trump criminal justice platform" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Unconditional Support for Israel", description: "Trump has been unconditionally supportive of Israel across both administrations — moving the U.S. embassy to Jerusalem, brokering the Abraham Accords, and backing Israel's military campaign in Gaza while proposing a controversial Palestinian population relocation plan.", actions: ["Moved the U.S. embassy from Tel Aviv to Jerusalem in 2018.", "Brokered the Abraham Accords normalizing Israel's relations with the UAE, Bahrain, Sudan, and Morocco.", "Proposed relocating Palestinians from Gaza to Egypt and Jordan — widely rejected internationally."], source: "State Department records; White House statements, 2018–2025" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "Economic Nationalism; Sweeping Tariffs", description: "Trump imposed sweeping tariffs on Chinese goods — 25% on $250B in goods in his first term, and broader tariffs on most imports in his second — framing them as protecting American manufacturing and decoupling from China. Critics argue they raised consumer prices without reducing the trade deficit.", actions: ["Imposed 25% tariffs on $250B in Chinese goods (2018–2019).", "Launched sweeping 'universal baseline tariffs' on most imports in 2025.", "Pursued economic decoupling from China in semiconductors, tech, and manufacturing."], source: "USTR records; White House trade executive orders, 2025" },
         ],
         trump: {
             relationship: "45th & 47th President — This Is the Subject",
@@ -2380,15 +2116,12 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "A New York jury convicted Trump on 34 felony counts of falsifying business records in May 2024 — making him the first former U.S. president convicted of felony crimes. He was later given an unconditional discharge at sentencing.",
-                source: "Manhattan District Attorney's Office; The New York Times, May 2024"
-            },
-            {
-                text: "The House Select Committee on January 6th concluded in December 2022 that Trump was 'the central cause' of the Capitol attack and referred him to the DOJ on four criminal counts, including obstruction of an official proceeding and inciting insurrection.",
-                source: "House Select Committee Final Report, December 2022"
-            }
+        controversies: [
+            { title: "34 Felony Convictions (2024)", description: "A New York jury convicted Trump on 34 felony counts of falsifying business records related to hush money payments to Stormy Daniels. He is the first U.S. president convicted of felony crimes. He received an unconditional discharge at sentencing and the conviction did not prevent his 2024 election win.", source: "Manhattan District Attorney's Office; The New York Times, May 2024" },
+            { title: "January 6th Capitol Attack", description: "Trump delivered a speech urging supporters to march to the Capitol as Congress certified the 2020 election results. A mob stormed the building, disrupting certification for hours, resulting in multiple deaths. The House Select Committee concluded Trump was 'the central cause' of the attack.", source: "House Select Committee Final Report, December 2022" },
+            { title: "Refused to Concede 2020 Election; Falsely Claimed Fraud", description: "Trump refused to concede the 2020 election, claiming without substantiated evidence that widespread fraud cost him the race. More than 60 courts dismissed his challenges. He pressured the Vice President, state officials, and the DOJ to help overturn the results.", source: "Federal indictment, August 2023; DOJ motion to dismiss, November 2024" },
+            { title: "Civil Fraud Judgment ($454M) and Sexual Abuse Liability", description: "A New York court found Trump liable for business fraud and ordered him to pay $454M in penalties. Separately, a jury found him liable for sexual abuse of writer E. Jean Carroll and awarded $83.3M in damages in a second trial.", source: "New York v. Trump, February 2024; Carroll v. Trump, January 2024" },
+            { title: "Four Criminal Indictments in One Year (2023)", description: "Trump was indicted in four separate criminal cases in 2023 — Manhattan (hush money), federal (classified documents), federal (2020 election), and Georgia (RICO). He was convicted in Manhattan. The two federal cases were dismissed after his 2024 election victory. The Georgia case remains pending.", source: "DOJ indictments, 2023; Fulton County Superior Court" },
         ]
     },
     {
@@ -4501,14 +4234,15 @@ function toggleIssue(el) {
 }
 
 function renderControversial(c) {
-    if (!c.controversial || !c.controversial.length) {
+    const data = c.issues || c.controversial || [];
+    if (!data.length) {
         document.getElementById("p-controversial").innerHTML = `<p class="no-concerns">No data on file.</p>`;
         return;
     }
 
     document.getElementById("p-controversial").innerHTML = `
         <div class="issue-grid">
-            ${c.controversial.map(issue => `
+            ${data.map(issue => `
                 <div class="issue-card">
                     <div class="issue-header" onclick="toggleIssue(this)">
                         <div class="issue-left">
@@ -4747,13 +4481,14 @@ function showProfile(id) {
     renderEpstein(c);
 
     const concerns = document.getElementById("p-concerns");
-    concerns.innerHTML = (c.concerns && c.concerns.length)
-        ? c.concerns.map(con => `
+    concerns.innerHTML = (c.controversies && c.controversies.length)
+        ? c.controversies.map(con => `
             <div class="concern-card">
-                <p>${con.text}</p>
+                <p><strong>${con.title}</strong></p>
+                <p>${con.description}</p>
                 <cite>Source: ${con.source}</cite>
             </div>`).join("")
-        : `<p class="no-concerns">No major concerns on record at this time.</p>`;
+        : `<p class="no-concerns">No major controversies on record at this time.</p>`;
 
     document.getElementById("home-view").style.display = "none";
     document.getElementById("compare-view").style.display = "none";
@@ -4873,16 +4608,15 @@ function renderComparison(c1, c2) {
         </div>
     </div>`;
 
-    // Issue stances table — find all topics across both candidates
-    const allTopics = [...new Set([
-        ...(c1.controversial || []).map(x => x.topic),
-        ...(c2.controversial || []).map(x => x.topic)
-    ])];
+    // Issue stances table — standardized 11 topics across all candidates
+    const ISSUE_TOPICS = ["Healthcare","Climate & Energy","Immigration & Border","Abortion & Reproductive Rights","Gun Control","Tax Policy & Economy","Foreign Policy & Military","Education","Criminal Justice & Policing","Israel & Gaza","Trade & China"];
+
+    const allTopics = ISSUE_TOPICS;
 
     if (allTopics.length > 0) {
         const rows = allTopics.map(topic => {
-            const i1 = (c1.controversial || []).find(x => x.topic === topic);
-            const i2 = (c2.controversial || []).find(x => x.topic === topic);
+            const i1 = (c1.issues || []).find(x => x.topic === topic);
+            const i2 = (c2.issues || []).find(x => x.topic === topic);
             const badge = (item) => item
                 ? `<span class="stance-badge stance-${item.stance}">${item.stanceLabel}</span>`
                 : `<span style="color:var(--text-muted);font-size:12px">—</span>`;
