@@ -2582,70 +2582,18 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); Florida financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Abortion",
-                stance: "strongly-opposes",
-                stanceLabel: "Signed 6-Week Ban",
-                description: "DeSantis signed a 6-week abortion ban in April 2023, before most women know they are pregnant. The law replaced Florida's earlier 15-week ban. Courts temporarily blocked enforcement; the Florida Supreme Court later allowed it to take effect.",
-                actions: [
-                    "Signed a 15-week abortion ban in 2022.",
-                    "Signed a 6-week abortion ban in April 2023 — among the most restrictive in the nation.",
-                    "The Florida Supreme Court upheld the 6-week ban in April 2024.",
-                    "Florida voters passed Amendment 4 in November 2024 enshrining abortion rights in the state constitution, a direct rebuke.",
-                ],
-                source: "Florida state records; Florida Supreme Court ruling, April 2024; AP election results, November 2024"
-            },
-            {
-                topic: "Disney Dispute",
-                stance: "opposes",
-                stanceLabel: "Revoked Disney's Special Tax Status",
-                description: "DeSantis entered a highly publicized feud with Disney after the company publicly opposed the Parental Rights in Education Act. He signed legislation dissolving Disney's self-governing Reedy Creek Improvement District — a status Disney had held since 1967. Disney sued; the dispute was eventually settled.",
-                actions: [
-                    "Signed legislation dissolving Disney's Reedy Creek special district in April 2022.",
-                    "Appointed a new oversight board to assume control of the district.",
-                    "Disney filed a First Amendment lawsuit against DeSantis in 2023.",
-                    "The dispute was settled in 2024 after new Disney board members reached an agreement with DeSantis' office.",
-                ],
-                source: "Florida state records; The New York Times, April 2022; Reuters, 2024"
-            },
-            {
-                topic: "COVID Response",
-                stance: "opposes",
-                stanceLabel: "Opposed Mandates; Kept Florida Open",
-                description: "DeSantis was among the most prominent governors to resist COVID lockdowns and vaccine mandates. He kept Florida schools and businesses open, banned mask mandates in schools, and barred vaccine requirements for employees. Supporters credit this with Florida's strong post-COVID economy; critics note Florida had among the highest death rates per capita in 2021.",
-                actions: [
-                    "Issued executive orders prohibiting local governments from imposing stricter COVID restrictions than the state.",
-                    "Banned mask mandates in Florida schools.",
-                    "Signed legislation prohibiting employer vaccine mandates.",
-                    "Openly clashed with CDC guidance and Dr. Fauci throughout the pandemic.",
-                ],
-                source: "Florida executive orders, 2020–2021; CDC COVID data tracker"
-            },
-            {
-                topic: "Immigration",
-                stance: "strongly-opposes",
-                stanceLabel: "Strict Enforcement; Migrant Transport Operations",
-                description: "DeSantis signed strict immigration enforcement laws and used state funds to fly migrants to Democratic-led cities — a strategy he described as highlighting hypocrisy among Democrats. Critics called it cruel; legal challenges followed.",
-                actions: [
-                    "Flew 50 migrants from Texas to Martha's Vineyard, Massachusetts using $12 million in state funds (2022).",
-                    "Signed SB 1718 — one of the strictest state immigration laws in the country.",
-                    "Authorized Florida law enforcement to cooperate with federal immigration enforcement.",
-                ],
-                source: "NPR, September 2022; Florida SB 1718 signing, May 2023"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Pro-Israel",
-                description: "DeSantis has been an outspoken supporter of Israel. Florida was among the first states to ban Florida government entities from participating in BDS (Boycott, Divestment, Sanctions) movements, and DeSantis has signed legislation combating campus antisemitism.",
-                actions: [
-                    "Signed executive order directing state entities not to participate in BDS movements.",
-                    "Signed legislation expanding the definition of antisemitism adopted by Florida universities.",
-                    "Visited Israel multiple times as Governor; announced his presidential campaign from Israel.",
-                ],
-                source: "Florida state records; Jerusalem Post, April 2023"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes Federal Healthcare Mandates", description: "DeSantis opposes the ACA and federal healthcare mandates. As Governor, he did not expand Medicaid under the ACA and has opposed vaccine requirements for employees and students. He supports market-based healthcare competition.", actions: ["Did not expand Medicaid under the ACA despite bipartisan calls to do so.", "Signed legislation prohibiting employer vaccine mandates in Florida.", "Opposes a government-run public option or single-payer system."], source: "Florida executive record; DeSantis healthcare platform" },
+            { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Opposes Climate Mandates; Pro-Energy", description: "DeSantis opposes federal climate regulations and has largely avoided using the term 'climate change.' He signed a Florida energy bill that prioritizes energy production over clean energy mandates, while also signing some coastal conservation measures due to Florida's geography.", actions: ["Signed HB 1645 (2023) removing climate and renewable energy mandates from Florida law.", "Supports expanding natural gas and nuclear energy.", "Has avoided directly addressing human-caused climate change publicly."], source: "Florida HB 1645; Tampa Bay Times, 2023" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Strict Enforcement; Migrant Transports", description: "DeSantis signed some of the strictest state immigration laws in the country and used state funds to fly migrants to Democratic-led cities — a strategy he called exposing progressive hypocrisy. Critics called it cruel; legal and criminal inquiries followed.", actions: ["Flew 50 migrants to Martha's Vineyard using $12M in state funds (2022).", "Signed SB 1718 — one of the most restrictive state immigration laws in the country.", "Authorized Florida law enforcement to cooperate with federal immigration enforcement."], source: "NPR, September 2022; Florida SB 1718 signing, May 2023" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Signed 6-Week Ban", description: "DeSantis signed a 6-week abortion ban in April 2023 — before most women know they are pregnant — following an earlier 15-week ban. Florida voters subsequently passed a constitutional amendment enshrining abortion rights in November 2024, a direct electoral rebuke of the law.", actions: ["Signed a 15-week abortion ban in 2022.", "Signed a 6-week abortion ban in April 2023.", "Florida voters passed Amendment 4 enshrining abortion rights despite his opposition (November 2024)."], source: "Florida state records; Florida Supreme Court ruling, April 2024" },
+            { topic: "Gun Control", stance: "opposes", stanceLabel: "Opposes New Restrictions", description: "DeSantis opposes new gun control legislation and signed permitless carry into Florida law. He has an A rating from the NRA and has opposed background check expansions and red flag law requirements.", actions: ["Signed permitless concealed carry into Florida law (2023).", "Opposes federal assault weapons bans and universal background checks.", "Signed legislation limiting local governments' ability to pass stricter gun laws than the state."], source: "Florida state records; NRA ratings" },
+            { topic: "Tax Policy & Economy", stance: "opposes", stanceLabel: "Tax Cuts; Anti-Regulation", description: "DeSantis supports cutting taxes and eliminating regulations. Florida has no state income tax and he has positioned the state as a low-tax alternative to high-tax blue states. He opposes federal minimum wage increases and corporate tax hikes.", actions: ["Signed multiple rounds of Florida tax relief, including eliminating sales tax on baby items.", "Opposes federal minimum wage increases and corporate tax hikes.", "Positioned Florida as business-friendly in competition with California and New York."], source: "Florida economic record; DeSantis economic platform" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Hawkish but Initially Skeptical on Ukraine", description: "DeSantis initially called the Russia-Ukraine war a 'territorial dispute' not worth major U.S. involvement — a break from hawkish Republican orthodoxy that drew significant criticism. He later softened that position as his presidential campaign struggled.", actions: ["Called the Russia-Ukraine war a 'territorial dispute' not worth major U.S. investment (March 2023).", "Later said he would continue supporting Ukraine if elected, softening his earlier position.", "Supports strong military and unconditional support for Israel."], source: "Tucker Carlson interview, March 2023; DeSantis campaign clarification, 2023" },
+            { topic: "Education", stance: "opposes", stanceLabel: "Parental Rights; Anti-DEI; School Choice", description: "DeSantis has made education a signature issue, signing the 'Don't Say Gay' Parental Rights in Education Act, banning DEI programs at state universities, and expanding school choice. He has been among the most aggressive governors in restricting curriculum content.", actions: ["Signed the Parental Rights in Education Act limiting classroom gender and sexuality discussions.", "Signed legislation banning DEI programs at Florida public universities.", "Expanded Florida's school choice and voucher programs."], source: "Florida state records; DeSantis education record" },
+            { topic: "Criminal Justice & Policing", stance: "opposes", stanceLabel: "Law Enforcement Support; Anti-Reform", description: "DeSantis is a strong supporter of law enforcement and opposes criminal justice reform efforts. He signed the 'Combating Public Disorder Act' increasing penalties for riot-related offenses and has been critical of progressive prosecutors.", actions: ["Signed the Combating Public Disorder Act increasing penalties for protest-related crimes.", "Suspended progressive Hillsborough County State Attorney Andrew Warren from office in 2022.", "Supports the death penalty and opposes ending mandatory minimum sentences."], source: "Florida state records; DeSantis executive record" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Unconditional Support for Israel", description: "DeSantis has been an outspoken supporter of Israel, making Florida among the first states to ban government participation in BDS movements. He announced his presidential campaign in Israel.", actions: ["Signed executive order directing state entities not to participate in BDS movements.", "Signed legislation expanding the definition of antisemitism at Florida universities.", "Visited Israel multiple times as Governor; announced presidential campaign there."], source: "Florida state records; Jerusalem Post, April 2023" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "Hawkish on China", description: "DeSantis takes a hardline posture toward China, signing legislation restricting Chinese nationals from purchasing property near Florida military bases and opposing Chinese influence in Florida universities.", actions: ["Signed legislation banning Chinese nationals from purchasing property near military bases in Florida.", "Supports restricting Chinese investment in critical U.S. infrastructure.", "Opposes Chinese-affiliated educational programs at Florida universities."], source: "Florida state records; DeSantis China policy statements" },
         ],
         trump: {
             relationship: "Former Ally / 2024 Primary Rival",
@@ -2682,15 +2630,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "The Washington Post reported in 2023 that DeSantis' administration pressured the Florida Department of Health to alter COVID death data in ways that made Florida's pandemic performance appear better than CDC figures showed — allegations the administration denied.",
-                source: "The Washington Post, 2023; CDC COVID data tracker"
-            },
-            {
-                text: "The New York Times reported in 2024 that DeSantis' 2024 presidential campaign burned through money at an extraordinary rate — spending $150 million while never gaining traction — in what campaign strategists across both parties described as one of the most poorly managed presidential campaigns in modern history.",
-                source: "The New York Times, January 2024"
-            }
+        controversies: [
+            { title: "Martha's Vineyard Migrant Flights — Criminal Inquiry", description: "DeSantis used $12M in Florida state funds to fly approximately 50 migrants from Texas to Martha's Vineyard. A state criminal investigation was opened alleging migrants were fraudulently induced to board with false promises about services awaiting them in Massachusetts.", source: "NPR, September 2022; Florida State Attorney's Office" },
+            { title: "Disney Feud — Used State Power Against a Private Company's Political Speech", description: "DeSantis revoked Disney's self-governing Reedy Creek special district status after Disney publicly opposed his Parental Rights in Education Act — an action Disney and critics argued was unconstitutional government retaliation against protected political speech. Disney sued on First Amendment grounds. The dispute was settled in 2024.", source: "The New York Times, April 2022; Reuters, 2024" },
+            { title: "Alleged COVID Data Manipulation", description: "The Washington Post reported that DeSantis' administration pressured the Florida Department of Health to alter COVID death data in ways that made Florida's pandemic performance look better than CDC figures showed. The administration denied the allegations.", source: "The Washington Post, 2023; CDC COVID data tracker" },
+            { title: "$150M Presidential Campaign That Won Zero States", description: "DeSantis spent approximately $150 million on a 2024 presidential campaign that never gained traction, dropped out before the first primary vote was cast, and was described by campaign strategists as one of the most poorly managed presidential runs in modern history.", source: "The New York Times, January 2024" },
         ]
     },
     {
@@ -2805,70 +2749,18 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); Senate financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Native American Heritage Controversy",
-                stance: "mixed",
-                stanceLabel: "Claimed Heritage; DNA Test Controversy",
-                description: "Warren identified herself as Native American in legal directories in the 1980s and 1990s, and Harvard Law cited her as a Native American faculty member. She took a DNA test in 2018 that showed distant Native American ancestry, but the Cherokee Nation released a statement saying 'a DNA test is useless to determine tribal citizenship.'",
-                actions: [
-                    "Listed herself as 'American Indian' in a Texas State Bar directory in 1986.",
-                    "Harvard Law School cited her as a Native American hire in faculty diversity statistics.",
-                    "Released DNA test results in October 2018 showing distant Native American ancestry (6–10 generations back).",
-                    "The Cherokee Nation issued a statement criticizing the DNA test as inappropriate.",
-                    "Apologized in February 2019 for 'not being more sensitive' about tribal citizenship.",
-                ],
-                source: "Boston Globe, April 2018; Cherokee Nation statement, October 2018; The Atlantic, February 2019"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "mixed",
-                stanceLabel: "Supports Israel; Called for Ceasefire",
-                description: "Warren affirmed Israel's right to self-defense after October 7, 2023 but was among the Senate Democrats who called more explicitly for a ceasefire and conditions on weapons as the conflict escalated and civilian casualties mounted.",
-                actions: [
-                    "Affirmed Israel's right to self-defense after the October 7 attack.",
-                    "Called for an immediate ceasefire as the conflict in Gaza extended into 2024.",
-                    "Joined colleagues calling for conditions on U.S. weapons transfers to Israel.",
-                ],
-                source: "Warren Senate statements, 2023–2024"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Abortion Rights",
-                description: "Warren has consistently supported abortion rights and has been among the most outspoken senators on the issue, particularly after the Dobbs decision. She supports federal legislation to restore Roe-level protections.",
-                actions: [
-                    "Co-sponsored the Women's Health Protection Act.",
-                    "Called for abolishing the filibuster specifically to pass abortion rights legislation after Dobbs.",
-                    "Introduced legislation to protect abortion medication access.",
-                ],
-                source: "Senate vote record; Warren Senate statements, 2022"
-            },
-            {
-                topic: "Gun Control",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Gun Control",
-                description: "Warren supports comprehensive gun control legislation including universal background checks, red flag laws, and an assault weapons ban. She has an A rating from gun safety groups and a failing grade from the NRA.",
-                actions: [
-                    "Voted for the Bipartisan Safer Communities Act (2022).",
-                    "Supports universal background checks and an assault weapons ban.",
-                    "Has introduced legislation banning ghost guns and large-capacity magazines.",
-                ],
-                source: "Senate vote record; Giffords Law Center scorecard"
-            },
-            {
-                topic: "Wall Street & Corporate Power",
-                stance: "strongly-opposes",
-                stanceLabel: "Opponent of Concentrated Financial Power",
-                description: "Warren has made challenging Wall Street and corporate monopoly power the central theme of her Senate career — from creating the CFPB to calling for breaking up Amazon and Google. She has been one of the most consistent and detailed critics of financial industry practices in Congress.",
-                actions: [
-                    "Created the Consumer Financial Protection Bureau framework in the Dodd-Frank Act.",
-                    "Introduced the Accountable Capitalism Act requiring large corporations to consider all stakeholders.",
-                    "Called for breaking up Amazon, Google, and Facebook using antitrust law.",
-                    "Opposed the Federal Reserve's emergency lending to banks during COVID without worker protections.",
-                ],
-                source: "Dodd-Frank Act record; Warren Medium post, March 2019; Senate Banking Committee record"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "strongly-supports", stanceLabel: "Medicare for All (Evolved to Public Option)", description: "Warren co-sponsored Medicare for All and defended it at debates in 2019, then released a transition plan preserving private insurance — a shift attributed to polling. She now supports a public option as a stepping stone toward universal coverage.", actions: ["Co-sponsored the Medicare for All Act.", "Released a M4A transition plan in 2019 preserving private insurance for the first three years.", "Supports expanding Medicaid and ACA subsidies as near-term steps."], source: "Senate vote record; Warren M4A plan, November 2019" },
+            { topic: "Climate & Energy", stance: "strongly-supports", stanceLabel: "Aggressive Climate Action", description: "Warren supports aggressive federal action on climate change including a Green New Deal approach, ending fossil fuel subsidies, and massive investment in clean energy. She has made climate a top-tier issue throughout her Senate career.", actions: ["Co-sponsored the Green New Deal resolution.", "Supports ending federal fossil fuel subsidies and leases on public lands.", "Backed the Inflation Reduction Act as a necessary step, while calling for more ambition."], source: "Senate vote record; Warren climate platform" },
+            { topic: "Immigration & Border", stance: "supports", stanceLabel: "Comprehensive Reform; Humane Enforcement", description: "Warren supports a path to citizenship for undocumented immigrants, ending family separation, and a humane asylum process. She opposes mass deportation and has been critical of immigration enforcement policies she views as cruel.", actions: ["Supports the Dream Act and a path to citizenship for undocumented immigrants.", "Opposed the 2024 bipartisan border deal's asylum restrictions as too harsh.", "Called for closing private immigration detention facilities."], source: "Senate vote record; Warren immigration platform" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Strongly Supports Abortion Rights", description: "Warren has been among the most outspoken senators on abortion rights. After Dobbs she called for abolishing the filibuster specifically to pass federal abortion protections.", actions: ["Co-sponsored the Women's Health Protection Act.", "Called for abolishing the filibuster to pass abortion rights legislation after Dobbs.", "Introduced legislation protecting access to abortion medication."], source: "Senate vote record; Warren Senate statements, 2022" },
+            { topic: "Gun Control", stance: "strongly-supports", stanceLabel: "Strongly Supports Gun Control", description: "Warren supports comprehensive gun control — universal background checks, red flag laws, assault weapons ban, and banning ghost guns. She receives a failing grade from the NRA and an A rating from gun safety groups.", actions: ["Voted for the Bipartisan Safer Communities Act (2022).", "Supports universal background checks and an assault weapons ban.", "Introduced legislation banning ghost guns and large-capacity magazines."], source: "Senate vote record; Giffords Law Center scorecard" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Wealth Tax; Break Up Corporate Power", description: "Warren has been the Senate's leading voice for a wealth tax on billionaires, breaking up monopolistic corporations, and aggressive financial regulation. She created the CFPB and has called for breaking up Amazon, Google, and Facebook.", actions: ["Introduced the Ultra-Millionaire Tax Act imposing a 2% annual wealth tax on fortunes above $50M.", "Created the Consumer Financial Protection Bureau framework in the Dodd-Frank Act.", "Called for using antitrust law to break up Amazon, Google, and Facebook."], source: "Senate Banking Committee record; Warren economic platform" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Reform-Oriented; Skeptical of Military Spending", description: "Warren supports U.S. alliances and democratic values abroad but has called for reforming and reducing military spending, ending what she calls endless wars, and oversight of defense contractors. She is more dovish than most Democrats on military budgets.", actions: ["Supported ending the 2001 Authorization for Use of Military Force.", "Called for cutting the defense budget and redirecting funds to domestic priorities.", "Supports NATO and democratic alliances while opposing blank-check military spending."], source: "Senate vote record; Warren foreign policy platform" },
+            { topic: "Education", stance: "strongly-supports", stanceLabel: "Free College; Cancel All Student Debt", description: "Warren ran her 2020 campaign on canceling all student loan debt and making public college free, funded by her wealth tax. She has continued pushing for debt relief in the Senate.", actions: ["Proposed canceling up to $50,000 in student loan debt per borrower.", "Supports tuition-free public college and community college.", "Backed Biden's debt relief efforts and called for more aggressive cancellation."], source: "Warren 2020 campaign platform; Senate bill record" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Supports Reform; End Mass Incarceration", description: "Warren supports ending mandatory minimum sentences, legalizing marijuana, ending private prisons, and redirecting law enforcement spending to community services. She has been a consistent voice for criminal justice reform.", actions: ["Supports the EQUAL Act to eliminate sentencing disparities between crack and powder cocaine.", "Backs legalizing marijuana and expunging prior convictions.", "Introduced legislation to end private federal prison contracts."], source: "Senate vote record; Warren criminal justice platform" },
+            { topic: "Israel & Gaza", stance: "mixed", stanceLabel: "Supports Israel; Called for Ceasefire", description: "Warren affirmed Israel's right to self-defense after October 7 but was among the senators who called more explicitly for a ceasefire and conditions on U.S. weapons as civilian casualties mounted.", actions: ["Affirmed Israel's right to self-defense after the October 7 attack.", "Called for an immediate ceasefire as the conflict extended into 2024.", "Joined colleagues calling for conditions on U.S. weapons transfers to Israel."], source: "Warren Senate statements, 2023–2024" },
+            { topic: "Trade & China", stance: "mixed", stanceLabel: "Fair Trade; Strategic Competition with China", description: "Warren supports trade agreements with strong labor and environmental standards and views China as a strategic competitor. She has supported targeted industrial policy — like the CHIPS Act — to counter Chinese dominance in critical sectors.", actions: ["Supported the CHIPS Act to invest in domestic semiconductor manufacturing.", "Supports trade deals only with enforceable labor and environmental provisions.", "Backs targeted restrictions on Chinese investment in critical U.S. infrastructure."], source: "Senate vote record; Warren trade platform" },
         ],
         trump: {
             relationship: "Consistent Opponent",
@@ -2912,15 +2804,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "The Boston Globe reported in April 2018 that Warren had listed herself as 'American Indian' in a Texas State Bar registration card in 1986, and that Harvard Law School had cited her as a Native American hire — raising questions about whether her career had benefited from a heritage claim she could not substantiate.",
-                source: "Boston Globe, April 2018"
-            },
-            {
-                text: "Politico reported in March 2020 that Warren's decision not to endorse Bernie Sanders after dropping out of the 2020 primary — despite being his closest ideological ally — drew significant criticism from progressive activists who viewed it as a strategic betrayal of shared values.",
-                source: "Politico, March 2020"
-            }
+        controversies: [
+            { title: "Falsely Claimed Native American Heritage for Decades", description: "Warren listed herself as 'American Indian' in a Texas State Bar directory in 1986 and was cited by Harvard Law as a Native American hire. She took a DNA test in 2018 showing distant ancestry (1/64th to 1/1024th), which the Cherokee Nation called useless for determining tribal citizenship. She apologized in 2019 for 'not being more sensitive.'", source: "Boston Globe, April 2018; Cherokee Nation statement, October 2018" },
+            { title: "Did Not Endorse Sanders After Dropping Out of 2020 Primary", description: "Despite being Sanders' closest ideological ally in the 2020 race, Warren declined to endorse him when she dropped out — instead eventually endorsing Biden. Progressives viewed it as a strategic betrayal of shared values that may have affected the primary outcome.", source: "Politico, March 2020; The Atlantic, March 2020" },
+            { title: "Consulting Income From Corporations She Later Criticized", description: "Warren earned consulting income from major corporations including Travelers Insurance and Dow Chemical prior to her Senate career — companies whose practices aligned with the corporate accountability issues she built her reputation opposing.", source: "The Washington Examiner, 2019; Warren campaign response" },
+            { title: "Medicare for All Reversal", description: "Warren forcefully defended full Medicare for All in 2019 debates, insisting she was 'with Bernie' on eliminating private insurance. She then released a transition plan weeks later that would delay M4A by three years and preserve private insurance — drawing accusations of political opportunism.", source: "Democratic primary debates, 2019; Warren M4A plan, November 2019" },
         ]
     },
     {
@@ -3030,68 +2918,18 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); Senate financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Immigration (Gang of Eight)",
-                stance: "mixed",
-                stanceLabel: "Co-Authored Reform Bill; Later Opposed It",
-                description: "Rubio was a lead Republican author of the 2013 bipartisan 'Gang of Eight' comprehensive immigration reform bill, which passed the Senate 68–32. He later abandoned support for the bill as the Tea Party and conservative base turned against it, calling it a mistake — a reversal that became a defining moment of his 2016 presidential campaign.",
-                actions: [
-                    "Co-authored the Border Security, Economic Opportunity, and Immigration Modernization Act (2013).",
-                    "The bill passed the Senate 68–32 but was never brought to a House vote.",
-                    "Distanced himself from the bill during his 2016 presidential campaign, calling a path to citizenship the 'wrong approach.'",
-                    "Now opposes comprehensive immigration reform and supports enforcement-first approaches.",
-                ],
-                source: "Senate vote record, June 2013; Rubio 2016 campaign statements"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Pro-Israel",
-                description: "Rubio is one of the Senate's most consistently and unconditionally pro-Israel members. He has opposed any restrictions on U.S. military aid to Israel and has been critical of international pressure on Israel over its Gaza campaign.",
-                actions: [
-                    "Attended and praised Netanyahu's address to a joint session of Congress in July 2024.",
-                    "Opposed any pause or conditions on U.S. weapons transfers to Israel.",
-                    "As Secretary of State, has affirmed unconditional U.S. support for Israel's military operations.",
-                ],
-                source: "Senate vote record; State Department statements, 2025"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-opposes",
-                stanceLabel: "Strongly Opposes Abortion Rights",
-                description: "Rubio has consistently opposed abortion rights, receiving a 100% rating from the National Right to Life Committee throughout his Senate career. He supports a federal abortion ban with narrow exceptions.",
-                actions: [
-                    "Voted against the Women's Health Protection Act.",
-                    "Supports a federal 15-week abortion ban with narrow exceptions for rape, incest, and life of the mother.",
-                    "Received a 100% career rating from the National Right to Life Committee.",
-                ],
-                source: "Senate vote record; National Right to Life scorecard"
-            },
-            {
-                topic: "Gun Control",
-                stance: "opposes",
-                stanceLabel: "Opposes New Restrictions",
-                description: "Rubio has opposed most gun control legislation in the Senate. Notably, he faced intense public pressure after the Parkland school shooting in his home state of Florida and held a nationally televised town hall confronted by Parkland survivors and parents — but ultimately voted against major gun control measures.",
-                actions: [
-                    "Attended nationally televised CNN town hall after the February 2018 Parkland shooting.",
-                    "Voted against the Bipartisan Safer Communities Act (2022).",
-                    "Has received an A rating from the NRA and millions in career contributions from gun rights organizations.",
-                ],
-                source: "NRA ratings; Senate vote record; CNN town hall, February 2018"
-            },
-            {
-                topic: "Climate Change",
-                stance: "mixed",
-                stanceLabel: "Skeptical of Policy Action",
-                description: "Rubio has acknowledged climate change is occurring but questioned the scientific consensus on its human causes and consistently opposed major climate legislation. He represents a major coastal state and has acknowledged Florida's vulnerability to sea level rise.",
-                actions: [
-                    "Stated in 2014: 'I do not believe human activity is causing these dramatic changes.'",
-                    "Opposed the Paris Climate Agreement and cap-and-trade legislation.",
-                    "Supported some limited funding for coastal resilience given Florida's vulnerability.",
-                ],
-                source: "ABC This Week interview, May 2014; Senate vote record"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes ACA; Free Market", description: "Rubio has consistently opposed the Affordable Care Act and supports replacing it with a market-based system. He worked to undermine the ACA's risk corridor program — a move that destabilized insurance markets — and opposes a public option.", actions: ["Inserted a provision eliminating the ACA's risk corridors into a government spending bill, contributing to insurer withdrawals from ACA markets.", "Voted to repeal the ACA in 2017.", "Supports health savings accounts and market competition as alternatives."], source: "Senate vote record; Washington Post ACA risk corridor analysis, 2017" },
+            { topic: "Climate & Energy", stance: "mixed", stanceLabel: "Climate Skeptic; Supports Some Resilience", description: "Rubio has questioned the scientific consensus on human-caused climate change and opposed major climate legislation. However, as a Florida senator, he has supported some coastal resilience funding given his state's vulnerability to sea level rise.", actions: ["Stated in 2014: 'I do not believe human activity is causing these dramatic changes.'", "Opposed the Paris Climate Agreement and cap-and-trade legislation.", "Supported some limited federal funding for coastal resilience projects."], source: "ABC This Week interview, May 2014; Senate vote record" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Co-Authored Reform; Now Enforcement-First", description: "Rubio was a lead author of the bipartisan Gang of Eight immigration reform bill in 2013, then abandoned it under Tea Party pressure and now opposes the comprehensive reform approach he helped create.", actions: ["Co-authored the Border Security, Economic Opportunity, and Immigration Modernization Act (2013).", "The bill passed the Senate 68–32 but was never brought to a House vote.", "Called his own bill 'the wrong approach' during his 2016 presidential campaign."], source: "Senate vote record, June 2013; Rubio 2016 campaign statements" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Strongly Opposes Abortion Rights", description: "Rubio has consistently opposed abortion rights, receiving a 100% rating from the National Right to Life Committee. He supports a federal 15-week ban with narrow exceptions and praised the Dobbs decision.", actions: ["Voted against the Women's Health Protection Act.", "Supports a federal 15-week abortion ban with narrow exceptions.", "Received a 100% career rating from the National Right to Life Committee."], source: "Senate vote record; National Right to Life scorecard" },
+            { topic: "Gun Control", stance: "opposes", stanceLabel: "Opposes New Restrictions", description: "Rubio has opposed most gun control legislation despite facing intense pressure after the Parkland school shooting in his home state. He held a nationally televised CNN town hall confronted by Parkland survivors but ultimately voted against major gun control measures.", actions: ["Attended CNN town hall after the February 2018 Parkland shooting.", "Voted against the Bipartisan Safer Communities Act (2022).", "Receives an A rating from the NRA."], source: "NRA ratings; Senate vote record; CNN town hall, February 2018" },
+            { topic: "Tax Policy & Economy", stance: "opposes", stanceLabel: "Tax Cuts; Working Class Focus", description: "Rubio supported the 2017 Tax Cuts and Jobs Act but pushed for a larger Child Tax Credit expansion to benefit working-class families. He has been one of the more populist voices on economic issues within the Republican Party.", actions: ["Voted for the Tax Cuts and Jobs Act (2017).", "Pushed to expand the Child Tax Credit for working families in the TCJA negotiations.", "Supports strategic industrial policy to counter China's economic challenge."], source: "Senate vote record; Rubio economic platform" },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", stanceLabel: "Hawkish; Strong Military; Anti-China", description: "Rubio is among the Senate's most hawkish members on foreign policy — supporting a large defense budget, unconditional support for Israel, maximum pressure on Cuba, Venezuela, and Iran, and aggressive competition with China.", actions: ["Supports maximum pressure sanctions on Cuba, Venezuela, Iran, and China.", "Backed U.S. military aid to Ukraine before serving in Trump's China-skeptical administration.", "As Secretary of State, has taken a hardline posture toward adversary nations."], source: "Senate foreign policy record; State Department record, 2025" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice; Market Competition", description: "Rubio supports school choice, charter schools, and vocational training. He opposes federal education mandates and has called for an education system more focused on workforce preparation than traditional four-year degrees.", actions: ["Supports expanding charter schools and school voucher programs.", "Advocates for expanding community college and vocational training pathways.", "Opposes federal curriculum mandates and Common Core."], source: "Rubio education platform; Senate record" },
+            { topic: "Criminal Justice & Policing", stance: "opposes", stanceLabel: "Law Enforcement Support; Tough on Crime", description: "Rubio supports strong law enforcement funding and opposes most criminal justice reform efforts. He has been critical of calls to defund police and supports mandatory minimum sentences for drug trafficking.", actions: ["Opposes calls to defund or restructure police departments.", "Voted against sentencing reform provisions in the First Step Act.", "Supports the death penalty for drug traffickers."], source: "Senate vote record; Rubio criminal justice platform" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Unconditional Support for Israel", description: "Rubio is one of the Senate's most consistently and unconditionally pro-Israel members. He opposed any restrictions on U.S. military aid to Israel and as Secretary of State has affirmed unconditional U.S. support.", actions: ["Attended and praised Netanyahu's address to Congress in July 2024.", "Opposed any pause or conditions on U.S. weapons transfers to Israel.", "As Secretary of State, affirmed unconditional U.S. support for Israel's military operations."], source: "Senate vote record; State Department statements, 2025" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "Hawkish on China; Strategic Industrial Policy", description: "Rubio has been one of the Senate's leading voices on countering China economically and militarily. He supports targeted industrial policy, tariffs, and restrictions on Chinese investment as a national security matter.", actions: ["Introduced legislation restricting Chinese ownership of U.S. farmland and technology companies.", "Supports strategic industrial policy to reduce U.S. dependence on Chinese supply chains.", "Backs tariffs on Chinese goods as a national security tool."], source: "Senate China policy record; Rubio trade platform" },
         ],
         trump: {
             relationship: "Bitter Rival / Full Ally",
@@ -3128,15 +2966,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "The New York Times reported in 2015 that Rubio had accumulated a pattern of financial problems including a home equity line of drawdown, liquidating a retirement account, and large outstanding student loans — raising questions about his personal financial management for a candidate presenting himself as economically responsible.",
-                source: "The New York Times, June 2015"
-            },
-            {
-                text: "The Tampa Bay Times reported in 2010 that during his time as Florida House Speaker, Rubio had improperly charged personal expenses to a Republican Party of Florida credit card. Some charges were reimbursed; the full extent of personal versus official use was disputed.",
-                source: "Tampa Bay Times, March 2010"
-            }
+        controversies: [
+            { title: "Co-Authored Immigration Reform Bill, Then Disowned It", description: "Rubio was a lead author of the bipartisan Gang of Eight immigration reform bill that passed the Senate 68–32 in 2013, then under Tea Party pressure called his own bill 'the wrong approach' during his 2016 presidential campaign. It became the defining example of his willingness to reverse for political convenience.", source: "Senate vote record, 2013; Rubio 2016 campaign statements" },
+            { title: "Voted Against Gun Safety Bill After Parkland Shooting in His State", description: "Rubio attended a nationally televised CNN town hall confronted by Parkland shooting survivors and parents after the February 2018 massacre at a school in his home state — but ultimately voted against the Bipartisan Safer Communities Act in 2022.", source: "CNN town hall, February 2018; Senate vote record, 2022" },
+            { title: "Republican Party Credit Card Personal Charges", description: "Rubio charged approximately $100,000 to a Republican Party of Florida American Express card while serving as Florida House Speaker — including personal expenses. Some charges were reimbursed; the full extent of personal versus official use was disputed.", source: "Tampa Bay Times, March 2010; Politico, March 2010" },
+            { title: "Personal Financial Management Questions", description: "The New York Times reported in 2015 that Rubio had liquidated a retirement account, taken a home equity loan, and accumulated significant student loan debt — raising questions about personal financial management for a candidate presenting himself as economically responsible.", source: "The New York Times, June 2015" },
         ]
     },
     {
