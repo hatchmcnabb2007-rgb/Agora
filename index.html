@@ -1261,6 +1261,53 @@
         }
         .lp-cta-sec:hover { border-color: var(--dark); box-shadow: 0 4px 16px rgba(0,0,0,.09); transform: translateY(-1px); }
 
+        /* Newsletter */
+        .lp-newsletter {
+            background: white; border-top: 1px solid var(--border);
+            padding: 72px 24px; text-align: center;
+        }
+        .lp-nl-title {
+            font-family: 'Playfair Display', serif; font-size: 30px;
+            font-weight: 700; color: var(--dark); margin-bottom: 12px;
+        }
+        .lp-nl-sub { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; }
+        .lp-nl-form {
+            display: flex; gap: 10px; max-width: 440px;
+            margin: 0 auto; flex-wrap: wrap; justify-content: center;
+        }
+        .lp-nl-input {
+            flex: 1; min-width: 200px; padding: 13px 16px;
+            font-size: 14px; font-family: 'Inter', sans-serif;
+            border: 1.5px solid var(--border); border-radius: 8px;
+            outline: none; color: var(--text-primary); background: var(--bg);
+            transition: border-color .2s;
+        }
+        .lp-nl-input:focus { border-color: var(--accent); background: white; }
+        .lp-nl-btn {
+            padding: 13px 24px; background: var(--dark); color: white;
+            font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+            border: none; border-radius: 8px; cursor: pointer; transition: all .2s;
+            white-space: nowrap;
+        }
+        .lp-nl-btn:hover { background: var(--accent); }
+        .lp-nl-success {
+            display: none; font-size: 15px; font-weight: 600;
+            color: #059669; margin-top: 4px;
+        }
+
+        /* Home newsletter strip */
+        .home-nl-strip {
+            width: 100%; max-width: 880px; margin-top: 48px;
+            background: white; border: 1px solid var(--border);
+            border-radius: 10px; padding: 24px 28px;
+            display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+        }
+        .home-nl-left { flex: 1; min-width: 180px; }
+        .home-nl-title { display: block; font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+        .home-nl-sub { display: block; font-size: 12px; color: var(--text-secondary); }
+        .home-nl-form { display: flex; gap: 8px; flex-wrap: wrap; }
+        .home-nl-success { display: none; font-size: 13px; font-weight: 600; color: #059669; }
+
         /* Manifesto strip */
         .lp-manifesto {
             background: var(--dark); color: white;
@@ -1292,6 +1339,12 @@
     </style>
 </head>
 <body>
+<!-- Netlify Forms detection — do not remove -->
+<form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="newsletter">
+    <input name="bot-field">
+    <input type="email" name="email">
+</form>
 
 <header>
     <div class="wordmark" onclick="showLanding()">AG<span>ORA</span></div>
@@ -1360,6 +1413,17 @@
         <button class="lp-cta-sec" onclick="enterApp()">See all 14 profiles &nbsp;→</button>
     </section>
 
+    <section class="lp-newsletter">
+        <div class="lp-section-eyebrow">Newsletter</div>
+        <div class="lp-nl-title">Stay in the loop.</div>
+        <p class="lp-nl-sub">New profiles, feature updates, and analysis — straight to your inbox. No spam, ever.</p>
+        <div id="lp-nl-form" class="lp-nl-form">
+            <input type="email" id="lp-nl-email" class="lp-nl-input" placeholder="your@email.com" name="email">
+            <button class="lp-nl-btn" onclick="submitNewsletter('lp-nl-form','lp-nl-email','lp-nl-success')">Subscribe →</button>
+        </div>
+        <div id="lp-nl-success" class="lp-nl-success">You're on the list. We'll be in touch.</div>
+    </section>
+
     <section class="lp-manifesto">
         <p class="lp-manifesto-quote">
             "Democracy works best when voters have <em>real information</em> — not talking points, not spin, not sound bites."
@@ -1412,6 +1476,18 @@
 
     <div class="section-label" id="grid-label">Featured Profiles</div>
     <div class="featured-grid" id="featured-grid"></div>
+
+    <div class="home-nl-strip">
+        <div class="home-nl-left">
+            <span class="home-nl-title">Agora Newsletter</span>
+            <span class="home-nl-sub">New profiles and feature updates, when they ship.</span>
+        </div>
+        <div id="home-nl-form" class="home-nl-form">
+            <input type="email" id="home-nl-email" class="lp-nl-input home-nl-input" placeholder="your@email.com" style="min-width:200px;flex:unset">
+            <button class="lp-nl-btn" onclick="submitNewsletter('home-nl-form','home-nl-email','home-nl-success')">Subscribe</button>
+        </div>
+        <div id="home-nl-success" class="lp-nl-success home-nl-success"></div>
+    </div>
 </div>
 
 <!-- PROFILE -->
@@ -5346,6 +5422,26 @@ function syncCompareProfileBtn() {
 
 renderFeatured();
 renderLandingPreview();
+
+// ── Newsletter signup (Netlify Forms) ────────────────────
+function submitNewsletter(formId, inputId, successId) {
+    const input = document.getElementById(inputId);
+    const email = (input.value || "").trim();
+    if (!email || !email.includes("@")) {
+        input.style.borderColor = "#DC2626";
+        setTimeout(() => input.style.borderColor = "", 1500);
+        input.focus();
+        return;
+    }
+    const body = new URLSearchParams({ "form-name": "newsletter", email });
+    fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() })
+        .finally(() => {
+            document.getElementById(formId).style.display = "none";
+            const success = document.getElementById(successId);
+            success.textContent = "You're on the list. We'll be in touch.";
+            success.style.display = "block";
+        });
+}
 
 // Navigate to profile if URL has ?id= param on load
 (function () {
