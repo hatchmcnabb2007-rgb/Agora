@@ -974,6 +974,10 @@
         }
         .compare-total { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--dark); margin-bottom: 4px; text-align: center; }
         .compare-total-sub { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; text-align: center; }
+        .cmp-cycle-tabs { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; margin-bottom: 12px; }
+        .cmp-cycle-tab { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 16px; border: 1px solid var(--border); background: white; cursor: pointer; color: var(--text-secondary); transition: all .15s; font-family: 'Inter', sans-serif; }
+        .cmp-cycle-tab:hover { border-color: var(--accent); color: var(--accent); }
+        .cmp-cycle-tab.active { background: var(--dark); color: white; border-color: var(--dark); }
         .compare-issue-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 40px; }
         .compare-issue-table { width: 100%; border-collapse: collapse; }
         .compare-issue-table th {
@@ -4394,6 +4398,25 @@ function showHome(pushState = true) {
 
 // ── Compare logic ────────────────────────────────────────
 let selectedToCompare = new Set();
+let cmpCandidates = [null, null];
+let cmpCycleIdx = [0, 0];
+
+function buildCompareFinanceCol(c, slot, cycleIdx) {
+    const f = c.finance[cycleIdx];
+    const tabs = c.finance.length > 1 ? `<div class="cmp-cycle-tabs">${c.finance.map((fi, i) =>
+        `<button class="cmp-cycle-tab ${i === cycleIdx ? "active" : ""}" onclick="switchCompareCycle(${slot},${i})">${fi.year}</button>`
+    ).join("")}</div>` : "";
+    return `<div class="compare-col-name">${c.name}</div>
+        ${tabs}
+        <div class="compare-total">${formatMoney(f.total)}</div>
+        <div class="compare-total-sub">${f.year} ${f.office} campaign</div>
+        ${buildFinanceBar(f)}`;
+}
+
+function switchCompareCycle(slot, idx) {
+    cmpCycleIdx[slot] = idx;
+    document.getElementById(`cmp-finance-col-${slot}`).innerHTML = buildCompareFinanceCol(cmpCandidates[slot], slot, idx);
+}
 
 function toggleCompare(id, event) {
     event.stopPropagation();
@@ -4466,6 +4489,9 @@ function buildFinanceBar(cycle) {
 }
 
 function renderComparison(c1, c2) {
+    cmpCandidates = [c1, c2];
+    cmpCycleIdx = [0, 0];
+
     document.getElementById("compare-header-cols").innerHTML = [c1, c2].map(c => `
         <div class="compare-hero-col">
             ${makeAvatar(c, "avatar-lg")}
@@ -4474,23 +4500,14 @@ function renderComparison(c1, c2) {
             <div class="profile-party-badge badge-${c.party}" style="margin-top:10px;display:inline-block">${partyLabel(c.party)}</div>
         </div>`).join("");
 
-    const f1 = c1.finance[0];
-    const f2 = c2.finance[0];
-
     let html = `
-    <div class="compare-section-title">Campaign Finance — Most Recent Cycle</div>
+    <div class="compare-section-title">Campaign Finance</div>
     <div class="compare-finance-cols">
-        <div class="compare-finance-col">
-            <div class="compare-col-name">${c1.name}</div>
-            <div class="compare-total" id="cmp-total-${c1.id}">${formatMoney(f1.total)}</div>
-            <div class="compare-total-sub">${f1.year} ${f1.office} campaign</div>
-            ${buildFinanceBar(f1)}
+        <div class="compare-finance-col" id="cmp-finance-col-0">
+            ${buildCompareFinanceCol(c1, 0, 0)}
         </div>
-        <div class="compare-finance-col">
-            <div class="compare-col-name">${c2.name}</div>
-            <div class="compare-total" id="cmp-total-${c2.id}">${formatMoney(f2.total)}</div>
-            <div class="compare-total-sub">${f2.year} ${f2.office} campaign</div>
-            ${buildFinanceBar(f2)}
+        <div class="compare-finance-col" id="cmp-finance-col-1">
+            ${buildCompareFinanceCol(c2, 1, 0)}
         </div>
     </div>`;
 
