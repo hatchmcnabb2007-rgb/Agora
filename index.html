@@ -77,6 +77,12 @@
         .card-name { font-weight: 700; font-size: 17px; margin-bottom: 4px; }
         .card-title { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.4; }
         .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .card-status { font-size: 11px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+        .card-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+        .status-active { color: #059669; }
+        .status-active .card-status-dot { background: #059669; }
+        .status-former { color: var(--text-muted); }
+        .status-former .card-status-dot { background: var(--text-muted); }
         .tag { font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; color: var(--text-secondary); }
 
         /* ── Profile ── */
@@ -1135,9 +1141,14 @@
             .legend-bar-wrap { display: none; }
             .vision-pillars { grid-template-columns: 1fr; }
             .shift-body { grid-template-columns: 1fr; }
-            .compare-header-cols { grid-template-columns: 1fr; gap: 0; }
+            .compare-header-cols { grid-template-columns: 1fr 1fr; gap: 0; }
             .compare-finance-cols { grid-template-columns: 1fr; }
             .compare-position-cols { grid-template-columns: 1fr; }
+            .compare-body { padding: 20px 14px; }
+            .compare-issue-table th, .compare-issue-table td { padding: 8px 6px; font-size: 12px; }
+            .compare-total { font-size: 20px; }
+            .cmp-cycle-tabs { gap: 3px; }
+            .cmp-cycle-tab { font-size: 10px; padding: 3px 7px; }
         }
         /* ── Landing Page ── */
         #landing-view { display: block; }
@@ -2003,7 +2014,7 @@ const candidates = [
         fecId: "P00014530",
         name: "Nikki Haley",
         initials: "NH",
-        photo: null,
+        photo: "https://upload.wikimedia.org/wikipedia/commons/7/75/Nikki_Haley_official_photo.jpg",
         party: "R",
         title: "Former U.S. Ambassador to the UN · Former Governor, South Carolina",
         state: "South Carolina",
@@ -3615,7 +3626,7 @@ const candidates = [
         fecId: "P00010074",
         name: "Pete Buttigieg",
         initials: "PB",
-        photo: null,
+        photo: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Pete_Buttigieg_official_photo.jpg",
         party: "D",
         title: "Former U.S. Secretary of Transportation · Former Mayor of South Bend, Indiana",
         state: "Indiana",
@@ -4044,7 +4055,7 @@ const candidates = [
         fecId: "P00016097",
         name: "Gavin Newsom",
         initials: "GN",
-        photo: null,
+        photo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Gavin_Newsom_official_photo.jpg",
         party: "D",
         title: "Governor of California · Former Mayor of San Francisco",
         state: "California",
@@ -4685,10 +4696,34 @@ function showProfile(id, pushState = true) {
     document.getElementById("compare-view").style.display = "none";
     document.getElementById("profile-view").style.display = "block";
     window.scrollTo(0, 0);
-    document.querySelectorAll(".nav-item").forEach((n, i) => n.classList.toggle("active", i === 0));
+    syncNavTabs(c);
     setTimeout(initScrollSpy, 100);
     fetchFECData(c);
     syncCompareProfileBtn();
+}
+
+function syncNavTabs(c) {
+    const sectionIds = ["sec-highlights","sec-vision","sec-positions","sec-finance","sec-controversial","sec-votes","sec-trump","sec-ethics","sec-epstein","sec-concerns"];
+    const hasContent = {
+        "sec-highlights":   true,
+        "sec-vision":       true,
+        "sec-positions":    true,
+        "sec-finance":      true,
+        "sec-controversial": !!(c.issues && c.issues.length),
+        "sec-votes":        true,
+        "sec-trump":        !!c.trumpRecord,
+        "sec-ethics":       !!c.ethics,
+        "sec-epstein":      !!c.epstein,
+        "sec-concerns":     !!(c.controversies && c.controversies.length),
+    };
+    const navItems = document.querySelectorAll(".nav-item");
+    let firstVisible = true;
+    navItems.forEach((item, i) => {
+        const show = hasContent[sectionIds[i]] !== false;
+        item.style.display = show ? "" : "none";
+        item.classList.toggle("active", show && firstVisible);
+        if (show && firstVisible) firstVisible = false;
+    });
 }
 
 function showHome(pushState = true) {
@@ -4718,7 +4753,12 @@ function renderLandingPreview() {
     const picks = ids.map(id => candidates.find(c => c.id === id)).filter(Boolean);
     const grid = document.getElementById("lp-preview-grid");
     if (!grid) return;
-    grid.innerHTML = picks.map(c => `
+    const activeRoles = ["senator","representative","president","governor","cabinet"];
+    grid.innerHTML = picks.map(c => {
+        const active = activeRoles.includes(c.currentRole);
+        const statusClass = active ? "status-active" : "status-former";
+        const statusLabel = active ? "Active" : "Out of office";
+        return `
         <div class="candidate-card" onclick="showProfile('${c.id}')">
             <div class="card-header">
                 ${makeAvatar(c, "avatar-sm")}
@@ -4728,9 +4768,10 @@ function renderLandingPreview() {
                 </div>
             </div>
             <div class="card-title">${c.title}</div>
+            <div class="card-status ${statusClass}"><span class="card-status-dot"></span>${statusLabel}</div>
             <div class="card-tags">${(c.tags || []).map(t => `<span class="tag">${t}</span>`).join("")}</div>
-        </div>
-    `).join("");
+        </div>`;
+    }).join("");
 }
 
 // ── Compare logic ────────────────────────────────────────
@@ -5144,7 +5185,12 @@ function renderFeatured() {
     if (!list.length) {
         grid.innerHTML = `<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--text-muted);font-size:14px">No profiles match this filter yet — more coming soon.</div>`;
     } else {
-        grid.innerHTML = list.map(c => `
+        const activeRoles = ["senator","representative","president","governor","cabinet"];
+        grid.innerHTML = list.map(c => {
+            const active = activeRoles.includes(c.currentRole);
+            const statusClass = active ? "status-active" : "status-former";
+            const statusLabel = active ? "Active" : "Out of office";
+            return `
             <div class="candidate-card" onclick="showProfile('${c.id}')">
                 <button class="compare-toggle" data-id="${c.id}" onclick="toggleCompare('${c.id}', event)">+ Compare</button>
                 <div class="card-header" style="margin-right:80px">
@@ -5155,8 +5201,10 @@ function renderFeatured() {
                     </div>
                 </div>
                 <div class="card-title">${c.title}</div>
+                <div class="card-status ${statusClass}"><span class="card-status-dot"></span>${statusLabel}</div>
                 <div class="card-tags">${c.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
-            </div>`).join("");
+            </div>`;
+        }).join("");
     }
     updateFilterBar();
 }
