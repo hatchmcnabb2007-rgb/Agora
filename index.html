@@ -1037,6 +1037,42 @@
         .party-chip.active-R { background: #DC2626; color: white; border-color: #DC2626; }
         .party-chip.active-I { background: #7C3AED; color: white; border-color: #7C3AED; }
 
+        /* Match my views */
+        .match-chip {
+            font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+            padding: 5px 14px; border-radius: 20px; border: 1.5px solid var(--accent);
+            background: white; cursor: pointer; font-family: 'Inter', sans-serif;
+            color: var(--accent); transition: all .15s;
+        }
+        .match-chip:hover { background: var(--accent); color: white; }
+        .match-chip.active { background: var(--accent); color: white; }
+        .match-panel {
+            display: none; width: 100%; max-width: 880px;
+            background: white; border: 1px solid var(--border);
+            border-radius: 10px; padding: 24px; margin-bottom: 16px;
+        }
+        .match-panel.open { display: block; }
+        .match-panel-header {
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+        }
+        .match-panel-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+        .match-clear { font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; padding: 0; transition: color .15s; }
+        .match-clear:hover { color: var(--dark); }
+        .match-rows { display: flex; flex-direction: column; gap: 10px; }
+        .match-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .match-topic-label { font-size: 13px; color: var(--text-primary); font-weight: 500; flex: 1; min-width: 180px; }
+        .pos-group { display: flex; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); flex-shrink: 0; }
+        .pos-btn { font-size: 11px; font-weight: 600; padding: 5px 14px; border: none; border-right: 1px solid var(--border); background: white; cursor: pointer; color: var(--text-secondary); transition: all .15s; font-family: 'Inter', sans-serif; }
+        .pos-btn:last-child { border-right: none; }
+        .pos-btn:hover { background: var(--bg); color: var(--dark); }
+        .pos-btn.active-support { background: #059669; color: white; }
+        .pos-btn.active-neutral { background: var(--dark); color: white; }
+        .pos-btn.active-oppose { background: #DC2626; color: white; }
+        .match-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px; display: inline-block; }
+        .match-high { background: #D1FAE5; color: #059669; }
+        .match-mid { background: #FEF3C7; color: #D97706; }
+        .match-low { background: #FEE2E2; color: #DC2626; }
+
         #map-container { display: none; width: 100%; max-width: 880px; margin-bottom: 28px; }
         #tile-map { width: 100%; }
         #tile-map svg { display: block; width: 100%; height: auto; }
@@ -1466,7 +1502,16 @@
             <button class="party-chip" id="chip-D" onclick="toggleParty('D')">Democrat</button>
             <button class="party-chip" id="chip-R" onclick="toggleParty('R')">Republican</button>
             <button class="party-chip" id="chip-I" onclick="toggleParty('I')">Independent</button>
+            <button class="match-chip" id="match-chip" onclick="toggleMatchPanel()">Match My Views</button>
         </div>
+    </div>
+
+    <div class="match-panel" id="match-panel">
+        <div class="match-panel-header">
+            <span class="match-panel-title">Set your position on each topic — candidates re-sort by alignment</span>
+            <button class="match-clear" onclick="clearPositions()">Clear all</button>
+        </div>
+        <div class="match-rows" id="match-rows"></div>
     </div>
 
     <div id="map-container">
@@ -4891,8 +4936,6 @@ function renderComparison(c1, c2) {
     </div>`;
 
     // Issue stances table — standardized 11 topics across all candidates
-    const ISSUE_TOPICS = ["Healthcare","Climate & Energy","Immigration & Border","Abortion & Reproductive Rights","Gun Control","Tax Policy & Economy","Foreign Policy & Military","Education","Criminal Justice & Policing","Israel & Gaza","Trade & China"];
-
     const allTopics = ISSUE_TOPICS;
 
     if (allTopics.length > 0) {
@@ -5016,6 +5059,9 @@ const STATE_GRID = [
 let activeStateFilter = null;
 let activePartyFilter = null;
 let currentView = 'grid';
+let userPositions = {};
+
+const ISSUE_TOPICS = ["Healthcare","Climate & Energy","Immigration & Border","Abortion & Reproductive Rights","Gun Control","Tax Policy & Economy","Foreign Policy & Military","Education","Criminal Justice & Policing","Israel & Gaza","Trade & China"];
 
 function getFiltered() {
     return candidates.filter(c => {
@@ -5179,6 +5225,60 @@ async function renderMap() {
 }
 
 // ── Home grid ────────────────────────────────────────────
+// ── Match My Views ───────────────────────────────────────
+function renderMatchPanel() {
+    document.getElementById("match-rows").innerHTML = ISSUE_TOPICS.map((topic, i) => {
+        const pos = userPositions[topic];
+        return `<div class="match-row">
+            <span class="match-topic-label">${topic}</span>
+            <div class="pos-group">
+                <button class="pos-btn ${pos === "support" ? "active-support" : ""}" onclick="setPosition(${i},'support')">Support</button>
+                <button class="pos-btn ${pos === "neutral" ? "active-neutral" : ""}" onclick="setPosition(${i},'neutral')">Neutral</button>
+                <button class="pos-btn ${pos === "oppose" ? "active-oppose" : ""}" onclick="setPosition(${i},'oppose')">Oppose</button>
+            </div>
+        </div>`;
+    }).join("");
+}
+
+function toggleMatchPanel() {
+    const panel = document.getElementById("match-panel");
+    const btn = document.getElementById("match-chip");
+    const open = panel.classList.toggle("open");
+    btn.classList.toggle("active", open);
+    btn.textContent = open ? "✕ Close" : "Match My Views";
+    if (open) renderMatchPanel();
+}
+
+function setPosition(idx, val) {
+    const topic = ISSUE_TOPICS[idx];
+    if (userPositions[topic] === val) delete userPositions[topic];
+    else userPositions[topic] = val;
+    renderMatchPanel();
+    renderFeatured();
+}
+
+function clearPositions() {
+    userPositions = {};
+    renderMatchPanel();
+    renderFeatured();
+}
+
+function getAlignment(c) {
+    const setTopics = Object.keys(userPositions);
+    if (!setTopics.length) return null;
+    let matches = 0, counted = 0;
+    setTopics.forEach(topic => {
+        const issue = (c.issues || []).find(x => x.topic === topic);
+        if (!issue) return;
+        counted++;
+        const s = issue.stance, p = userPositions[topic];
+        if (p === "support" && (s === "supports" || s === "strongly-supports")) matches++;
+        else if (p === "neutral" && s === "mixed") matches++;
+        else if (p === "oppose" && (s === "opposes" || s === "strongly-opposes")) matches++;
+    });
+    return counted ? { matches, total: counted } : null;
+}
+
 function renderFeatured() {
     const list = getFiltered();
     const grid = document.getElementById("featured-grid");
@@ -5186,10 +5286,30 @@ function renderFeatured() {
         grid.innerHTML = `<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--text-muted);font-size:14px">No profiles match this filter yet — more coming soon.</div>`;
     } else {
         const activeRoles = ["senator","representative","president","governor","cabinet"];
-        grid.innerHTML = list.map(c => {
+        const matchActive = Object.keys(userPositions).length > 0;
+
+        // Sort by alignment when match panel is active
+        let sorted = [...list];
+        if (matchActive) {
+            sorted.sort((a, b) => {
+                const sa = getAlignment(a), sb = getAlignment(b);
+                const ra = sa ? sa.matches / sa.total : -1;
+                const rb = sb ? sb.matches / sb.total : -1;
+                return rb - ra;
+            });
+        }
+
+        grid.innerHTML = sorted.map(c => {
             const active = activeRoles.includes(c.currentRole);
             const statusClass = active ? "status-active" : "status-former";
             const statusLabel = active ? "Active" : "Out of office";
+            const align = matchActive ? getAlignment(c) : null;
+            let badgeHtml = "";
+            if (align) {
+                const pct = align.matches / align.total;
+                const cls = pct >= 0.6 ? "match-high" : pct >= 0.3 ? "match-mid" : "match-low";
+                badgeHtml = `<div class="match-badge ${cls}">${align.matches} of ${align.total} align</div>`;
+            }
             return `
             <div class="candidate-card" onclick="showProfile('${c.id}')">
                 <button class="compare-toggle" data-id="${c.id}" onclick="toggleCompare('${c.id}', event)">+ Compare</button>
@@ -5202,6 +5322,7 @@ function renderFeatured() {
                 </div>
                 <div class="card-title">${c.title}</div>
                 <div class="card-status ${statusClass}"><span class="card-status-dot"></span>${statusLabel}</div>
+                ${badgeHtml}
                 <div class="card-tags">${c.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
             </div>`;
         }).join("");
