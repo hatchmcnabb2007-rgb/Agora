@@ -1072,12 +1072,19 @@
         }
         .filter-clear:hover { background: rgba(255,255,255,.25); }
 
-        /* ── Vote Tracker ── */
-        .vt-follow-row { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-        .follow-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 20px; border: 2px solid var(--border); background: white; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--text-secondary); transition: all .15s; }
+        /* ── Follow Strip ── */
+        .follow-strip {
+            display: flex; align-items: center; gap: 16px;
+            background: white; border: 1px solid var(--border); border-radius: 10px;
+            padding: 16px 20px; margin-bottom: 32px; flex-wrap: wrap;
+        }
+        .follow-strip-text { display: flex; flex-direction: column; gap: 3px; }
+        .follow-strip-main { font-size: 14px; font-weight: 600; color: var(--dark); }
+        .follow-strip-sub { font-size: 12px; color: var(--text-muted); }
+        .follow-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 20px; border: 2px solid var(--border); background: white; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--text-secondary); transition: all .15s; white-space: nowrap; }
         .follow-btn:hover { border-color: var(--accent); color: var(--accent); }
         .follow-btn.following { background: var(--dark); color: white; border-color: var(--dark); }
-        .vt-follow-note { font-size: 13px; color: var(--text-muted); }
+        /* ── Vote Tracker ── */
         .vt-section-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
         .vt-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
         .vt-not-in-office { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 4px; }
@@ -1212,6 +1219,13 @@
         </div>
     </nav>
     <div class="profile-body">
+        <div class="follow-strip">
+            <button class="follow-btn" id="follow-btn" onclick="toggleFollow(currentCandidate.id)">☆ Follow</button>
+            <div class="follow-strip-text">
+                <span class="follow-strip-main">Follow to track when they vote or act</span>
+                <span class="follow-strip-sub">🔔 Notifications coming soon</span>
+            </div>
+        </div>
         <div class="section" id="sec-highlights">
             <div class="section-title">Career Highlights</div>
             <ul class="highlight-list" id="p-highlights"></ul>
@@ -4910,18 +4924,9 @@ function formatDate(str) {
 function renderVoteTracker(c) {
     const el = document.getElementById("p-vote-tracker");
     if (!el) return;
-    const following = isFollowing(c.id);
-    const firstName = c.name.split(" ")[0];
-
-    let html = `<div class="vt-follow-row">
-        <button class="follow-btn ${following ? "following" : ""}" id="follow-btn" onclick="toggleFollow('${c.id}')">
-            ${following ? "★ Following" : "☆ Follow"}
-        </button>
-        <span class="vt-follow-note">Follow to track when ${firstName} votes or acts</span>
-    </div>`;
 
     // Recent activity — role-specific
-    html += `<div class="vt-section-label">Recent Activity</div>`;
+    let html = `<div class="vt-section-label">Recent Activity</div>`;
     const notInOffice = c.currentRole === "former" || c.currentRole === "cabinet";
     if (notInOffice) {
         const sub = c.currentRole === "cabinet"
