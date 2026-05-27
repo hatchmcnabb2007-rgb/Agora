@@ -43,7 +43,7 @@
         .tagline { font-size: 11px; color: #9CA3AF; letter-spacing: .1em; text-transform: uppercase; }
 
         /* ── Home ── */
-        #home-view { display: flex; flex-direction: column; align-items: center; padding: 72px 24px 60px; }
+        #home-view { display: none; flex-direction: column; align-items: center; padding: 72px 24px 60px; }
         .hero-title { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 900; color: var(--dark); text-align: center; line-height: 1.15; margin-bottom: 14px; max-width: 540px; }
         .hero-sub { font-size: 16px; color: var(--text-secondary); text-align: center; max-width: 480px; line-height: 1.65; margin-bottom: 44px; }
 
@@ -1139,14 +1139,239 @@
             .compare-finance-cols { grid-template-columns: 1fr; }
             .compare-position-cols { grid-template-columns: 1fr; }
         }
+        /* ── Landing Page ── */
+        #landing-view { display: block; }
+
+        .lp-hero {
+            min-height: calc(100vh - 54px);
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        .lp-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 35%, rgba(139,105,20,.18) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .lp-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,.035) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+        .lp-hero-inner { position: relative; z-index: 1; text-align: center; max-width: 720px; }
+        .lp-eyebrow {
+            font-size: 11px; font-weight: 700; letter-spacing: .22em;
+            text-transform: uppercase; color: #D4A853; margin-bottom: 28px;
+        }
+        .lp-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 6.5vw, 80px);
+            font-weight: 900; color: white; line-height: 1.1;
+            margin-bottom: 28px; letter-spacing: -.02em;
+        }
+        .lp-headline em { font-style: normal; color: #D4A853; }
+        .lp-sub {
+            font-size: 17px; color: #9CA3AF; line-height: 1.75;
+            max-width: 520px; margin: 0 auto 44px;
+        }
+        .lp-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--accent); color: white;
+            font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+            padding: 16px 40px; border-radius: 8px; border: none; cursor: pointer;
+            transition: all .2s; letter-spacing: .02em;
+        }
+        .lp-cta:hover { background: #A07A18; box-shadow: 0 8px 28px rgba(139,105,20,.45); transform: translateY(-2px); }
+        .lp-scroll-hint {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            color: #374151; font-size: 20px;
+            animation: lp-float 2.2s ease-in-out infinite;
+        }
+        @keyframes lp-float {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: .5; }
+            50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+        }
+
+        /* Stats band */
+        .lp-stats {
+            background: white; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: center;
+        }
+        .lp-stat {
+            padding: 32px 52px; text-align: center;
+            border-right: 1px solid var(--border);
+        }
+        .lp-stat:last-child { border-right: none; }
+        .lp-stat-num {
+            display: block; font-family: 'Playfair Display', serif;
+            font-size: 38px; font-weight: 700; color: var(--accent);
+            line-height: 1; margin-bottom: 8px;
+        }
+        .lp-stat-label {
+            display: block; font-size: 11px; font-weight: 600;
+            letter-spacing: .11em; text-transform: uppercase; color: var(--text-muted);
+        }
+
+        /* Features */
+        .lp-features { background: var(--bg); padding: 80px 24px; display: flex; justify-content: center; }
+        .lp-features-inner {
+            max-width: 900px; width: 100%;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 2px; background: var(--border);
+            border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+        }
+        .lp-feature { background: white; padding: 40px 34px; }
+        .lp-feature-icon { font-size: 30px; margin-bottom: 20px; display: block; }
+        .lp-feature-title {
+            font-family: 'Playfair Display', serif; font-size: 21px;
+            font-weight: 700; color: var(--dark); margin-bottom: 12px;
+        }
+        .lp-feature-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+
+        /* Preview */
+        .lp-preview { background: var(--bg); padding: 80px 24px; text-align: center; border-top: 1px solid var(--border); }
+        .lp-section-eyebrow {
+            font-size: 11px; font-weight: 700; letter-spacing: .14em;
+            text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px;
+        }
+        .lp-section-title {
+            font-family: 'Playfair Display', serif; font-size: 34px;
+            font-weight: 700; color: var(--dark); margin-bottom: 48px;
+        }
+        .lp-preview-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px; max-width: 900px; margin: 0 auto 48px;
+        }
+        .lp-cta-sec {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: white; color: var(--dark);
+            font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+            padding: 13px 30px; border-radius: 8px; border: 1px solid var(--border);
+            cursor: pointer; transition: all .2s;
+        }
+        .lp-cta-sec:hover { border-color: var(--dark); box-shadow: 0 4px 16px rgba(0,0,0,.09); transform: translateY(-1px); }
+
+        /* Manifesto strip */
+        .lp-manifesto {
+            background: var(--dark); color: white;
+            padding: 72px 24px; text-align: center;
+        }
+        .lp-manifesto-quote {
+            font-family: 'Playfair Display', serif; font-size: clamp(22px, 3.5vw, 38px);
+            font-weight: 700; line-height: 1.4; max-width: 720px; margin: 0 auto 20px;
+            color: white;
+        }
+        .lp-manifesto-quote em { font-style: normal; color: #D4A853; }
+        .lp-manifesto-sub { font-size: 14px; color: #6B7280; }
+
+        /* Footer */
+        .lp-footer {
+            background: #111827; color: #6B7280;
+            font-size: 13px; text-align: center;
+            padding: 36px 24px; border-top: 1px solid rgba(255,255,255,.05);
+        }
+
+        /* Landing mobile */
+        @media (max-width: 700px) {
+            .lp-stats { flex-wrap: wrap; }
+            .lp-stat { flex: 0 0 50%; border-bottom: 1px solid var(--border); padding: 24px 20px; }
+            .lp-stat:nth-child(odd) { border-right: 1px solid var(--border); }
+            .lp-stat:nth-child(even) { border-right: none; }
+            .lp-features-inner { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="wordmark" onclick="showHome()">REPRE<span>SENT</span></div>
+    <div class="wordmark" onclick="showLanding()">REPRE<span>SENT</span></div>
     <div class="tagline">Know Your Candidates</div>
 </header>
+
+<!-- LANDING PAGE -->
+<div id="landing-view">
+    <section class="lp-hero">
+        <div class="lp-hero-inner">
+            <div class="lp-eyebrow">Political Transparency · Powered by Public Data</div>
+            <h1 class="lp-headline">
+                Know who <em>funds</em> them.<br>
+                Know how they <em>vote</em>.<br>
+                Know where they <em>stand</em>.
+            </h1>
+            <p class="lp-sub">Live campaign finance data, voting records, and policy positions for America's most influential politicians — all in one place, for free.</p>
+            <button class="lp-cta" onclick="enterApp()">Explore Candidates &nbsp;→</button>
+        </div>
+        <div class="lp-scroll-hint">↓</div>
+    </section>
+
+    <div class="lp-stats">
+        <div class="lp-stat">
+            <span class="lp-stat-num">14</span>
+            <span class="lp-stat-label">Profiles</span>
+        </div>
+        <div class="lp-stat">
+            <span class="lp-stat-num">11</span>
+            <span class="lp-stat-label">Issue Topics</span>
+        </div>
+        <div class="lp-stat">
+            <span class="lp-stat-num">Live</span>
+            <span class="lp-stat-label">FEC Data</span>
+        </div>
+        <div class="lp-stat">
+            <span class="lp-stat-num">Free</span>
+            <span class="lp-stat-label">Always</span>
+        </div>
+    </div>
+
+    <section class="lp-features">
+        <div class="lp-features-inner">
+            <div class="lp-feature">
+                <span class="lp-feature-icon">💰</span>
+                <div class="lp-feature-title">Follow the Money</div>
+                <p class="lp-feature-desc">Live campaign finance data from the FEC, broken down by small donors, corporations, super PACs, labor unions, and more. Sourced directly from federal filings — no estimates.</p>
+            </div>
+            <div class="lp-feature">
+                <span class="lp-feature-icon">📋</span>
+                <div class="lp-feature-title">Track the Record</div>
+                <p class="lp-feature-desc">Legislation they've sponsored, executive orders they've signed, and the key votes that define their career. Real-time activity from Congress.gov and the Federal Register.</p>
+            </div>
+            <div class="lp-feature">
+                <span class="lp-feature-icon">⚖️</span>
+                <div class="lp-feature-title">Compare Side-by-Side</div>
+                <p class="lp-feature-desc">Head-to-head comparisons across 11 standardized issue topics — healthcare, climate, immigration, abortion, and more. See exactly where they agree and where they diverge.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="lp-preview">
+        <div class="lp-section-eyebrow">In the Spotlight</div>
+        <div class="lp-section-title">Browse the profiles</div>
+        <div class="lp-preview-grid" id="lp-preview-grid"></div>
+        <button class="lp-cta-sec" onclick="enterApp()">See all 14 profiles &nbsp;→</button>
+    </section>
+
+    <section class="lp-manifesto">
+        <p class="lp-manifesto-quote">
+            "Democracy works best when voters have <em>real information</em> — not talking points, not spin, not sound bites."
+        </p>
+        <p class="lp-manifesto-sub">That's what Represent is for.</p>
+    </section>
+
+    <footer class="lp-footer">
+        <div>Built on public data &nbsp;·&nbsp; FEC &nbsp;·&nbsp; Congress.gov &nbsp;·&nbsp; Federal Register</div>
+        <div style="margin-top:8px; opacity:.5; font-size:12px">Represent is independent and nonpartisan</div>
+    </footer>
+</div>
 
 <!-- HOME -->
 <div id="home-view">
@@ -4379,6 +4604,7 @@ function showProfile(id, pushState = true) {
             </div>`).join("")
         : `<p class="no-concerns">No major controversies on record at this time.</p>`;
 
+    document.getElementById("landing-view").style.display = "none";
     document.getElementById("home-view").style.display = "none";
     document.getElementById("compare-view").style.display = "none";
     document.getElementById("profile-view").style.display = "block";
@@ -4390,10 +4616,45 @@ function showProfile(id, pushState = true) {
 }
 
 function showHome(pushState = true) {
+    document.getElementById("landing-view").style.display = "none";
     document.getElementById("home-view").style.display = "flex";
     document.getElementById("profile-view").style.display = "none";
     document.getElementById("compare-view").style.display = "none";
     if (pushState) navigate(null);
+}
+
+function showLanding() {
+    document.getElementById("landing-view").style.display = "block";
+    document.getElementById("home-view").style.display = "none";
+    document.getElementById("profile-view").style.display = "none";
+    document.getElementById("compare-view").style.display = "none";
+    window.scrollTo(0, 0);
+}
+
+function enterApp() {
+    document.getElementById("landing-view").style.display = "none";
+    document.getElementById("home-view").style.display = "flex";
+    window.scrollTo(0, 0);
+}
+
+function renderLandingPreview() {
+    const ids = ["donald-trump", "bernie-sanders", "kamala-harris", "ted-cruz", "elizabeth-warren", "ron-desantis"];
+    const picks = ids.map(id => candidates.find(c => c.id === id)).filter(Boolean);
+    const grid = document.getElementById("lp-preview-grid");
+    if (!grid) return;
+    grid.innerHTML = picks.map(c => `
+        <div class="candidate-card" onclick="showProfile('${c.id}')">
+            <div class="card-header">
+                ${makeAvatar(c, "avatar-sm")}
+                <div class="card-header-text">
+                    <div class="card-party party-${c.party}">${partyLabel(c.party)}</div>
+                    <div class="card-name">${c.name}</div>
+                </div>
+            </div>
+            <div class="card-title">${c.title}</div>
+            <div class="card-tags">${(c.tags || []).map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        </div>
+    `).join("");
 }
 
 // ── Compare logic ────────────────────────────────────────
@@ -4462,6 +4723,7 @@ function showCompare() {
     const c1 = candidates.find(x => x.id === ids[0]);
     const c2 = candidates.find(x => x.id === ids[1]);
 
+    document.getElementById("landing-view").style.display = "none";
     document.getElementById("home-view").style.display = "none";
     document.getElementById("profile-view").style.display = "none";
     document.getElementById("compare-view").style.display = "block";
@@ -5058,7 +5320,7 @@ function navigate(id) {
 window.addEventListener("popstate", e => {
     const id = e.state && e.state.id;
     if (id) showProfile(id, false);
-    else showHome(false);
+    else showLanding();
 });
 
 // ── Compare from profile ─────────────────────────────────
@@ -5083,6 +5345,7 @@ function syncCompareProfileBtn() {
 }
 
 renderFeatured();
+renderLandingPreview();
 
 // Navigate to profile if URL has ?id= param on load
 (function () {
