@@ -84,6 +84,11 @@
         .profile-hero { background: var(--dark); color: white; padding: 32px 24px 30px; }
         .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #9CA3AF; cursor: pointer; margin-bottom: 22px; background: none; border: none; font-family: 'Inter', sans-serif; padding: 0; transition: color .15s; }
         .back-btn:hover { color: white; }
+        .profile-hero-top { display: flex; justify-content: space-between; align-items: flex-start; }
+        .share-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #9CA3AF; cursor: pointer; background: none; border: 1px solid rgba(255,255,255,.15); border-radius: 6px; font-family: 'Inter', sans-serif; padding: 5px 12px; transition: color .15s, border-color .15s; }
+        .share-btn:hover { color: white; border-color: rgba(255,255,255,.4); }
+        .share-toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1F2937; color: #D1FAE5; font-size: 13px; font-family: 'Inter', sans-serif; padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(52,211,153,.3); opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; z-index: 9999; white-space: nowrap; }
+        .share-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
         .profile-hero-content { display: flex; align-items: flex-start; gap: 22px; }
         .profile-name { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; margin-bottom: 6px; line-height: 1.2; }
         .profile-meta { font-size: 15px; color: #D1D5DB; line-height: 1.5; }
@@ -1131,7 +1136,10 @@
 <!-- PROFILE -->
 <div id="profile-view">
     <div class="profile-hero">
-        <button class="back-btn" onclick="showHome()">← Back to search</button>
+        <div class="profile-hero-top">
+            <button class="back-btn" onclick="showHome()">← Back to search</button>
+            <button class="share-btn" onclick="shareProfile()" id="share-btn">⎘ Share</button>
+        </div>
         <div class="profile-hero-content">
             <div class="avatar avatar-lg" id="p-photo"></div>
             <div>
@@ -2231,71 +2239,18 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); Senate and federal financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Afghanistan Withdrawal",
-                stance: "mixed",
-                stanceLabel: "Ordered Withdrawal; Disputed Execution",
-                description: "Biden ordered the final U.S. withdrawal from Afghanistan in August 2021, ending America's 20-year war. The collapse of the Afghan government in days — rather than weeks as intelligence had projected — and chaotic scenes at Kabul airport drew widespread criticism from both parties.",
-                actions: [
-                    "Set August 31, 2021 deadline for full U.S. military withdrawal.",
-                    "The Afghan government fell in 11 days; Kabul airport scenes drew international attention.",
-                    "A suicide bombing at the airport killed 13 U.S. service members and over 170 Afghan civilians.",
-                    "Defended the decision as necessary, arguing no U.S. troop presence would have indefinitely sustained the Afghan government.",
-                ],
-                source: "DOD after-action report; The New York Times, August 2021"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "mixed",
-                stanceLabel: "Strong Israel Supporter; Later Added Conditions",
-                description: "Biden was a long-standing and vocal supporter of Israel. After the October 7, 2023 Hamas attack, he committed strong U.S. support for Israel's military response. He later paused one weapons shipment amid concerns about civilian casualties — drawing criticism from both pro-Israel and pro-Palestinian camps.",
-                actions: [
-                    "Visited Israel within days of the October 7 Hamas attack to express solidarity.",
-                    "Committed billions in military aid for Israel's military campaign in Gaza.",
-                    "Paused delivery of 2,000-lb bombs in May 2024 citing concerns about their use in densely populated areas.",
-                    "Called for a two-state solution and pushed for a ceasefire deal in 2024.",
-                ],
-                source: "White House statements, 2023–2024; Reuters, May 2024"
-            },
-            {
-                topic: "Immigration",
-                stance: "mixed",
-                stanceLabel: "Initially Expansive; Shifted to Enforcement",
-                description: "Biden reversed many Trump immigration restrictions upon taking office but faced record border crossing numbers. By 2023–2024 his administration had shifted toward stricter enforcement measures, including a controversial executive order restricting asylum — a move critics said mirrored Trump-era policies.",
-                actions: [
-                    "Ended the Remain in Mexico policy and family separation on day one.",
-                    "Border crossings reached record levels in 2023.",
-                    "Signed an executive order in June 2024 restricting asylum processing when crossings exceeded a daily threshold.",
-                    "Supported the bipartisan border security bill that Trump later urged Republicans to kill.",
-                ],
-                source: "DHS data; The New York Times, June 2024"
-            },
-            {
-                topic: "Cognitive Fitness Debate",
-                stance: "mixed",
-                stanceLabel: "Stepped Down Amid Public Concern",
-                description: "Biden's fitness for a second term became a defining political controversy in 2024. A poor debate performance in June 2024 against Trump accelerated calls from Democratic officials and donors for him to withdraw. Biden announced he would not seek re-election in July 2024, endorsing Vice President Kamala Harris.",
-                actions: [
-                    "Delivered a widely criticized performance at the June 27, 2024 presidential debate.",
-                    "Multiple Democratic senators and representatives publicly called for him to withdraw.",
-                    "Announced he would not seek re-election on July 21, 2024.",
-                    "Endorsed Kamala Harris for president shortly after withdrawing.",
-                ],
-                source: "The New York Times, July 2024; Biden withdrawal statement, July 21, 2024"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Abortion Rights",
-                description: "Biden supported abortion rights as a matter of federal policy, though his personal Catholic faith had long made him privately conflicted on the issue. After the Dobbs decision, he called for Congress to codify Roe and signed executive orders aimed at protecting access to abortion services and medication.",
-                actions: [
-                    "Signed executive orders protecting access to abortion medication and services after Dobbs (2022).",
-                    "Called on Congress to pass legislation codifying Roe v. Wade.",
-                    "Featured abortion rights prominently in 2022 midterm and 2024 campaign messaging.",
-                ],
-                source: "White House executive orders, 2022; The Washington Post, July 2022"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "supports", stanceLabel: "ACA Expansion; Drug Pricing Reform", description: "Biden expanded the Affordable Care Act through the Inflation Reduction Act, capping insulin at $35/month for Medicare recipients and allowing Medicare to negotiate drug prices for the first time. He supports a public option but did not achieve it legislatively.", actions: ["Signed the Inflation Reduction Act capping insulin costs and allowing Medicare drug price negotiation.", "Expanded ACA subsidies through the American Rescue Plan.", "Proposed a public health insurance option during the 2020 campaign."], source: "Inflation Reduction Act; White House healthcare record" },
+            { topic: "Climate & Energy", stance: "supports", stanceLabel: "Rejoined Paris Agreement; IRA Clean Energy", description: "Biden rejoined the Paris Climate Agreement on day one and signed the Inflation Reduction Act — the largest climate investment in U.S. history at $369B for clean energy. He also faced criticism for approving major oil and gas projects, including the Willow Project in Alaska.", actions: ["Rejoined the Paris Climate Agreement on January 20, 2021.", "Signed the Inflation Reduction Act investing $369B in clean energy (2022).", "Approved the Willow Project oil drilling project in Alaska — drawing progressive criticism."], source: "White House executive actions; Inflation Reduction Act" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Initially Open; Shifted to Enforcement", description: "Biden reversed Trump immigration restrictions on day one but faced record border crossing numbers. By 2024 his administration had shifted toward strict enforcement, including a controversial executive order restricting asylum — a move critics compared to Trump-era policies.", actions: ["Ended Remain in Mexico policy and family separation on day one.", "Border crossings reached record levels in 2023.", "Signed an executive order in June 2024 restricting asylum when crossings exceeded a daily threshold."], source: "DHS data; The New York Times, June 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Strongly Supports Abortion Rights", description: "Biden supported abortion rights as federal policy, though his Catholic faith made him privately conflicted. After Dobbs, he signed executive orders protecting access to abortion medication and called for Congress to codify Roe v. Wade.", actions: ["Signed executive orders protecting access to abortion medication and services after Dobbs.", "Called on Congress to codify Roe v. Wade into federal law.", "Featured abortion rights prominently in 2022 and 2024 messaging."], source: "White House executive orders, 2022; The Washington Post, July 2022" },
+            { topic: "Gun Control", stance: "supports", stanceLabel: "Supports Gun Control; Signed Bipartisan Bill", description: "Biden signed the Bipartisan Safer Communities Act in 2022 — the most significant federal gun legislation in nearly 30 years. He supports universal background checks and an assault weapons ban but did not achieve them legislatively.", actions: ["Signed the Bipartisan Safer Communities Act (2022).", "Signed executive orders requiring background checks for ghost guns.", "Called for a federal assault weapons ban and magazine limits."], source: "White House legislative record; Bipartisan Safer Communities Act" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Progressive Taxes; Industrial Policy", description: "Biden raised the minimum corporate tax to 15%, increased IRS enforcement funding targeting wealthy tax evaders, and invested in domestic manufacturing through the CHIPS Act and Inflation Reduction Act. He supports higher taxes on income above $400,000.", actions: ["Signed the Inflation Reduction Act establishing a 15% corporate minimum tax.", "Signed the CHIPS Act investing $52B in domestic semiconductor manufacturing.", "Proposed raising the top marginal income tax rate and capital gains taxes."], source: "White House economic record; Treasury Department" },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", stanceLabel: "Strong NATO; Hawkish on Russia", description: "Biden rebuilt U.S. alliances, led the Western response to Russia's invasion of Ukraine with over $75B in aid, and maintained a hawkish posture toward China. He is credited with strengthening NATO cohesion while criticized for the chaotic Afghanistan withdrawal.", actions: ["Led the coordinated NATO and allied response to Russia's invasion of Ukraine.", "Expanded NATO with Finland and Sweden joining the alliance.", "Delivered over $75B in military and economic assistance to Ukraine."], source: "White House foreign policy record; NATO records" },
+            { topic: "Education", stance: "supports", stanceLabel: "Public Education; Limited Debt Relief", description: "Biden provided limited student debt relief through administrative action before the Supreme Court blocked his broader plan. He supports public education investment and expanded Pell Grants.", actions: ["Proposed canceling $10,000–$20,000 in student debt — blocked by the Supreme Court (2023).", "Doubled the maximum Pell Grant in the American Rescue Plan.", "Expanded income-driven repayment plans for federal student loan borrowers."], source: "White House education record; Biden v. Nebraska (2023)" },
+            { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Crime Bill Author; Later Reform-Oriented", description: "Biden authored the 1994 Violent Crime Control Act, which critics say fueled mass incarceration. During and after his presidency he acknowledged some provisions had 'failed' and pledged reform — including eliminating mandatory minimums for drug offenses and ending the federal death penalty.", actions: ["Authored the 1994 Crime Bill as Senate Judiciary Chair.", "Pledged during 2020 campaign to eliminate mandatory minimum sentences for drug offenses.", "Declined to execute any federal death row inmates during his presidency."], source: "Senate Judiciary record; Biden 2020 platform; The Atlantic, September 2019" },
+            { topic: "Israel & Gaza", stance: "mixed", stanceLabel: "Strong Supporter; Later Added Conditions", description: "Biden was a long-standing supporter of Israel. After October 7, he committed strong U.S. support for Israel's military response, then later paused one weapons shipment over civilian casualty concerns — drawing criticism from both pro-Israel and pro-Palestinian camps.", actions: ["Visited Israel within days of the October 7 Hamas attack.", "Committed billions in military aid for Israel's military campaign in Gaza.", "Paused delivery of 2,000-lb bombs in May 2024 citing densely populated area concerns."], source: "White House statements, 2023–2024; Reuters, May 2024" },
+            { topic: "Trade & China", stance: "mixed", stanceLabel: "Maintained Trump Tariffs; Added Tech Restrictions", description: "Biden maintained most Trump-era tariffs on Chinese goods rather than removing them, and added targeted restrictions on advanced semiconductors and AI technology exports to China. He pursued economic competition with China while maintaining diplomatic channels.", actions: ["Maintained the majority of Trump's 25% tariffs on Chinese goods.", "Added export controls on advanced semiconductors and chip manufacturing equipment to China.", "Signed the CHIPS Act to reduce U.S. dependence on Chinese semiconductor manufacturing."], source: "USTR records; Commerce Department export controls; White House China strategy" },
         ],
         trump: {
             relationship: "Consistent Opponent / Successor",
@@ -2339,15 +2294,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "The New York Times reported in July 2024 that Biden's inner circle had actively managed and downplayed his declining cognitive performance for months before he withdrew from the 2024 race — raising questions about transparency with the Democratic Party and the public.",
-                source: "The New York Times, July 2024"
-            },
-            {
-                text: "Biden issued a broad preemptive pardon for his son Hunter Biden in December 2024 — covering any federal offenses Hunter 'has committed or may have committed' from January 2014 through December 2024 — after having previously stated publicly he would not pardon him.",
-                source: "White House pardon statement, December 1, 2024"
-            }
+        controversies: [
+            { title: "Cognitive Decline Concealed From Public", description: "The New York Times reported that Biden's inner circle actively managed and downplayed his declining cognitive performance for months before he withdrew from the 2024 race. A poor debate performance in June 2024 forced the issue into the open. Democrats and allies raised questions about whether voters were misled about his fitness for office.", source: "The New York Times, July 2024" },
+            { title: "Pardoned Hunter Biden After Pledging Not To", description: "Biden issued a sweeping preemptive pardon for his son Hunter Biden in December 2024 — covering any federal offenses 'committed or may have committed' from January 2014 through December 2024 — after repeatedly and publicly stating he would not pardon him.", source: "White House pardon statement, December 1, 2024" },
+            { title: "Afghanistan Withdrawal Chaos (2021)", description: "Biden's ordered withdrawal from Afghanistan in August 2021 led to the rapid collapse of the Afghan government in 11 days, chaotic scenes at Kabul airport, and a suicide bombing that killed 13 U.S. service members and over 170 civilians. The intelligence community had projected a slower collapse.", source: "DOD after-action report; The New York Times, August 2021" },
+            { title: "Classified Documents Found at Private Offices and Home", description: "Classified documents from Biden's time as Vice President were found at his Penn Biden Center office and his Delaware home in late 2022, raising questions about how they were handled. A special counsel declined to prosecute but described Biden as 'an elderly man with a poor memory.'", source: "DOJ Special Counsel Report, February 2024" },
         ]
     },
     {
@@ -2462,69 +2413,18 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); Senate financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Immigration (Border Czar Role)",
-                stance: "mixed",
-                stanceLabel: "Led Diplomacy; Criticized for Results",
-                description: "Biden assigned Harris to lead diplomatic efforts to address the root causes of migration from Central America. Republicans labeled her the 'border czar' and blamed her for record crossing numbers — a framing she disputed, noting she was tasked with foreign diplomacy, not domestic enforcement.",
-                actions: [
-                    "Led diplomatic engagement with El Salvador, Guatemala, and Honduras on migration root causes.",
-                    "Visited the border in June 2021 — months after calls from Republicans to do so.",
-                    "Border crossings reached record levels during her VP tenure.",
-                    "Supported the bipartisan border security bill that Trump urged Senate Republicans to kill in 2024.",
-                ],
-                source: "White House statements; The Washington Post, June 2021"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "mixed",
-                stanceLabel: "Supported Israel; Called for Ceasefire",
-                description: "Harris affirmed Israel's right to self-defense after October 7, 2023 but was more willing than Biden to publicly call for a ceasefire and humanitarian corridors — a tension that reflected broader divisions within the Democratic coalition she needed to hold together in 2024.",
-                actions: [
-                    "Affirmed Israel's right to defend itself after the October 7 Hamas attack.",
-                    "Publicly called for a ceasefire more explicitly than Biden during the 2024 campaign.",
-                    "Faced protest from pro-Palestinian activists at campaign events and the DNC.",
-                ],
-                source: "Harris campaign statements, 2024; The Atlantic, September 2024"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Abortion Rights",
-                description: "Harris made abortion rights the central issue of her 2024 presidential campaign. Her framing — arguing that protecting abortion access was fundamentally about freedom and government overreach — was credited with driving high turnout among women voters even as she ultimately lost the Electoral College.",
-                actions: [
-                    "Made restoring federal abortion protections the signature issue of her 2024 campaign.",
-                    "Traveled to abortion clinics and providers in states where abortion remained restricted.",
-                    "Voted against every Senate bill that would restrict abortion access.",
-                ],
-                source: "Harris campaign platform; Senate vote record; The New York Times, September 2024"
-            },
-            {
-                topic: "Criminal Justice Record as Prosecutor",
-                stance: "mixed",
-                stanceLabel: "Reform Prosecutor — Record Disputed",
-                description: "Harris' record as San Francisco DA and California AG became a flashpoint in the 2020 Democratic primary. Progressives criticized her for prosecutorial decisions they characterized as harmful to marginalized communities; she described herself as a 'progressive prosecutor' who worked for reform from within the system.",
-                actions: [
-                    "Opposed a ballot measure to legalize marijuana as San Francisco DA in 2010; later supported legalization as Senator.",
-                    "Her office was cited in a 2015 federal court ruling for withholding evidence in death penalty cases.",
-                    "Implemented truancy prosecution policies that resulted in parents of truant children being charged — a policy she later distanced herself from.",
-                    "Created the Bureau of Children's Justice as AG and established California's first statewide anti-recidivism program.",
-                ],
-                source: "San Francisco Chronicle archive; CalMatters, 2019; The Intercept, 2019"
-            },
-            {
-                topic: "Gun Control",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Gun Control",
-                description: "Harris has consistently supported comprehensive gun control legislation — universal background checks, red flag laws, and an assault weapons ban. As a senator she voted for all major gun control measures and made it a signature issue in her presidential campaigns.",
-                actions: [
-                    "Voted for the Bipartisan Safer Communities Act (2022).",
-                    "Supports universal background checks, red flag laws, and an assault weapons ban.",
-                    "As AG, led a coalition of state AGs supporting gun safety regulations.",
-                ],
-                source: "Senate vote record; Giffords Law Center scorecard"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "supports", stanceLabel: "ACA Expansion; Public Option", description: "Harris supports expanding the ACA and a public health insurance option. She co-sponsored Medicare for All in 2017, then moved to a public option position during the 2020 primary — a shift critics noted as politically motivated.", actions: ["Co-sponsored the Medicare for All Act (2017), later moved to a public option position.", "Supports expanding Medicaid and ACA subsidies.", "Backed Medicare drug price negotiation in the Inflation Reduction Act."], source: "Senate vote record; Harris campaign platform" },
+            { topic: "Climate & Energy", stance: "supports", stanceLabel: "Green Energy Investment; Clean Economy", description: "Harris supports aggressive action on climate change, including major federal investment in clean energy and transitioning away from fossil fuels. She backed the Green New Deal as a senator and the Inflation Reduction Act as VP.", actions: ["Co-sponsored the Green New Deal resolution as a senator.", "Cast the tie-breaking vote to pass the Inflation Reduction Act.", "Supports ending new fossil fuel leases on federal land."], source: "Senate vote record; IRA passage record" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Reform Supporter; Criticized as 'Border Czar'", description: "Harris was assigned to lead diplomatic efforts to address root causes of Central American migration. Republicans labeled her the 'border czar' and blamed her for record crossing numbers — a framing she disputed, noting her role was foreign diplomacy, not domestic enforcement.", actions: ["Led diplomatic engagement with El Salvador, Guatemala, and Honduras on migration causes.", "Supported the bipartisan border security bill that Trump urged Republicans to kill.", "Visited the border in June 2021 after months of Republican pressure to do so."], source: "White House statements; The Washington Post, June 2021" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Strongly Supports Abortion Rights", description: "Harris made abortion rights the central issue of her 2024 presidential campaign. Her framing — that protecting abortion access is fundamentally about freedom and government overreach — drove high turnout among women voters even as she ultimately lost the Electoral College.", actions: ["Made restoring federal abortion protections the signature issue of her 2024 campaign.", "Traveled to abortion clinics and providers in restricted states.", "Voted against every Senate bill that would restrict abortion access."], source: "Harris campaign platform; Senate vote record" },
+            { topic: "Gun Control", stance: "strongly-supports", stanceLabel: "Strongly Supports Gun Control", description: "Harris has consistently supported comprehensive gun control — universal background checks, red flag laws, and an assault weapons ban. As California AG, she led a coalition of state AGs supporting gun safety regulations.", actions: ["Voted for the Bipartisan Safer Communities Act (2022).", "Supports universal background checks, red flag laws, and an assault weapons ban.", "As AG, led state coalition supporting gun safety regulations."], source: "Senate vote record; Giffords Law Center scorecard" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Progressive Taxes; Opportunity Economy", description: "Harris supports higher taxes on corporations and high earners, an anti-price gouging measure for essential goods, and investment in housing construction. Her 2024 campaign framed her economic vision as an 'opportunity economy.'", actions: ["Proposed a minimum 25% tax on billionaire unrealized gains.", "Backed the Inflation Reduction Act's 15% corporate minimum tax.", "Proposed housing construction incentives and first-time homebuyer assistance."], source: "Harris 2024 economic platform; IRA record" },
+            { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Strong Alliances; Democracy Abroad", description: "Harris supports robust U.S. engagement with allies, NATO, and multilateral institutions. She affirmed the U.S. commitment to Ukraine, supported NATO expansion, and took a measured but firm position toward China.", actions: ["Affirmed U.S. commitment to NATO Article 5 and Ukraine aid.", "Attended the Munich Security Conference as VP (2021).", "Supported targeted export controls on advanced technology to China."], source: "White House foreign policy record; Harris VP statements" },
+            { topic: "Education", stance: "supports", stanceLabel: "Public Education; Debt Relief", description: "Harris supported broad student debt cancellation and increased investment in public education. She backed the Biden administration's debt relief efforts that were partially blocked by the Supreme Court.", actions: ["Supported the Biden student debt cancellation plan blocked by the Supreme Court.", "Backed universal pre-K as part of the Build Back Better framework.", "Supports increasing teacher pay and Title I school funding."], source: "Biden-Harris education record; Harris campaign platform" },
+            { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Reform Prosecutor — Record Disputed", description: "Harris' record as San Francisco DA and California AG became a flashpoint. Progressives criticized prosecutorial decisions; she described herself as a 'progressive prosecutor' working reform from within. Her record on marijuana, truancy prosecution, and evidence disclosure drew scrutiny.", actions: ["Opposed marijuana legalization as San Francisco DA in 2010; later co-sponsored federal decriminalization.", "Implemented truancy prosecution policies she later distanced herself from.", "Created California's first statewide anti-recidivism program as AG."], source: "CalMatters, 2019; The Intercept, 2019; San Francisco Chronicle archive" },
+            { topic: "Israel & Gaza", stance: "mixed", stanceLabel: "Supported Israel; Called for Ceasefire", description: "Harris affirmed Israel's right to self-defense after October 7 but was more willing than Biden to publicly call for a ceasefire — a tension that reflected the Democratic coalition divisions she needed to manage in 2024.", actions: ["Affirmed Israel's right to defend itself after the October 7 Hamas attack.", "Publicly called for a ceasefire more explicitly than Biden during the 2024 campaign.", "Faced protest from pro-Palestinian activists at campaign events and the DNC."], source: "Harris campaign statements, 2024; The Atlantic, September 2024" },
+            { topic: "Trade & China", stance: "mixed", stanceLabel: "Competitive but Engaged", description: "Harris supported the Biden administration's China trade approach — maintaining Trump-era tariffs while adding targeted tech restrictions. She favors economic competition with China without fully decoupling.", actions: ["Supported maintaining Trump-era tariffs on Chinese goods.", "Backed semiconductor export controls targeting Chinese manufacturers.", "Supports the CHIPS Act to reduce U.S. dependence on Chinese semiconductor production."], source: "White House trade record; Harris VP statements" },
         ],
         trump: {
             relationship: "Consistent Opponent / 2024 Opponent",
@@ -2568,15 +2468,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "Politico reported in December 2021 that Harris' office had experienced significant staff turmoil, with a high rate of departures among senior aides citing a 'dysfunctional' work environment — raising management concerns early in her VP tenure.",
-                source: "Politico, December 2021"
-            },
-            {
-                text: "Harris dropped out of the 2020 Democratic primary in December 2019 — before a single vote was cast — finishing in the single digits in national polling despite being considered an early frontrunner, raising questions about her campaign operation.",
-                source: "The New York Times, December 3, 2019"
-            }
+        controversies: [
+            { title: "Staff Turmoil as Vice President", description: "Politico reported in December 2021 that Harris' office experienced significant staff departures, with aides citing a 'dysfunctional' work environment and feeling 'set up to fail.' Multiple senior communications and policy staff departed within the first year.", source: "Politico, December 2021" },
+            { title: "Dropped Out of 2020 Primary Before Iowa", description: "Harris dropped out of the 2020 Democratic primary in December 2019 — before a single vote was cast — finishing in the single digits in national polling despite being considered an early frontrunner. Internal campaign dysfunction and poor fundraising were cited as causes.", source: "The New York Times, December 3, 2019" },
+            { title: "2015 Federal Court Ruling on Evidence Withholding", description: "A Ninth Circuit panel ruled in 2015 that the California AG's office under Harris failed to properly disclose evidence in a death penalty case. A dissenting judge called the behavior 'outrageous.' Harris' office disputed characterizations of her personal involvement.", source: "Ninth Circuit Court ruling, 2015; Los Angeles Times, March 2015" },
+            { title: "Prosecutorial Record Contradictions", description: "Harris opposed legalizing marijuana as San Francisco DA in 2010, prosecuted parents of truant children under a policy she later disowned, and her office withheld evidence in death penalty cases — a record that conflicted sharply with the progressive image she cultivated in the 2020 primary.", source: "CalMatters, 2019; The Intercept, 2019" },
         ]
     },
     {
