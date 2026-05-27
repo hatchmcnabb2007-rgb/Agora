@@ -4892,8 +4892,8 @@ function syncFollowBtn() {
 }
 
 // ── Vote tracker ──────────────────────────────────────────
-// Register a free key at https://www.propublica.org/datastore/api/propublica-congress-api
-const PROPUBLICA_KEY = "YOUR_PROPUBLICA_KEY";
+// Congress.gov API — same DEMO_KEY pattern as FEC; register for a higher-rate key at api.congress.gov
+const CONGRESS_KEY = "DEMO_KEY";
 
 function voteLabel(v) {
     return { yes: "Voted Yes", no: "Voted No", signed: "Signed", vetoed: "Vetoed",
@@ -4964,7 +4964,7 @@ async function fetchRecentActivity(c) {
         if (c.currentRole === "president") {
             await fetchPresidentEOs(el);
         } else if ((c.currentRole === "senator" || c.currentRole === "representative") && c.bioguideId) {
-            await fetchCongressVotes(c, el);
+            await fetchCongressActivity(c, el);
         } else if (c.currentRole === "governor") {
             el.innerHTML = `<div class="vt-note">Live executive order tracking for state governors is coming soon. Check your state's official governor website for recent orders.</div>`;
         }
@@ -4994,28 +4994,23 @@ async function fetchPresidentEOs(el) {
         </div>`;
 }
 
-async function fetchCongressVotes(c, el) {
-    if (PROPUBLICA_KEY === "YOUR_PROPUBLICA_KEY") {
-        el.innerHTML = `<div class="vt-key-needed">Live vote tracking requires a free ProPublica Congress API key. <a href="https://www.propublica.org/datastore/api/propublica-congress-api" target="_blank">Get one here →</a></div>`;
-        return;
-    }
-    const res = await fetch(`https://api.propublica.org/congress/v1/members/${c.bioguideId}/votes.json`, {
-        headers: { "X-API-Key": PROPUBLICA_KEY }
-    });
+async function fetchCongressActivity(c, el) {
+    const url = `https://api.congress.gov/v3/member/${c.bioguideId}/sponsored-legislation?format=json&api_key=${CONGRESS_KEY}&limit=6`;
+    const res = await fetch(url);
     if (!res.ok) throw new Error();
     const data = await res.json();
-    const votes = (data.results[0]?.votes || []).slice(0, 6);
-    if (!votes.length) { el.innerHTML = `<div class="vt-error">No recent votes found.</div>`; return; }
+    const bills = data.sponsoredLegislation || [];
+    if (!bills.length) { el.innerHTML = `<div class="vt-error">No recent legislative activity found.</div>`; return; }
     el.innerHTML = `
-        <div class="vt-live-header">Recent Votes <span class="live-badge"><span class="live-dot"></span>Live</span></div>
+        <div class="vt-live-header">Recently Sponsored Legislation <span class="live-badge"><span class="live-dot"></span>Live</span></div>
         <div class="vt-activity-list">
-            ${votes.map(v => `
+            ${bills.map(b => `
             <div class="vt-activity-card">
                 <div class="vt-activity-top">
-                    <span class="vote-badge vote-${v.position === "Yes" ? "yes" : "no"}">${v.position}</span>
-                    <span class="vt-activity-date">${formatDate(v.date)}</span>
+                    <span class="vt-activity-type">${b.type || "Bill"} ${b.number || ""}</span>
+                    <span class="vt-activity-date">${formatDate(b.introducedDate)}</span>
                 </div>
-                <div class="vt-activity-title">${v.description}</div>
+                <div class="vt-activity-title">${b.title}</div>
             </div>`).join("")}
         </div>`;
 }
