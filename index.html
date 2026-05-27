@@ -3080,68 +3080,18 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); Senate financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "Ukraine Aid",
-                stance: "strongly-opposes",
-                stanceLabel: "Blocked or Opposed Multiple Aid Packages",
-                description: "Paul has been the Senate's most prominent obstacle to Ukraine aid packages, blocking or delaying multiple bills using Senate procedural rules. He argues the U.S. cannot afford unlimited foreign aid and that the conflict should be resolved diplomatically, not through indefinite military support.",
-                actions: [
-                    "Placed a Senate hold on a $40 billion Ukraine aid bill in May 2022, delaying its passage for weeks.",
-                    "Voted against multiple Ukraine aid packages.",
-                    "Blocked the $95 billion foreign aid package in February 2024 for weeks using Senate procedural tools.",
-                ],
-                source: "Senate vote record; The Hill, May 2022; Politico, February 2024"
-            },
-            {
-                topic: "COVID Policy",
-                stance: "strongly-opposes",
-                stanceLabel: "Opposed Mandates; Clashed with Fauci",
-                description: "Paul became one of the most prominent critics of COVID public health restrictions and of Dr. Anthony Fauci — accusing him of lying to Congress about NIH funding of gain-of-function research at the Wuhan Institute of Virology. Their clashes at Senate hearings drew national attention.",
-                actions: [
-                    "Accused Dr. Fauci of lying to Congress about NIH funding of Wuhan Institute research in multiple Senate hearings.",
-                    "Opposed vaccine mandates, school closures, and mask mandates consistently.",
-                    "Introduced legislation to fire Dr. Fauci and restructure the NIH.",
-                    "Contracted COVID in March 2020 — one of the first senators to test positive.",
-                ],
-                source: "Senate Health Committee hearing transcripts, 2021–2022; Paul Senate statements"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "mixed",
-                stanceLabel: "Supports Israel; Opposes Blank-Check Aid",
-                description: "Paul supports Israel's right to self-defense but has opposed unconditional U.S. military aid packages to Israel on fiscal grounds — a position that puts him at odds with most Republicans. He believes aid should be tied to fiscal accountability and should not add to the national debt.",
-                actions: [
-                    "Voted against unconditional military aid packages to Israel in 2024.",
-                    "Offered amendments to offset Israel aid with cuts elsewhere in the budget.",
-                    "Affirmed Israel's right to defend itself while opposing open-ended financial commitments.",
-                ],
-                source: "Senate vote record; Paul Senate statements, 2024"
-            },
-            {
-                topic: "Drug Policy Reform",
-                stance: "supports",
-                stanceLabel: "Supports Decriminalization and Reform",
-                description: "Paul has been one of the few Republicans to support criminal justice reform and decriminalization of marijuana — arguing that mandatory minimum sentences and the war on drugs have disproportionately harmed minority communities and represent government overreach.",
-                actions: [
-                    "Co-sponsored the REDEEM Act with Democratic Sen. Cory Booker — allowing juvenile drug records to be sealed.",
-                    "Introduced legislation to end mandatory minimum sentences for non-violent drug offenses.",
-                    "Supports medical marijuana and has criticized federal interference with state cannabis laws.",
-                ],
-                source: "Senate bill record; Paul Senate press releases, 2014–2024"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-opposes",
-                stanceLabel: "Opposes Abortion Rights; Introduced Federal Ban",
-                description: "Consistent with his stated belief that life begins at conception, Paul introduced the Life at Conception Act — which would grant full legal personhood to fertilized eggs under the 14th Amendment. He supports a federal abortion ban.",
-                actions: [
-                    "Introduced the Life at Conception Act in multiple Congresses.",
-                    "Received a 100% rating from the National Right to Life Committee.",
-                    "Supports a federal abortion ban with no exceptions for rape or incest.",
-                ],
-                source: "Senate bill record; National Right to Life scorecard"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Opposes Federal Healthcare; Free Market", description: "Paul is an ophthalmologist who believes healthcare should be entirely market-driven. He opposes the ACA, Medicare for All, and any government-run insurance program, arguing they reduce quality and increase costs.", actions: ["Introduced legislation to repeal the ACA in full.", "Opposes Medicare, Medicaid expansion, and any government-run insurance option.", "As a doctor, performed free eye surgeries for uninsured patients — citing charity as the private alternative to government programs."], source: "Senate vote record; Paul healthcare platform" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Opposes Climate Regulations", description: "Paul opposes federal climate regulations and mandates as government overreach. He supports an all-of-the-above energy strategy with minimal federal direction and has been skeptical of climate models and proposed policy responses.", actions: ["Opposed the Inflation Reduction Act's clean energy mandates.", "Supports eliminating the EPA's authority over carbon emissions.", "Opposes cap-and-trade, carbon taxes, and renewable energy mandates."], source: "Senate vote record; Paul energy platform" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Supports Reform; Opposes Amnesty", description: "Paul's immigration position is more nuanced than most Republicans — he has supported pathways for undocumented immigrants who commit no crimes while opposing blanket amnesty. He also supports reduced legal immigration levels on fiscal grounds.", actions: ["Proposed a 'Trust but Verify' pathway for undocumented immigrants with clean records.", "Opposes blanket amnesty and mass deportation in equal measure.", "Supports reducing overall immigration levels to match economic demand."], source: "Paul immigration platform; Senate vote record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Life at Conception; Federal Ban", description: "Paul introduced the Life at Conception Act — which would grant full legal personhood to fertilized eggs under the 14th Amendment — and supports a federal abortion ban with no exceptions for rape or incest.", actions: ["Introduced the Life at Conception Act in multiple Congresses.", "Received a 100% rating from the National Right to Life Committee.", "Supports a federal abortion ban with no exceptions for rape or incest."], source: "Senate bill record; National Right to Life scorecard" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Strongly Opposes All Restrictions", description: "Paul is a consistent opponent of all gun control legislation, viewing the 2nd Amendment as an absolute right. He opposes universal background checks, red flag laws, assault weapons bans, and any federal registry.", actions: ["Voted against the Bipartisan Safer Communities Act (2022).", "Opposes universal background checks and red flag laws as unconstitutional.", "Has an A+ rating from the NRA."], source: "NRA ratings; Senate vote record" },
+            { topic: "Tax Policy & Economy", stance: "strongly-opposes", stanceLabel: "Flat Tax; Eliminate Most Agencies", description: "Paul supports a flat tax to replace the current income tax code, eliminating numerous federal agencies, and returning to a constitutional limited government in which federal spending is a fraction of current levels.", actions: ["Proposed a 14.5% flat tax to replace the income tax in 2015.", "Introduces a balanced budget amendment every Congress.", "Has called for eliminating the Departments of Education, Energy, Commerce, and HUD."], source: "Paul economic platform; Senate bill record" },
+            { topic: "Foreign Policy & Military", stance: "strongly-opposes", stanceLabel: "Non-Interventionist; Cut Defense Spending", description: "Paul is the Senate's most consistent non-interventionist — opposing military engagements abroad, cutting the defense budget, and ending what he calls 'endless wars.' He blocked Ukraine aid packages and opposed most foreign military interventions.", actions: ["Blocked multiple Ukraine aid packages using Senate procedural rules.", "Opposes the Authorization for Use of Military Force as an unconstitutional blank check.", "Has introduced amendments to cut the defense budget by 10–20%."], source: "Senate vote record; Paul foreign policy platform" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "Abolish Dept. of Education; School Choice", description: "Paul supports eliminating the U.S. Department of Education entirely and returning all education decisions to states and localities. He supports school choice and opposes all federal curriculum mandates.", actions: ["Has introduced legislation to abolish the Department of Education.", "Supports school vouchers and charter schools.", "Opposes Common Core and any federal education standards."], source: "Paul education platform; Senate bill record" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Bipartisan Reform; End Drug War", description: "Paul is one of the only Republicans to consistently support criminal justice reform — co-sponsoring bipartisan sentencing reform and advocating for decriminalizing marijuana. He argues the War on Drugs has disproportionately harmed minorities and represents government overreach.", actions: ["Co-sponsored the REDEEM Act with Sen. Cory Booker to allow juvenile drug records to be sealed.", "Introduced legislation to end mandatory minimum sentences for non-violent drug offenses.", "Supports medical marijuana and ending federal interference with state cannabis laws."], source: "Senate bill record; Paul criminal justice platform" },
+            { topic: "Israel & Gaza", stance: "mixed", stanceLabel: "Supports Israel; Opposes Blank-Check Aid", description: "Paul supports Israel's right to self-defense but opposes unconditional U.S. military aid on fiscal grounds — a position that puts him at odds with most Republicans. He has demanded aid packages be offset with cuts elsewhere in the budget.", actions: ["Voted against unconditional military aid packages to Israel in 2024.", "Offered amendments to offset Israel aid with cuts elsewhere in the budget.", "Affirmed Israel's right to defend itself while opposing open-ended financial commitments."], source: "Senate vote record; Paul Senate statements, 2024" },
+            { topic: "Trade & China", stance: "mixed", stanceLabel: "Generally Free Trade; Strategic Skepticism", description: "Paul generally opposes tariffs as a tax on American consumers but recognizes China as a strategic threat. He is more skeptical of broad tariff regimes than most Republicans while supporting targeted restrictions on national security grounds.", actions: ["Generally opposed Trump's broad tariff regime as a tax on American families.", "Supports targeted restrictions on Chinese investment in critical U.S. infrastructure.", "Has backed export controls on advanced technology to China."], source: "Senate vote record; Paul trade platform" },
         ],
         trump: {
             relationship: "Libertarian Critic — Selective Ally",
@@ -3178,15 +3128,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "Rand Paul was accused by the American Board of Ophthalmology of practicing without proper board certification after he set up his own certifying board — the 'National Board of Ophthalmology' — rather than submitting to the standard recertification process. The ABO said his self-created board did not meet its standards.",
-                source: "American Board of Ophthalmology statement; Washington Post, 2010"
-            },
-            {
-                text: "The Louisville Courier-Journal reported in 2013 that Paul's 2013 CPAC speech and a speech at a Virginia law school contained passages that appeared to be plagiarized from Wikipedia and other sources without attribution. Paul's office acknowledged the errors and said proper citations would be added.",
-                source: "BuzzFeed News, November 2013; Rand Paul's office response, 2013"
-            }
+        controversies: [
+            { title: "Created His Own Medical Certification Board", description: "Paul was accused by the American Board of Ophthalmology of practicing without proper board certification. Rather than submitting to the standard recertification process, he created his own certifying body — the 'National Board of Ophthalmology.' The ABO said Paul's self-created board did not meet established standards.", source: "American Board of Ophthalmology statement; Washington Post, 2010" },
+            { title: "Plagiarism in Speeches (2013)", description: "Paul's CPAC speech and a speech at a Virginia law school contained passages that appeared to be copied from Wikipedia and other sources without attribution. Paul's office acknowledged the errors and said proper citations would be added, characterizing it as a staffing error.", source: "BuzzFeed News, November 2013; Rand Paul's office response, 2013" },
+            { title: "Physical Assault by Neighbor (2017)", description: "Paul's next-door neighbor Rene Boucher tackled him in November 2017, breaking six of his ribs and causing lasting health complications. Boucher was charged and convicted of assaulting a member of Congress, served 30 days in jail, and Paul won a $580,000 civil judgment. The dispute reportedly stemmed from lawn care disagreements.", source: "The New York Times, November 2017; civil court ruling, 2020" },
+            { title: "Blocked Ukraine Aid Packages Repeatedly", description: "Paul used Senate procedural rules to block or delay multiple Ukraine aid packages — including placing holds that delayed a $40B bill and a $95B foreign aid package — drawing bipartisan criticism for preventing military aid during an active war.", source: "The Hill, May 2022; Politico, February 2024" },
         ]
     },
     {
@@ -3291,67 +3237,18 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); federal financial disclosures"
             }
         },
-        controversial: [
-            {
-                topic: "East Palestine Train Derailment (2023)",
-                stance: "mixed",
-                stanceLabel: "Late Federal Response; Took Responsibility",
-                description: "A Norfolk Southern freight train carrying hazardous materials derailed in East Palestine, Ohio in February 2023, causing a toxic chemical spill. Buttigieg's delayed public response drew bipartisan criticism. He ultimately visited the site, acknowledged the slow response, and pursued legislation to strengthen rail safety standards.",
-                actions: [
-                    "Did not visit East Palestine until 20 days after the derailment — drawing bipartisan criticism.",
-                    "Introduced the Railway Safety Act with bipartisan Senate support.",
-                    "Blamed railroad industry lobbying for weakening safety rules — Republicans blocked the Railway Safety Act in the Senate.",
-                ],
-                source: "DOT press releases; NBC News, February 2023; Senate vote record, 2023"
-            },
-            {
-                topic: "Parental Leave During Supply Chain Crisis",
-                stance: "mixed",
-                stanceLabel: "Took Parental Leave; Timing Disputed",
-                description: "Buttigieg took several weeks of parental leave in October 2021 — when he and his husband Chasten adopted twin newborns — during the height of a national supply chain crisis. Republicans criticized the timing; supporters pointed out that parental leave is a right he championed and the DOT continued to function under acting leadership.",
-                actions: [
-                    "Took parental leave in October 2021 while the U.S. supply chain was under significant strain.",
-                    "Critics, including Tucker Carlson, used the moment to attack his fitness for office.",
-                    "Returned to work in November 2021; later stated he made no apologies for taking leave.",
-                ],
-                source: "Fox News, October 2021; Buttigieg statements; DOT operations review, 2021"
-            },
-            {
-                topic: "Israel & Gaza",
-                stance: "mixed",
-                stanceLabel: "Affirmed Israel's Right to Defend Itself",
-                description: "Buttigieg supported the Biden administration's initial strong backing of Israel after October 7, 2023 while increasingly calling for protection of civilian lives as the conflict extended. He navigated a position consistent with the administration he served.",
-                actions: [
-                    "Affirmed Israel's right to self-defense after October 7.",
-                    "Called for protection of civilian lives and access for humanitarian aid.",
-                    "Consistent with Biden administration policy throughout.",
-                ],
-                source: "Buttigieg press statements, 2023–2024"
-            },
-            {
-                topic: "South Bend Police Controversy",
-                stance: "mixed",
-                stanceLabel: "Handling of Police Shooting Criticized",
-                description: "As Mayor of South Bend, Buttigieg faced significant criticism for his handling of the police shooting of Eric Logan, a Black man, in June 2019. The shooting occurred while Buttigieg was on the 2020 campaign trail; his response and the South Bend Police Department's diversity record became flashpoints in his presidential campaign.",
-                actions: [
-                    "The South Bend Police Department's share of Black officers fell during Buttigieg's tenure as mayor.",
-                    "His response to the Eric Logan shooting was criticized by local Black community leaders.",
-                    "Returned from the campaign trail to South Bend to address the shooting.",
-                ],
-                source: "South Bend Tribune, June 2019; The New York Times, June 2019"
-            },
-            {
-                topic: "Abortion",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Abortion Rights",
-                description: "Buttigieg has consistently and strongly supported abortion rights. He is notable for discussing abortion rights in moral and religious terms — arguing as a Christian that religious freedom includes the freedom not to have one's healthcare decisions governed by someone else's theology.",
-                actions: [
-                    "Supported codifying Roe v. Wade into federal law.",
-                    "Argued publicly that religious faith does not require opposing abortion rights.",
-                    "Consistent supporter of the Women's Health Protection Act.",
-                ],
-                source: "Buttigieg 2020 presidential platform; Fox News interview, 2023"
-            },
+        issues: [
+            { topic: "Healthcare", stance: "supports", stanceLabel: "Public Option; ACA Expansion", description: "Buttigieg supports a public health insurance option and expanding the ACA. He opposed Medicare for All in the 2020 primary, favoring a 'Medicare for All Who Want It' approach that preserves private insurance as a choice.", actions: ["Proposed 'Medicare for All Who Want It' — a public option preserving private insurance.", "Supported the Inflation Reduction Act's drug pricing provisions.", "Backed expanding Medicaid and ACA subsidies."], source: "Buttigieg 2020 presidential platform; DOT record" },
+            { topic: "Climate & Energy", stance: "strongly-supports", stanceLabel: "Clean Energy Transition; EV Infrastructure", description: "As Secretary of Transportation, Buttigieg oversaw the largest federal investment in infrastructure in decades, including a $7.5B EV charging network and major investments in public transit and rail. He is a strong advocate for the clean energy transition.", actions: ["Oversaw $7.5B investment in a national EV charging network under the Bipartisan Infrastructure Law.", "Invested $66B in Amtrak and passenger rail under the Bipartisan Infrastructure Law.", "Supported aggressive emissions standards for vehicles."], source: "DOT record; Bipartisan Infrastructure Law implementation" },
+            { topic: "Immigration & Border", stance: "supports", stanceLabel: "Comprehensive Reform; Humane Enforcement", description: "Buttigieg supports a path to citizenship for undocumented immigrants, protecting DACA recipients, and a humane asylum process. As Transportation Secretary he focused on infrastructure rather than immigration enforcement.", actions: ["Supports the Dream Act and a path to citizenship for undocumented immigrants.", "Backed the bipartisan border security deal in 2024.", "Supports ending family separation and large-scale detention."], source: "Buttigieg 2020 presidential platform" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Strongly Supports Abortion Rights", description: "Buttigieg has consistently and strongly supported abortion rights, notably framing the issue in religious and moral terms — arguing that religious freedom includes freedom from having your healthcare decisions governed by someone else's theology.", actions: ["Supported codifying Roe v. Wade into federal law.", "Argued publicly that religious faith does not require opposing abortion rights.", "Consistent supporter of the Women's Health Protection Act."], source: "Buttigieg 2020 presidential platform; Fox News interview, 2023" },
+            { topic: "Gun Control", stance: "supports", stanceLabel: "Supports Gun Control", description: "Buttigieg supports universal background checks, red flag laws, and an assault weapons ban. He advocated for gun control measures during his 2020 presidential campaign.", actions: ["Supports universal background checks and red flag laws.", "Backs an assault weapons ban.", "Advocated for gun control after multiple mass shootings."], source: "Buttigieg 2020 presidential platform" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Progressive Taxes; Worker Investment", description: "Buttigieg supports progressive taxation, investment in worker training, and reducing economic inequality. His 2020 campaign proposed a financial transaction tax, higher rates for top earners, and significant public investment in infrastructure and education.", actions: ["Proposed a financial transaction tax on stock trades as part of his 2020 platform.", "Supports higher marginal rates for top income earners.", "Advocated for infrastructure investment as an economic multiplier."], source: "Buttigieg 2020 economic platform" },
+            { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Alliance-Based; Democracy Abroad", description: "Buttigieg is a Navy Reserve veteran who deployed to Afghanistan in 2014. He supports robust U.S. engagement with alliances, NATO, and democratic institutions abroad, and has been a critic of isolationism.", actions: ["Deployed to Afghanistan as a naval intelligence officer in 2014.", "Supports NATO and U.S. leadership in defending democratic institutions.", "Backed U.S. military aid to Ukraine."], source: "Buttigieg military record; 2020 presidential platform" },
+            { topic: "Education", stance: "supports", stanceLabel: "Public Education; Debt Reform", description: "Buttigieg supports significant investment in public education, reducing student loan burdens, and expanding early childhood education. His 2020 platform proposed debt-free college for families earning under $100,000.", actions: ["Proposed debt-free public college for families earning under $100,000.", "Supports universal pre-K and early childhood education investment.", "Backs expanding income-driven repayment for student loan borrowers."], source: "Buttigieg 2020 presidential platform" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Reform-Oriented; Mixed Mayoral Record", description: "Buttigieg supports criminal justice reform including ending mass incarceration and eliminating mandatory minimum sentences for non-violent crimes. His mayoral record in South Bend drew criticism for handling of a police shooting and a decline in Black officers.", actions: ["Supports ending mandatory minimum sentences for non-violent drug offenses.", "Backs legalizing marijuana and expunging prior convictions.", "Faced significant criticism for South Bend Police Department's racial equity record as mayor."], source: "Buttigieg 2020 presidential platform; South Bend Tribune, 2019" },
+            { topic: "Israel & Gaza", stance: "mixed", stanceLabel: "Supports Israel; Called for Civilian Protection", description: "Buttigieg affirmed Israel's right to self-defense after October 7, 2023 while increasingly calling for protection of civilian lives and access for humanitarian aid as the conflict extended.", actions: ["Affirmed Israel's right to self-defense after October 7.", "Called for protection of civilian lives and humanitarian aid access.", "Consistent with Biden administration policy throughout."], source: "Buttigieg press statements, 2023–2024" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "Strategic Competition; Domestic Investment", description: "Buttigieg supports strategic competition with China through domestic industrial investment — particularly in infrastructure, semiconductors, and clean energy — rather than broad tariffs. He backed the CHIPS Act and Bipartisan Infrastructure Law as tools to counter Chinese economic dominance.", actions: ["Oversaw implementation of the Bipartisan Infrastructure Law as part of a domestic economic strengthening strategy.", "Supports the CHIPS Act as a counter to Chinese semiconductor dominance.", "Favors strategic domestic investment over broad tariff regimes."], source: "DOT record; Buttigieg policy statements" },
         ],
         trump: {
             relationship: "Consistent Opponent",
@@ -3387,15 +3284,11 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
-            {
-                text: "NBC News reported in 2019 that South Bend's homicide rate had risen sharply during Buttigieg's tenure as mayor, and that the city's racial equity challenges — including in policing — had not been resolved by the time he left office to run for president.",
-                source: "NBC News, June 2019"
-            },
-            {
-                text: "The Intercept reported in 2019 that Buttigieg had not disclosed the full scope of his consulting clients at McKinsey, citing confidentiality agreements — a lack of transparency his campaign rivals raised as a concern about his record.",
-                source: "The Intercept, December 2019"
-            }
+        controversies: [
+            { title: "East Palestine Train Derailment Response (2023)", description: "A Norfolk Southern freight train derailed in East Palestine, Ohio in February 2023, releasing toxic chemicals. Buttigieg did not visit the site for 20 days, drawing bipartisan criticism. He later acknowledged the delayed response and introduced railway safety legislation that Republicans blocked in the Senate.", source: "NBC News, February 2023; Senate vote record, 2023" },
+            { title: "Took Parental Leave During National Supply Chain Crisis (2021)", description: "Buttigieg took parental leave in October 2021 — when he and his husband adopted twin newborns — while the U.S. supply chain faced significant strain. Republicans sharply criticized the timing; supporters argued that as a parental leave advocate he would have been hypocritical not to take it.", source: "Fox News, October 2021; DOT operations review, 2021" },
+            { title: "South Bend Police Shooting and Racial Equity Record", description: "Buttigieg faced significant criticism for his handling of the police shooting of Eric Logan, a Black man, in June 2019 while he was on the 2020 campaign trail. The share of Black officers in the South Bend Police Department fell during his tenure as mayor.", source: "South Bend Tribune, June 2019; The New York Times, June 2019" },
+            { title: "McKinsey Consulting Clients Not Disclosed", description: "Buttigieg worked for McKinsey from 2007–2010 and cited confidentiality constraints when pressed on specific clients during the 2020 campaign. After McKinsey released him from confidentiality obligations, he disclosed work for a grocery retail client and Blue Cross Blue Shield — clients at odds with his progressive positioning.", source: "The Intercept, 2019; Buttigieg campaign press release, December 2019" },
         ]
     },
     {
@@ -3505,67 +3398,83 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); Senate financial disclosures"
             }
         },
-        controversial: [
+        issues: [
             {
-                topic: "Merrick Garland Blockade (2016)",
-                stance: "mixed",
-                stanceLabel: "Blocked Confirmation for 293 Days",
-                description: "McConnell refused to hold a hearing or vote on President Obama's Supreme Court nominee Merrick Garland for nearly a year — from March to November 2016 — arguing the seat should be filled by whichever president the voters chose in the election. He then confirmed Amy Coney Barrett in October 2020, eight days before election day, contradicting his stated rationale.",
-                actions: [
-                    "Refused to hold a hearing or vote on Merrick Garland after his March 2016 nomination.",
-                    "Stated in 2016: 'The American people should have a voice in the selection of their next Supreme Court Justice.'",
-                    "Confirmed Amy Coney Barrett on October 26, 2020 — eight days before Election Day — using the opposite standard.",
-                    "Stated he would confirm a Trump nominee in 2024 even if a vacancy arose in an election year.",
-                ],
-                source: "Senate Judiciary Committee records; McConnell Senate floor statements, 2016 and 2020"
-            },
-            {
-                topic: "Ukraine Aid",
-                stance: "strongly-supports",
-                stanceLabel: "Strong Ukraine Supporter — Broke with Trump",
-                description: "McConnell has been one of the Senate's most consistent and forceful advocates for Ukraine aid — a position that put him in direct conflict with the Trump wing of his party. He pushed through multiple Ukraine aid packages and gave emotional floor speeches about the importance of supporting Ukraine.",
-                actions: [
-                    "Led Senate Republican support for the $95 billion foreign aid package including Ukraine funding (April 2024).",
-                    "Delivered an emotional floor speech calling for Ukraine support after announcing he would step down as leader.",
-                    "Repeatedly contradicted Trump's skepticism of Ukraine aid and NATO commitments.",
-                ],
-                source: "Senate vote record; McConnell floor speech, February 2024"
-            },
-            {
-                topic: "January 6th",
-                stance: "mixed",
-                stanceLabel: "Condemned Attack; Voted to Acquit Trump",
-                description: "McConnell gave a powerful Senate floor speech after the January 6th Capitol attack, saying Trump was 'practically and morally responsible' for the events of that day. He then voted to acquit Trump in the impeachment trial — arguing the Senate lacked jurisdiction over a former president.",
-                actions: [
-                    "Condemned the January 6th attack in stark terms: Trump was 'practically and morally responsible.'",
-                    "Voted to acquit Trump in the second impeachment trial, citing a jurisdictional objection.",
-                    "Said after the acquittal: Trump could still face criminal prosecution.",
-                ],
-                source: "McConnell Senate floor speech, February 13, 2021; Senate impeachment vote record"
-            },
-            {
-                topic: "Opioid Crisis",
-                stance: "mixed",
-                stanceLabel: "Opposed Pain Capable Bill; Kentucky Hardest Hit",
-                description: "Kentucky has been among the states hardest hit by the opioid epidemic. McConnell has supported some federal anti-opioid legislation but has also been criticized for his votes that critics argue prioritized pharmaceutical industry interests over addressing the crisis.",
-                actions: [
-                    "Co-sponsored the SUPPORT for Patients and Communities Act (2018) — the largest federal anti-opioid legislation in history.",
-                    "Received criticism for campaign contributions from the pharmaceutical industry.",
-                    "Kentucky consistently ranks among states with highest overdose death rates.",
-                ],
-                source: "SUPPORT Act (P.L. 115-271); OpenSecrets pharmaceutical donations data; CDC overdose data"
-            },
-            {
-                topic: "Abortion",
+                topic: "Healthcare",
                 stance: "strongly-opposes",
-                stanceLabel: "Strongly Opposes Abortion Rights",
-                description: "McConnell has consistently voted against abortion rights legislation throughout his Senate career. His most consequential action on abortion was enabling the confirmation of three Supreme Court justices who voted to overturn Roe v. Wade in 2022.",
-                actions: [
-                    "Voted against every Senate bill protecting abortion access.",
-                    "Blocking Garland and confirming Gorsuch, Kavanaugh, and Barrett created the majority that overturned Roe.",
-                    "Praised the Dobbs decision as 'courageous and correct.'",
-                ],
+                stanceLabel: "Opposed ACA; Led Repeal Attempts",
+                description: "McConnell led the Senate effort to repeal the Affordable Care Act and has consistently opposed expanding federal health coverage. He has supported market-based approaches and Medicaid reform rather than universal coverage programs.",
+                source: "Senate vote record; McConnell healthcare statements, 2010–2022"
+            },
+            {
+                topic: "Climate & Energy",
+                stance: "opposes",
+                stanceLabel: "Skeptical of Climate Mandates; Backs Fossil Fuels",
+                description: "McConnell has opposed major climate legislation throughout his career, arguing climate regulations harm the economy and workers — particularly in Kentucky's coal industry. He voted against the Inflation Reduction Act's climate provisions and opposed the Paris Agreement.",
+                source: "Senate vote record; McConnell energy statements, 2009–2024"
+            },
+            {
+                topic: "Immigration & Border",
+                stance: "opposes",
+                stanceLabel: "Supports Border Security; Opposed Amnesty",
+                description: "McConnell has consistently opposed comprehensive immigration reform that includes a path to citizenship, instead supporting enforcement-first approaches. He worked to block bipartisan border security legislation in early 2024 under pressure from Trump.",
+                source: "Senate vote record; McConnell immigration statements, 2013–2024"
+            },
+            {
+                topic: "Abortion & Reproductive Rights",
+                stance: "strongly-opposes",
+                stanceLabel: "Strongly Opposes; Enabled Dobbs Decision",
+                description: "McConnell has consistently voted against abortion access legislation. His most consequential action was blocking Merrick Garland and confirming three conservative Supreme Court justices who voted to overturn Roe v. Wade in Dobbs (2022). He praised the decision as 'courageous and correct.'",
                 source: "Senate vote record; McConnell statement on Dobbs, June 2022"
+            },
+            {
+                topic: "Gun Control",
+                stance: "strongly-opposes",
+                stanceLabel: "Opposes New Gun Control Legislation",
+                description: "McConnell has opposed most federal gun control legislation throughout his career, consistently voting against expanded background checks and assault weapons restrictions. He has a historically high NRA rating.",
+                source: "Senate vote record; NRA candidate ratings, 1985–2022"
+            },
+            {
+                topic: "Tax Policy & Economy",
+                stance: "strongly-supports",
+                stanceLabel: "Supports Tax Cuts; Supply-Side Economics",
+                description: "McConnell was a lead architect of the 2017 Tax Cuts and Jobs Act, which significantly reduced corporate and individual tax rates. He has supported extending the Trump tax cuts and opposed tax increases, while also expressing selective concern about deficits when Democrats are in power.",
+                source: "Tax Cuts and Jobs Act (2017); McConnell fiscal statements, 2001–2023"
+            },
+            {
+                topic: "Foreign Policy & Military",
+                stance: "strongly-supports",
+                stanceLabel: "Reagan-Era Hawk; Strong NATO and Ukraine Supporter",
+                description: "McConnell is a foreign policy hawk in the Reagan tradition — a consistent supporter of strong defense spending, NATO commitments, and Ukraine aid. His push for Ukraine aid put him in direct conflict with the Trump wing of his party.",
+                source: "Senate vote record; McConnell floor speech on Ukraine, February 2024"
+            },
+            {
+                topic: "Education",
+                stance: "opposes",
+                stanceLabel: "Supports School Choice; Limited Federal Role",
+                description: "McConnell has supported school choice initiatives and opposed expansions of the federal role in education. He has backed voucher programs and charter schools while opposing teachers' union priorities.",
+                source: "Senate vote record; McConnell education statements, 2001–2022"
+            },
+            {
+                topic: "Criminal Justice & Policing",
+                stance: "opposes",
+                stanceLabel: "Pro-Law Enforcement; Limited Reform Support",
+                description: "McConnell has generally opposed criminal justice reform legislation that reduced mandatory minimums or reformed policing practices. He supported the First Step Act (2018) — a bipartisan sentencing reform bill — but has otherwise backed a law-and-order approach.",
+                source: "Senate vote record; First Step Act (2018); McConnell statements, 2014–2022"
+            },
+            {
+                topic: "Israel & Gaza",
+                stance: "strongly-supports",
+                stanceLabel: "Unwavering Israel Supporter; Backs Military Aid",
+                description: "McConnell has been a consistent and strong supporter of Israel throughout his Senate career, backing military aid packages and opposing conditions on U.S. assistance. He has criticized the Biden and Biden-era Democratic pressure on Israel regarding Gaza operations.",
+                source: "Senate vote record; McConnell statements on Israel, 2023–2024"
+            },
+            {
+                topic: "Trade & China",
+                stance: "strongly-opposes",
+                stanceLabel: "Hawkish on China; Economic and Military Hardliner",
+                description: "McConnell has been among the Senate's most consistent China hawks — supporting economic restrictions, sanctions, and military posture to counter Chinese influence. His wife Elaine Chao's family's shipping connections to China have periodically drawn conflict-of-interest scrutiny.",
+                source: "Senate vote record; McConnell China statements, 2018–2024"
             },
         ],
         trump: {
@@ -3610,14 +3519,31 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
+        controversies: [
             {
-                text: "The New York Times reported in 2019 that Transportation Secretary Elaine Chao — McConnell's wife — had intervened to benefit her family's shipping company and Kentucky projects under her jurisdiction, raising conflict-of-interest concerns given McConnell's role as Senate Majority Leader. A DOT Inspector General review was opened.",
-                source: "The New York Times, June 2019"
+                title: "Merrick Garland Blockade (2016)",
+                description: "McConnell refused to hold a hearing or vote on President Obama's Supreme Court nominee Merrick Garland for 293 days in 2016, claiming the seat should be filled by the next president. He then confirmed Amy Coney Barrett eight days before the 2020 election using a contradictory standard — widely condemned as one of the most brazen hypocrisies in modern Senate history.",
+                source: "Senate Judiciary Committee records; McConnell Senate floor statements, 2016 and 2020"
             },
             {
-                text: "McConnell experienced several public freezing episodes in 2023 — stopping mid-sentence during press conferences for 30+ seconds — leading to significant public concern about his health and capacity to serve. He later announced he would not seek re-election and stepped down as Senate Republican leader.",
+                title: "Elaine Chao / DOT Conflict of Interest",
+                description: "The New York Times reported in 2019 that Transportation Secretary Elaine Chao — McConnell's wife — intervened to benefit her family's Chinese shipping company and steered disproportionate federal transportation funds to Kentucky while McConnell was Senate Majority Leader. A DOT Inspector General review was opened; DOJ declined to prosecute.",
+                source: "The New York Times, June 2019; DOT Inspector General report, 2021"
+            },
+            {
+                title: "Public Freezing Episodes (2023)",
+                description: "McConnell experienced several documented public freezing episodes in 2023, stopping mid-sentence at press conferences for 30+ seconds. The incidents raised significant public concern about his cognitive health and fitness for office. He later announced he would not seek re-election and stepped down as Senate Republican leader in January 2025.",
                 source: "Associated Press, August 2023; McConnell statement, February 2024"
+            },
+            {
+                title: "January 6th: Condemned Then Acquitted",
+                description: "McConnell delivered one of the most powerful Republican condemnations of Trump after January 6th, calling him 'practically and morally responsible' for the attack. He then voted to acquit Trump in the impeachment trial, citing jurisdictional grounds — a contradiction critics called political cowardice that shielded Trump from accountability.",
+                source: "McConnell Senate floor speech, February 13, 2021; Senate impeachment vote record"
+            },
+            {
+                title: "Campaign Finance Reversal",
+                description: "McConnell expressed concern in 2002 about the corrupting influence of 'soft money' in campaigns. He subsequently became one of the most vocal opponents of any campaign finance restrictions, celebrating Citizens United and blocking every disclosure or limit proposal — effectively making dark money a structural feature of American elections.",
+                source: "McConnell Senate statements, 2002; McConnell Citizens United statement, 2010"
             }
         ]
     },
@@ -3728,69 +3654,83 @@ const candidates = [
                 source: "SDNY court records; Epstein flight log manifests (Miami Herald, 2023); California financial disclosures"
             }
         },
-        controversial: [
+        issues: [
             {
-                topic: "Homelessness Crisis",
-                stance: "mixed",
-                stanceLabel: "Major Crisis on His Watch; Dispute Over Record",
-                description: "California has the largest homeless population of any state, and the crisis worsened significantly under Newsom's governorship. He has launched major initiatives and committed billions, but critics argue the spending has not produced measurable reductions in homelessness. A 2024 Supreme Court ruling (Grants Pass v. Johnson) allowed California cities to clear encampments — which Newsom embraced.",
-                actions: [
-                    "Committed billions in state funding to address homelessness — with disputed results.",
-                    "Signed executive orders directing local governments to clear homeless encampments after Grants Pass ruling.",
-                    "Created the CARE Court program to mandate mental health treatment for some homeless individuals.",
-                    "California's homeless population grew from approximately 130,000 to 180,000 during his governorship.",
-                ],
-                source: "California HCD homelessness data; Grants Pass v. Johnson (2024); CalMatters homelessness tracker"
+                topic: "Healthcare",
+                stance: "strongly-supports",
+                stanceLabel: "Universal Coverage; Expanded Medi-Cal to All Residents",
+                description: "Newsom has pursued the most ambitious state healthcare agenda in America — extending Medi-Cal to all income-eligible residents regardless of immigration status, championing a state single-payer system (CalCare), and capping insulin and EpiPen prices.",
+                source: "Newsom healthcare executive orders; Medi-Cal expansion records, 2024"
             },
             {
-                topic: "French Laundry Incident (2020)",
-                stance: "mixed",
-                stanceLabel: "Violated His Own COVID Restrictions",
-                description: "Newsom attended a birthday dinner at the French Laundry restaurant in Napa Valley in November 2020 — with lobbyists and political allies — at the same time he was urging Californians to avoid indoor dining and social gatherings due to COVID-19. He apologized and acknowledged the hypocrisy.",
-                actions: [
-                    "Attended maskless indoor dinner at the French Laundry on November 6, 2020.",
-                    "Had issued guidelines restricting indoor dining and social gatherings days earlier.",
-                    "Apologized publicly: 'I made a bad mistake. I should have stood up and … modeled better behavior.'",
-                    "The incident contributed to the 2021 recall campaign that he survived with 62% of the vote.",
-                ],
-                source: "San Francisco Chronicle, November 2020; Newsom apology statement, November 2020"
+                topic: "Climate & Energy",
+                stance: "strongly-supports",
+                stanceLabel: "Most Aggressive State Climate Agenda in America",
+                description: "Newsom has set some of the most ambitious climate targets in the world — banning new gas-powered car sales by 2035, targeting 100% clean electricity by 2045, and phasing out all oil extraction in California. He has used California's market size to effectively set national standards.",
+                source: "Newsom executive orders on climate; California Air Resources Board regulations, 2020–2024"
             },
             {
-                topic: "California Cost of Living",
+                topic: "Immigration & Border",
+                stance: "strongly-supports",
+                stanceLabel: "Sanctuary State; Comprehensive Reform Advocate",
+                description: "Newsom has made California a sanctuary state — prohibiting state and local law enforcement from cooperating with federal immigration enforcement. He supports comprehensive immigration reform including a path to citizenship and has filed lawsuits challenging federal immigration enforcement actions.",
+                source: "California sanctuary state laws; Newsom immigration statements, 2017–2025"
+            },
+            {
+                topic: "Abortion & Reproductive Rights",
+                stance: "strongly-supports",
+                stanceLabel: "Made CA an Abortion Refuge; Enshrined in CA Constitution",
+                description: "Newsom has made California the national model for post-Dobbs abortion access — enshrining abortion rights in the California Constitution (Prop 1, 2022), protecting providers from out-of-state prosecution, expanding Medi-Cal coverage of abortion services, and welcoming out-of-state patients.",
+                source: "California Prop 1 results, November 2022; Newsom executive orders, 2022"
+            },
+            {
+                topic: "Gun Control",
+                stance: "strongly-supports",
+                stanceLabel: "Proposed 28th Amendment; Assault Weapons Ban",
+                description: "Newsom has proposed a 28th Constitutional Amendment to enshrine universal background checks, waiting periods, and assault weapons restrictions. He signed California's assault weapon ban, required background checks for ammunition, and allowed private citizens to sue gun manufacturers.",
+                source: "Newsom constitutional amendment announcement, June 2023; California gun legislation record"
+            },
+            {
+                topic: "Tax Policy & Economy",
+                stance: "supports",
+                stanceLabel: "Progressive Taxation; Corporate Accountability",
+                description: "Newsom supports progressive taxation and has signed legislation increasing taxes on high earners and corporations in California. He has also pushed corporate minimum wage increases (fast food worker law) and expanded labor protections. Critics cite California's high taxes as a driver of business and resident flight.",
+                source: "California tax legislation record; Newsom budget statements, 2019–2024"
+            },
+            {
+                topic: "Foreign Policy & Military",
                 stance: "mixed",
-                stanceLabel: "Presided Over Affordability Crisis",
-                description: "California has the highest cost of living of any state, with housing costs, energy prices, and taxes well above the national average. Newsom has pursued housing supply reforms but critics argue they have been insufficient. California experienced net domestic out-migration for the first time in modern history during his tenure.",
-                actions: [
-                    "Signed legislation streamlining some housing permitting and reducing single-family zoning restrictions.",
-                    "California experienced net out-migration of approximately 500,000 residents from 2020–2023.",
-                    "Signed legislation to reduce regulations on housing construction, though results have been contested.",
-                ],
-                source: "California Department of Finance population estimates; CalMatters housing tracker"
+                stanceLabel: "Mainstream Democratic Positions; Focused on Domestic Issues",
+                description: "As governor, Newsom has not held primary responsibility for foreign policy, but has expressed mainstream Democratic positions — supporting NATO, multilateral institutions, and diplomacy-first approaches. He has positioned himself as a national opposition leader against Trump's foreign policy.",
+                source: "Newsom public statements on foreign policy, 2019–2025"
+            },
+            {
+                topic: "Education",
+                stance: "strongly-supports",
+                stanceLabel: "Strong Public Education Funding; Opposes Private Vouchers",
+                description: "Newsom has significantly increased California's public education spending and opposed school voucher programs. He has backed universal pre-K, free community college, and expanded student mental health services. He has strongly opposed charter school expansion and voucher proposals backed by conservatives.",
+                source: "California education budget records; Newsom education statements, 2019–2024"
+            },
+            {
+                topic: "Criminal Justice & Policing",
+                stance: "mixed",
+                stanceLabel: "Reform-Minded; Balanced by Public Safety Concerns",
+                description: "Newsom has supported criminal justice reforms including reducing cash bail and reforming sentencing for nonviolent offenses, but has also backed law enforcement during civil unrest and signed legislation rolling back some reforms after rising crime rates became a political liability.",
+                source: "California criminal justice legislation record; Newsom statements, 2020–2024"
             },
             {
                 topic: "Israel & Gaza",
                 stance: "mixed",
-                stanceLabel: "Supports Israel; Called for Humanitarian Protection",
-                description: "Newsom affirmed Israel's right to self-defense after October 7, 2023. He has called for civilian protection and humanitarian access but largely stayed within Democratic mainstream positioning — careful to maintain party cohesion ahead of a potential presidential bid.",
-                actions: [
-                    "Visited Israel in October 2023 to express solidarity.",
-                    "Called for protection of civilian lives and a two-state solution.",
-                    "Faced pressure from California's large Arab American and progressive communities.",
-                ],
+                stanceLabel: "Supports Israel's Right to Defend; Calls for Civilian Protection",
+                description: "Newsom affirmed Israel's right to self-defense after October 7, 2023, visiting Israel to express solidarity. He has called for civilian protection and a two-state solution but largely stayed within Democratic mainstream positioning — careful to maintain party cohesion ahead of a potential presidential run amid pressure from California's Arab American and progressive communities.",
                 source: "Newsom statements, October 2023; Los Angeles Times, 2024"
             },
             {
-                topic: "Abortion",
-                stance: "strongly-supports",
-                stanceLabel: "Strongly Supports Abortion Rights; Made CA a Refuge State",
-                description: "Newsom has made California a national destination for abortion access after Dobbs — expanding state funding, protecting providers from out-of-state prosecution, and enshrining abortion rights in the California Constitution.",
-                actions: [
-                    "Voters approved Proposition 1 in 2022 — enshrining abortion rights in the California Constitution.",
-                    "Signed legislation protecting California abortion providers from out-of-state prosecution.",
-                    "Expanded Medi-Cal coverage of abortion services and out-of-state patients.",
-                    "California became the state most frequently visited by out-of-state patients seeking abortion after Dobbs.",
-                ],
-                source: "California Prop 1 results, November 2022; Newsom executive orders, 2022"
+                topic: "Trade & China",
+                stance: "mixed",
+                stanceLabel: "Supports U.S. Competitiveness; Multilateral Trade Approach",
+                description: "Newsom supports a multilateral trade approach over unilateral tariffs, emphasizing alliances and diplomacy to counter China. As governor, he has attracted Chinese investment in California's clean energy sector while also signing legislation restricting Chinese-owned land purchases near military bases.",
+                source: "Newsom trade and China statements, 2019–2025; California foreign land ownership legislation"
             },
         ],
         trump: {
@@ -3840,14 +3780,31 @@ const candidates = [
                 }
             ]
         },
-        concerns: [
+        controversies: [
             {
-                text: "The San Francisco Chronicle reported in November 2020 that Newsom had attended an indoor birthday dinner at the French Laundry restaurant with political donors and lobbyists while California was under COVID restrictions he had personally issued, prompting an apology from the Governor.",
-                source: "San Francisco Chronicle, November 18, 2020"
+                title: "French Laundry COVID Violation (2020)",
+                description: "Newsom attended an indoor maskless birthday dinner at the upscale French Laundry restaurant in Napa Valley on November 6, 2020 — with lobbyists and political allies — at the same time he was urging Californians to avoid indoor dining and social gatherings due to COVID-19. He publicly apologized, calling it 'a bad mistake.' The incident contributed to the 2021 recall campaign that he survived with 62% of the vote.",
+                source: "San Francisco Chronicle, November 18, 2020; Newsom apology statement, November 2020"
             },
             {
-                text: "CalMatters reported in 2023 that California had seen net domestic out-migration of hundreds of thousands of residents during Newsom's governorship, driven by housing costs, taxes, and cost of living — a challenge Newsom's critics have cited as evidence his model of governance is failing.",
-                source: "CalMatters, California Department of Finance population data, 2023"
+                title: "Homelessness Crisis Worsened Under His Watch",
+                description: "California's homeless population grew from approximately 130,000 to 180,000 during Newsom's governorship despite billions in state spending. Critics across the political spectrum have argued the money was wasted or mismanaged. After a 2024 Supreme Court ruling allowed encampment clearings, Newsom reversed course and ordered local governments to sweep encampments — a sharp pivot from earlier positions.",
+                source: "California HCD homelessness data; Grants Pass v. Johnson (2024); CalMatters homelessness tracker"
+            },
+            {
+                title: "Net Domestic Out-Migration from California",
+                description: "California experienced net domestic out-migration for the first time in modern history during Newsom's tenure — approximately 500,000 residents left from 2020–2023, driven by housing costs, taxes, and cost of living. Critics have used this as a central argument against his 'California model' of governance, though Newsom disputes the framing and points to continued economic growth.",
+                source: "CalMatters; California Department of Finance population estimates, 2023"
+            },
+            {
+                title: "PlumpJack Business Conflicts of Interest",
+                description: "Newsom's family business interests — including the PlumpJack hospitality and wine group — were placed in a blind trust upon becoming governor, but watchdog groups have noted the difficulty of fully eliminating conflicts of interest given the group's extensive California footprint. The French Laundry dinner further highlighted the intersections between his business, social, and political networks.",
+                source: "California Form 700 filings; California Fair Political Practices Commission"
+            },
+            {
+                title: "Early Same-Sex Marriage Defiance (2004)",
+                description: "As Mayor of San Francisco, Newsom ordered the city to issue marriage licenses to same-sex couples in 2004 — in defiance of state law. The licenses were later invalidated. While widely celebrated as a civil rights milestone today, the act raised legal questions about executive authority and unilateral policy defiance that Newsom's critics noted as a pattern of overreach.",
+                source: "San Francisco Mayor's office records, February 2004; Proposition 8 litigation history"
             }
         ]
     }
