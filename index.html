@@ -1159,7 +1159,7 @@
             <div class="nav-item" onclick="scrollToSection('sec-trump')">Trump Record</div>
             <div class="nav-item" onclick="scrollToSection('sec-ethics')">Ethics</div>
             <div class="nav-item" onclick="scrollToSection('sec-epstein')">Epstein</div>
-            <div class="nav-item" onclick="scrollToSection('sec-concerns')">Concerns</div>
+            <div class="nav-item" onclick="scrollToSection('sec-concerns')">Controversies</div>
         </div>
     </nav>
     <div class="profile-body">
@@ -1177,7 +1177,7 @@
         </div>
         <div class="section" id="sec-finance">
             <div class="section-title">Campaign Finance</div>
-            <div class="finance-disclaimer">Data sourced from FEC filings · Representative figures for demonstration</div>
+            <div class="finance-disclaimer">Total raised sourced live from FEC · Breakdown percentages are approximate based on public filings</div>
             <div class="cycle-tabs" id="p-cycle-tabs"></div>
             <div class="finance-totals" id="p-finance-totals"></div>
             <div class="finance-quickstats" id="p-quickstats"></div>
@@ -1251,7 +1251,7 @@ const candidates = [
         fecId: "S0VT00023",
         name: "Bernie Sanders",
         initials: "BS",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/S000033.jpg",
         party: "I",
         title: "U.S. Senator — Vermont",
         state: "Vermont",
@@ -1426,7 +1426,7 @@ const candidates = [
         fecId: "S2TX00325",
         name: "Ted Cruz",
         initials: "TC",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/C001098.jpg",
         party: "R",
         title: "U.S. Senator — Texas",
         state: "Texas",
@@ -1778,7 +1778,7 @@ const candidates = [
         fecId: "H8NY15148",
         name: "Alexandria Ocasio-Cortez",
         initials: "AO",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/O000172.jpg",
         party: "D",
         title: "U.S. Representative — New York (NY-14)",
         state: "New York",
@@ -1956,7 +1956,7 @@ const candidates = [
         fecId: "P80001571",
         name: "Donald Trump",
         initials: "DT",
-        photo: null,
+        photo: "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
         party: "R",
         title: "45th & 47th President of the United States",
         state: "Florida",
@@ -2137,7 +2137,7 @@ const candidates = [
         fecId: "P80000722",
         name: "Joe Biden",
         initials: "JB",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/B000444.jpg",
         party: "D",
         title: "46th President of the United States · Former U.S. Senator, Delaware",
         state: "Delaware",
@@ -2306,7 +2306,7 @@ const candidates = [
         fecId: "P00003392",
         name: "Kamala Harris",
         initials: "KH",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/H001075.jpg",
         party: "D",
         title: "49th Vice President of the United States · Former U.S. Senator, California",
         state: "California",
@@ -2480,7 +2480,7 @@ const candidates = [
         fecId: "P00014522",
         name: "Ron DeSantis",
         initials: "RD",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/D000628.jpg",
         party: "R",
         title: "Governor of Florida · Former U.S. Representative",
         state: "Florida",
@@ -2642,7 +2642,7 @@ const candidates = [
         fecId: "S2MA00170",
         name: "Elizabeth Warren",
         initials: "EW",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/W000817.jpg",
         party: "D",
         title: "U.S. Senator — Massachusetts",
         state: "Massachusetts",
@@ -2816,7 +2816,7 @@ const candidates = [
         fecId: "S0FL00338",
         name: "Marco Rubio",
         initials: "MR",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/R000595.jpg",
         party: "R",
         title: "U.S. Secretary of State · Former U.S. Senator, Florida",
         state: "Florida",
@@ -2978,7 +2978,7 @@ const candidates = [
         fecId: "S1KY00068",
         name: "Rand Paul",
         initials: "RP",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/P000603.jpg",
         party: "R",
         title: "U.S. Senator — Kentucky",
         state: "Kentucky",
@@ -3296,7 +3296,7 @@ const candidates = [
         fecId: "S8KY00014",
         name: "Mitch McConnell",
         initials: "MM",
-        photo: null,
+        photo: "https://theunitedstates.io/images/congress/450x550/M000355.jpg",
         party: "R",
         title: "U.S. Senator — Kentucky · Former Senate Majority Leader",
         state: "Kentucky",
@@ -4348,6 +4348,7 @@ function renderComparison(c1, c2) {
 }
 
 // ── FEC live data ─────────────────────────────────────────
+// Register a free key at https://api.data.gov/signup/ and replace DEMO_KEY below
 const FEC_KEY = "DEMO_KEY";
 
 async function fetchFECData(candidate) {
