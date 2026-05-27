@@ -1072,6 +1072,48 @@
         }
         .filter-clear:hover { background: rgba(255,255,255,.25); }
 
+        /* ── Vote Tracker ── */
+        .vt-follow-row { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .follow-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 20px; border: 2px solid var(--border); background: white; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--text-secondary); transition: all .15s; }
+        .follow-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .follow-btn.following { background: var(--dark); color: white; border-color: var(--dark); }
+        .vt-follow-note { font-size: 13px; color: var(--text-muted); }
+        .vt-section-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+        .vt-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .vt-not-in-office { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 4px; }
+        .vt-not-in-office .vt-nio-status { font-size: 14px; font-weight: 600; color: var(--dark); }
+        .vt-not-in-office .vt-nio-sub { font-size: 12px; color: var(--text-muted); }
+        .vt-live-wrap { margin-bottom: 24px; }
+        .vt-loading { font-size: 13px; color: var(--text-muted); font-style: italic; padding: 12px 0; }
+        .vt-live-header { font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--dark); margin-bottom: 10px; }
+        .vt-activity-list { display: flex; flex-direction: column; gap: 8px; }
+        .vt-activity-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+        .vt-activity-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+        .vt-activity-type { font-size: 11px; font-weight: 700; color: var(--accent); }
+        .vt-activity-date { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+        .vt-activity-title { font-size: 13px; line-height: 1.5; color: var(--text-primary); }
+        .vt-key-needed { font-size: 13px; color: var(--text-muted); padding: 14px; background: var(--bg); border-radius: 8px; line-height: 1.6; margin-bottom: 24px; }
+        .vt-key-needed a { color: var(--accent); }
+        .vt-note { font-size: 13px; color: var(--text-muted); padding: 14px; background: var(--bg); border-radius: 8px; margin-bottom: 24px; line-height: 1.6; }
+        .vt-error { font-size: 13px; color: var(--text-muted); font-style: italic; padding: 12px 0; }
+        .key-votes-list { display: flex; flex-direction: column; gap: 10px; }
+        .key-vote-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+        .kv-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+        .kv-bill { font-size: 14px; font-weight: 700; color: var(--dark); line-height: 1.35; }
+        .kv-significance { font-size: 13px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 6px; }
+        .kv-date { font-size: 11px; color: var(--text-muted); }
+        .vote-badge { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+        .vote-yes      { background: #D1FAE5; color: #065F46; }
+        .vote-no       { background: #FEE2E2; color: #991B1B; }
+        .vote-signed   { background: #065F46; color: white; }
+        .vote-vetoed   { background: #991B1B; color: white; }
+        .vote-sponsored { background: #EDE9FE; color: #4C1D95; }
+        .vote-convict  { background: #FEE2E2; color: #991B1B; }
+        .vote-acquit   { background: #FEF3C7; color: #92400E; }
+        .vote-decision { background: #E0F2FE; color: #075985; }
+        .vote-abstained { background: #F3F4F6; color: #4B5563; }
+        .follow-star { color: var(--accent); font-size: 12px; margin-left: 4px; }
+
         @media (max-width: 700px) {
             .hero-title { font-size: 30px; }
             .position-grid { grid-template-columns: 1fr; }
@@ -1162,6 +1204,7 @@
             <div class="nav-item" onclick="scrollToSection('sec-positions')">Positions</div>
             <div class="nav-item" onclick="scrollToSection('sec-finance')">Finances</div>
             <div class="nav-item" onclick="scrollToSection('sec-controversial')">Issues</div>
+            <div class="nav-item" onclick="scrollToSection('sec-votes')">Vote Tracker</div>
             <div class="nav-item" onclick="scrollToSection('sec-trump')">Trump Record</div>
             <div class="nav-item" onclick="scrollToSection('sec-ethics')">Ethics</div>
             <div class="nav-item" onclick="scrollToSection('sec-epstein')">Epstein</div>
@@ -1196,6 +1239,10 @@
         <div class="section" id="sec-controversial">
             <div class="section-title">Controversial Issues</div>
             <div id="p-controversial"></div>
+        </div>
+        <div class="section" id="sec-votes">
+            <div class="section-title">Vote & Activity Tracker</div>
+            <div id="p-vote-tracker"></div>
         </div>
         <div class="section" id="sec-trump">
             <div class="section-title">Trump Administration Record</div>
@@ -1264,6 +1311,17 @@ const candidates = [
         state: "Vermont",
         office: "U.S. Senate",
         tags: ["Healthcare", "Economy", "Environment"],
+        currentRole: "senator",
+        bioguideId: "S000033",
+        keyVotes: [
+            { bill: "Iraq War Authorization (AUMF)", vote: "no", date: "2002", significance: "One of 133 House members to vote against the Iraq War — a moment of political courage that distinguished him from most Democrats who later renounced their yes votes." },
+            { bill: "Brady Handgun Violence Prevention Act", vote: "no", date: "1993", significance: "Voted against mandatory waiting periods for gun purchases, reflecting the political realities of representing rural Vermont. He fully reversed this position by 2015." },
+            { bill: "Affordable Care Act", vote: "yes", date: "2010", significance: "Voted for the ACA while simultaneously pushing for a single-payer Medicare for All system, calling it a necessary but inadequate step." },
+            { bill: "Tax Cuts and Jobs Act", vote: "no", date: "2017", significance: "Led Senate Democratic opposition to the Republican tax overhaul, calling it 'a massive tax break for the very rich' that would add $1.5 trillion to the deficit." },
+            { bill: "American Rescue Plan", vote: "yes", date: "2021", significance: "Chaired the Senate Budget Committee during its passage — the $1.9 trillion COVID relief bill included $1,400 direct payments and the largest child tax credit expansion in history." },
+            { bill: "Inflation Reduction Act", vote: "yes", date: "2022", significance: "Voted for the largest climate investment in U.S. history despite calling it insufficient — it fell far short of the Green New Deal he co-sponsored." },
+            { bill: "Arms Sales Block — Israel", vote: "sponsored", date: "2024", significance: "Introduced joint resolutions to block $18 billion in arms sales to Israel — a major escalation in his criticism of Israeli military operations in Gaza that he called a violation of international law." },
+        ],
         highlights: [
             "Served as Mayor of Burlington, VT from 1981–1989 — the longest-serving independent mayor of a U.S. city at the time.",
             "Elected to the U.S. House of Representatives in 1990, serving 16 years before winning his Senate seat.",
@@ -1439,6 +1497,16 @@ const candidates = [
         state: "Texas",
         office: "U.S. Senate",
         tags: ["Courts", "Energy", "National Security"],
+        currentRole: "senator",
+        bioguideId: "C001098",
+        keyVotes: [
+            { bill: "Government Shutdown Filibuster", vote: "no", date: "2013", significance: "Staged a 21-hour floor speech to defund the ACA — triggering a government shutdown that failed but established his brand as a confrontational outsider willing to blow up Washington norms." },
+            { bill: "Tax Cuts and Jobs Act", vote: "yes", date: "2017", significance: "Voted for the sweeping Republican tax overhaul after securing a last-minute expansion of the child tax credit, having threatened to vote no over other provisions." },
+            { bill: "First Trump Impeachment", vote: "acquit", date: "2020", significance: "Voted to acquit Trump on both articles — calling the process 'an unconstitutional impeachment sham.'" },
+            { bill: "Electoral College Objection — Pennsylvania", vote: "no", date: "2021", significance: "Led a coalition of senators objecting to Pennsylvania's electoral votes following January 6th — one of the most significant challenges to a presidential election certification in modern history." },
+            { bill: "Bipartisan Safer Communities Act", vote: "no", date: "2022", significance: "Voted against the first major bipartisan gun safety legislation in 30 years, calling it an unconstitutional infringement on Second Amendment rights." },
+            { bill: "Ukraine Aid Package ($95B)", vote: "no", date: "2024", significance: "Voted against the $95 billion foreign aid package for Ukraine, Israel, and Taiwan — arguing it lacked border security provisions and represented 'blank checks' for foreign nations." },
+        ],
         highlights: [
             "Served as Solicitor General of Texas from 2003–2008, arguing multiple cases before the U.S. Supreme Court.",
             "Elected to the U.S. Senate in 2012 as part of the Tea Party wave.",
@@ -1622,6 +1690,14 @@ const candidates = [
         state: "South Carolina",
         office: "Former",
         tags: ["Foreign Policy", "Fiscal Policy", "Education"],
+        currentRole: "former",
+        keyVotes: [
+            { bill: "Confederate Flag Removal — South Carolina", vote: "decision", date: "2015", significance: "Called for and signed legislation removing the Confederate battle flag from the SC State House following the Charleston church shooting — widely credited with accelerating the flag's removal across the South." },
+            { bill: "UN Human Rights Council Withdrawal", vote: "decision", date: "2018", significance: "Led the U.S. withdrawal from the UN Human Rights Council as UN Ambassador, citing its disproportionate criticism of Israel and inclusion of member states with severe human rights records." },
+            { bill: "Syria Withdrawal Opposition", vote: "decision", date: "2018", significance: "Publicly opposed Trump's announced withdrawal of U.S. forces from Syria — one of the few direct public disagreements with Trump during her tenure as UN Ambassador." },
+            { bill: "Resignation as UN Ambassador", vote: "decision", date: "2018", significance: "Resigned as UN Ambassador on her own terms with Trump's public blessing — positioning herself as a loyal but independent figure for a future presidential run." },
+            { bill: "2024 Presidential Primary", vote: "decision", date: "2024", significance: "Remained in the Republican primary longer than any other challenger, winning the DC primary and continuing through Super Tuesday before suspending — then notably declined to endorse Trump for weeks." },
+        ],
         highlights: [
             "Served as the first female and first minority Governor of South Carolina (2011–2017).",
             "Appointed U.S. Ambassador to the United Nations by President Trump (2017–2018).",
@@ -1791,6 +1867,15 @@ const candidates = [
         state: "New York",
         office: "U.S. House",
         tags: ["Climate", "Healthcare", "Housing"],
+        currentRole: "representative",
+        bioguideId: "O000172",
+        keyVotes: [
+            { bill: "Green New Deal Resolution", vote: "sponsored", date: "2019", significance: "Co-introduced the Green New Deal with Sen. Ed Markey — the defining left-wing climate document in modern politics, calling for a 10-year national mobilization on climate and economic justice." },
+            { bill: "American Rescue Plan", vote: "yes", date: "2021", significance: "Voted for the $1.9 trillion COVID relief bill including $1,400 direct payments and the largest child tax credit expansion in history." },
+            { bill: "Infrastructure Investment and Jobs Act", vote: "no", date: "2021", significance: "Voted against the bipartisan infrastructure bill, arguing it should not be decoupled from the larger Build Back Better social spending package — one of 6 House progressives to vote no." },
+            { bill: "Inflation Reduction Act", vote: "yes", date: "2022", significance: "Voted for the largest climate investment in U.S. history despite calling it 'a step in the right direction' that fell far short of the Green New Deal's ambitions." },
+            { bill: "Israel Arms Sales Resolution", vote: "sponsored", date: "2024", significance: "Co-sponsored legislation to block arms sales to Israel under the Arms Export Control Act, calling Israel's military campaign in Gaza a violation of international law." },
+        ],
         highlights: [
             "Elected in 2018 at age 29 — the youngest woman ever elected to Congress at that time.",
             "Defeated 10-term incumbent Joe Crowley in the 2018 Democratic primary, one of the biggest upsets in recent congressional history.",
@@ -1969,6 +2054,15 @@ const candidates = [
         state: "Florida",
         office: "President",
         tags: ["Trade", "Immigration", "Deregulation"],
+        currentRole: "president",
+        keyVotes: [
+            { bill: "Tax Cuts and Jobs Act", vote: "signed", date: "2017", significance: "Signed the most significant tax overhaul in 30 years — reducing the corporate rate from 35% to 21% and cutting individual rates. Added an estimated $1.5 trillion to the deficit over 10 years." },
+            { bill: "Paris Agreement Withdrawal", vote: "decision", date: "2017", significance: "Announced U.S. withdrawal from the Paris Climate Agreement, calling it a bad deal for American workers. Biden rejoined in 2021; Trump withdrew again immediately upon returning to office in January 2025." },
+            { bill: "First Impeachment — Acquitted", vote: "acquit", date: "2020", significance: "Acquitted by the Senate on charges of abuse of power and obstruction of Congress related to pressuring Ukraine to investigate Joe Biden. The first president in history to be impeached twice." },
+            { bill: "COVID National Emergency Declaration", vote: "decision", date: "2020", significance: "Declared a national emergency in March 2020 while simultaneously downplaying the virus's severity, opposing mask mandates, and pushing to reopen the economy — a response that defined his handling of the worst public health crisis in a century." },
+            { bill: "Second Impeachment — Acquitted", vote: "acquit", date: "2021", significance: "Acquitted by the Senate on the charge of incitement of insurrection following January 6th, 57–43 — the most bipartisan impeachment conviction vote in history, but short of the two-thirds needed." },
+            { bill: "EO 14159 — Border National Emergency", vote: "signed", date: "2025", significance: "Signed on his first day back in office, declaring a national emergency at the southern border and invoking the Alien Enemies Act of 1798 to order mass deportation operations." },
+        ],
         highlights: [
             "Elected 45th President in 2016, defeating Hillary Clinton in the Electoral College despite losing the popular vote.",
             "Signed the Tax Cuts and Jobs Act (2017) — the largest tax overhaul since 1986, cutting the corporate rate from 35% to 21%.",
@@ -2150,6 +2244,16 @@ const candidates = [
         state: "Delaware",
         office: "Former",
         tags: ["Foreign Policy", "Climate", "Healthcare"],
+        currentRole: "former",
+        bioguideId: "B000444",
+        keyVotes: [
+            { bill: "American Rescue Plan", vote: "signed", date: "2021", significance: "Signed the $1.9 trillion COVID relief bill within weeks of taking office — including $1,400 payments and the largest child tax credit expansion in history. Supporters credit it with the fastest job recovery on record; critics argue it fueled inflation." },
+            { bill: "Infrastructure Investment and Jobs Act", vote: "signed", date: "2021", significance: "Signed the largest infrastructure investment in generations — $1.2 trillion for roads, bridges, broadband, and clean water. A rare bipartisan achievement." },
+            { bill: "Afghanistan Withdrawal", vote: "decision", date: "2021", significance: "Ordered the final withdrawal of U.S. forces after 20 years. The Taliban took Kabul within days and 13 American service members died in a suicide bombing during the chaotic evacuation — the most criticized moment of his presidency." },
+            { bill: "Inflation Reduction Act", vote: "signed", date: "2022", significance: "Signed the largest climate investment in U.S. history — $369 billion in climate provisions plus Medicare drug price negotiation authority. A signature domestic achievement." },
+            { bill: "Student Loan Forgiveness (Struck Down)", vote: "decision", date: "2022", significance: "Announced executive action canceling up to $20,000 in student debt. The Supreme Court struck it down 6–3 in 2023, ruling it exceeded executive authority." },
+            { bill: "Decision Not to Seek Re-election", vote: "decision", date: "2024", significance: "Announced on July 21, 2024 that he would not seek re-election — under sustained pressure from Democratic leaders following a widely-criticized debate performance against Trump. Endorsed Kamala Harris." },
+        ],
         highlights: [
             "Served as U.S. Senator from Delaware for 36 years (1973–2009), including as chairman of the Senate Judiciary and Foreign Relations Committees.",
             "Served as 47th Vice President of the United States under Barack Obama (2009–2017).",
@@ -2319,6 +2423,15 @@ const candidates = [
         state: "California",
         office: "Former",
         tags: ["Criminal Justice", "Climate", "Healthcare"],
+        currentRole: "former",
+        bioguideId: "H001075",
+        keyVotes: [
+            { bill: "Tax Cuts and Jobs Act", vote: "no", date: "2017", significance: "Voted against the Republican tax overhaul as a first-year senator, calling it a giveaway to corporations and the wealthy." },
+            { bill: "First Trump Impeachment", vote: "convict", date: "2020", significance: "Voted to convict Trump on both articles of impeachment before being selected as Biden's running mate." },
+            { bill: "American Rescue Plan (Tie-Breaking Vote)", vote: "yes", date: "2021", significance: "Cast the tie-breaking vote as Vice President to pass the $1.9 trillion COVID relief bill — the first of several consequential 50-50 Senate votes that defined the Biden administration's ability to govern." },
+            { bill: "Inflation Reduction Act (Tie-Breaking Vote)", vote: "yes", date: "2022", significance: "Cast the deciding tie-breaking vote to pass the Inflation Reduction Act — the largest climate investment in U.S. history." },
+            { bill: "2024 Presidential Campaign", vote: "decision", date: "2024", significance: "Accepted the Democratic presidential nomination after Biden's withdrawal — the first woman of color nominated for president by a major party. Lost to Trump in the Electoral College 312–226." },
+        ],
         highlights: [
             "Served as District Attorney of San Francisco (2004–2011) and Attorney General of California (2011–2017).",
             "Elected U.S. Senator from California in 2016 — the second Black woman and first South Asian-American senator in U.S. history.",
@@ -2493,6 +2606,15 @@ const candidates = [
         state: "Florida",
         office: "Governor",
         tags: ["Education", "Immigration", "Anti-Woke"],
+        currentRole: "governor",
+        keyVotes: [
+            { bill: "COVID Restrictions Refusal", vote: "decision", date: "2020", significance: "Refused to issue a statewide mask mandate and reopened Florida's economy and schools earlier than most states — a high-profile gamble that built his national conservative brand around anti-mandate governance." },
+            { bill: "Parental Rights in Education Act ('Don't Say Gay')", vote: "signed", date: "2022", significance: "Signed legislation restricting instruction on gender identity and sexual orientation in K-3 classrooms — triggering national controversy, a public fight with Disney, and major copycat legislation across Republican states." },
+            { bill: "Stop WOKE Act", vote: "signed", date: "2022", significance: "Signed the 'Stop Wrongs to Our Kids and Employees' Act restricting DEI training in workplaces and universities. Portions were struck down by federal courts as First Amendment violations." },
+            { bill: "Migrant Relocation Flights — Martha's Vineyard", vote: "decision", date: "2022", significance: "Arranged flights relocating 50 Venezuelan migrants from Texas to Martha's Vineyard — a political stunt designed to confront Democratic leaders over immigration that drew national attention and legal challenges." },
+            { bill: "Disney/Reedy Creek Elimination", vote: "signed", date: "2022", significance: "Signed legislation eliminating Disney's special self-governing tax district after Disney publicly opposed the 'Don't Say Gay' bill — beginning a legal and political battle that dragged into 2024." },
+            { bill: "2024 Presidential Primary Dropout", vote: "decision", date: "2024", significance: "Suspended his presidential campaign in January 2024 after weak early-state polling, despite having been considered Trump's strongest potential challenger. Immediately endorsed Trump." },
+        ],
         highlights: [
             "Served as U.S. Representative for Florida's 6th Congressional District from 2013–2019.",
             "Elected Governor of Florida in 2018 by a margin of 0.4%; re-elected in 2022 by 19 points — one of the largest gubernatorial landslides in Florida history.",
@@ -2655,6 +2777,15 @@ const candidates = [
         state: "Massachusetts",
         office: "U.S. Senate",
         tags: ["Consumer Protection", "Wall Street", "Healthcare"],
+        currentRole: "senator",
+        bioguideId: "W000817",
+        keyVotes: [
+            { bill: "Tax Cuts and Jobs Act", vote: "no", date: "2017", significance: "Led Senate Democratic opposition to the Republican tax overhaul, publishing a 'corruption score' showing how provisions benefited Trump-connected industries." },
+            { bill: "First Trump Impeachment", vote: "convict", date: "2020", significance: "Voted to convict Trump on both articles of impeachment — abuse of power and obstruction of Congress." },
+            { bill: "American Rescue Plan", vote: "yes", date: "2021", significance: "Voted for the $1.9 trillion COVID relief bill, which included the child tax credit expansion she had long advocated." },
+            { bill: "Inflation Reduction Act", vote: "yes", date: "2022", significance: "Voted for the legislation's Medicare drug price negotiation provisions — a partial achievement of her decade-long push to allow Medicare to negotiate pharmaceutical prices directly." },
+            { bill: "CFPB Defense", vote: "decision", date: "2023-2025", significance: "Led Senate opposition to repeated Republican attempts to defund and dismantle the Consumer Financial Protection Bureau she created in 2010 — calling it an attempt to return financial regulation to the pre-2008 status quo." },
+        ],
         highlights: [
             "Harvard Law School professor and leading bankruptcy law scholar before entering politics.",
             "Created the Consumer Financial Protection Bureau (CFPB) as part of the Dodd-Frank Act following the 2008 financial crisis.",
@@ -2829,6 +2960,15 @@ const candidates = [
         state: "Florida",
         office: "Cabinet",
         tags: ["Foreign Policy", "China", "National Security"],
+        currentRole: "cabinet",
+        bioguideId: "R000595",
+        keyVotes: [
+            { bill: "Gang of Eight Immigration Bill", vote: "yes", date: "2013", significance: "Co-authored and voted for a bipartisan comprehensive immigration reform bill that passed the Senate 68-32 but died in the House — Rubio later disavowed it under primary pressure, calling his own legislation a mistake." },
+            { bill: "Tax Cuts and Jobs Act", vote: "yes", date: "2017", significance: "Threatened to vote against the bill unless the child tax credit was expanded, ultimately securing a compromise." },
+            { bill: "First Trump Impeachment", vote: "acquit", date: "2020", significance: "Voted to acquit Trump on both articles of impeachment." },
+            { bill: "Bipartisan Safer Communities Act", vote: "no", date: "2022", significance: "Voted against the first major bipartisan gun safety bill in 30 years — despite Florida being the site of the 2018 Parkland school shooting that catalyzed the legislation." },
+            { bill: "Ukraine Aid Package ($95B)", vote: "yes", date: "2024", significance: "Voted for Ukraine aid as senator, then became Secretary of State and took a harder line on pushing Ukraine toward negotiations with Russia — a notable shift in posture." },
+        ],
         highlights: [
             "Served as Speaker of the Florida House of Representatives (2007–2008) before being elected to the U.S. Senate in 2010.",
             "Served as U.S. Senator from Florida for 14 years (2011–2025), sitting on the Senate Intelligence and Foreign Relations Committees.",
@@ -2991,6 +3131,15 @@ const candidates = [
         state: "Kentucky",
         office: "U.S. Senate",
         tags: ["Civil Liberties", "Non-Interventionism", "Fiscal Policy"],
+        currentRole: "senator",
+        bioguideId: "P000603",
+        keyVotes: [
+            { bill: "PATRIOT Act Reauthorization", vote: "no", date: "2015", significance: "Staged a nearly 11-hour filibuster against NSA surveillance reauthorization — forcing a brief expiration of bulk phone data collection and drawing national attention to government surveillance programs." },
+            { bill: "Tax Cuts and Jobs Act", vote: "no", date: "2017", significance: "Voted against the Republican tax overhaul — calling it insufficiently bold on deficit reduction and arguing it didn't actually cut spending. One of only a few Republicans to vote no." },
+            { bill: "COVID Relief Packages", vote: "no", date: "2020-2021", significance: "Voted against every major COVID relief package, arguing they were deficit-financed spending that would fuel inflation — a position that proved more prescient than his critics acknowledged at the time." },
+            { bill: "Infrastructure Investment and Jobs Act", vote: "no", date: "2021", significance: "Voted against the $1.2 trillion bipartisan infrastructure bill, calling it a 'spending boondoggle' and arguing infrastructure should be funded by redirecting existing spending rather than new outlays." },
+            { bill: "Ukraine Aid Packages", vote: "no", date: "2022-2024", significance: "Consistently voted against and used procedural holds to delay Ukraine aid packages — calling them unaffordable blank checks. His single-senator holds delayed billions in aid on multiple occasions." },
+        ],
         highlights: [
             "Ophthalmologist by training; founded the Southern Kentucky Lions Eye Clinic providing free eye care to uninsured patients.",
             "Elected U.S. Senator from Kentucky in 2010, part of the Tea Party wave.",
@@ -3153,6 +3302,14 @@ const candidates = [
         state: "Indiana",
         office: "Former",
         tags: ["Infrastructure", "Clean Energy", "LGBTQ Rights"],
+        currentRole: "former",
+        keyVotes: [
+            { bill: "Infrastructure Investment and Jobs Act (Implementation)", vote: "decision", date: "2021", significance: "Led Transportation Department implementation of the $1.2 trillion infrastructure law — the largest federal investment in roads, bridges, rail, and broadband in a generation." },
+            { bill: "Paternity Leave During Supply Chain Crisis", vote: "decision", date: "2021", significance: "Took federally permitted paternity leave while supply chain and port congestion crises worsened — criticized by political opponents and defended by allies as exercising a right all workers should have." },
+            { bill: "East Palestine, Ohio Train Derailment Response", vote: "decision", date: "2023", significance: "Faced significant criticism for arriving 20 days after the Norfolk Southern derailment in East Palestine, Ohio. The episode became a focal point for critics of his DOT tenure." },
+            { bill: "Boeing Safety Investigation", vote: "decision", date: "2024", significance: "Ordered enhanced FAA oversight of Boeing following a mid-flight door plug blowout on an Alaska Airlines flight — raising questions about whether FAA oversight had been sufficiently rigorous." },
+            { bill: "EV Charging Network Initiative", vote: "decision", date: "2023", significance: "Oversaw rollout of a $7.5 billion federally funded electric vehicle charging network — criticized for slow deployment despite aiming to build 500,000 charging stations nationwide." },
+        ],
         highlights: [
             "Elected Mayor of South Bend, Indiana in 2011 at age 29 — one of the youngest mayors of a major U.S. city.",
             "Served as Secretary of Transportation from 2021–2025 — the first openly gay Cabinet member confirmed by the Senate.",
@@ -3309,6 +3466,15 @@ const candidates = [
         state: "Kentucky",
         office: "U.S. Senate",
         tags: ["Judiciary", "Senate Power", "National Security"],
+        currentRole: "senator",
+        bioguideId: "M000355",
+        keyVotes: [
+            { bill: "Merrick Garland Supreme Court Nomination Block", vote: "decision", date: "2016", significance: "Refused to hold a hearing or vote on Obama's Supreme Court nominee for 293 days — then confirmed Amy Coney Barrett 8 days before the 2020 election using a contradictory standard. Widely viewed as the most consequential use of Senate power in modern history." },
+            { bill: "Tax Cuts and Jobs Act", vote: "yes", date: "2017", significance: "Floor-managed the passage of the most significant tax overhaul in 30 years — reducing the corporate rate from 35% to 21%." },
+            { bill: "Second Trump Impeachment", vote: "acquit", date: "2021", significance: "Voted to acquit Trump on incitement of insurrection while simultaneously calling him 'practically and morally responsible' for January 6th — a contradiction widely criticized as political cowardice." },
+            { bill: "Bipartisan Safer Communities Act", vote: "yes", date: "2022", significance: "Unusually supported the first major bipartisan gun safety legislation in 30 years — helping broker a deal that included enhanced background checks and red flag law incentives for states." },
+            { bill: "Ukraine Aid Package ($95B)", vote: "yes", date: "2024", significance: "Led Senate Republican support for the $95 billion Ukraine/Israel/Taiwan aid package — directly contradicting Trump and cementing the central fault line between Reaganite institutionalism and MAGA populism." },
+        ],
         highlights: [
             "Served as U.S. Senator from Kentucky since 1985 — one of the longest-serving senators in American history.",
             "Served as Senate Majority Leader from 2015–2021 and 2019–2021 — among the most powerful Senate leaders in modern history.",
@@ -3565,6 +3731,15 @@ const candidates = [
         state: "California",
         office: "Governor",
         tags: ["Climate", "Healthcare", "Housing"],
+        currentRole: "governor",
+        keyVotes: [
+            { bill: "Same-Sex Marriage Licenses — San Francisco", vote: "decision", date: "2004", significance: "Ordered San Francisco to issue marriage licenses to same-sex couples as mayor — in defiance of state law, nearly a decade before the Supreme Court legalized same-sex marriage nationally. The act accelerated the national political conversation." },
+            { bill: "Gas Vehicle Sales Ban by 2035", vote: "signed", date: "2020", significance: "Signed an executive order banning new gas-powered vehicle sales in California by 2035 — the first such ban in the U.S., effectively setting a de facto national standard given California's market size." },
+            { bill: "Proposition 1 — Abortion Rights in CA Constitution", vote: "decision", date: "2022", significance: "Championed Prop 1, enshrining abortion rights in the California Constitution with 67% of the vote following Dobbs — making California the national model for post-Dobbs abortion access." },
+            { bill: "28th Amendment Proposal (Gun Control)", vote: "decision", date: "2023", significance: "Called for a 28th Constitutional Amendment enshrining universal background checks, waiting periods, and an assault weapons ban — reframing gun control as a constitutional rather than statutory issue." },
+            { bill: "Homeless Encampment Clearings (Post-Grants Pass)", vote: "signed", date: "2024", significance: "Signed executive orders directing local governments to clear homeless encampments following the Supreme Court's Grants Pass ruling — a notable pivot from prior Democratic reluctance to mandate clearings." },
+            { bill: "California vs. Trump Administration (40+ Lawsuits)", vote: "decision", date: "2025", significance: "Led California in filing over 40 lawsuits against Trump's second-term executive orders within 100 days — positioning himself as the national face of Democratic opposition." },
+        ],
         highlights: [
             "Served as Mayor of San Francisco from 2004–2011, where he issued marriage licenses to same-sex couples in 2004 — nearly a decade before the Supreme Court legalized same-sex marriage nationally.",
             "Served as Lieutenant Governor of California from 2011–2019.",
@@ -4171,6 +4346,7 @@ function showProfile(id, pushState = true) {
     renderVision(c);
     renderFinance(c, 0);
     renderControversial(c);
+    renderVoteTracker(c);
     renderTrump(c);
     renderEthics(c);
     renderEpstein(c);
@@ -4606,7 +4782,7 @@ function renderFeatured() {
                     ${makeAvatar(c, "avatar-sm")}
                     <div class="card-header-text">
                         <div class="card-party party-${c.party}">${partyLabel(c.party)}</div>
-                        <div class="card-name">${c.name}</div>
+                        <div class="card-name">${c.name}${isFollowing(c.id) ? ' <span class="follow-star">★</span>' : ''}</div>
                     </div>
                 </div>
                 <div class="card-title">${c.title}</div>
@@ -4667,7 +4843,7 @@ let spyObserver = null;
 function initScrollSpy() {
     if (spyObserver) spyObserver.disconnect();
 
-    const sections = ["sec-highlights","sec-vision","sec-positions","sec-finance","sec-controversial","sec-trump","sec-ethics","sec-epstein","sec-concerns"];
+    const sections = ["sec-highlights","sec-vision","sec-positions","sec-finance","sec-controversial","sec-votes","sec-trump","sec-ethics","sec-epstein","sec-concerns"];
     const navItems = document.querySelectorAll(".nav-item");
     const profileNav = document.getElementById("profile-nav");
     const offset = getStickyOffset();
@@ -4693,6 +4869,155 @@ function initScrollSpy() {
         const el = document.getElementById(id);
         if (el) spyObserver.observe(el);
     });
+}
+
+// ── Follow system (localStorage) ─────────────────────────
+const FOLLOWS_KEY = "represent_followed";
+function getFollowed() { return JSON.parse(localStorage.getItem(FOLLOWS_KEY) || "[]"); }
+function isFollowing(id) { return getFollowed().includes(id); }
+function toggleFollow(id) {
+    const f = getFollowed();
+    const i = f.indexOf(id);
+    if (i === -1) f.push(id); else f.splice(i, 1);
+    localStorage.setItem(FOLLOWS_KEY, JSON.stringify(f));
+    syncFollowBtn();
+    renderFeatured();
+}
+function syncFollowBtn() {
+    const btn = document.getElementById("follow-btn");
+    if (!btn || !currentCandidate) return;
+    const on = isFollowing(currentCandidate.id);
+    btn.textContent = on ? "★ Following" : "☆ Follow";
+    btn.classList.toggle("following", on);
+}
+
+// ── Vote tracker ──────────────────────────────────────────
+// Register a free key at https://www.propublica.org/datastore/api/propublica-congress-api
+const PROPUBLICA_KEY = "YOUR_PROPUBLICA_KEY";
+
+function voteLabel(v) {
+    return { yes: "Voted Yes", no: "Voted No", signed: "Signed", vetoed: "Vetoed",
+             sponsored: "Sponsored", convict: "Convict", acquit: "Acquit",
+             decision: "Decision", abstained: "Did Not Vote" }[v] || v;
+}
+
+function formatDate(str) {
+    if (!str) return "";
+    const d = new Date(str + "T12:00:00");
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function renderVoteTracker(c) {
+    const el = document.getElementById("p-vote-tracker");
+    if (!el) return;
+    const following = isFollowing(c.id);
+    const firstName = c.name.split(" ")[0];
+
+    let html = `<div class="vt-follow-row">
+        <button class="follow-btn ${following ? "following" : ""}" id="follow-btn" onclick="toggleFollow('${c.id}')">
+            ${following ? "★ Following" : "☆ Follow"}
+        </button>
+        <span class="vt-follow-note">Follow to track when ${firstName} votes or acts</span>
+    </div>`;
+
+    // Recent activity — role-specific
+    html += `<div class="vt-section-label">Recent Activity</div>`;
+    const notInOffice = c.currentRole === "former" || c.currentRole === "cabinet";
+    if (notInOffice) {
+        const sub = c.currentRole === "cabinet"
+            ? `Currently serving as: ${c.title}`
+            : `Last served as: ${c.title}`;
+        html += `<div class="vt-not-in-office">
+            <span class="vt-nio-status">Not currently in elected office</span>
+            <span class="vt-nio-sub">${sub}</span>
+        </div>`;
+    } else {
+        html += `<div class="vt-live-wrap" id="vt-live-${c.id}">
+            <div class="vt-loading">Loading recent activity…</div>
+        </div>`;
+    }
+
+    // Key votes
+    if (c.keyVotes && c.keyVotes.length) {
+        html += `<div class="vt-section-label">Key Votes & Decisions</div>
+        <div class="key-votes-list">
+            ${c.keyVotes.map(v => `
+            <div class="key-vote-card">
+                <div class="kv-top">
+                    <div class="kv-bill">${v.bill}</div>
+                    <span class="vote-badge vote-${v.vote}">${voteLabel(v.vote)}</span>
+                </div>
+                <div class="kv-significance">${v.significance}</div>
+                <div class="kv-date">${v.date}</div>
+            </div>`).join("")}
+        </div>`;
+    }
+
+    el.innerHTML = html;
+    if (!notInOffice) fetchRecentActivity(c);
+}
+
+async function fetchRecentActivity(c) {
+    const el = document.getElementById(`vt-live-${c.id}`);
+    if (!el) return;
+    try {
+        if (c.currentRole === "president") {
+            await fetchPresidentEOs(el);
+        } else if ((c.currentRole === "senator" || c.currentRole === "representative") && c.bioguideId) {
+            await fetchCongressVotes(c, el);
+        } else if (c.currentRole === "governor") {
+            el.innerHTML = `<div class="vt-note">Live executive order tracking for state governors is coming soon. Check your state's official governor website for recent orders.</div>`;
+        }
+    } catch(e) {
+        el.innerHTML = `<div class="vt-error">Could not load recent activity — check back later.</div>`;
+    }
+}
+
+async function fetchPresidentEOs(el) {
+    const url = "https://www.federalregister.gov/api/v1/documents.json?conditions[president_ids][]=trump&conditions[type][]=PRESDOCU&conditions[presidential_document_type][]=executive_order&per_page=5&order=newest&fields[]=title&fields[]=signing_date&fields[]=executive_order_number";
+    const res = await fetch(url);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const results = data.results || [];
+    if (!results.length) { el.innerHTML = `<div class="vt-error">No recent executive orders found.</div>`; return; }
+    el.innerHTML = `
+        <div class="vt-live-header">Recent Executive Orders <span class="live-badge"><span class="live-dot"></span>Live</span></div>
+        <div class="vt-activity-list">
+            ${results.map(eo => `
+            <div class="vt-activity-card">
+                <div class="vt-activity-top">
+                    <span class="vt-activity-type">EO ${eo.executive_order_number || "—"}</span>
+                    <span class="vt-activity-date">${formatDate(eo.signing_date)}</span>
+                </div>
+                <div class="vt-activity-title">${eo.title}</div>
+            </div>`).join("")}
+        </div>`;
+}
+
+async function fetchCongressVotes(c, el) {
+    if (PROPUBLICA_KEY === "YOUR_PROPUBLICA_KEY") {
+        el.innerHTML = `<div class="vt-key-needed">Live vote tracking requires a free ProPublica Congress API key. <a href="https://www.propublica.org/datastore/api/propublica-congress-api" target="_blank">Get one here →</a></div>`;
+        return;
+    }
+    const res = await fetch(`https://api.propublica.org/congress/v1/members/${c.bioguideId}/votes.json`, {
+        headers: { "X-API-Key": PROPUBLICA_KEY }
+    });
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const votes = (data.results[0]?.votes || []).slice(0, 6);
+    if (!votes.length) { el.innerHTML = `<div class="vt-error">No recent votes found.</div>`; return; }
+    el.innerHTML = `
+        <div class="vt-live-header">Recent Votes <span class="live-badge"><span class="live-dot"></span>Live</span></div>
+        <div class="vt-activity-list">
+            ${votes.map(v => `
+            <div class="vt-activity-card">
+                <div class="vt-activity-top">
+                    <span class="vote-badge vote-${v.position === "Yes" ? "yes" : "no"}">${v.position}</span>
+                    <span class="vt-activity-date">${formatDate(v.date)}</span>
+                </div>
+                <div class="vt-activity-title">${v.description}</div>
+            </div>`).join("")}
+        </div>`;
 }
 
 // ── Share / deep-link ────────────────────────────────────
