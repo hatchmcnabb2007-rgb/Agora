@@ -87,6 +87,9 @@
         .profile-hero-top { display: flex; justify-content: space-between; align-items: flex-start; }
         .share-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #9CA3AF; cursor: pointer; background: none; border: 1px solid rgba(255,255,255,.15); border-radius: 6px; font-family: 'Inter', sans-serif; padding: 5px 12px; transition: color .15s, border-color .15s; }
         .share-btn:hover { color: white; border-color: rgba(255,255,255,.4); }
+        .compare-profile-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #9CA3AF; cursor: pointer; background: none; border: 1px solid rgba(255,255,255,.15); border-radius: 6px; font-family: 'Inter', sans-serif; padding: 5px 12px; transition: all .15s; }
+        .compare-profile-btn:hover { color: white; border-color: rgba(255,255,255,.4); }
+        .compare-profile-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
         .share-toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1F2937; color: #D1FAE5; font-size: 13px; font-family: 'Inter', sans-serif; padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(52,211,153,.3); opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; z-index: 9999; white-space: nowrap; }
         .share-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
         .profile-hero-content { display: flex; align-items: flex-start; gap: 22px; }
@@ -1138,7 +1141,10 @@
     <div class="profile-hero">
         <div class="profile-hero-top">
             <button class="back-btn" onclick="showHome()">← Back to search</button>
-            <button class="share-btn" onclick="shareProfile()" id="share-btn">⎘ Share</button>
+            <div style="display:flex;gap:8px">
+                <button class="compare-profile-btn" onclick="toggleCompareFromProfile()" id="compare-profile-btn">+ Compare</button>
+                <button class="share-btn" onclick="shareProfile()" id="share-btn">⎘ Share</button>
+            </div>
         </div>
         <div class="profile-hero-content">
             <div class="avatar avatar-lg" id="p-photo"></div>
@@ -1233,6 +1239,7 @@
 </div>
 
 <div class="map-tooltip" id="map-tooltip"><div id="tt-name"></div><div class="tt-count" id="tt-count"></div></div>
+<div class="share-toast" id="share-toast">Link copied to clipboard</div>
 
 <script>
 const CATEGORIES = [
@@ -4133,10 +4140,11 @@ function renderFinance(c, cycleIndex) {
 // ── Profile renderer ─────────────────────────────────────
 let currentCandidate = null;
 
-function showProfile(id) {
+function showProfile(id, pushState = true) {
     const c = candidates.find(x => x.id === id);
     if (!c) return;
     currentCandidate = c;
+    if (pushState) navigate(id);
 
     const photoEl = document.getElementById("p-photo");
     photoEl.innerHTML = c.photo
@@ -4181,16 +4189,17 @@ function showProfile(id) {
     document.getElementById("compare-view").style.display = "none";
     document.getElementById("profile-view").style.display = "block";
     window.scrollTo(0, 0);
-    // reset active nav item then start spy
     document.querySelectorAll(".nav-item").forEach((n, i) => n.classList.toggle("active", i === 0));
     setTimeout(initScrollSpy, 100);
     fetchFECData(c);
+    syncCompareProfileBtn();
 }
 
-function showHome() {
+function showHome(pushState = true) {
     document.getElementById("home-view").style.display = "flex";
     document.getElementById("profile-view").style.display = "none";
     document.getElementById("compare-view").style.display = "none";
+    if (pushState) navigate(null);
 }
 
 // ── Compare logic ────────────────────────────────────────
@@ -4686,7 +4695,58 @@ function initScrollSpy() {
     });
 }
 
+// ── Share / deep-link ────────────────────────────────────
+function shareProfile() {
+    if (!currentCandidate) return;
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("id", currentCandidate.id);
+    navigator.clipboard.writeText(url.toString()).then(() => {
+        const toast = document.getElementById("share-toast");
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2200);
+    });
+}
+
+// ── URL routing ──────────────────────────────────────────
+function navigate(id) {
+    history.pushState({ id }, "", id ? `?id=${id}` : window.location.pathname);
+}
+
+window.addEventListener("popstate", e => {
+    const id = e.state && e.state.id;
+    if (id) showProfile(id, false);
+    else showHome(false);
+});
+
+// ── Compare from profile ─────────────────────────────────
+function toggleCompareFromProfile() {
+    if (!currentCandidate) return;
+    const id = currentCandidate.id;
+    if (selectedToCompare.has(id)) {
+        selectedToCompare.delete(id);
+    } else {
+        if (selectedToCompare.size < 2) selectedToCompare.add(id);
+    }
+    updateCompareUI();
+    syncCompareProfileBtn();
+}
+
+function syncCompareProfileBtn() {
+    const btn = document.getElementById("compare-profile-btn");
+    if (!btn || !currentCandidate) return;
+    const on = selectedToCompare.has(currentCandidate.id);
+    btn.textContent = on ? "✓ In Compare" : "+ Compare";
+    btn.classList.toggle("selected", on);
+}
+
 renderFeatured();
+
+// Navigate to profile if URL has ?id= param on load
+(function () {
+    const id = new URLSearchParams(window.location.search).get("id");
+    if (id) showProfile(id, false);
+})();
 </script>
 </body>
 </html>
