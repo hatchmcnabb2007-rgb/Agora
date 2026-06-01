@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1080px; height: 1080px; overflow: hidden; background: #0D0D0D; }
+
+    .frame {
+      width: 1080px;
+      height: 1080px;
+      background: #0D0D0D;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 88px 88px 72px 88px;
+    }
+
+    .gold-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #C9A84C, #E8CC7A, #C9A84C);
+    }
+
+    .label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 12px;
+    }
+
+    .topic-tag {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 42px;
+      color: #F8F6F2;
+      font-weight: normal;
+      margin-bottom: 52px;
+    }
+
+    .split {
+      display: flex;
+      gap: 0;
+      flex: 1;
+    }
+
+    .side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-right: 48px;
+    }
+
+    .side.right {
+      padding-right: 0;
+      padding-left: 48px;
+      border-left: 1px solid #222;
+    }
+
+    .party-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .party-label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .candidate-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 30px;
+      color: #F8F6F2;
+      font-weight: normal;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .state-role {
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: #444;
+      letter-spacing: 0.05em;
+      margin-bottom: 40px;
+    }
+
+    .stance-headline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+      color: #C9A84C;
+      font-weight: normal;
+      margin-bottom: 16px;
+    }
+
+    .stance-detail {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      color: #777;
+      line-height: 1.65;
+    }
+
+    .divider-h {
+      height: 1px;
+      background: #1a1a1a;
+      margin: 40px 0;
+    }
+
+    .key-vote {
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #3a3a3a;
+      margin-bottom: 6px;
+    }
+
+    .vote-text {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .tagline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 19px;
+      color: #F8F6F2;
+      font-weight: normal;
+      line-height: 1.5;
+      margin-top: 40px;
+      margin-bottom: 44px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .handle {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      color: #3a3a3a;
+      letter-spacing: 0.05em;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #C9A84C;
+      letter-spacing: 0.18em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="gold-bar"></div>
+    <div class="label">Issue Comparison</div>
+    <div class="topic-tag">Healthcare</div>
+
+    <div class="split">
+      <div class="side">
+        <div class="party-label">
+          <span class="party-dot" style="background:#4466CC;"></span>
+          Independent
+        </div>
+        <div class="candidate-name">Bernie<br>Sanders</div>
+        <div class="state-role">U.S. Senator · Vermont</div>
+
+        <div class="stance-headline">Medicare for All</div>
+        <div class="stance-detail">
+          Supports a federal single-payer system that would replace private insurance. Has introduced the Medicare for All Act in every Senate session since 2013.
+        </div>
+
+        <div class="divider-h"></div>
+        <div class="key-vote">Key Vote</div>
+        <div class="vote-text">Co-sponsored Medicare for All Act of 2022 — federal single-payer coverage for all Americans</div>
+      </div>
+
+      <div class="side right">
+        <div class="party-label">
+          <span class="party-dot" style="background:#CC3333;"></span>
+          Republican
+        </div>
+        <div class="candidate-name">Mitch<br>McConnell</div>
+        <div class="state-role">U.S. Senator · Kentucky</div>
+
+        <div class="stance-headline">Opposed to Expansion</div>
+        <div class="stance-detail">
+          Has led efforts to repeal the Affordable Care Act multiple times. Opposes federal mandates and favors returning healthcare authority to states.
+        </div>
+
+        <div class="divider-h"></div>
+        <div class="key-vote">Key Vote</div>
+        <div class="vote-text">Voted YES on the 2017 ACA repeal effort (failed 49–51 in Senate)</div>
+      </div>
+    </div>
+
+    <div class="tagline">Same issue. Different votes. See where yours stands.</div>
+
+    <div class="footer">
+      <div class="handle">@AgoraCivicEngagement</div>
+      <div class="wordmark">AGORA</div>
+    </div>
+  </div>
+</body>
+</html>

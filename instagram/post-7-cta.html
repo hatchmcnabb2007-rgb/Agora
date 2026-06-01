@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1080px; height: 1080px; overflow: hidden; background: #0D0D0D; }
+
+    .frame {
+      width: 1080px;
+      height: 1080px;
+      background: #0D0D0D;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 88px 88px 72px 88px;
+    }
+
+    .gold-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #C9A84C, #E8CC7A, #C9A84C);
+    }
+
+    .label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 52px;
+    }
+
+    .headline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 88px;
+      line-height: 1.02;
+      color: #F8F6F2;
+      font-weight: normal;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .list {
+      margin-bottom: 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .arrow {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #C9A84C;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .item-text {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 19px;
+      color: #777;
+      line-height: 1.4;
+    }
+
+    .cta-bar {
+      background: #C9A84C;
+      padding: 22px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .cta-text {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+      color: #0D0D0D;
+      font-weight: normal;
+    }
+
+    .cta-handle {
+      font-family: system-ui, sans-serif;
+      font-size: 16px;
+      color: #0D0D0D;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .tagline {
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: #333;
+      letter-spacing: 0.06em;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #C9A84C;
+      letter-spacing: 0.18em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="gold-bar"></div>
+    <div class="label">Follow Along</div>
+
+    <div class="headline">Weekly<br>candidate<br>breakdowns.</div>
+
+    <div class="list">
+      <div class="list-item">
+        <div class="arrow">→</div>
+        <div class="item-text">Campaign finance deep dives — who's funding whom</div>
+      </div>
+      <div class="list-item">
+        <div class="arrow">→</div>
+        <div class="item-text">Issue stance comparisons — side by side</div>
+      </div>
+      <div class="list-item">
+        <div class="arrow">→</div>
+        <div class="item-text">Voting record spotlights — what they actually did</div>
+      </div>
+    </div>
+
+    <div class="cta-bar">
+      <div class="cta-text">Nonpartisan. Free. Always.</div>
+      <div class="cta-handle">@AgoraCivicEngagement</div>
+    </div>
+
+    <div class="footer">
+      <div class="tagline">New content every week.</div>
+      <div class="wordmark">AGORA</div>
+    </div>
+  </div>
+</body>
+</html>

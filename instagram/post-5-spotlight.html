@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1080px; height: 1080px; overflow: hidden; background: #0D0D0D; }
+
+    .frame {
+      width: 1080px;
+      height: 1080px;
+      background: #0D0D0D;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 88px 88px 72px 88px;
+    }
+
+    .gold-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #C9A84C, #E8CC7A, #C9A84C);
+    }
+
+    .label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 44px;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 52px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 3px;
+      background: #1a1a1a;
+      border: 1px solid #222;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, serif;
+      font-size: 40px;
+      color: #C9A84C;
+    }
+
+    .name-block {}
+
+    .candidate-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 54px;
+      color: #F8F6F2;
+      font-weight: normal;
+      line-height: 1.0;
+      margin-bottom: 10px;
+    }
+
+    .role {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      color: #555;
+      letter-spacing: 0.06em;
+    }
+
+    .section-label {
+      font-family: system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 16px;
+    }
+
+    .stances {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 44px;
+      flex: 1;
+    }
+
+    .stance-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .issue-name {
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      width: 180px;
+      flex-shrink: 0;
+    }
+
+    .stance-badge {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      color: #F8F6F2;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1a1a1a;
+      margin-bottom: 36px;
+    }
+
+    .finance-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    .fin-stat {
+      flex: 1;
+      padding-right: 40px;
+      border-right: 1px solid #1a1a1a;
+      margin-right: 40px;
+    }
+
+    .fin-stat:last-child {
+      border-right: none;
+      padding-right: 0;
+      margin-right: 0;
+    }
+
+    .fin-number {
+      font-family: Georgia, serif;
+      font-size: 38px;
+      color: #F8F6F2;
+      font-weight: normal;
+    }
+
+    .fin-label {
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      color: #444;
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .handle {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      color: #3a3a3a;
+      letter-spacing: 0.05em;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #C9A84C;
+      letter-spacing: 0.18em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="gold-bar"></div>
+    <div class="label">Candidate Spotlight</div>
+
+    <div class="header-row">
+      <div class="avatar">BS</div>
+      <div class="name-block">
+        <div class="candidate-name">Bernie<br>Sanders</div>
+        <div class="role">U.S. Senator · Vermont · Independent</div>
+      </div>
+    </div>
+
+    <div class="section-label">Issue Stances</div>
+    <div class="stances">
+      <div class="stance-row">
+        <div class="issue-name">Healthcare</div>
+        <div class="stance-badge">Medicare for All — federal single-payer</div>
+      </div>
+      <div class="stance-row">
+        <div class="issue-name">Climate</div>
+        <div class="stance-badge">Supports Green New Deal</div>
+      </div>
+      <div class="stance-row">
+        <div class="issue-name">Economy</div>
+        <div class="stance-badge">Wealth tax on billionaires</div>
+      </div>
+      <div class="stance-row">
+        <div class="issue-name">Education</div>
+        <div class="stance-badge">Free public college, cancel student debt</div>
+      </div>
+      <div class="stance-row">
+        <div class="issue-name">Campaign Finance</div>
+        <div class="stance-badge">No PAC money — small donors only</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label" style="margin-bottom:24px;">2020 Presidential Campaign Finance</div>
+    <div class="finance-row">
+      <div class="fin-stat">
+        <div class="fin-number">$211M</div>
+        <div class="fin-label">Total raised</div>
+      </div>
+      <div class="fin-stat">
+        <div class="fin-number">~$18</div>
+        <div class="fin-label">Average donation</div>
+      </div>
+      <div class="fin-stat">
+        <div class="fin-number">$0</div>
+        <div class="fin-label">Corporate PAC money</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="handle">@AgoraCivicEngagement</div>
+      <div class="wordmark">AGORA</div>
+    </div>
+  </div>
+</body>
+</html>

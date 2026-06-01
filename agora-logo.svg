@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <rect width="500" height="500" fill="#1F2937"/>
+  <text
+    x="250"
+    y="295"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="100"
+    font-weight="700"
+    letter-spacing="3">
+    <tspan fill="#ffffff">AG</tspan><tspan fill="#D4A853">ORA</tspan>
+  </text>
+  <text
+    x="250"
+    y="335"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="16"
+    letter-spacing="7"
+    fill="#9CA3AF">KNOW YOUR CANDIDATES</text>
+</svg>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1080px; height: 1080px; overflow: hidden; background: #0D0D0D; }
+
+    .frame {
+      width: 1080px;
+      height: 1080px;
+      background: #0D0D0D;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 88px 88px 72px 88px;
+    }
+
+    .gold-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #C9A84C, #E8CC7A, #C9A84C);
+    }
+
+    .label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 52px;
+    }
+
+    .headline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 72px;
+      line-height: 1.05;
+      color: #F8F6F2;
+      font-weight: normal;
+      margin-bottom: 44px;
+    }
+
+    .body-text {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 26px;
+      color: #888;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .em {
+      color: #F8F6F2;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1a1a1a;
+      margin: 44px 0;
+    }
+
+    .pills {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .pill {
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: #555;
+      border: 1px solid #1e1e1e;
+      padding: 8px 18px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .handle {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      color: #3a3a3a;
+      letter-spacing: 0.05em;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #C9A84C;
+      letter-spacing: 0.18em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="gold-bar"></div>
+    <div class="label">Behind the Build</div>
+
+    <div class="headline">Built by a<br>19-year-old<br>from Tennessee.</div>
+
+    <div class="body-text">
+      No VC funding. No political agenda.<br>
+      Just a voter who got tired of not knowing<br>
+      <span class="em">who was funding his politicians.</span>
+      <br><br>
+      Agora is free.<br>
+      Always will be.
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pills">
+      <div class="pill">Not partisan</div>
+      <div class="pill">Not for profit</div>
+      <div class="pill">Built in public</div>
+    </div>
+
+    <div class="footer">
+      <div class="handle">@AgoraCivicEngagement</div>
+      <div class="wordmark">AGORA</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1080px; height: 1080px; overflow: hidden; background: #0D0D0D; }
+
+    .frame {
+      width: 1080px;
+      height: 1080px;
+      background: #0D0D0D;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 88px 88px 72px 88px;
+    }
+
+    .gold-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #C9A84C, #E8CC7A, #C9A84C);
+    }
+
+    .label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 48px;
+    }
+
+    .big-number {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 120px;
+      line-height: 1.0;
+      color: #C9A84C;
+      font-weight: normal;
+    }
+
+    .big-sub {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 36px;
+      color: #F8F6F2;
+      font-weight: normal;
+      margin-top: 8px;
+      margin-bottom: 56px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #222;
+      margin-bottom: 48px;
+    }
+
+    .split {
+      display: flex;
+      gap: 0;
+      flex: 1;
+      margin-bottom: 48px;
+    }
+
+    .side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .candidate-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      color: #F8F6F2;
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+
+    .amount {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 52px;
+      color: #F8F6F2;
+      font-weight: normal;
+      line-height: 1.0;
+    }
+
+    .cycle {
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: #444;
+      margin-top: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .vert-divider {
+      width: 1px;
+      background: #222;
+      margin: 0 48px;
+      align-self: stretch;
+    }
+
+    .tagline {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 17px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 48px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .handle {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      color: #3a3a3a;
+      letter-spacing: 0.05em;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #C9A84C;
+      letter-spacing: 0.18em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="gold-bar"></div>
+    <div class="label">Follow the Money</div>
+
+    <div class="big-number">$1.83B</div>
+    <div class="big-sub">raised in a single election.</div>
+
+    <div class="divider"></div>
+
+    <div class="split">
+      <div class="side">
+        <div class="side-label">Candidate</div>
+        <div class="candidate-name">Donald Trump</div>
+        <div class="amount">$774M</div>
+        <div class="cycle">2020 Presidential</div>
+      </div>
+      <div class="vert-divider"></div>
+      <div class="side">
+        <div class="side-label">Candidate</div>
+        <div class="candidate-name">Joe Biden</div>
+        <div class="amount">$1.06B</div>
+        <div class="cycle">2020 Presidential</div>
+      </div>
+    </div>
+
+    <div class="tagline">
+      Both numbers are real. Both are on Agora.<br>
+      We don't pick sides — we show receipts.
+    </div>
+
+    <div class="footer">
+      <div class="handle">@AgoraCivicEngagement</div>
+      <div class="wordmark">AGORA</div>
+    </div>
+  </div>
+</body>
+</html>

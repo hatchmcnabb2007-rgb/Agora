@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1080px; height: 1080px; overflow: hidden; background: #0D0D0D; }
+
+    .frame {
+      width: 1080px;
+      height: 1080px;
+      background: #0D0D0D;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 88px 88px 72px 88px;
+    }
+
+    .gold-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #C9A84C, #E8CC7A, #C9A84C);
+    }
+
+    .label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 52px;
+    }
+
+    .headline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 80px;
+      line-height: 1.05;
+      color: #F8F6F2;
+      font-weight: normal;
+      flex: 1;
+    }
+
+    .source-block {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-left: 3px solid #C9A84C;
+      padding: 28px 32px;
+      margin-bottom: 44px;
+    }
+
+    .source-label {
+      font-family: system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 10px;
+    }
+
+    .source-text {
+      font-family: system-ui, sans-serif;
+      font-size: 16px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 52px;
+    }
+
+    .stat {
+      flex: 1;
+      border-right: 1px solid #1a1a1a;
+      padding-right: 40px;
+      margin-right: 40px;
+    }
+
+    .stat:last-child {
+      border-right: none;
+      padding-right: 0;
+      margin-right: 0;
+    }
+
+    .stat-number {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 48px;
+      color: #F8F6F2;
+      font-weight: normal;
+      line-height: 1.0;
+    }
+
+    .stat-desc {
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: #444;
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .handle {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      color: #3a3a3a;
+      letter-spacing: 0.05em;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #C9A84C;
+      letter-spacing: 0.18em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="gold-bar"></div>
+    <div class="label">Real Data</div>
+
+    <div class="headline">
+      Real numbers.<br>Not estimates.
+    </div>
+
+    <div class="source-block" style="margin-top: 36px;">
+      <div class="source-label">Data Source</div>
+      <div class="source-text">
+        Agora pulls live campaign finance directly from the FEC — the Federal Election Commission, the government agency that tracks every dollar raised and spent in American federal politics.
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-number">86</div>
+        <div class="stat-desc">Politicians tracked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">11</div>
+        <div class="stat-desc">Issue stances per candidate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">Live</div>
+        <div class="stat-desc">FEC finance data</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="handle">@AgoraCivicEngagement</div>
+      <div class="wordmark">AGORA</div>
+    </div>
+  </div>
+</body>
+</html>

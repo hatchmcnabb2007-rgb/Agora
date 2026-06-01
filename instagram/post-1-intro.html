@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1080px; height: 1080px; overflow: hidden; background: #0D0D0D; }
+
+    .frame {
+      width: 1080px;
+      height: 1080px;
+      background: #0D0D0D;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 88px 88px 72px 88px;
+    }
+
+    .gold-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #C9A84C, #E8CC7A, #C9A84C);
+    }
+
+    .label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 52px;
+    }
+
+    .headline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 96px;
+      line-height: 1.02;
+      color: #F8F6F2;
+      font-weight: normal;
+      flex: 1;
+    }
+
+    .sub {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 21px;
+      color: #777;
+      line-height: 1.6;
+      margin-bottom: 52px;
+      letter-spacing: 0.01em;
+    }
+
+    .chips {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    .chip {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: #C9A84C;
+      border: 1px solid #3a3020;
+      background: #181308;
+      padding: 10px 22px;
+      border-radius: 3px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .handle {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      color: #3a3a3a;
+      letter-spacing: 0.05em;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #C9A84C;
+      letter-spacing: 0.18em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="gold-bar"></div>
+    <div class="label">Introducing Agora</div>
+    <div class="headline">Know your<br>candidates.</div>
+    <div class="sub" style="margin-top: 36px;">
+      Campaign finance. Voting records.<br>
+      Platform breakdowns. All in one place.<br>
+      No spin — just data.
+    </div>
+    <div class="chips">
+      <div class="chip">86 Profiles</div>
+      <div class="chip">Live FEC Data</div>
+      <div class="chip">Nonpartisan</div>
+      <div class="chip">Free</div>
+    </div>
+    <div class="footer">
+      <div class="handle">@AgoraCivicEngagement</div>
+      <div class="wordmark">AGORA</div>
+    </div>
+  </div>
+</body>
+</html>
