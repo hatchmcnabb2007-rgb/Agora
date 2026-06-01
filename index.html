@@ -1549,6 +1549,42 @@
             <button class="party-chip" id="chip-R" onclick="toggleParty('R')">Republican</button>
             <button class="party-chip" id="chip-I" onclick="toggleParty('I')">Independent</button>
             <button class="match-chip" id="match-chip" onclick="toggleMatchPanel()">Match My Views</button>
+            <button class="my-reps-chip" id="my-reps-chip" onclick="toggleMyRepsPanel()">My Representatives</button>
+        </div>
+    </div>
+
+    <div class="my-reps-panel" id="my-reps-panel">
+        <div class="my-reps-header">
+            <span class="my-reps-title">Find who represents you in Congress</span>
+            <button class="my-reps-clear" onclick="clearMyReps()">Clear ✕</button>
+        </div>
+        <div class="my-reps-body">
+            <div class="my-reps-row">
+                <span class="my-reps-label">ZIP</span>
+                <input class="my-reps-input" id="zip-input" type="text" inputmode="numeric" placeholder="e.g. 90210" maxlength="5"
+                    onkeydown="if(event.key==='Enter')lookupZip()">
+                <button class="my-reps-btn" id="zip-btn" onclick="lookupZip()">Look Up</button>
+                <span class="my-reps-or">or</span>
+                <select class="my-reps-select" id="state-select">
+                    <option value="">State…</option>
+                    <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+                    <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+                    <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                    <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+                    <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+                    <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                    <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+                    <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+                    <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                    <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+                    <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+                    <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                    <option>Wisconsin</option><option>Wyoming</option>
+                </select>
+                <input class="my-reps-input my-reps-input-sm" id="district-input" type="number" min="1" max="55" placeholder="District #">
+                <button class="my-reps-btn" onclick="applyManualReps()">Apply</button>
+            </div>
+            <div class="my-reps-status" id="my-reps-status"></div>
         </div>
     </div>
 
@@ -12468,8 +12504,167 @@ const MATCH_QUESTIONS = [
     { topic: "Trade & China",                    question: "Should the U.S. impose tariffs to protect American industries from China?" },
 ];
 
+// ── My Representatives ────────────────────────────────────
+let myRepsMode  = false;   // whether the feature is active
+let myState     = null;    // state abbreviation e.g. "NY"
+let myDistrict  = null;    // congressional district number (int) or null = senators only
+
+// Restore saved location from localStorage
+(function() {
+    try {
+        const saved = JSON.parse(localStorage.getItem('agora_myReps') || 'null');
+        if (saved && saved.state) { myState = saved.state; myDistrict = saved.district || null; }
+    } catch(e) {}
+})();
+
+// Parse state abbreviation + district number from the politician's office string.
+// Handles: "U.S. House, NY-14", "Massachusetts 7th District", etc.
+function parseDistrict(office) {
+    if (!office) return null;
+    // Pattern 1: two-letter abbr + dash + number  (most common in new files)
+    const m1 = office.match(/\b([A-Z]{2})-(\d+)\b/);
+    if (m1) return { stateAbbr: m1[1], district: parseInt(m1[2]) };
+    // Pattern 2: full state name + ordinal number + "District"
+    for (const [name, abbr] of Object.entries(STATE_ABBR)) {
+        if (office.includes(name)) {
+            const m2 = office.match(/(\d+)(?:st|nd|rd|th)\s+District/i);
+            if (m2) return { stateAbbr: abbr, district: parseInt(m2[1]) };
+        }
+    }
+    return null;
+}
+
+// Does a given politician represent the user's state/district?
+function representsUser(c) {
+    if (!myRepsMode || !myState) return false;
+    const polState = STATE_ABBR[c.state];
+    if (!polState || polState !== myState) return false;
+    const office = (c.office || '').toLowerCase();
+    const title  = (c.title  || '').toLowerCase();
+    // Senators represent the whole state
+    if (title.includes('senator') || office.includes('senator') || office.includes('u.s. senate')) return true;
+    // Governors represent the whole state too
+    if (title.includes('governor') || office.includes('governor')) return true;
+    // House members: match district
+    if (myDistrict) {
+        const d = parseDistrict(c.office || '');
+        if (d && d.stateAbbr === myState && d.district === myDistrict) return true;
+    }
+    return false;
+}
+
+function toggleMyRepsPanel() {
+    const panel = document.getElementById('my-reps-panel');
+    const chip  = document.getElementById('my-reps-chip');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    chip.classList.toggle('active', !isOpen);
+    // Pre-fill inputs if we have saved data
+    if (!isOpen && myState) {
+        const stateFullName = Object.entries(STATE_ABBR).find(([,a]) => a === myState)?.[0] || '';
+        const sel = document.getElementById('state-select');
+        if (sel) sel.value = stateFullName;
+        const din = document.getElementById('district-input');
+        if (din) din.value = myDistrict || '';
+        setRepsStatus(`Currently set: ${stateFullName}${myDistrict ? ` District ${myDistrict}` : ' (senators only)'}`, 'success');
+    }
+}
+
+function setRepsStatus(msg, type) {
+    const el = document.getElementById('my-reps-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'my-reps-status' + (type ? ' ' + type : '');
+}
+
+async function lookupZip() {
+    const zip = document.getElementById('zip-input').value.trim();
+    if (!/^\d{5}$/.test(zip)) { setRepsStatus('Enter a valid 5-digit ZIP code.', 'error'); return; }
+    const btn = document.getElementById('zip-btn');
+    btn.disabled = true;
+    btn.textContent = '…';
+    setRepsStatus('Looking up your location…', '');
+    try {
+        // Step 1: ZIP → lat/lon via Nominatim (OpenStreetMap, CORS-enabled, free)
+        const nomRes = await fetch(
+            `https://nominatim.openstreetmap.org/search?postalcode=${zip}&country=US&format=json&limit=1`,
+            { headers: { 'Accept-Language': 'en' } }
+        );
+        const nomData = await nomRes.json();
+        if (!nomData.length) throw new Error('ZIP code not found.');
+        const { lat, lon } = nomData[0];
+
+        // Step 2: lat/lon → congressional district via Census geocoder (CORS-enabled, free, no key)
+        const censusRes = await fetch(
+            `https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=${lon}&y=${lat}` +
+            `&benchmark=Public_AR_Current&vintage=Census2020_Current` +
+            `&layers=118th%20Congressional%20Districts&format=json`
+        );
+        const censusData = await censusRes.json();
+        const districts = censusData?.result?.geographies?.['118th Congressional Districts'];
+        if (!districts || !districts.length) throw new Error('Congressional district not found for this ZIP.');
+
+        const stateFips = parseInt(districts[0].STATE);
+        const distNum   = parseInt(districts[0].CD118);
+        const stateAbbr = FIPS[stateFips];
+        if (!stateAbbr) throw new Error('Could not identify state.');
+
+        const stateFullName = Object.entries(STATE_ABBR).find(([,a]) => a === stateAbbr)?.[0] || stateAbbr;
+        setMyReps(stateAbbr, distNum, `Found: ${stateFullName} — District ${distNum}`);
+        // Sync manual inputs
+        const sel = document.getElementById('state-select');
+        if (sel) sel.value = stateFullName;
+        const din = document.getElementById('district-input');
+        if (din) din.value = distNum;
+    } catch(e) {
+        setRepsStatus(e.message || 'Lookup failed. Try entering your state and district manually.', 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Look Up';
+    }
+}
+
+function applyManualReps() {
+    const sel  = document.getElementById('state-select');
+    const din  = document.getElementById('district-input');
+    const stateName = sel ? sel.value : '';
+    if (!stateName) { setRepsStatus('Please select a state.', 'error'); return; }
+    const stateAbbr = STATE_ABBR[stateName];
+    const district  = din && din.value ? parseInt(din.value) : null;
+    setMyReps(stateAbbr, district, `Set: ${stateName}${district ? ` — District ${district}` : ' (senators only)'}`);
+}
+
+function setMyReps(stateAbbr, district, statusMsg) {
+    myState    = stateAbbr;
+    myDistrict = district || null;
+    myRepsMode = true;
+    try { localStorage.setItem('agora_myReps', JSON.stringify({ state: myState, district: myDistrict })); } catch(e) {}
+    document.getElementById('my-reps-chip').classList.add('active');
+    setRepsStatus(statusMsg || '', 'success');
+    activeStateFilter = null; // don't double-filter by state
+    renderFeatured();
+    renderMap();
+}
+
+function clearMyReps() {
+    myRepsMode = false;
+    myState    = null;
+    myDistrict = null;
+    try { localStorage.removeItem('agora_myReps'); } catch(e) {}
+    document.getElementById('my-reps-panel').classList.remove('open');
+    document.getElementById('my-reps-chip').classList.remove('active');
+    document.getElementById('zip-input').value = '';
+    document.getElementById('state-select').value = '';
+    document.getElementById('district-input').value = '';
+    setRepsStatus('', '');
+    renderFeatured();
+    renderMap();
+}
+
+// ── Filters ───────────────────────────────────────────────
 function getFiltered() {
     return candidates.filter(c => {
+        if (myRepsMode) return representsUser(c);
         const abbr = STATE_ABBR[c.state];
         if (activeStateFilter && abbr !== activeStateFilter) return false;
         if (activePartyFilter && c.party !== activePartyFilter) return false;
@@ -12481,8 +12676,14 @@ function updateFilterBar() {
     const bar = document.getElementById('filter-bar');
     const txt = document.getElementById('filter-bar-text');
     const parts = [];
-    if (activeStateFilter) parts.push(`<strong>${STATE_GRID.find(s=>s[0]===activeStateFilter)?.[3] || activeStateFilter}</strong>`);
-    if (activePartyFilter) parts.push(`<strong>${partyLabel(activePartyFilter)}s</strong>`);
+    if (myRepsMode && myState) {
+        const stateFullName = STATE_GRID.find(s => s[0] === myState)?.[3] || myState;
+        const distPart = myDistrict ? ` — District ${myDistrict}` : '';
+        parts.push(`Your representatives: <strong>${stateFullName}${distPart}</strong>`);
+    } else {
+        if (activeStateFilter) parts.push(`<strong>${STATE_GRID.find(s=>s[0]===activeStateFilter)?.[3] || activeStateFilter}</strong>`);
+        if (activePartyFilter) parts.push(`<strong>${partyLabel(activePartyFilter)}s</strong>`);
+    }
     if (parts.length) {
         txt.innerHTML = `Showing ${parts.join(' · ')}`;
         bar.classList.add('visible');
@@ -12490,15 +12691,14 @@ function updateFilterBar() {
         bar.classList.remove('visible');
     }
     const label = document.getElementById('grid-label');
-    label.textContent = parts.length ? 'Filtered Profiles' : 'Featured Profiles';
+    label.textContent = myRepsMode ? 'Your Representatives' : (parts.length ? 'Filtered Profiles' : 'Featured Profiles');
 }
 
 function clearFilters() {
     activeStateFilter = null;
     activePartyFilter = null;
     document.querySelectorAll('.party-chip').forEach(c => c.className = 'party-chip');
-    renderFeatured();
-    renderMap();
+    if (myRepsMode) clearMyReps(); else { renderFeatured(); renderMap(); }
 }
 
 function toggleParty(p) {
