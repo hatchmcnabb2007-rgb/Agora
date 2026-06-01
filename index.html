@@ -7843,14 +7843,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "SOTU Factual Misrepresentation",
-                stance: "mixed",
-                stanceLabel: "SOTU Factual Misrepresentation",
-                description: "The sex trafficking anecdote in her SOTU response was verifiably misleading — presenting a Bush-era incident in Mexico as a Biden border policy failure. The misrepresentation was fact-checked and widely reported.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes ACA; Supports Repeal", description: "Britt opposes the Affordable Care Act and supports market-based healthcare reforms. Co-introduced legislation protecting IVF access after Alabama Supreme Court ruling threatened the practice.", actions: ["Co-introduced IVF Protection Act (2024).", "Backs ACA repeal/replacement."], source: "Senate voting record, 118th Congress" },
+            { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Pro-Fossil Fuels", description: "Britt supports expanded fossil fuel production and opposes major climate legislation, aligning with Alabama's energy interests.", actions: ["Opposed Inflation Reduction Act climate provisions.", "Supports expanded oil and gas drilling."], source: "Senate voting record, 118th Congress" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Border Enforcement", description: "Britt advocates strict border enforcement and voted against the bipartisan border deal after Trump urged its defeat — making it a centerpiece of her viral SOTU response.", actions: ["Voted no on Bipartisan Border Security Act (2024).", "Delivered SOTU response focused on border crime."], source: "Senate roll call 41, February 7, 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion; Supports IVF", description: "Britt strongly opposes abortion and supports Alabama's near-total ban, but broke with the hardest anti-abortion position to support IVF access after the Alabama Supreme Court ruling.", actions: ["Supports Alabama abortion ban.", "Co-introduced IVF Protection Act."], source: "Senate voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Britt opposes most new gun control measures and supports Second Amendment rights, consistent with Alabama's pro-gun constituency.", actions: ["Opposed new gun control legislation.", "Backed by gun rights groups."], source: "Senate voting record" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Pro-Tax Cuts; Pro-Business", description: "Britt supports extending Trump-era tax cuts and pro-business deregulation policies.", actions: ["Supports extending 2017 Trump tax cuts.", "Backs deregulation."], source: "Senate voting record" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Pro-Defense; Skeptical of Ukraine Aid", description: "Britt supports strong defense spending given Alabama's defense industry but voted against the foreign aid supplemental that included Ukraine support.", actions: ["Voted yes on NDAA FY2024.", "Voted no on National Security Supplemental (2024)."], source: "Senate roll call 348 (2023); roll call 61 (2024)" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice; Anti-CRT", description: "Britt supports school choice and parental rights legislation, opposing what she calls 'woke' curricula in schools.", actions: ["Supports school choice expansion.", "Backs parental rights legislation."], source: "Senate voting record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Tough on Crime; Pro-Police", description: "Britt strongly supports law enforcement and tough-on-crime policies, opposing reform efforts she sees as soft on crime.", actions: ["Supports increased police funding.", "Opposes criminal justice reform proposals seen as lenient."], source: "Senate voting record" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "Britt is strongly pro-Israel and has supported military aid to Israel, while opposing the broader foreign aid package.", actions: ["Supports Israel military aid.", "Condemned Hamas after October 7."], source: "Senate voting record" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Britt takes a hawkish stance on China, supporting restrictions on Chinese investment and technology in the U.S.", actions: ["Backs China hawk legislation.", "Supports tariffs on Chinese imports."], source: "Senate voting record" },
         ],
         trump: {
             relationship: "Strong Ally",
@@ -7939,22 +7942,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Credibility After Jan 6 Reversal",
-                stance: "mixed",
-                stanceLabel: "Credibility After Jan 6 Reversal",
-                description: "The recorded denial of his own statements is a defining moment — raises serious questions about honesty that follow his entire political legacy.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Speakership Deals Enabled His Ouster",
-                stance: "mixed",
-                stanceLabel: "Speakership Deals Enabled His Ouster",
-                description: "The concessions he made to get the Speaker job — including the single-member motion to vacate rule — directly caused his removal. Political analysts call it a foreseeable self-inflicted wound.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes ACA", description: "McCarthy consistently opposed the Affordable Care Act throughout his House career and voted to repeal or weaken it multiple times.", actions: ["Voted to repeal ACA multiple times.", "Opposed Medicare drug price negotiation."], source: "House voting record" },
+            { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Pro-Fossil Fuels", description: "McCarthy opposes major climate legislation and supports expanded oil and gas production. Pushed pro-energy 'Lower Energy Costs Act' as Speaker.", actions: ["Led passage of H.R. 1 Lower Energy Costs Act (2023).", "Opposed Inflation Reduction Act."], source: "House roll call vote 182, March 30, 2023" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Border Enforcement", description: "McCarthy made border security a top GOP priority as Speaker and pushed HR 2, the strict Republican border enforcement bill.", actions: ["Led passage of Secure the Border Act (HR 2).", "Pushed Biden impeachment inquiry citing border."], source: "House roll call vote 232, May 11, 2023" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "McCarthy opposes abortion rights and voted for federal abortion restrictions throughout his House career.", actions: ["Voted for federal abortion restrictions.", "Supported state abortion bans."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "McCarthy opposes most new gun control measures and consistently received A ratings from the NRA.", actions: ["Voted against universal background checks.", "Voted against assault weapons ban."], source: "House voting record; NRA ratings" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Pro-Tax Cuts", description: "McCarthy was a key supporter of the 2017 Trump tax cuts and negotiated the 2023 debt ceiling deal as Speaker that included spending caps.", actions: ["Voted for 2017 Tax Cuts and Jobs Act.", "Negotiated Fiscal Responsibility Act debt ceiling deal (2023)."], source: "House roll call vote 259, May 31, 2023" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Pro-Defense; Delayed Ukraine Aid", description: "McCarthy supported strong defense spending but blocked standalone Ukraine aid for months under MAGA pressure — a major Speakership controversy.", actions: ["Voted yes on NDAA.", "Delayed Ukraine aid votes (2023-2024)."], source: "House floor proceedings, 118th Congress" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice; Anti-CRT", description: "McCarthy supports school choice and opposed federal education programs he viewed as overreach.", actions: ["Supported Parents Bill of Rights Act.", "Backs school choice."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Pro-Police; Tough on Crime", description: "McCarthy strongly supports law enforcement and opposed criminal justice reform efforts seen as soft on crime.", actions: ["Backed police funding increases.", "Opposed soft-on-crime measures."], source: "House voting record" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "McCarthy is a strong supporter of Israel and condemned Hamas after October 7. Pushed Israel aid as Speaker.", actions: ["Pushed Israel aid legislation as Speaker.", "Condemned Hamas after October 7."], source: "House floor record" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "McCarthy took a hawkish stance on China, creating the House Select Committee on the CCP as Speaker.", actions: ["Created House Select Committee on the CCP (2023).", "Supports China trade restrictions."], source: "House Resolution, January 2023" },
         ],
         trump: {
             relationship: "Strong Ally (After Initial Criticism)",
@@ -8045,22 +8043,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Corporate Donor Influence",
-                stance: "mixed",
-                stanceLabel: "Corporate Donor Influence",
-                description: "The alignment between her donor base and her votes on drug pricing and financial regulation created serious questions about whose interests she was actually representing.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Did Not Run for Re-election",
-                stance: "mixed",
-                stanceLabel: "Did Not Run for Re-election",
-                description: "She did not run for re-election in 2024 — the seat was won by Democrat Ruben Gallego, who had challenged her from the left. This suggests even Arizona voters were ready to move on.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "mixed", stanceLabel: "Diluted Drug Pricing Reforms", description: "Sinema diluted Build Back Better's drug pricing provisions, ultimately negotiating a narrower Medicare drug price negotiation in the IRA. Pharmaceutical donations raised conflict questions.", actions: ["Diluted BBB drug pricing reforms.", "Voted yes on narrower IRA drug pricing."], source: "Senate roll call vote 325, August 7, 2022" },
+            { topic: "Climate & Energy", stance: "supports", stanceLabel: "Supported IRA Climate Provisions", description: "Sinema voted for the Inflation Reduction Act's climate investments after negotiating changes to other provisions.", actions: ["Voted yes on Inflation Reduction Act (2022).", "Voted yes on Bipartisan Infrastructure Law (2021)."], source: "Senate roll call vote 325, 2022; roll call 369, 2021" },
+            { topic: "Immigration & Border", stance: "supports", stanceLabel: "Bipartisan Border Negotiator", description: "Sinema was a lead negotiator on bipartisan immigration and border bills, including the 2024 deal that Republicans ultimately killed under Trump pressure.", actions: ["Co-led bipartisan 2024 border deal negotiation.", "Voted yes on Bipartisan Border Security Act (2024)."], source: "Senate roll call vote 41, February 7, 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "supports", stanceLabel: "Pro-Choice", description: "Sinema supports abortion rights and voted to codify Roe v. Wade protections at the federal level.", actions: ["Voted yes on Women's Health Protection Act.", "Supports codifying Roe."], source: "Senate voting record" },
+            { topic: "Gun Control", stance: "supports", stanceLabel: "Supported Bipartisan Safer Communities Act", description: "Sinema was a key negotiator of the bipartisan gun safety legislation passed after Uvalde — the most significant federal gun law in decades.", actions: ["Co-negotiated Bipartisan Safer Communities Act (2022).", "Voted yes on background check reforms."], source: "Senate roll call vote 245, June 23, 2022" },
+            { topic: "Tax Policy & Economy", stance: "mixed", stanceLabel: "Protected Carried Interest", description: "Sinema famously demanded preservation of the carried interest loophole during IRA negotiations — protecting hedge funds and private equity. Voted for the law's corporate minimum tax.", actions: ["Demanded carried interest loophole preservation in IRA.", "Voted yes on 15% corporate minimum tax."], source: "Senate negotiations, IRA, August 2022" },
+            { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Mainstream Internationalist", description: "Sinema generally supported strong U.S. international engagement and voted for Ukraine aid and major defense bills.", actions: ["Voted yes on NDAA.", "Voted yes on Ukraine aid supplementals."], source: "Senate voting record" },
+            { topic: "Education", stance: "supports", stanceLabel: "Pell Grant Expansion", description: "Sinema supported expanded Pell Grants and federal education investments.", actions: ["Voted for Pell Grant expansion.", "Supported community college investment."], source: "Senate voting record" },
+            { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Moderate Position", description: "Sinema took moderate positions on criminal justice — supporting some reform while emphasizing law enforcement support.", actions: ["Backed police funding.", "Supported some sentencing reforms."], source: "Senate voting record" },
+            { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Sinema supported Israel aid and condemned Hamas, taking a mainstream pro-Israel position.", actions: ["Voted yes on Israel aid in supplemental.", "Condemned Hamas after October 7."], source: "Senate voting record" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "CHIPS Act Supporter", description: "Sinema voted for the CHIPS and Science Act to compete with China in semiconductor manufacturing.", actions: ["Voted yes on CHIPS Act (2022).", "Supports semiconductor manufacturing."], source: "Senate roll call vote 282, July 27, 2022" },
         ],
         trump: {
             relationship: "Complex — Voted Against Trump on Some Issues, Blocked Democratic Priorities",
@@ -8151,22 +8144,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Family Business Questions",
-                stance: "mixed",
-                stanceLabel: "Family Business Questions",
-                description: "Questions about whether his family's real estate business benefited from state contracts during his governorship — verify if any formal ethics inquiries were initiated.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Senate Role in MAGA Conference",
-                stance: "mixed",
-                stanceLabel: "Senate Role in MAGA Conference",
-                description: "As a Trump critic in a now-MAGA-dominated Senate Republican conference, his ability to influence legislation or committee assignments may be limited.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "mixed", stanceLabel: "Moderate Republican on ACA", description: "As governor, Hogan accepted Maryland's Medicaid expansion and supported maintaining ACA protections — breaking with national Republicans on full repeal.", actions: ["Accepted Medicaid expansion in Maryland.", "Supported state ACA marketplace."], source: "Maryland Governor's office record" },
+            { topic: "Climate & Energy", stance: "supports", stanceLabel: "Pro-Climate Republican", description: "Hogan supported climate action including rejoining the Regional Greenhouse Gas Initiative as Maryland governor.", actions: ["Rejoined Regional Greenhouse Gas Initiative.", "Supported offshore wind development."], source: "Maryland Governor's office record" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Moderate Border Position", description: "Hogan supports border security but rejects hardline anti-immigrant rhetoric, criticizing Trump's family separation policy.", actions: ["Criticized Trump family separation policy.", "Backed deployment of MD National Guard to border."], source: "Public statements, 2018-2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "mixed", stanceLabel: "Pro-Choice; Allowed MD Law to Stand", description: "Hogan personally opposes abortion but did not seek to restrict abortion access in Maryland, allowing existing state protections to remain.", actions: ["Did not restrict abortion access as MD governor.", "Stated support for codifying Roe in 2024 Senate run."], source: "Maryland Governor's office record" },
+            { topic: "Gun Control", stance: "mixed", stanceLabel: "Moderate Gun Position", description: "Hogan signed gun safety legislation as Maryland governor, including red flag laws and bump stock bans.", actions: ["Signed Maryland red flag law (2018).", "Signed bump stock ban."], source: "Maryland Governor's office record" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Tax Cuts; Fiscal Conservative", description: "Hogan cut taxes as Maryland governor, especially for retirees, while maintaining state finances.", actions: ["Cut Maryland retirement income taxes.", "Reduced tolls and fees."], source: "Maryland Governor's office record" },
+            { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Internationalist; Pro-Ukraine", description: "Hogan supports strong international engagement and Ukraine aid, breaking with MAGA isolationism.", actions: ["Publicly backed Ukraine aid.", "Criticized GOP isolationism."], source: "Public statements, 2022-2024" },
+            { topic: "Education", stance: "mixed", stanceLabel: "School Choice; Public Ed Funding", description: "Hogan supported some school choice while maintaining substantial public education funding in Maryland.", actions: ["Increased K-12 funding.", "Supported limited school choice expansion."], source: "Maryland Governor's office record" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Pro-Police; Some Reform", description: "Hogan supported law enforcement while signing some moderate criminal justice reforms in Maryland.", actions: ["Increased police funding.", "Signed some sentencing reform measures."], source: "Maryland Governor's office record" },
+            { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Hogan has expressed strong support for Israel and condemned Hamas.", actions: ["Condemned Hamas after October 7.", "Expressed support for Israel."], source: "Public statements" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "China Competition", description: "Hogan supports U.S. competition with China and economic measures to strengthen American manufacturing.", actions: ["Backed CHIPS Act framework.", "Supports China hawkish trade measures."], source: "Public statements, 2022-2024" },
         ],
         trump: {
             relationship: "Consistent Critic / Opponent",
@@ -8256,22 +8244,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Theater Incident Conduct",
-                stance: "mixed",
-                stanceLabel: "Theater Incident Conduct",
-                description: "The Beetlejuice incident raised questions about her conduct and judgment in public settings.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Public Safety Concerns",
-                stance: "mixed",
-                stanceLabel: "Public Safety Concerns",
-                description: "Her insistence on carrying firearms in the Capitol and filing legal challenges to House security rules during a period of elevated threat has drawn sustained criticism.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Repeal ACA", description: "Boebert opposes the Affordable Care Act and supports its full repeal.", actions: ["Voted to repeal/weaken ACA.", "Opposed Medicare drug price negotiation."], source: "House voting record" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Climate Denial; Pro-Fossil Fuels", description: "Boebert rejects climate science consensus and strongly supports expanded fossil fuel production.", actions: ["Voted for Lower Energy Costs Act (HR 1).", "Opposed Inflation Reduction Act."], source: "House roll call vote 182, March 30, 2023" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Anti-Immigration", description: "Boebert advocates for hardline immigration enforcement, border wall construction, and mass deportation.", actions: ["Voted for Secure the Border Act (HR 2).", "Voted against bipartisan immigration measures."], source: "House voting record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "Boebert strongly opposes abortion rights and supports federal abortion restrictions.", actions: ["Voted for federal abortion restrictions.", "Co-sponsored Life at Conception Act."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Aggressive Gun Rights Advocate", description: "Boebert is a vocal gun rights advocate who owned a firearms-themed restaurant and has insisted on carrying guns in the Capitol.", actions: ["Voted against all major gun control measures.", "Owned Shooters Grill (firearms-themed restaurant)."], source: "House voting record; NRA A rating" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Tax Cuts; Spending Cuts", description: "Boebert supports extending Trump-era tax cuts and aggressive spending cuts.", actions: ["Supports extending 2017 Trump tax cuts.", "Voted against bipartisan spending bills."], source: "House voting record" },
+            { topic: "Foreign Policy & Military", stance: "opposes", stanceLabel: "Isolationist; Anti-Ukraine Aid", description: "Boebert opposes most foreign aid including Ukraine aid, taking an America First isolationist position.", actions: ["Voted no on Ukraine aid supplementals.", "Opposed foreign aid packages."], source: "House roll call vote 156, April 20, 2024" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "Anti-Public Ed; School Choice", description: "Boebert advocates eliminating the Department of Education and aggressive school choice.", actions: ["Co-sponsored legislation to abolish Dept. of Education.", "Backs school choice expansion."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Pro-Police; Tough on Crime", description: "Boebert strongly supports law enforcement and opposes criminal justice reforms she views as soft on crime.", actions: ["Voted to increase police funding.", "Opposed sentencing reform."], source: "House voting record" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "Boebert is strongly pro-Israel and voted for Israel aid while opposing aid to Ukraine.", actions: ["Voted yes on Israel-only aid bill.", "Condemned Hamas after October 7."], source: "House roll call vote 593, November 2, 2023" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Boebert takes a hawkish stance on China and supports tariffs and restrictions on Chinese technology.", actions: ["Supports China trade restrictions.", "Backed TikTok divestiture bill."], source: "House voting record" },
         ],
         trump: {
             relationship: "Strong Ally",
@@ -8363,22 +8346,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Georgia Election Interference Call",
-                stance: "mixed",
-                stanceLabel: "Georgia Election Interference Call",
-                description: "The post-2020 call to GA Secretary of State Raffensperger raised questions about whether Graham pressured a state official to alter election results. Raffensperger testified to this characterization under oath.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Credibility After Trump Flip",
-                stance: "mixed",
-                stanceLabel: "Credibility After Trump Flip",
-                description: "Graham's complete reversal on Trump — after years of calling him dangerous — has led critics across the political spectrum to question the authenticity of his stated positions.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes ACA; Graham-Cassidy", description: "Graham co-sponsored the failed Graham-Cassidy ACA repeal bill in 2017 and consistently opposes the ACA.", actions: ["Co-authored Graham-Cassidy ACA repeal (2017).", "Voted to repeal ACA multiple times."], source: "Senate roll call vote 109, July 28, 2017" },
+            { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Pro-Fossil Fuels", description: "Graham supports expanded fossil fuel production and has worked on nuclear energy, but generally opposes major climate legislation.", actions: ["Opposed Inflation Reduction Act.", "Supports expanded oil and gas drilling."], source: "Senate voting record" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Past Bipartisan Reform; Now Hardliner", description: "Graham was part of past bipartisan immigration reform efforts (Gang of Eight) but has shifted to a hardline border position under Trump.", actions: ["Past Gang of Eight reform (2013).", "Voted no on Bipartisan Border Security Act (2024)."], source: "Senate roll call vote 41, February 7, 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion; 15-Week Ban", description: "Graham introduced a national 15-week abortion ban in 2022 and strongly opposes abortion rights.", actions: ["Introduced national 15-week abortion ban (2022).", "Voted for federal abortion restrictions."], source: "Protecting Pain-Capable Unborn Children from Late-Term Abortions Act, September 2022" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Graham opposes most gun control measures and consistently receives high NRA ratings.", actions: ["Voted no on universal background checks.", "Voted no on assault weapons bans."], source: "Senate voting record; NRA ratings" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Pro-Tax Cuts", description: "Graham voted for the 2017 Trump tax cuts and supports extending them.", actions: ["Voted yes on 2017 Tax Cuts and Jobs Act.", "Supports tax cut extension."], source: "Senate roll call vote 323, December 20, 2017" },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", stanceLabel: "Hawkish Internationalist", description: "Graham is one of the Senate's most hawkish foreign policy voices, strongly supporting Ukraine aid, military intervention, and aggressive defense spending.", actions: ["Strongly backed Ukraine aid supplementals.", "Backs aggressive military posture."], source: "Senate roll call vote 61, February 13, 2024" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice; Anti-CRT", description: "Graham supports school choice and opposes federal education programs he views as overreach.", actions: ["Supports school choice expansion.", "Backs parental rights legislation."], source: "Senate voting record" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Co-Sponsored First Step Act", description: "Graham co-sponsored the First Step Act criminal justice reform in 2018, breaking with some Republicans.", actions: ["Co-sponsored First Step Act (2018).", "Generally supports law enforcement."], source: "Senate roll call vote 271, December 18, 2018" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "Graham is one of the most hawkishly pro-Israel senators, advocating aggressive military support and even strikes on Iran.", actions: ["Strongly backed Israel aid.", "Called for U.S. strikes on Iran."], source: "Senate floor record" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Graham takes a strongly hawkish stance on China, supporting sanctions and trade restrictions.", actions: ["Backs China sanctions.", "Supports TikTok divestiture."], source: "Senate voting record" },
         ],
         trump: {
             relationship: "Former Critic, Now Strong Ally",
@@ -8472,22 +8450,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Political Survival in Trump's GOP",
-                stance: "mixed",
-                stanceLabel: "Political Survival in Trump's GOP",
-                description: "Her moderate independence is increasingly at odds with the direction of the Republican Party. Each election cycle brings a stronger primary challenge from the MAGA wing.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "ANWR Drilling",
-                stance: "mixed",
-                stanceLabel: "ANWR Drilling",
-                description: "Her support for drilling in ANWR puts her at odds with environmental advocates who view the Arctic Refuge as a conservation priority.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "supports", stanceLabel: "Saved ACA in 2017", description: "Murkowski was the deciding vote alongside McCain and Collins to save the Affordable Care Act from repeal in 2017.", actions: ["Voted no on ACA skinny repeal (2017).", "Supports Medicaid expansion in Alaska."], source: "Senate roll call vote 179, July 28, 2017" },
+            { topic: "Climate & Energy", stance: "mixed", stanceLabel: "Pro-Oil; Some Climate Action", description: "Murkowski supports Alaska oil development including ANWR but has supported some bipartisan climate provisions in infrastructure law.", actions: ["Voted yes on Bipartisan Infrastructure Law (2021).", "Supports ANWR drilling and Alaska oil."], source: "Senate roll call vote 369, August 10, 2021" },
+            { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Moderate; Bipartisan Bills", description: "Murkowski has supported bipartisan immigration reform efforts and voted for the 2024 bipartisan border bill.", actions: ["Voted yes on Bipartisan Border Security Act (2024).", "Supports DACA recipients."], source: "Senate roll call vote 41, February 7, 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "supports", stanceLabel: "Pro-Choice Republican", description: "Murkowski is one of the few pro-choice Republicans in the Senate, supporting abortion rights and codifying Roe.", actions: ["Voted to codify Roe protections.", "Supports abortion access."], source: "Senate roll call vote 175, May 11, 2022" },
+            { topic: "Gun Control", stance: "mixed", stanceLabel: "Supported Bipartisan Safer Communities Act", description: "Murkowski voted for the bipartisan gun safety legislation in 2022, breaking with most Senate Republicans.", actions: ["Voted yes on Bipartisan Safer Communities Act (2022).", "Backed background check improvements."], source: "Senate roll call vote 245, June 23, 2022" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Pro-Business; Tax Cuts", description: "Murkowski supports lower taxes and pro-business policies. Voted for the 2017 Trump tax cuts.", actions: ["Voted yes on 2017 Tax Cuts and Jobs Act.", "Supports Alaska economic development."], source: "Senate voting record" },
+            { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Internationalist; Pro-Ukraine", description: "Murkowski strongly supports Ukraine aid and traditional internationalist foreign policy.", actions: ["Voted yes on Ukraine aid supplementals.", "Backed NATO commitments."], source: "Senate roll call vote 61, February 13, 2024" },
+            { topic: "Education", stance: "supports", stanceLabel: "Pro-Public Ed", description: "Murkowski supports public education funding and has worked on rural education and Alaska Native education issues.", actions: ["Backed Pell Grant expansion.", "Supports Alaska Native education programs."], source: "Senate voting record" },
+            { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Some Reform; Pro-Police", description: "Murkowski supported First Step Act criminal justice reform and has worked on missing/murdered indigenous women legislation.", actions: ["Voted yes on First Step Act (2018).", "Backed Savanna's Act on MMIW."], source: "Senate roll call vote 271, December 18, 2018" },
+            { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Murkowski supports Israel and voted for Israel aid in foreign aid packages.", actions: ["Voted yes on foreign aid including Israel (2024).", "Condemned Hamas after October 7."], source: "Senate voting record" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "Pro-CHIPS; China Hawk", description: "Murkowski supports U.S. competitiveness measures including the CHIPS Act and is hawkish on China.", actions: ["Voted yes on CHIPS Act (2022).", "Supports China trade restrictions."], source: "Senate roll call vote 282, July 27, 2022" },
         ],
         trump: {
             relationship: "Opponent",
@@ -8577,14 +8550,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Iraq War Family Legacy",
-                stance: "mixed",
-                stanceLabel: "Iraq War Family Legacy",
-                description: "Her defense of her father's Iraq War record — which led to over 100,000 civilian deaths — is a persistent tension between her stated commitment to rule of law and her family's history of consequential policy failures.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes ACA", description: "Cheney consistently opposed the Affordable Care Act and voted to repeal it throughout her House career.", actions: ["Voted to repeal ACA.", "Opposed expansion of federal healthcare programs."], source: "House voting record" },
+            { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Pro-Fossil Fuels", description: "Cheney supports expanded oil and gas development, consistent with Wyoming's energy industry, and opposes most climate legislation.", actions: ["Opposed Build Back Better climate provisions.", "Supports expanded oil and gas drilling."], source: "House voting record" },
+            { topic: "Immigration & Border", stance: "opposes", stanceLabel: "Border Security Hawk", description: "Cheney supports strict border enforcement while opposing the hardest anti-immigrant rhetoric.", actions: ["Voted for border enforcement bills.", "Supports increased border security funding."], source: "House voting record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "Cheney consistently voted against abortion rights throughout her House career.", actions: ["Voted for federal abortion restrictions.", "Maintained anti-abortion record."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Cheney consistently opposed gun control measures and received high NRA ratings.", actions: ["Voted against universal background checks.", "Voted against assault weapons restrictions."], source: "House voting record; NRA ratings" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Pro-Tax Cuts", description: "Cheney voted for the 2017 Trump tax cuts and traditional Republican fiscal policy.", actions: ["Voted yes on 2017 Tax Cuts and Jobs Act.", "Supports lower corporate taxes."], source: "House roll call vote 699, December 19, 2017" },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", stanceLabel: "Hawkish Internationalist", description: "Cheney is one of the strongest interventionist voices in the GOP, supporting NATO, Ukraine aid, and robust U.S. military engagement abroad.", actions: ["Strongly backed Ukraine aid.", "Supports robust NATO commitments."], source: "Public statements; House voting record" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice", description: "Cheney generally supports school choice and traditional Republican education positions.", actions: ["Supports school choice expansion.", "Backed limits on federal education programs."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Pro-Police; Rule of Law", description: "Cheney emphasized rule of law and supported law enforcement throughout her House career.", actions: ["Voted to support police funding.", "Co-led Jan 6 Committee investigation."], source: "House voting record; Jan 6 Committee" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "Cheney is a strong Israel supporter consistent with her hawkish foreign policy views.", actions: ["Voted for Israel aid.", "Condemned Hamas."], source: "House voting record" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Cheney takes a hawkish stance on China and supports robust U.S. competition with Beijing.", actions: ["Supports China trade restrictions.", "Backs aggressive China policy."], source: "Public statements" },
         ],
         trump: {
             relationship: "Defining Opponent",
@@ -8677,22 +8653,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Conspiracy Theory Background",
-                stance: "mixed",
-                stanceLabel: "Conspiracy Theory Background",
-                description: "Her documented history of promoting QAnon, false flag theories, and calls for political violence before entering Congress raises fundamental questions about fitness for office.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Governing Disruption",
-                stance: "mixed",
-                stanceLabel: "Governing Disruption",
-                description: "Her motion to vacate Speaker Johnson after Ukraine aid, her opposition to most spending bills, and her maximalist tactics have made her a disruptive force even within her own party — preventing government from functioning normally.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Repeal ACA", description: "Greene strongly opposes the Affordable Care Act and supports its full repeal.", actions: ["Voted to repeal/weaken ACA.", "Opposed Medicare drug price negotiation."], source: "House voting record" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Climate Denial; Pro-Fossil Fuels", description: "Greene rejects climate science and has promoted conspiracy theories about climate policy. Strongly supports fossil fuels.", actions: ["Voted for Lower Energy Costs Act (HR 1).", "Opposed Inflation Reduction Act."], source: "House voting record" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Anti-Immigration", description: "Greene advocates for mass deportation, ending birthright citizenship, and the most aggressive border enforcement measures.", actions: ["Voted for Secure the Border Act (HR 2).", "Pushed Mayorkas impeachment over border."], source: "House voting record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "Greene strongly opposes abortion rights and supports a federal abortion ban.", actions: ["Voted for federal abortion restrictions.", "Co-sponsored Life at Conception Act."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Greene is a vocal gun rights advocate who has worn guns as accessories at the Capitol and opposes all major gun control measures.", actions: ["Voted against all major gun control measures.", "Co-sponsored national concealed carry."], source: "House voting record; NRA A rating" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Tax Cuts; Spending Cuts", description: "Greene supports extending Trump-era tax cuts and aggressive spending cuts, often voting against bipartisan funding bills.", actions: ["Supports extending 2017 Trump tax cuts.", "Voted against most bipartisan spending bills."], source: "House voting record" },
+            { topic: "Foreign Policy & Military", stance: "strongly-opposes", stanceLabel: "Isolationist; Anti-Ukraine Aid", description: "Greene strongly opposes Ukraine aid and most foreign engagement, filed motion to vacate Speaker Johnson over Ukraine aid.", actions: ["Filed motion to vacate Speaker Johnson over Ukraine aid (2024).", "Voted no on all Ukraine aid supplementals."], source: "House motion to vacate, May 8, 2024" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "Anti-Public Ed; School Choice", description: "Greene supports abolishing the Department of Education and aggressive school choice.", actions: ["Backed abolishing Dept. of Education.", "Supports voucher expansion."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Pro-Police; Tough on Crime", description: "Greene strongly supports law enforcement and opposes criminal justice reform efforts.", actions: ["Voted for police funding increases.", "Opposed sentencing reform."], source: "House voting record" },
+            { topic: "Israel & Gaza", stance: "strongly-opposes", stanceLabel: "Anti-Foreign Aid; Voted Against Israel Aid", description: "Despite occasional pro-Israel rhetoric, Greene voted against both the standalone $14.3B Israel emergency military aid package (Nov 2023) and the combined national security supplemental that included Israel funding (Apr 2024) — citing opposition to all foreign spending. She has also faced repeated criticism for antisemitic remarks, including promoting the Rothschild-wildfire conspiracy theory and comparing COVID mask mandates to the Holocaust.", actions: ["Voted no on $14.3B standalone Israel emergency aid (Nov 2023).", "Voted no on national security supplemental including Israel aid (Apr 2024).", "Promoted antisemitic Rothschild wildfire conspiracy (2018)."], source: "House roll call votes 556 (Nov 2023) and 150 (Apr 2024)" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Greene takes a strongly hawkish stance on China and supports trade restrictions.", actions: ["Backed TikTok divestiture bill.", "Supports China trade restrictions."], source: "House voting record" },
         ],
         trump: {
             relationship: "Devoted Ally",
@@ -8785,14 +8756,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Arizona Electoral Vulnerability",
-                stance: "mixed",
-                stanceLabel: "Arizona Electoral Vulnerability",
-                description: "Arizona is competitive and Trump won it in 2024. His next re-election will be difficult in the current environment unless conditions shift.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "supports", stanceLabel: "Pro-ACA; Drug Price Negotiation", description: "Kelly supports the Affordable Care Act and voted for the Inflation Reduction Act's Medicare drug price negotiation provisions.", actions: ["Voted yes on Inflation Reduction Act (2022).", "Backed expanded ACA subsidies."], source: "Senate roll call vote 325, August 7, 2022" },
+            { topic: "Climate & Energy", stance: "supports", stanceLabel: "Pro-Climate Action", description: "Kelly supports clean energy investments and voted for the IRA's climate provisions while supporting Arizona's solar industry.", actions: ["Voted yes on Inflation Reduction Act (2022).", "Voted yes on Bipartisan Infrastructure Law (2021)."], source: "Senate roll call vote 325, 2022; roll call 369, 2021" },
+            { topic: "Immigration & Border", stance: "supports", stanceLabel: "Bipartisan Border Negotiator", description: "Kelly was a key negotiator of the 2024 bipartisan border deal that Republicans killed under Trump pressure. Takes a moderate, border-state Democrat position.", actions: ["Co-led bipartisan 2024 border deal negotiation.", "Voted yes on Bipartisan Border Security Act (2024)."], source: "Senate roll call vote 41, February 7, 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Pro-Choice", description: "Kelly strongly supports abortion rights and voted to codify Roe v. Wade.", actions: ["Voted yes on Women's Health Protection Act.", "Supports codifying Roe."], source: "Senate roll call vote 175, May 11, 2022" },
+            { topic: "Gun Control", stance: "strongly-supports", stanceLabel: "Major Gun Safety Advocate", description: "Kelly is a major gun safety advocate — his wife, Gabby Giffords, survived a 2011 mass shooting. He co-founded Giffords PAC.", actions: ["Voted yes on Bipartisan Safer Communities Act (2022).", "Co-founded Giffords gun safety group."], source: "Senate roll call vote 245, June 23, 2022" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Middle-Class Tax Cuts", description: "Kelly supports middle-class tax cuts and voted for the IRA's corporate minimum tax.", actions: ["Voted yes on IRA corporate minimum tax.", "Backs middle-class tax relief."], source: "Senate voting record" },
+            { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Pro-Ukraine; Navy Veteran", description: "Kelly, a former Navy combat pilot and astronaut, strongly supports Ukraine aid and NATO commitments.", actions: ["Voted yes on Ukraine aid supplementals.", "Voted yes on NDAA."], source: "Senate roll call vote 61, February 13, 2024" },
+            { topic: "Education", stance: "supports", stanceLabel: "Pro-Public Ed", description: "Kelly supports federal investment in public education, Pell Grants, and STEM education.", actions: ["Voted for Pell Grant expansion.", "Backed STEM education funding."], source: "Senate voting record" },
+            { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Moderate; Pro-Police", description: "Kelly takes a moderate position supporting law enforcement while backing some reform measures.", actions: ["Backed police funding.", "Supported some sentencing reform."], source: "Senate voting record" },
+            { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel; Backed Aid", description: "Kelly supported Israel aid in the foreign aid supplemental and condemned Hamas, while expressing concern about civilian casualties.", actions: ["Voted yes on foreign aid including Israel (2024).", "Condemned Hamas after October 7."], source: "Senate roll call vote 61, February 13, 2024" },
+            { topic: "Trade & China", stance: "supports", stanceLabel: "CHIPS Act; China Competition", description: "Kelly strongly supported the CHIPS Act and supports U.S. semiconductor competition with China.", actions: ["Voted yes on CHIPS Act (2022).", "Supports China trade restrictions."], source: "Senate roll call vote 282, July 27, 2022" },
         ],
         trump: {
             relationship: "Opponent",
@@ -8879,22 +8853,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "DOJ Sex Trafficking Investigation",
-                stance: "mixed",
-                stanceLabel: "DOJ Sex Trafficking Investigation",
-                description: "A multi-year federal investigation into sex trafficking allegations was the defining ethical cloud of his congressional career. The investigation was closed without charges, but the underlying allegations were extensively reported.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "McCarthy Ouster Institutional Damage",
-                stance: "mixed",
-                stanceLabel: "McCarthy Ouster Institutional Damage",
-                description: "His ouster of McCarthy left the House speakerless for weeks and was widely cited as a reckless act of personal vendetta that damaged institutional function.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Repeal ACA", description: "Gaetz strongly opposes the Affordable Care Act and supports its full repeal.", actions: ["Voted to repeal/weaken ACA.", "Opposed expansion of federal healthcare."], source: "House voting record" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Climate Skeptic; Pro-Fossil Fuels", description: "Gaetz is skeptical of climate science consensus and strongly supports fossil fuel expansion.", actions: ["Voted for Lower Energy Costs Act (HR 1).", "Opposed Inflation Reduction Act."], source: "House voting record" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Anti-Immigration", description: "Gaetz advocates the most hardline border enforcement measures including mass deportation.", actions: ["Voted for Secure the Border Act (HR 2).", "Voted against all bipartisan immigration measures."], source: "House voting record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "Gaetz strongly opposes abortion rights and supports federal abortion restrictions.", actions: ["Voted for federal abortion restrictions.", "Co-sponsored Life at Conception Act."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Gaetz strongly opposes gun control and has an A rating from the NRA.", actions: ["Voted against universal background checks.", "Voted against assault weapons ban."], source: "House voting record; NRA A rating" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Tax Cuts; Aggressive Spending Cuts", description: "Gaetz supports extending Trump-era tax cuts and aggressive spending cuts, voting against most bipartisan spending bills.", actions: ["Supports extending 2017 Trump tax cuts.", "Voted against most spending bills."], source: "House voting record" },
+            { topic: "Foreign Policy & Military", stance: "strongly-opposes", stanceLabel: "Isolationist; Anti-Ukraine Aid", description: "Gaetz strongly opposes Ukraine aid and most foreign engagement, taking an America First isolationist position.", actions: ["Voted no on all Ukraine aid supplementals.", "Led McCarthy ouster partly over Ukraine."], source: "House motion to vacate, October 3, 2023" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "Anti-Public Ed; School Choice", description: "Gaetz supports abolishing the Department of Education and aggressive school choice.", actions: ["Backed abolishing Dept. of Education.", "Supports voucher expansion."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Pro-Police; Some Reform", description: "Gaetz has taken some unusual positions on criminal justice, supporting some reforms while strongly backing police.", actions: ["Backed police funding.", "Has supported some sentencing reforms."], source: "House voting record" },
+            { topic: "Israel & Gaza", stance: "mixed", stanceLabel: "Pro-Israel; Opposed Aid Package", description: "Gaetz supports Israel but voted against the combined foreign aid package due to opposition to Ukraine funding.", actions: ["Voted no on combined foreign aid package (2024).", "Voted for Israel-only aid bill."], source: "House roll call vote 156, April 20, 2024" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Gaetz takes a strongly hawkish stance on China and supports trade restrictions.", actions: ["Backed TikTok divestiture bill.", "Supports China trade restrictions."], source: "House voting record" },
         ],
         trump: {
             relationship: "Strong Ally",
@@ -8986,22 +8955,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Experience and Effectiveness",
-                stance: "mixed",
-                stanceLabel: "Experience and Effectiveness",
-                description: "At 25, he has less professional experience than virtually any member of Congress. Whether activism translates into legislative effectiveness is an open question.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Florida Political Environment",
-                stance: "mixed",
-                stanceLabel: "Florida Political Environment",
-                description: "Representing a blue district in an increasingly red state creates real challenges for re-election and constituent service when the state government is hostile to his agenda.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "strongly-supports", stanceLabel: "Medicare for All", description: "Frost supports Medicare for All and expanded healthcare access.", actions: ["Co-sponsored Medicare for All Act.", "Backed expanded ACA subsidies."], source: "House voting record; Medicare for All Caucus" },
+            { topic: "Climate & Energy", stance: "strongly-supports", stanceLabel: "Green New Deal", description: "Frost is a strong climate action advocate who supports the Green New Deal framework.", actions: ["Co-sponsored Green New Deal resolution.", "Voted yes on climate provisions."], source: "House voting record" },
+            { topic: "Immigration & Border", stance: "strongly-supports", stanceLabel: "Pro-Immigrant; Pro-Reform", description: "Frost supports comprehensive immigration reform, DACA protections, and humane border policies.", actions: ["Supports comprehensive immigration reform.", "Backs DACA protections."], source: "House voting record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", stanceLabel: "Pro-Choice", description: "Frost strongly supports abortion rights and codifying Roe v. Wade protections.", actions: ["Voted yes on Women's Health Protection Act.", "Supports codifying Roe."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-supports", stanceLabel: "Major Gun Safety Advocate", description: "Frost is a former March For Our Lives organizer and a leading gun safety voice in Congress. Gun violence prevention is a signature issue.", actions: ["Helped found first House Office of Gun Violence Prevention push.", "Co-sponsored assault weapons ban."], source: "House voting record" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Progressive Tax Policy", description: "Frost supports progressive tax reform including higher taxes on the wealthy and expanded social spending.", actions: ["Supports tax increases on wealthy.", "Backs expanded social spending."], source: "House voting record" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Progressive Foreign Policy", description: "Frost generally takes progressive foreign policy positions, supporting diplomacy and restraint while backing Ukraine aid.", actions: ["Voted yes on Ukraine aid.", "Backs reduced military intervention."], source: "House voting record" },
+            { topic: "Education", stance: "strongly-supports", stanceLabel: "Free College; Student Debt Relief", description: "Frost strongly supports student debt relief and tuition-free public college.", actions: ["Backs Biden student debt relief.", "Supports tuition-free college."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Reform; Ending Mass Incarceration", description: "Frost strongly supports criminal justice reform and ending mass incarceration.", actions: ["Backs criminal justice reform legislation.", "Supports ending qualified immunity."], source: "House voting record" },
+            { topic: "Israel & Gaza", stance: "critical", stanceLabel: "Critical of Netanyahu; Ceasefire Advocate", description: "Frost has been critical of Netanyahu's government and called for a ceasefire, condemning both Hamas and excessive civilian casualties in Gaza.", actions: ["Called for ceasefire in Gaza.", "Critical of Israeli civilian casualties."], source: "Public statements, 2023-2024" },
+            { topic: "Trade & China", stance: "mixed", stanceLabel: "Progressive Trade Position", description: "Frost generally backs progressive trade positions with worker protections, supports CHIPS Act competition framework.", actions: ["Voted yes on CHIPS Act framework.", "Supports worker protections in trade."], source: "House voting record" },
         ],
         trump: {
             relationship: "Opponent",
@@ -9093,22 +9057,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "2020 Election Denial",
-                stance: "mixed",
-                stanceLabel: "2020 Election Denial",
-                description: "His role in organizing the House amicus brief supporting overturning the 2020 election is the defining concern about his fitness for the Speakership — the nation's third-highest constitutional office.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Governing Capacity in Narrow Majority",
-                stance: "mixed",
-                stanceLabel: "Governing Capacity in Narrow Majority",
-                description: "Managing a fractious five-vote Republican majority has proven extremely difficult — shutdown threats, debt ceiling fights, and the motion to vacate all reflect the challenges of leading a conference he cannot fully control.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Repeal ACA", description: "Johnson strongly opposes the Affordable Care Act and supports its repeal.", actions: ["Voted to repeal/weaken ACA.", "Opposed Medicare drug price negotiation."], source: "House voting record" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Pro-Fossil Fuels", description: "Johnson opposes major climate legislation and supports expanded fossil fuel production.", actions: ["Led passage of Lower Energy Costs Act (HR 1) as Speaker.", "Opposed Inflation Reduction Act."], source: "House voting record" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Border Enforcement", description: "Johnson made border security a top priority as Speaker, pushing HR 2 and rejecting the bipartisan Senate border deal.", actions: ["Rejected bipartisan Senate border deal (2024).", "Backed Mayorkas impeachment."], source: "Public statements, February 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "Johnson is a strong abortion opponent and former Alliance Defending Freedom lawyer who fought abortion rights cases.", actions: ["Voted for federal abortion restrictions.", "Long anti-abortion legal career."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Johnson opposes most gun control measures and has consistently received A ratings from the NRA.", actions: ["Voted against universal background checks.", "Voted against assault weapons ban."], source: "House voting record; NRA ratings" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Pro-Tax Cuts", description: "Johnson supports extending Trump-era tax cuts and traditional fiscal conservatism.", actions: ["Voted yes on 2017 Tax Cuts and Jobs Act.", "Supports extending tax cuts."], source: "House voting record" },
+            { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Delayed Then Allowed Ukraine Aid", description: "Johnson blocked Ukraine aid for months as Speaker before finally allowing a vote in April 2024, surviving a motion to vacate from MTG over it.", actions: ["Delayed then allowed Ukraine aid vote (April 2024).", "Survived motion to vacate (May 2024)."], source: "House roll call vote 156, April 20, 2024" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "School Choice; Anti-CRT", description: "Johnson supports school choice and parental rights legislation, opposing what he sees as ideological curriculum.", actions: ["Backed Parents Bill of Rights Act.", "Supports school choice."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Pro-Police; Tough on Crime", description: "Johnson strongly supports law enforcement and tough-on-crime policies.", actions: ["Backed police funding increases.", "Opposed criminal justice reform seen as lenient."], source: "House voting record" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "Johnson is a strong Israel supporter and pushed Israel aid as Speaker, including the standalone Israel aid bill.", actions: ["Pushed standalone Israel aid bill (Nov 2023).", "Led passage of foreign aid with Israel funding (2024)."], source: "House roll call vote 593, November 2, 2023" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Johnson takes a hawkish stance on China and supports trade restrictions on Chinese imports and technology.", actions: ["Backed TikTok divestiture bill.", "Supports China trade restrictions."], source: "House voting record" },
         ],
         trump: {
             relationship: "Strong Ally",
@@ -9199,14 +9158,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Jan 6 Text Contradictions",
-                stance: "mixed",
-                stanceLabel: "Jan 6 Text Contradictions",
-                description: "The text messages to Meadows revealed a gap between his public statements about the 2020 election and his private actions — raising questions about his stated principles of constitutional integrity.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Repeal ACA", description: "Lee strongly opposes the Affordable Care Act and has consistently voted to repeal it.", actions: ["Voted to repeal ACA multiple times.", "Opposed Medicare drug price negotiation."], source: "Senate voting record" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Climate Skeptic; Pro-Fossil Fuels", description: "Lee is skeptical of climate science consensus and strongly supports fossil fuel expansion. Famously mocked the Green New Deal on Senate floor.", actions: ["Mocked Green New Deal on Senate floor with Reagan/dinosaur slides (2019).", "Opposed Inflation Reduction Act."], source: "Senate floor remarks, March 2019" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Border", description: "Lee advocates strict border enforcement and voted against the bipartisan border deal.", actions: ["Voted no on Bipartisan Border Security Act (2024).", "Supports strict enforcement."], source: "Senate roll call vote 41, February 7, 2024" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "Lee strongly opposes abortion rights and supports federal abortion restrictions.", actions: ["Voted for federal abortion restrictions.", "Long anti-abortion record."], source: "Senate voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Lee strongly opposes gun control measures and has high NRA ratings.", actions: ["Voted no on Bipartisan Safer Communities Act (2022).", "Voted against universal background checks."], source: "Senate voting record; NRA ratings" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Libertarian Tax Cuts", description: "Lee is a libertarian-leaning conservative who supports aggressive tax cuts and limited government.", actions: ["Voted yes on 2017 Tax Cuts and Jobs Act.", "Supports balanced budget amendment."], source: "Senate voting record" },
+            { topic: "Foreign Policy & Military", stance: "opposes", stanceLabel: "Anti-Interventionist", description: "Lee takes a non-interventionist position, opposing most Ukraine aid and questioning expansive military commitments.", actions: ["Voted no on Ukraine aid supplementals.", "Opposed war powers expansions."], source: "Senate roll call vote 61, February 13, 2024" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "Anti-Federal Ed; School Choice", description: "Lee supports abolishing or reducing the Department of Education and expanding school choice.", actions: ["Backed limiting Dept. of Education.", "Supports school choice."], source: "Senate voting record" },
+            { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Co-Sponsored First Step Act", description: "Lee was a key Republican backer of the First Step Act criminal justice reform in 2018.", actions: ["Co-sponsored First Step Act (2018).", "Backs some sentencing reforms."], source: "Senate roll call vote 271, December 18, 2018" },
+            { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel; Opposed Foreign Aid Package", description: "Lee supports Israel but voted against the combined foreign aid package due to opposition to Ukraine funding.", actions: ["Voted no on combined foreign aid package (2024).", "Voted for Israel-only aid."], source: "Senate roll call vote 61, February 13, 2024" },
+            { topic: "Trade & China", stance: "opposes", stanceLabel: "Mixed China Position", description: "Lee takes a more skeptical view of tariffs than many Republicans, citing free-market principles, while still opposing China's authoritarianism.", actions: ["Questioned broad tariff regimes.", "Voted yes on China-related restrictions."], source: "Senate voting record" },
         ],
         trump: {
             relationship: "Ally (Evolved from Skeptic)",
@@ -9296,22 +9258,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "LGBTQ+ Record",
-                stance: "mixed",
-                stanceLabel: "LGBTQ+ Record",
-                description: "His RFRA signing and consistent opposition to LGBTQ+ rights remain defining issues for a large portion of the public. His positions are seen by critics as discriminatory; he frames them as religious freedom.",
-                actions: [],
-                source: ""
-            },
-            {
-                topic: "Political Future Uncertain",
-                stance: "mixed",
-                stanceLabel: "Political Future Uncertain",
-                description: "Having burned his bridge with Trump without building a clear alternative coalition, Pence's political future is unclear. He is seen as too anti-Trump for MAGA Republicans and too conservative for independents.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "strongly-opposes", stanceLabel: "Repeal ACA", description: "Pence strongly opposes the Affordable Care Act and supported its full repeal during his vice presidency.", actions: ["Backed ACA repeal as VP.", "Opposed Medicaid expansion as Indiana Governor before relenting."], source: "Trump administration record" },
+            { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Climate Skeptic; Pro-Fossil Fuels", description: "Pence has historically been skeptical of climate change consensus and supported the Trump administration's Paris Agreement withdrawal.", actions: ["Backed Paris Agreement withdrawal.", "Supports expanded fossil fuel production."], source: "Trump administration record" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Border", description: "Pence supports hardline border enforcement consistent with Trump-era policies.", actions: ["Backed border wall construction.", "Supported family separation policy."], source: "Trump administration record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Strongly Anti-Abortion", description: "Pence is one of the most prominent anti-abortion politicians in America and supports a federal abortion ban.", actions: ["Supports federal abortion ban.", "Cast tie-breaking Senate vote on Title X anti-abortion rules."], source: "Trump administration record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Pence strongly opposes gun control measures and has consistently received A ratings from the NRA.", actions: ["Spoke at NRA conventions.", "Opposed gun control measures."], source: "Public speeches and record" },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Pro-Tax Cuts; Supply Side", description: "Pence is a strong supply-side conservative who championed the 2017 Trump tax cuts as VP.", actions: ["Championed 2017 Tax Cuts and Jobs Act.", "Supports extending tax cuts."], source: "Trump administration record" },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", stanceLabel: "Hawkish Internationalist; Pro-Ukraine", description: "Pence supports a hawkish foreign policy and broke with Trump on Ukraine aid, strongly backing continued support.", actions: ["Publicly backed Ukraine aid.", "Criticized Trump's isolationism."], source: "Public statements, 2023-2024" },
+            { topic: "Education", stance: "strongly-opposes", stanceLabel: "School Choice", description: "Pence was a major school choice advocate as Indiana Governor and continued that as VP.", actions: ["Expanded Indiana voucher program.", "Backed school choice as VP."], source: "Indiana Governor's office record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Pro-Police; Tough on Crime", description: "Pence strongly supports law enforcement and tough-on-crime policies.", actions: ["Backed police funding.", "Supported tough-on-crime measures."], source: "Public record" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "Pence is one of the most strongly pro-Israel American politicians, particularly tied to evangelical Christian Zionism.", actions: ["Backed Jerusalem embassy move.", "Strong evangelical Israel supporter."], source: "Public record" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Pence is a major China hawk and gave defining speeches against Chinese Communist Party as VP.", actions: ["Gave Hudson Institute China speech (2018).", "Supports China trade restrictions."], source: "Hudson Institute speech, October 4, 2018" },
         ],
         trump: {
             relationship: "Was Loyal Ally, Became Target",
@@ -9402,14 +9359,17 @@ const candidates = [
             affiliations: { status: "none", dotClass: "affil-dot-none", label: "No Known Affiliation", description: "No documented connection.", source: "" }
         },
         issues: [
-            {
-                topic: "Signalgate Judgment",
-                stance: "mixed",
-                stanceLabel: "Signalgate Judgment",
-                description: "The accidental journalist addition to a sensitive group chat raises questions about operational security practices at the NSA level — the standard for classified communications should be much higher.",
-                actions: [],
-                source: ""
-            }
+            { topic: "Healthcare", stance: "opposes", stanceLabel: "Opposes ACA", description: "Waltz opposes the Affordable Care Act and supports market-based healthcare reforms.", actions: ["Voted to repeal/weaken ACA.", "Backed Republican alternatives."], source: "House voting record" },
+            { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Pro-Fossil Fuels", description: "Waltz supports fossil fuel expansion and opposes major climate legislation.", actions: ["Voted for Lower Energy Costs Act (HR 1).", "Opposed Inflation Reduction Act."], source: "House voting record" },
+            { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Hardline Border Enforcement", description: "Waltz advocates strict border enforcement and supports Trump-era immigration policies.", actions: ["Voted for Secure the Border Act (HR 2).", "Backs border wall construction."], source: "House voting record" },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Anti-Abortion", description: "Waltz opposes abortion rights and supports federal abortion restrictions.", actions: ["Voted for federal abortion restrictions.", "Backs anti-abortion legislation."], source: "House voting record" },
+            { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun Rights", description: "Waltz strongly opposes gun control measures and supports Second Amendment rights.", actions: ["Voted against universal background checks.", "Voted against assault weapons restrictions."], source: "House voting record; NRA ratings" },
+            { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Pro-Tax Cuts", description: "Waltz supports extending Trump-era tax cuts and traditional Republican fiscal policy.", actions: ["Supports extending 2017 Trump tax cuts.", "Backs lower corporate taxes."], source: "House voting record" },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", stanceLabel: "Hawkish; Green Beret Veteran", description: "Waltz is a former Green Beret with hawkish foreign policy views. As NSA, he has emphasized China competition and Iran deterrence.", actions: ["Voted yes on NDAA.", "Appointed Trump's National Security Advisor (2025)."], source: "Public record; NSA appointment" },
+            { topic: "Education", stance: "opposes", stanceLabel: "School Choice", description: "Waltz supports school choice and parental rights legislation.", actions: ["Backed Parents Bill of Rights Act.", "Supports school choice expansion."], source: "House voting record" },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", stanceLabel: "Pro-Police", description: "Waltz strongly supports law enforcement and tough-on-crime policies.", actions: ["Backed police funding.", "Opposed soft-on-crime measures."], source: "House voting record" },
+            { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Strongly Pro-Israel", description: "Waltz is a strong Israel supporter and voted for Israel aid.", actions: ["Voted for Israel aid legislation.", "Condemned Hamas after October 7."], source: "House voting record" },
+            { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Hawk", description: "Waltz is one of the strongest China hawks in Congress and chaired the China Task Force.", actions: ["Chaired GOP China Task Force.", "Backs broad China restrictions."], source: "Public record" },
         ],
         trump: {
             relationship: "Strong Ally",
