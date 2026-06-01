@@ -1428,6 +1428,57 @@
             padding: 36px 24px; border-top: 1px solid rgba(255,255,255,.05);
         }
 
+        /* ── Report Modal ── */
+        .report-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,.45); z-index: 200;
+            align-items: center; justify-content: center; padding: 16px;
+        }
+        .report-overlay.open { display: flex; }
+        .report-modal {
+            background: #fff; border-radius: 12px; width: 100%; max-width: 480px;
+            padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.2);
+            max-height: 90vh; overflow-y: auto;
+        }
+        .report-modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .report-modal-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+        .report-modal-close {
+            background: none; border: none; cursor: pointer; font-size: 18px;
+            color: var(--text-muted); padding: 4px; line-height: 1;
+        }
+        .report-modal-close:hover { color: var(--text-primary); }
+        .report-field { margin-bottom: 16px; }
+        .report-label {
+            display: block; font-size: 11px; font-weight: 600; color: var(--text-secondary);
+            margin-bottom: 6px; letter-spacing: .05em; text-transform: uppercase;
+        }
+        .report-input, .report-select, .report-textarea {
+            width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+            border-radius: 8px; font-family: inherit; font-size: 14px;
+            background: var(--bg); color: var(--text-primary); outline: none;
+            transition: border-color .15s;
+        }
+        .report-input:focus, .report-select:focus, .report-textarea:focus { border-color: var(--accent); }
+        .report-input[readonly] { opacity: .55; cursor: default; }
+        .report-textarea { resize: vertical; min-height: 90px; }
+        .report-submit {
+            width: 100%; padding: 12px; background: var(--accent); color: #fff;
+            border: none; border-radius: 8px; font-family: inherit; font-size: 14px;
+            font-weight: 600; cursor: pointer; margin-top: 4px; transition: opacity .15s;
+        }
+        .report-submit:hover { opacity: .85; }
+        .report-footer-note { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 12px; }
+        .profile-report-link {
+            display: block; text-align: center; margin: 28px auto 12px;
+            font-size: 12px; color: var(--text-muted); cursor: pointer;
+            text-decoration: underline; text-decoration-style: dotted;
+            background: none; border: none; font-family: inherit;
+        }
+        .profile-report-link:hover { color: var(--text-secondary); }
+
         /* Landing mobile */
         @media (max-width: 700px) {
             .lp-stats { flex-wrap: wrap; }
@@ -1717,6 +1768,7 @@
             <div class="section-title">Controversies</div>
             <div id="p-concerns"></div>
         </div>
+        <button class="profile-report-link" onclick="openReportModal()">Flag an error or misleading information</button>
     </div>
 </div>
 
@@ -1744,6 +1796,56 @@
 
 <div class="map-tooltip" id="map-tooltip"><div id="tt-name"></div><div class="tt-count" id="tt-count"></div></div>
 <div class="share-toast" id="share-toast">Link copied to clipboard</div>
+
+<!-- REPORT MODAL -->
+<div class="report-overlay" id="report-overlay" onclick="closeReportModal(event)">
+    <div class="report-modal">
+        <div class="report-modal-header">
+            <div class="report-modal-title">Flag an Issue</div>
+            <button class="report-modal-close" onclick="closeReportModal()">✕</button>
+        </div>
+        <div class="report-field">
+            <label class="report-label">Politician</label>
+            <input class="report-input" id="report-politician" type="text" readonly>
+        </div>
+        <div class="report-field">
+            <label class="report-label">Issue Type</label>
+            <select class="report-select" id="report-type">
+                <option value="Incorrect information">Incorrect information</option>
+                <option value="Misleading / biased framing">Misleading / biased framing</option>
+                <option value="Outdated information">Outdated information</option>
+                <option value="Missing information">Missing information</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="report-field">
+            <label class="report-label">Section</label>
+            <select class="report-select" id="report-section">
+                <option value="Career Highlights">Career Highlights</option>
+                <option value="Policy Vision">Policy Vision</option>
+                <option value="Key Positions">Key Positions</option>
+                <option value="Campaign Finance">Campaign Finance</option>
+                <option value="Controversial Issues">Controversial Issues</option>
+                <option value="Vote Tracker">Vote Tracker</option>
+                <option value="Trump Record">Trump Record</option>
+                <option value="Ethics Record">Ethics Record</option>
+                <option value="Epstein Record">Epstein Record</option>
+                <option value="Controversies">Controversies</option>
+                <option value="Other / General">Other / General</option>
+            </select>
+        </div>
+        <div class="report-field">
+            <label class="report-label">Description <span style="color:#DC2626;font-weight:400">*</span></label>
+            <textarea class="report-textarea" id="report-desc" placeholder="What's wrong or misleading? Include sources if you have them."></textarea>
+        </div>
+        <div class="report-field">
+            <label class="report-label">Your Email <span style="opacity:.5;font-weight:400;text-transform:none;letter-spacing:0">(optional — for follow-up)</span></label>
+            <input class="report-input" id="report-email" type="email" placeholder="you@example.com">
+        </div>
+        <button class="report-submit" onclick="submitReport()">Send Report</button>
+        <div class="report-footer-note">Opens your email client with a pre-filled message to the Agora team.</div>
+    </div>
+</div>
 
 <script>
 const CATEGORIES = [
@@ -13220,6 +13322,51 @@ function submitNewsletter(formId, inputId, successId) {
     const success = document.getElementById(successId);
     success.textContent = "You're on the list. We'll be in touch.";
     success.style.display = "block";
+}
+
+// ── Report Modal ──────────────────────────────────────────
+function openReportModal() {
+    const name = (window.currentCandidate && window.currentCandidate.name) ? window.currentCandidate.name : "";
+    document.getElementById("report-politician").value = name;
+    document.getElementById("report-desc").value = "";
+    document.getElementById("report-email").value = "";
+    document.getElementById("report-desc").style.borderColor = "";
+    document.getElementById("report-overlay").classList.add("open");
+}
+
+function closeReportModal(e) {
+    if (e && e.type === "click" && e.target !== document.getElementById("report-overlay")) return;
+    document.getElementById("report-overlay").classList.remove("open");
+}
+
+function submitReport() {
+    const desc = document.getElementById("report-desc").value.trim();
+    if (!desc) {
+        const ta = document.getElementById("report-desc");
+        ta.style.borderColor = "#DC2626";
+        setTimeout(() => ta.style.borderColor = "", 1500);
+        ta.focus();
+        return;
+    }
+    const politician = document.getElementById("report-politician").value;
+    const type       = document.getElementById("report-type").value;
+    const section    = document.getElementById("report-section").value;
+    const email      = document.getElementById("report-email").value.trim();
+
+    const subject = `[Agora Report] ${politician} — ${type}`;
+    const body = [
+        `Politician: ${politician}`,
+        `Issue Type: ${type}`,
+        `Section: ${section}`,
+        ``,
+        `Description:`,
+        desc,
+        ``,
+        `Contact: ${email || "not provided"}`,
+    ].join("\n");
+
+    window.location.href = `mailto:hatchmcnabb2007@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    document.getElementById("report-overlay").classList.remove("open");
 }
 
 // Navigate to profile if URL has ?id= param on load
