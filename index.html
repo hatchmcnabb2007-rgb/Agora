@@ -12912,7 +12912,9 @@ function renderFeatured() {
             const statusLabel = active ? "Active" : "Out of office";
             const align = matchActive ? getAlignment(c) : null;
             let badgeHtml = "";
-            if (align) {
+            if (myRepsMode && representsUser(c)) {
+                badgeHtml = `<div class="reps-you-badge">Represents You</div>`;
+            } else if (align) {
                 const pct = align.matches / align.total;
                 const cls = pct >= 0.6 ? "match-high" : pct >= 0.3 ? "match-mid" : "match-low";
                 badgeHtml = `<div class="match-badge ${cls}">${align.matches} of ${align.total} align</div>`;
@@ -13196,6 +13198,11 @@ function syncCompareProfileBtn() {
     btn.classList.toggle("selected", on);
 }
 
+// Restore My Reps mode if user had it saved
+if (myState) {
+    myRepsMode = true;
+    document.getElementById('my-reps-chip').classList.add('active');
+}
 renderFeatured();
 renderLandingPreview();
 
