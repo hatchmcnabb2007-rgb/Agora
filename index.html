@@ -1489,6 +1489,226 @@
             .lp-features-inner { grid-template-columns: 1fr; }
         }
     </style>
+
+    <style>
+        /* ── Ask Agora Chat Widget ── */
+        #agora-chat-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1F2937;
+            color: #fff;
+            border: none;
+            border-radius: 28px;
+            padding: 12px 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            transition: background 0.15s, transform 0.15s;
+        }
+        #agora-chat-btn:hover { background: #374151; transform: translateY(-1px); }
+        #agora-chat-btn svg { flex-shrink: 0; }
+
+        #agora-chat-panel {
+            position: fixed;
+            bottom: 80px;
+            right: 24px;
+            z-index: 9001;
+            width: 380px;
+            max-height: 540px;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(16px) scale(0.97);
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        #agora-chat-panel.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+
+        .aca-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: #1F2937;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .aca-header-left { display: flex; align-items: center; gap: 10px; }
+        .aca-logo {
+            width: 32px; height: 32px;
+            background: #8B6914;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 16px; font-weight: 700; color: #fff;
+            flex-shrink: 0;
+        }
+        .aca-title { font-family: 'Playfair Display', Georgia, serif; font-size: 15px; font-weight: 700; }
+        .aca-subtitle { font-family: 'Inter', sans-serif; font-size: 11px; color: #9CA3AF; margin-top: 1px; }
+        .aca-close {
+            background: none; border: none; color: #9CA3AF;
+            cursor: pointer; padding: 4px; border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            transition: color 0.1s;
+        }
+        .aca-close:hover { color: #fff; }
+
+        .aca-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scroll-behavior: smooth;
+        }
+
+        .aca-suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 4px 0;
+        }
+        .aca-suggestion-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+        .aca-suggestion {
+            background: #F8F6F2;
+            border: 1px solid #E5E1D8;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #374151;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.1s, border-color 0.1s;
+        }
+        .aca-suggestion:hover { background: #EEE9E0; border-color: #8B6914; }
+
+        .aca-msg {
+            display: flex;
+            flex-direction: column;
+            max-width: 88%;
+        }
+        .aca-msg.user { align-self: flex-end; align-items: flex-end; }
+        .aca-msg.assistant { align-self: flex-start; align-items: flex-start; }
+
+        .aca-bubble {
+            padding: 10px 13px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            line-height: 1.55;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .aca-msg.user .aca-bubble {
+            background: #1F2937;
+            color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+        .aca-msg.assistant .aca-bubble {
+            background: #F8F6F2;
+            color: #1A1A1A;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #E5E1D8;
+        }
+
+        .aca-typing {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 13px;
+            background: #F8F6F2;
+            border: 1px solid #E5E1D8;
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+            width: fit-content;
+        }
+        .aca-dot {
+            width: 6px; height: 6px;
+            background: #9CA3AF;
+            border-radius: 50%;
+            animation: aca-bounce 1.2s infinite;
+        }
+        .aca-dot:nth-child(2) { animation-delay: 0.2s; }
+        .aca-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes aca-bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        .aca-input-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            padding: 12px 14px;
+            border-top: 1px solid #E5E1D8;
+            background: #fff;
+            flex-shrink: 0;
+        }
+        #agora-chat-input {
+            flex: 1;
+            background: #F8F6F2;
+            border: 1px solid #E5E1D8;
+            border-radius: 10px;
+            padding: 9px 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            color: #1A1A1A;
+            resize: none;
+            outline: none;
+            max-height: 100px;
+            overflow-y: auto;
+            line-height: 1.4;
+            transition: border-color 0.15s;
+        }
+        #agora-chat-input:focus { border-color: #8B6914; }
+        #agora-chat-input::placeholder { color: #9CA3AF; }
+        #agora-chat-send {
+            background: #1F2937;
+            border: none;
+            border-radius: 10px;
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.15s;
+        }
+        #agora-chat-send:hover { background: #374151; }
+        #agora-chat-send:disabled { background: #D1D5DB; cursor: default; }
+
+        @media (max-width: 480px) {
+            #agora-chat-panel {
+                width: calc(100vw - 16px);
+                right: 8px;
+                bottom: 72px;
+                max-height: 70vh;
+            }
+            #agora-chat-btn { right: 16px; bottom: 16px; }
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -6348,11 +6568,11 @@ const candidates = [
         initials: "GY",
         photo: "https://upload.wikimedia.org/wikipedia/commons/8/80/Glenn_Youngkin_official_photo.jpg",
         party: "R",
-        title: "Governor of Virginia",
+        title: "Former Governor of Virginia",
         state: "Virginia",
-        office: "Governor of Virginia",
+        office: "Former Governor of Virginia (January 2022 – January 2026)",
         tags: ["Moderate Republican", "Business Conservative", "Anti-CRT", "Virginia"],
-        currentRole: "governor",
+        currentRole: "former",
         keyVotes: [
             { bill: "Executive Order 1 — Education Curriculum Review", vote: "signed", date: "2022-01-15", significance: "Signed on his first day in office, directing the Virginia Board of Education to review and revise curriculum standards to remove 'inherently divisive concepts' (CRT framing). Set the tone for his education agenda.", source: "Executive Order 1, Office of the Governor of Virginia, January 15, 2022" },
             { bill: "Parental Rights in Education Policies", vote: "signed", date: "2022-09-16", significance: "Signed Model Policies requiring schools to notify parents before students can use different pronouns or bathrooms, and requiring parental permission for changes to student records regarding gender identity.", source: "Virginia Department of Education Model Policies, 2022" },
@@ -6362,7 +6582,7 @@ const candidates = [
             { bill: "Virginia Clean Economy Act Repeal Attempts", vote: "vetoed or blocked", date: "2022-2023", significance: "Attempted to slow implementation of the Virginia Clean Economy Act's clean energy mandates but was constrained by existing law; rolled back some Northam-era clean energy policies where executive authority allowed.", source: "Governor's Office actions; Virginia State Corporation Commission proceedings" },
         ],
         highlights: [
-            "Governor of Virginia (since January 2022)",
+            "Governor of Virginia (January 2022 – January 2026)",
             "Carlyle Group co-CEO; businessman; no prior political office before governor",
             "Won on 'parents' rights in education' message — banned CRT framing in schools, opposed transgender bathroom policies",
             "Won by 2.6 points in a state Biden had won by 10 — seen as a bellwether for Republican messaging ahead of 2022 midterms",
@@ -9487,10 +9707,10 @@ const candidates = [
         initials: "MW",
         photo: "https://unitedstates.github.io/images/congress/450x550/W000825.jpg",
         party: "R",
-        title: "National Security Advisor",
+        title: "U.S. Ambassador to the United Nations",
         state: "Florida",
-        office: "National Security Advisor (2025–present)",
-        tags: ["National Security", "Green Beret", "Florida", "Signalgate"],
+        office: "U.S. Ambassador to the United Nations (2025–present); Former National Security Advisor",
+        tags: ["UN Ambassador", "Green Beret", "Florida", "Signalgate"],
         currentRole: "politician",
         keyVotes: [
             { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package as a House member — consistent with his hawkish national security background and support for Ukraine.", source: "House roll call vote 150, April 20, 2024" },
@@ -9501,9 +9721,9 @@ const candidates = [
             { bill: "Reassignment to UN Ambassador", vote: "nominated", date: "2025-05", significance: "Trump announced Waltz would be nominated as U.S. Ambassador to the United Nations following the Signalgate controversy — effectively removing him from the NSA role. The move preserved his place in the administration while shuffling his portfolio.", source: "Trump administration announcement, May 2025" },
         ],
         highlights: [
-            "National Security Advisor (since January 2025)",
+            "U.S. Ambassador to the United Nations (2025–present); National Security Advisor (January–May 2025)",
             "U.S. Army Green Beret; multiple combat deployments; decorated veteran; retired Colonel",
-            "U.S. Representative, FL-6 (2019–2025) before NSA appointment",
+            "U.S. Representative, FL-6 (2019–2025) before NSA appointment; removed from NSA role following Signalgate",
             "Accidentally added Atlantic editor Jeffrey Goldberg to a Signal group chat discussing sensitive Yemen strike plans — a significant national security breach",
             "Hawkish on China, Iran, and Russia; strong military readiness advocate; Afghanistan veteran"
         ],
@@ -13375,6 +13595,253 @@ function submitReport() {
     const id = new URLSearchParams(window.location.search).get("id");
     if (id) showProfile(id, false);
 })();
+
+// ── Ask Agora Chat Widget ──────────────────────────────────────────
+const AGORA_WORKER_URL = 'https://ask-agora.YOUR-SUBDOMAIN.workers.dev';
+
+const CHAT_SUGGESTIONS = [
+    "Who takes the most money from corporate PACs?",
+    "What is Bernie Sanders' stance on Medicare?",
+    "How did senators vote on the Inflation Reduction Act?",
+    "Which politicians support an assault weapons ban?",
+];
+
+let chatHistory = [];
+let chatOpen = false;
+let chatStreaming = false;
+
+function buildAgoraContext() {
+    const partyName = p => p === 'D' ? 'Democrat' : p === 'R' ? 'Republican' : 'Independent';
+
+    const compactList = candidates.map(c =>
+        `${c.name} (${partyName(c.party)}, ${c.title})`
+    ).join('\n');
+
+    let ctx = `POLITICIANS IN AGORA DATABASE (${candidates.length} total):\n${compactList}`;
+
+    if (currentCandidate) {
+        const c = currentCandidate;
+        ctx += `\n\n=== FULL PROFILE: ${c.name} ===\n`;
+        ctx += `Party: ${partyName(c.party)}\nTitle: ${c.title}\nState: ${c.state}\n`;
+
+        if (c.issues && c.issues.length) {
+            ctx += `\nISSUE STANCES:\n`;
+            c.issues.forEach(i => ctx += `  ${i.topic}: ${i.stanceLabel} — ${i.description}\n`);
+        }
+        if (c.keyVotes && c.keyVotes.length) {
+            ctx += `\nKEY VOTES:\n`;
+            c.keyVotes.forEach(v => ctx += `  ${v.bill} (${v.date}): ${v.vote.toUpperCase()} — ${v.significance}\n`);
+        }
+        if (Array.isArray(c.finance) && c.finance.length) {
+            ctx += `\nCAMPAIGN FINANCE:\n`;
+            c.finance.forEach(f => {
+                ctx += `  ${f.year} ${f.office}: $${(f.total / 1e6).toFixed(1)}M total`;
+                if (f.super_pac) ctx += `, ${f.super_pac}% super PAC`;
+                if (f.corporate_pac) ctx += `, ${f.corporate_pac}% corporate PAC`;
+                ctx += '\n';
+            });
+        }
+        if (c.controversies && c.controversies.length) {
+            ctx += `\nCONTROVERSIES:\n`;
+            c.controversies.forEach(con => ctx += `  ${con.title}: ${con.description} (${con.source})\n`);
+        }
+        if (c.highlights && c.highlights.length) {
+            ctx += `\nCAREER HIGHLIGHTS:\n`;
+            c.highlights.forEach(h => ctx += `  • ${h}\n`);
+        }
+    }
+    return ctx;
+}
+
+function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('agora-chat-panel').classList.toggle('open', chatOpen);
+    if (chatOpen) {
+        renderMessages();
+        setTimeout(() => document.getElementById('agora-chat-input').focus(), 220);
+    }
+}
+
+function renderMessages() {
+    const area = document.getElementById('aca-messages');
+    area.innerHTML = '';
+
+    if (chatHistory.length === 0) {
+        const suggestionsHtml = CHAT_SUGGESTIONS.map(q =>
+            `<button class="aca-suggestion" onclick="sendChat(${JSON.stringify(q)})">${q}</button>`
+        ).join('');
+        area.innerHTML = `<div class="aca-suggestions">
+            <div class="aca-suggestion-label">Try asking</div>
+            ${suggestionsHtml}
+        </div>`;
+        return;
+    }
+
+    chatHistory.forEach(msg => {
+        const div = document.createElement('div');
+        div.className = `aca-msg ${msg.role}`;
+        div.innerHTML = `<div class="aca-bubble">${escapeHtml(msg.content)}</div>`;
+        area.appendChild(div);
+    });
+    area.scrollTop = area.scrollHeight;
+}
+
+function addTypingIndicator() {
+    const area = document.getElementById('aca-messages');
+    const div = document.createElement('div');
+    div.className = 'aca-msg assistant';
+    div.id = 'aca-typing';
+    div.innerHTML = `<div class="aca-typing">
+        <div class="aca-dot"></div><div class="aca-dot"></div><div class="aca-dot"></div>
+    </div>`;
+    area.appendChild(div);
+    area.scrollTop = area.scrollHeight;
+}
+
+function replaceTypingWithMessage(text) {
+    const typingEl = document.getElementById('aca-typing');
+    const area = document.getElementById('aca-messages');
+    if (typingEl) {
+        typingEl.id = 'aca-streaming';
+        typingEl.innerHTML = `<div class="aca-bubble">${escapeHtml(text)}</div>`;
+    } else {
+        const div = document.createElement('div');
+        div.className = 'aca-msg assistant';
+        div.id = 'aca-streaming';
+        div.innerHTML = `<div class="aca-bubble">${escapeHtml(text)}</div>`;
+        area.appendChild(div);
+    }
+    area.scrollTop = area.scrollHeight;
+}
+
+function escapeHtml(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+async function sendChat(overrideText) {
+    if (chatStreaming) return;
+    const input = document.getElementById('agora-chat-input');
+    const text = (overrideText || input.value).trim();
+    if (!text) return;
+
+    input.value = '';
+    input.style.height = '';
+    document.getElementById('agora-chat-send').disabled = true;
+    chatStreaming = true;
+
+    chatHistory.push({ role: 'user', content: text });
+    renderMessages();
+    addTypingIndicator();
+
+    try {
+        const response = await fetch(AGORA_WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                messages: chatHistory.map(m => ({ role: m.role, content: m.content })),
+                systemContext: buildAgoraContext(),
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Request failed: ${response.status}`);
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullText = '';
+        let buffer = '';
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop();
+            for (const line of lines) {
+                if (!line.startsWith('data: ')) continue;
+                const data = line.slice(6).trim();
+                if (data === '[DONE]') break;
+                try {
+                    const parsed = JSON.parse(data);
+                    if (parsed.type === 'content_block_delta' && parsed.delta?.type === 'text_delta') {
+                        fullText += parsed.delta.text;
+                        replaceTypingWithMessage(fullText);
+                    }
+                } catch {}
+            }
+        }
+
+        if (!fullText) fullText = 'Sorry, I couldn\'t get a response. Please try again.';
+        chatHistory.push({ role: 'assistant', content: fullText });
+
+        const streaming = document.getElementById('aca-streaming');
+        if (streaming) streaming.removeAttribute('id');
+
+    } catch (err) {
+        const typing = document.getElementById('aca-typing');
+        if (typing) typing.remove();
+        const area = document.getElementById('aca-messages');
+        const errDiv = document.createElement('div');
+        errDiv.className = 'aca-msg assistant';
+        errDiv.innerHTML = `<div class="aca-bubble" style="color:#DC2626">Something went wrong. Please try again.</div>`;
+        area.appendChild(errDiv);
+        chatHistory.pop();
+    } finally {
+        chatStreaming = false;
+        document.getElementById('agora-chat-send').disabled = false;
+        document.getElementById('agora-chat-input').focus();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('agora-chat-input');
+    input.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+    });
+    input.addEventListener('input', () => {
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+    });
+});
 </script>
+
+<!-- Ask Agora Chat Widget -->
+<button id="agora-chat-btn" onclick="toggleChat()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    Ask Agora
+</button>
+
+<div id="agora-chat-panel">
+    <div class="aca-header">
+        <div class="aca-header-left">
+            <div class="aca-logo">A</div>
+            <div>
+                <div class="aca-title">Ask Agora</div>
+                <div class="aca-subtitle">AI-powered civic research</div>
+            </div>
+        </div>
+        <button class="aca-close" onclick="toggleChat()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
+    <div class="aca-messages" id="aca-messages"></div>
+    <div class="aca-input-row">
+        <textarea id="agora-chat-input" rows="1" placeholder="Ask about any candidate…"></textarea>
+        <button id="agora-chat-send" onclick="sendChat()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+        </button>
+    </div>
+</div>
 </body>
 </html>
