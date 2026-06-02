@@ -1734,7 +1734,7 @@
 
     <div class="lp-stats">
         <div class="lp-stat">
-            <span class="lp-stat-num">92</span>
+            <span class="lp-stat-num">102</span>
             <span class="lp-stat-label">Profiles</span>
         </div>
         <div class="lp-stat">
@@ -12461,7 +12461,577 @@ const candidates = [
                 { event: "VP Debate vs. Vance", action: "Debated J.D. Vance in October 2024 — widely seen as losing on debate points but maintaining likability. The debate softened Vance's negative image as much as it defined Walz.", source: "CBS VP Debate, October 2024" },
             ]
         }
-    }
+    },
+{
+    id: "kristinoem",
+    name: "Kristi Noem",
+    initials: "KN",
+    photo: "https://bioguide.congress.gov/bioguide/photo/N/N000184.jpg",
+    party: "R",
+    title: "Secretary of Homeland Security",
+    state: "South Dakota",
+    office: "U.S. Department of Homeland Security",
+    currentRole: "cabinet",
+    tags: ["Immigration Hawk", "Border Security", "Pro-Life", "2nd Amendment", "Trump Loyalist"],
+    highlights: [
+        "Confirmed as Secretary of Homeland Security on January 25, 2025, overseeing DHS and its 260,000 employees.",
+        "Served as Governor of South Dakota from 2019 to 2025, gaining national attention for rejecting COVID-19 mask mandates.",
+        "Led major ICE enforcement operations in 2025, including a high-profile raid in New York City.",
+        "Signed Constitutional Carry as her first act as governor and blocked local gun seizures during emergencies.",
+        "Removed from DHS role in March 2026 and appointed Special Envoy for the Western Hemisphere."
+    ],
+    keyVotes: [
+        { bill: "SD Constitutional Carry Bill", vote: "signed", date: "2019", significance: "Allowed permitless concealed carry of firearms in South Dakota.", source: "South Dakota Legislature, 2019" },
+        { bill: "SD Abortion Trigger Ban", vote: "action", date: "2022", significance: "Supported the near-total abortion ban that took effect after Dobbs v. Jackson.", source: "South Dakota Searchlight, 2022" },
+        { bill: "DHS ICE Age Limit Removal", vote: "action", date: "2025", significance: "Removed age restrictions on ICE agents to expand deportation capacity.", source: "DHS, 2025" },
+        { bill: "Operation Safeguard NYC", vote: "action", date: "2025", significance: "Personally led multi-agency immigration raid in New York City in January 2025.", source: "Reuters, 2025" },
+        { bill: "SD COVID Mask Mandate Refusal", vote: "action", date: "2020", significance: "Refused to issue statewide mask mandate, arguing individual freedom over government mandates.", source: "Associated Press, 2020" }
+    ],
+    finance: [
+        { year: "2022", office: "Governor, South Dakota", total: 15000000, small_individual: 12, large_individual: 48, super_pac: 20, labor_pac: 0, corporate_pac: 5, party: 5, other: 10 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "opposes", stanceLabel: "Market-Based", description: "Noem opposed Medicaid expansion in South Dakota during much of her governorship. She favors market-driven healthcare solutions and opposed the Affordable Care Act mandates.", actions: ["Rejected Medicaid expansion initially as governor", "Supported work requirements for Medicaid recipients", "Opposed federal healthcare mandates during COVID-19"], source: "Ballotpedia, 2024" },
+        { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Energy Dominance", description: "Noem prioritizes energy production over environmental regulation and has been critical of climate policy that she argues burdens rural economies.", actions: ["Opposed Biden-era EPA regulations on fossil fuels", "Supported Keystone XL pipeline construction", "Promoted South Dakota's agricultural and energy sector over carbon restrictions"], source: "OnTheIssues, 2024" },
+        { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Close the Border", description: "As DHS Secretary, Noem made border enforcement her signature priority, launching sweeping ICE operations and supporting mass deportations.", actions: ["Led January 2025 NYC immigration enforcement operation", "Expanded ICE enforcement in sanctuary cities", "Supported construction of the southern border wall"], source: "DHS, 2025" },
+        { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Pro-Life Absolutist", description: "Noem opposes abortion in nearly all circumstances and supported South Dakota's post-Dobbs trigger ban, which prohibits nearly all abortions except to save the mother's life.", actions: ["Supported SD trigger ban banning nearly all abortions after Dobbs", "Opposed abortion exceptions for rape and incest in SD law", "Signed anti-abortion legislation as governor"], source: "KristiNoem.com, 2024" },
+        { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "2nd Amendment Absolutist", description: "Noem is one of the country's strongest advocates for gun rights, signing permitless carry as her first act as governor and opposing any firearm restrictions.", actions: ["Signed Constitutional Carry as first gubernatorial act (2019)", "Blocked local governments from seizing firearms during emergencies", "Strengthened Stand Your Ground law in South Dakota"], source: "SD Legislature, 2019" },
+        { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Low Tax, Small Gov", description: "Noem supports cutting taxes and reducing government spending, touting South Dakota's lack of a state income tax as a model.", actions: ["Maintained South Dakota's status as a no-income-tax state", "Opposed federal spending increases during COVID relief debates", "Supported Trump-era tax cuts"], source: "Ballotpedia, 2024" },
+        { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "America First", description: "Noem supports a strong military and aligns with Trump's America First foreign policy, expressing skepticism of open-ended foreign commitments.", actions: ["Supported Trump's withdrawal from multilateral agreements", "Advocated for strong military spending", "Backed Trump's foreign policy agenda as DHS Secretary"], source: "OnTheIssues, 2024" },
+        { topic: "Education", stance: "opposes", stanceLabel: "Parents' Rights", description: "Noem supports parental control over education, opposes critical race theory instruction, and favors school choice initiatives.", actions: ["Signed legislation limiting CRT-related content in SD schools", "Supported school choice and parental rights legislation", "Opposed federal overreach in K-12 curriculum"], source: "Ballotpedia, 2024" },
+        { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Pro-Law Enforcement", description: "Noem is a strong backer of law enforcement and opposes defund-the-police efforts, supporting tougher sentencing and immigration-linked crime enforcement.", actions: ["Deployed SD National Guard to southern border", "Supported local law enforcement funding", "Opposed police defunding movements"], source: "OnTheIssues, 2024" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Noem is a strong supporter of Israel and backed U.S. military and diplomatic support for Israel during the Gaza conflict.", actions: ["Expressed strong support for Israel's right to defend itself", "Backed Trump administration's pro-Israel policy as DHS Secretary", "Visited Israel as governor"], source: "Ballotpedia, 2024" },
+        { topic: "Trade & China", stance: "supports", stanceLabel: "Tough on China", description: "Noem supports tariffs and economic pressure on China, particularly regarding agricultural competition and national security.", actions: ["Opposed Chinese land purchases near military installations in South Dakota", "Supported Trump-era tariffs on Chinese goods", "Backed efforts to restrict Chinese investment in U.S. agriculture"], source: "South Dakota Searchlight, 2023" }
+    ],
+    controversies: [
+        { title: "Shot Her Own Dog", description: "In her 2024 memoir 'No Going Back,' Noem revealed she shot and killed her 14-month-old dog Cricket after the dog attacked a neighbor's chickens and bit her. The revelation generated widespread national backlash and was seen as politically damaging ahead of her VP consideration.", source: "CBS News, 2024" },
+        { title: "Noem-Tied Firm Got Piece of $220M DHS Ad Contract", description: "ProPublica reported that a firm connected to Noem secretly received a portion of a $220 million DHS advertising campaign, raising conflict-of-interest questions during her tenure as DHS Secretary.", source: "ProPublica, 2025" },
+        { title: "Removed from DHS Role", description: "In March 2026, President Trump announced Noem would be removed as DHS Secretary and reassigned as Special Envoy for the Western Hemisphere, amid reports of friction over her handling of controversial ICE enforcement operations.", source: "Reuters, 2026" }
+    ],
+    trump: {
+        relationship: "Strong Ally",
+        badge: "trump-ally",
+        summary: "Noem was one of Trump's earliest and most visible supporters, frequently defending him on cable news and angling to be his 2024 VP pick. He rewarded her loyalty with the DHS Secretary appointment.",
+        moments: [
+            { event: "VP Shortlist", action: "Noem was widely reported as a top VP contender for Trump's 2024 ticket, having cultivated a close public relationship with him since 2020.", source: "Politico, 2024" },
+            { event: "DHS Secretary Appointment", action: "Trump nominated Noem as DHS Secretary, a high-profile role she used to execute his immigration agenda aggressively from day one.", source: "DHS, 2025" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "dougburgum",
+    name: "Doug Burgum",
+    initials: "DB",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Doug_Burgum_2025_DOI_portrait_%28cropped%29%28b%29.jpg/330px-Doug_Burgum_2025_DOI_portrait_%28cropped%29%28b%29.jpg",
+    party: "R",
+    title: "Secretary of the Interior",
+    state: "North Dakota",
+    office: "U.S. Department of the Interior",
+    currentRole: "cabinet",
+    tags: ["Energy Dominance", "Public Lands", "Tech Executive", "Former Governor", "America First Energy"],
+    highlights: [
+        "Confirmed as 55th Secretary of the Interior on January 30, 2025, in a bipartisan 79-18 vote.",
+        "Served as Governor of North Dakota from 2016 to 2024, championing energy production and tech-sector growth.",
+        "Led Trump's National Energy Dominance Council as chair, with Energy Secretary Chris Wright as vice-chairman.",
+        "Promoted expanded oil, gas, coal, and critical minerals extraction on federal lands and in wildlife refuges.",
+        "Co-founded Great Plains Energy Corridor Initiative before his political career; sold software company Great Plains Software to Microsoft for $1.1 billion in 2001."
+    ],
+    keyVotes: [
+        { bill: "National Energy Dominance Council", vote: "action", date: "2025", significance: "Named to chair Trump's new council directing federal energy policy across agencies.", source: "White House, 2025" },
+        { bill: "DOI Deregulation Orders", vote: "signed", date: "2025", significance: "Signed suite of orders on day one to speed energy project permitting and eliminate Inflation Reduction Act regulations.", source: "DOI, 2025" },
+        { bill: "Coal Plant Preservation Push", vote: "action", date: "2025", significance: "Called on Trump to use national energy emergency authority to keep coal plants open and reopen shuttered units.", source: "Western Governors Association, 2025" },
+        { bill: "Indigenous DEI Exemption", vote: "action", date: "2025", significance: "Ordered that Indigenous-related programs be exempt from the administration's DEI program eliminations.", source: "DOI, 2025" },
+        { bill: "Affordable Housing on Public Lands", vote: "action", date: "2025", significance: "Announced partnership with HUD to use federal public lands to build affordable housing.", source: "DOI, 2025" }
+    ],
+    finance: [
+        { year: "2024", office: "Presidential Primary, Republican", total: 18000000, small_individual: 5, large_individual: 15, super_pac: 3, labor_pac: 0, corporate_pac: 2, party: 0, other: 75 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "opposes", stanceLabel: "Free Market", description: "Burgum supports market-based healthcare solutions and opposes federal mandates. As governor he favored Medicaid reform with work requirements.", actions: ["Supported Medicaid work requirements in North Dakota", "Opposed ACA individual mandates", "Promoted telehealth expansion in rural ND"], source: "Ballotpedia, 2024" },
+        { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "All-of-the-Above Extraction", description: "Burgum is one of the country's most aggressive advocates for fossil fuel and critical minerals production on federal lands, arguing energy security and economic growth outweigh environmental concerns.", actions: ["Signed DOI orders to accelerate oil, gas, and coal permitting on federal lands", "Called for reopening shuttered coal plants under national energy emergency powers", "Promoted critical minerals mining in wildlife refuges"], source: "DOI, 2025" },
+        { topic: "Immigration & Border", stance: "opposes", stanceLabel: "Enforcement First", description: "Burgum supported Trump's border security agenda as governor and as Interior Secretary, emphasizing the role of energy and economic policy in addressing migration pressures.", actions: ["Supported Trump border security executive orders", "Backed National Guard deployment to southern border as governor", "Used DOI resources to support border infrastructure projects"], source: "Ballotpedia, 2024" },
+        { topic: "Abortion & Reproductive Rights", stance: "opposes", stanceLabel: "Pro-Life", description: "Burgum signed abortion restrictions as governor of North Dakota and supports returning abortion regulation to states following Dobbs.", actions: ["Signed near-total abortion ban into ND law (2023)", "Supported post-Dobbs state-level restrictions", "Declined to advocate for federal abortion ban"], source: "AP, 2023" },
+        { topic: "Gun Control", stance: "opposes", stanceLabel: "2nd Amendment", description: "Burgum opposes gun control measures and signed North Dakota's permitless carry law during his governorship.", actions: ["Signed permitless carry expansion in North Dakota", "Opposed federal universal background check legislation", "Supported concealed carry reciprocity"], source: "OnTheIssues, 2024" },
+        { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Pro-Growth Cutter", description: "As a former tech entrepreneur, Burgum champions low taxes and deregulation as engines of economic growth, particularly for energy and agriculture sectors.", actions: ["Cut state taxes during his ND governorship", "Supported Trump's 2017 Tax Cuts and Jobs Act extension", "Promoted tech and startup ecosystem development in North Dakota"], source: "Ballotpedia, 2024" },
+        { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Energy Security", description: "Burgum frames energy production as a national security and foreign policy tool, arguing American energy dominance reduces dependence on adversaries.", actions: ["Chaired National Energy Dominance Council to reduce reliance on foreign energy", "Supported LNG exports to European allies to counter Russian energy leverage", "Backed increased rare earth mineral production to counter Chinese supply chain dominance"], source: "DOI, 2025" },
+        { topic: "Education", stance: "opposes", stanceLabel: "Local Control", description: "Burgum supports state and local control of education, opposing federal curriculum mandates and advocating for career-technical pathways alongside traditional college education.", actions: ["Supported workforce training and apprenticeship programs in North Dakota", "Opposed federal Common Core-style mandates", "Championed technology education in rural schools"], source: "Ballotpedia, 2024" },
+        { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Pro-Law Enforcement", description: "Burgum supports strong law enforcement funding and opposes defund-the-police efforts, emphasizing community-based approaches alongside traditional policing.", actions: ["Increased law enforcement funding in North Dakota budget", "Opposed defund-the-police movement", "Supported pipeline protest enforcement during DAPL protests (2016-2017)"], source: "Ballotpedia, 2024" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Burgum has expressed support for Israel and aligned with the Trump administration's strong pro-Israel stance in the Middle East.", actions: ["Supported U.S. military aid to Israel", "Backed Trump administration's Jerusalem embassy stance", "Aligned with administration's position on Gaza conflict"], source: "Ballotpedia, 2024" },
+        { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "Counter China", description: "Burgum is a vocal advocate for reducing U.S. dependence on Chinese critical minerals and technology, using DOI's public lands portfolio to develop domestic alternatives.", actions: ["Prioritized critical minerals production on federal lands to counter Chinese supply dominance", "Supported rare earth mining in western states", "Backed tariffs on Chinese goods as part of broader economic competition strategy"], source: "DOI, 2025" }
+    ],
+    controversies: [
+        { title: "Gift Card Stunt During Presidential Campaign", description: "Burgum's 2024 presidential campaign offered $20 gift cards to small-dollar donors who gave $1 or more, a tactic critics called a gimmick to hit the donor threshold for debate qualification. The FEC opened an inquiry into whether the promotion violated campaign finance rules.", source: "NBC News, 2023" },
+        { title: "DAPL Protest Response", description: "As North Dakota governor, Burgum oversaw law enforcement's handling of Standing Rock Sioux protests against the Dakota Access Pipeline, which drew national criticism for the use of water cannons and rubber bullets against protesters in freezing temperatures.", source: "The Guardian, 2016" },
+        { title: "Rapid Rollback of Federal Conservation Rules", description: "Environmental groups filed legal challenges to Burgum's fast-tracked deregulation orders opening protected federal lands to fossil fuel extraction, arguing the moves violated the National Environmental Policy Act and endangered protected ecosystems.", source: "Sierra Club, 2025" }
+    ],
+    trump: {
+        relationship: "Loyal Ally",
+        badge: "trump-ally",
+        summary: "Burgum ran briefly against Trump in the 2024 Republican primary, dropped out, and quickly endorsed him. His reward was the Interior Secretary post, where he has been one of Trump's most enthusiastic executors of energy deregulation.",
+        moments: [
+            { event: "Endorsed Trump After Dropping Out", action: "Burgum dropped his presidential bid in December 2023 and immediately endorsed Trump, appearing at rallies and becoming a surrogate throughout the 2024 campaign.", source: "CBS News, 2023" },
+            { event: "Named to Lead National Energy Dominance Council", action: "Trump tapped Burgum to chair his interagency energy council, one of the most influential energy policy roles in the administration.", source: "White House, 2025" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "tulsigabbard",
+    name: "Tulsi Gabbard",
+    initials: "TG",
+    photo: "https://bioguide.congress.gov/bioguide/photo/G/G000571.jpg",
+    party: "R",
+    title: "Director of National Intelligence",
+    state: "Hawaii",
+    office: "Office of the Director of National Intelligence",
+    currentRole: "cabinet",
+    tags: ["Intelligence Reform", "Anti-Establishment", "Party Switcher", "Military Veteran", "Civil Liberties"],
+    highlights: [
+        "Confirmed as 8th Director of National Intelligence on February 12, 2025, in a narrow 52-48 Senate vote.",
+        "Served as the first Hindu member of Congress, representing Hawaii's 2nd district from 2013 to 2021.",
+        "Left the Democratic Party in October 2022, citing what she called extremism and warmongering within the party.",
+        "Implemented a 50% staff reduction and $700 million budget cut at ODNI in August 2025.",
+        "Iraq War veteran who served in the Army National Guard and deployed to Iraq and Kuwait."
+    ],
+    keyVotes: [
+        { bill: "2020 Presidential Primary Campaign", vote: "action", date: "2020", significance: "Ran as a Democrat, criticizing her own party's foreign policy and finishing with one delegate before withdrawing in March 2020.", source: "FEC, 2020" },
+        { bill: "Syria War Authorization Opposition", vote: "action", date: "2019", significance: "Consistently opposed U.S. military intervention in Syria and criticized regime-change wars, breaking with Democratic mainstream.", source: "Congress.gov, 2019" },
+        { bill: "ODNI Staff Reduction", vote: "action", date: "2025", significance: "Cut the ODNI workforce by 50% and reduced annual funding by $700 million as part of intelligence community restructuring.", source: "ODNI, 2025" },
+        { bill: "Intelligence Community Border Refocus", vote: "action", date: "2025", significance: "Redirected intelligence community resources toward identifying undocumented immigrants with terror ties and securing the southern border.", source: "ODNI, 2025" },
+        { bill: "Section 702 FISA Position", vote: "action", date: "2025", significance: "Characterized Section 702 foreign surveillance authority as 'critical' while pledging Fourth Amendment protections for Americans.", source: "Senate Intelligence Committee, 2025" }
+    ],
+    finance: [
+        { year: "2020", office: "Presidential Primary, Democratic", total: 12600000, small_individual: 55, large_individual: 30, super_pac: 0, labor_pac: 0, corporate_pac: 0, party: 0, other: 15 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "mixed", stanceLabel: "Previously Pro-Single Payer", description: "As a Democrat, Gabbard supported Medicare for All. After switching parties and joining the Trump administration, she has not advocated for universal healthcare.", actions: ["Cosponsored Medicare for All legislation as a Democratic congresswoman", "Did not address healthcare policy as DNI", "Shifted focus away from domestic policy positions after party switch"], source: "Congress.gov, 2019" },
+        { topic: "Climate & Energy", stance: "mixed", stanceLabel: "Shifted Position", description: "Gabbard previously supported climate action legislation as a Democrat but has not prioritized environmental policy since joining the Trump administration.", actions: ["Voted for climate-related legislation as a Democratic congresswoman", "Did not advocate for climate policy as DNI", "Aligned with Trump administration energy dominance framework"], source: "OnTheIssues, 2024" },
+        { topic: "Immigration & Border", stance: "opposes", stanceLabel: "Border Security Focus", description: "As DNI, Gabbard redirected intelligence resources toward identifying undocumented immigrants with terror ties, framing immigration as a national security issue.", actions: ["Redirected IC resources to support southern border enforcement", "Expanded counterterrorism to include counternarcotics at the border", "Designated cartels as top national security threats"], source: "ODNI, 2025" },
+        { topic: "Abortion & Reproductive Rights", stance: "mixed", stanceLabel: "Evolved Position", description: "Gabbard previously identified as pro-choice but has moderated her position over time. She has not prominently advocated on abortion since switching parties.", actions: ["Voted against partial-birth abortion bans as a Democrat", "Expressed support for some abortion restrictions in later years", "Has not taken a clear public stance since joining Trump administration"], source: "OnTheIssues, 2024" },
+        { topic: "Gun Control", stance: "mixed", stanceLabel: "Changed Position", description: "Gabbard previously supported some gun control measures as a Democrat including background check expansion, but has moved toward a more pro-gun position since switching parties.", actions: ["Supported background check legislation as a Democratic congresswoman", "Shifted toward Second Amendment advocacy after party switch", "Has not taken prominent gun policy positions as DNI"], source: "OnTheIssues, 2024" },
+        { topic: "Tax Policy & Economy", stance: "mixed", stanceLabel: "Shifting Views", description: "Gabbard has not been a prominent voice on tax policy. As a Democrat she opposed large corporate tax cuts; her current positions align more with Republican economic policy.", actions: ["Opposed Trump's 2017 tax cuts as a Democratic congresswoman", "Has not articulated detailed tax positions since joining Republicans", "Aligned with Trump administration's economic priorities"], source: "OnTheIssues, 2024" },
+        { topic: "Foreign Policy & Military", stance: "opposes", stanceLabel: "Anti-Interventionist", description: "Gabbard is one of the most prominent anti-interventionist voices in American politics, opposing regime change wars and calling for diplomacy with adversaries. This was a central reason she left the Democratic Party.", actions: ["Opposed U.S. military intervention in Syria, Libya, and Yemen as a congresswoman", "Met with Syrian President Bashar al-Assad in 2017, drawing bipartisan criticism", "Opposed NATO expansion and called for diplomatic engagement with Russia before the Ukraine war"], source: "Foreign Affairs, 2022" },
+        { topic: "Education", stance: "neutral", stanceLabel: "No Clear Stance", description: "Education has not been a priority issue for Gabbard. She has not taken prominent positions on K-12 or higher education policy in her current role.", actions: ["Did not prioritize education legislation as a congresswoman", "No significant education policy actions as DNI", "Generally aligned with parental rights framing after party switch"], source: "OnTheIssues, 2024" },
+        { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Reform-then-Law Order", description: "Gabbard previously supported criminal justice reform measures as a Democrat, including marijuana legalization, but has since aligned more with law-and-order positions.", actions: ["Supported marijuana decriminalization and criminal justice reform as a Democrat", "Backed policing reforms in the wake of George Floyd's death", "Shifted toward pro-law enforcement positions after party switch"], source: "OnTheIssues, 2024" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Gabbard has expressed support for Israel and aligned with the Trump administration's pro-Israel stance, though she previously called for a ceasefire as casualties mounted in Gaza.", actions: ["Expressed strong support for Israel's right to self-defense", "Aligned with Trump administration's position on Gaza conflict as DNI", "Previously called for humanitarian corridors during the Gaza conflict"], source: "Ballotpedia, 2024" },
+        { topic: "Trade & China", stance: "opposes", stanceLabel: "Tough on China", description: "Gabbard views China as a serious national security threat and has supported economic and intelligence measures to counter Chinese influence.", actions: ["Prioritized Chinese intelligence threats as a key IC focus area", "Supported tariffs and economic decoupling from China", "Highlighted Chinese espionage operations targeting U.S. infrastructure"], source: "ODNI, 2025" }
+    ],
+    controversies: [
+        { title: "Meeting with Bashar al-Assad", description: "In January 2017, Gabbard made an unannounced trip to Syria and met with President Bashar al-Assad, whose government was accused of war crimes including chemical weapons attacks on civilians. She faced bipartisan condemnation, including from fellow Democrats, for meeting with a U.S.-designated adversary.", source: "Washington Post, 2017" },
+        { title: "Labeled 'Russian Asset' by Hillary Clinton", description: "In October 2019, former Secretary of State Hillary Clinton suggested Gabbard was being 'groomed' as a Russian asset, citing her anti-interventionist foreign policy positions. Gabbard sued Clinton for defamation. The controversy intensified after Gabbard praised Russian-aligned talking points on Ukraine.", source: "The Hill, 2019" },
+        { title: "Leftover Campaign Cash Investigation", description: "The Federal Election Commission inquired about millions in leftover funds from Gabbard's 2020 presidential campaign that remained unspent after she suspended her campaign, raising questions about permissible use of campaign funds.", source: "Notus, 2024" }
+    ],
+    trump: {
+        relationship: "Appointee",
+        badge: "trump-ally",
+        summary: "Gabbard endorsed Trump in August 2024 after years of criticizing both parties. Trump rewarded her with the DNI post, one of the most sensitive intelligence positions in government.",
+        moments: [
+            { event: "Endorsed Trump for President", action: "Gabbard formally endorsed Trump in August 2024 after leaving the Democratic Party two years earlier, citing his foreign policy positions as closer to her own.", source: "NBC News, 2024" },
+            { event: "Confirmed as DNI in Narrow Vote", action: "Gabbard was confirmed 52-48, with only Sen. Mitch McConnell among Republicans voting no, reflecting concerns about her ties to foreign adversaries.", source: "Senate, 2025" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "petehegseth",
+    name: "Pete Hegseth",
+    initials: "PH",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Pete_Hegseth_Official_Portrait.jpg/330px-Pete_Hegseth_Official_Portrait.jpg",
+    party: "R",
+    title: "Secretary of Defense",
+    state: "Minnesota",
+    office: "U.S. Department of Defense",
+    currentRole: "cabinet",
+    tags: ["Military Hawk", "Fox News Host", "Warrior Culture", "Anti-Woke Military", "Trump Loyalist"],
+    highlights: [
+        "Confirmed as Secretary of Defense in January 2025 in a 50-50 Senate tie broken by Vice President JD Vance, the closest margin for any Defense Secretary.",
+        "Former Army National Guard infantry officer who deployed to Iraq and Afghanistan and served at Guantanamo Bay.",
+        "Hosted 'Fox and Friends Weekend' on Fox News from 2014 to 2024, becoming one of Trump's most prominent media defenders.",
+        "Authored 'The War on Warriors,' arguing the military has been weakened by progressive ideology and diversity initiatives.",
+        "Fired three top judge advocate generals and the chief of naval operations within weeks of taking office."
+    ],
+    keyVotes: [
+        { bill: "Pentagon DEI Program Elimination", vote: "action", date: "2025", significance: "Ordered elimination of diversity, equity, and inclusion programs across the Department of Defense.", source: "DOD, 2025" },
+        { bill: "Ukraine NATO Membership Position", vote: "action", date: "2025", significance: "Stated that Ukraine returning to pre-2014 borders was 'unrealistic' and opposed NATO membership for Ukraine, in a break from longstanding U.S. policy.", source: "Reuters, 2025" },
+        { bill: "Caribbean Drug Boat Strikes", vote: "action", date: "2025", significance: "Oversaw repeated U.S. military strikes on boats off Venezuela alleged to carry drugs, killing more than 80 people; AP reported many victims were laborers, not cartel members.", source: "AP, 2025" },
+        { bill: "Judge Advocate General Firings", vote: "action", date: "2025", significance: "Fired three top military lawyers (JAGs) and the Chief of Naval Operations, a move critics said undermined military legal oversight.", source: "NPR, 2025" },
+        { bill: "Pentagon Budget Reduction Order", vote: "action", date: "2025", significance: "Ordered most Pentagon initiatives to reduce funding and began a broad purge of officials he deemed insufficiently loyal.", source: "DOD, 2025" }
+    ],
+    finance: [
+        { year: "N/A", office: "Cabinet Appointee", total: 0, small_individual: 0, large_individual: 0, super_pac: 0, labor_pac: 0, corporate_pac: 0, party: 0, other: 100 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "neutral", stanceLabel: "Not a Priority", description: "Healthcare policy is outside Hegseth's portfolio as Defense Secretary. He has focused exclusively on military readiness and personnel issues.", actions: ["No significant healthcare policy actions", "Focused on military healthcare readiness within DOD", "Supported elimination of gender-affirming care through the military health system"], source: "DOD, 2025" },
+        { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Rejects Climate Focus", description: "Hegseth has reversed the military's climate-focused initiatives, arguing that climate change programs distract from warfighting capability.", actions: ["Ended Pentagon climate change programs and reporting requirements", "Removed climate change from military threat assessment frameworks", "Redirected climate-designated funds to readiness and weapons programs"], source: "DOD, 2025" },
+        { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Military at the Border", description: "Hegseth supports using active-duty military forces for border enforcement and has deployed DOD resources to the southern border.", actions: ["Deployed active-duty military units to the U.S.-Mexico border", "Supported using military detention facilities for immigration enforcement", "Coordinated with DHS on military-assisted deportation operations"], source: "DOD, 2025" },
+        { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", stanceLabel: "Pro-Life", description: "Hegseth ended DOD policies that provided travel funding for service members seeking abortions in states where the procedure is restricted.", actions: ["Eliminated DOD travel reimbursement for service members seeking abortions", "Reversed Biden-era reproductive healthcare policies for military personnel", "Supported conservative social policy changes within the military"], source: "DOD, 2025" },
+        { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "Pro-Gun", description: "Hegseth is a strong Second Amendment advocate and has opposed gun control legislation throughout his public career.", actions: ["Opposed background check expansion legislation while at Fox News", "Supported Constitutional Carry and concealed carry expansion", "Criticized red flag law proposals as due process violations"], source: "OnTheIssues, 2024" },
+        { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Low Tax", description: "Hegseth supports cutting taxes and reducing government spending, consistent with his overall conservative ideology.", actions: ["Supported Trump's tax cut agenda during Fox News tenure", "Backed government spending reductions", "Has not taken detailed positions on specific tax policy as Defense Secretary"], source: "OnTheIssues, 2024" },
+        { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Warrior Culture", description: "Hegseth advocates for a more aggressive military posture centered on warfighting rather than democracy promotion. He has called for removing restrictions on rules of engagement he sees as hampering combat effectiveness.", actions: ["Rebranded emphasis of DOD from 'Department of Defense' to 'Department of War' in internal communications", "Criticized Geneva Convention provisions he viewed as limiting military effectiveness", "Opposed NATO membership for Ukraine and pushed for a negotiated settlement of the Russia-Ukraine war"], source: "DOD, 2025" },
+        { topic: "Education", stance: "opposes", stanceLabel: "Anti-DEI in Military", description: "Hegseth has aggressively eliminated diversity, equity, and inclusion programs from military education and training curricula at service academies and professional military education institutions.", actions: ["Ordered removal of DEI content from service academy curricula", "Fired senior military education officials linked to DEI programs", "Mandated revision of military professional education programs to focus on warfighting"], source: "DOD, 2025" },
+        { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Law and Order", description: "Hegseth is a strong law-and-order advocate who has praised aggressive law enforcement and opposed police reform measures.", actions: ["Criticized defund-the-police movement on Fox News", "Supported harsh sentencing for violent crime", "Backed use of military assets to support domestic law enforcement operations"], source: "OnTheIssues, 2024" },
+        { topic: "Israel & Gaza", stance: "strongly-supports", stanceLabel: "Staunch Pro-Israel", description: "Hegseth is one of the strongest pro-Israel voices in the Cabinet, providing military support and intelligence cooperation to Israel during the Gaza conflict.", actions: ["Continued U.S. military aid and intelligence sharing with Israel", "Aligned with Israeli military strategy in Gaza", "Opposed international pressure for an arms embargo on Israel"], source: "DOD, 2025" },
+        { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "Counter China", description: "Hegseth views China as the primary long-term military threat to the United States and has focused DOD resources on preparing for potential conflict in the Indo-Pacific.", actions: ["Redirected Pentagon resources toward Indo-Pacific deterrence against China", "Accelerated procurement of weapons systems designed for high-end conflict with China", "Classified China as the 'pacing threat' and prioritized military competition with Beijing"], source: "DOD, 2025" }
+    ],
+    controversies: [
+        { title: "Signal Chat Classified Information Leak", description: "In March 2025, it was revealed that Hegseth had shared classified details about imminent U.S. airstrikes on Houthi targets in Yemen in a Signal group chat that inadvertently included a journalist. A Pentagon inspector general investigation found he violated protocol and may have endangered U.S. troops. A second Signal chat involving his wife, brother, and lawyer was subsequently discovered containing similar information.", source: "The Atlantic / NPR, 2025" },
+        { title: "Caribbean Military Strikes on Civilians", description: "Under Hegseth's direction, the U.S. military conducted repeated strikes on boats off Venezuela's coast allegedly carrying drugs, killing more than 80 people. The Associated Press reported that many victims were local laborers or fishermen rather than cartel members, and that a second strike killed survivors of the initial attack.", source: "AP, 2025" },
+        { title: "Confirmation Allegations of Misconduct", description: "During his confirmation process, Hegseth faced allegations of excessive alcohol use and a 2017 sexual misconduct allegation, for which he reached a financial settlement. Multiple Republican senators expressed reservations before ultimately voting for him.", source: "New York Times, 2025" }
+    ],
+    trump: {
+        relationship: "Strong Ally",
+        badge: "trump-ally",
+        summary: "Hegseth was one of Trump's most visible media defenders during his Fox News career. Trump chose him for Defense Secretary over the objections of establishment Republicans, rewarding his unwavering loyalty.",
+        moments: [
+            { event: "Years of Fox News Advocacy", action: "Hegseth used his Fox and Friends Weekend platform to aggressively defend Trump throughout his presidency and the 2020 election, becoming one of Trump's most trusted media voices.", source: "Fox News, 2014-2024" },
+            { event: "Confirmed in 50-50 Vote", action: "Hegseth's confirmation required VP JD Vance to cast the tie-breaking vote, the narrowest confirmation for any Defense Secretary in American history, reflecting deep concerns about his qualifications.", source: "Senate, 2025" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "rfkjr",
+    name: "Robert F. Kennedy Jr.",
+    initials: "RK",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Robert_F._Kennedy_Jr.%2C_official_portrait_%282025%29_%28cropped_3-4%29_%28b%29.jpg/330px-Robert_F._Kennedy_Jr.%2C_official_portrait_%282025%29_%28cropped_3-4%29_%28b%29.jpg",
+    party: "R",
+    title: "Secretary of Health and Human Services",
+    state: "New York",
+    office: "U.S. Department of Health and Human Services",
+    currentRole: "cabinet",
+    tags: ["MAHA", "Vaccine Skeptic", "Anti-Establishment", "Environmental Lawyer", "Party Switcher"],
+    highlights: [
+        "Confirmed as 26th Secretary of HHS in February 2025, overseeing the FDA, CDC, NIH, and CMS.",
+        "Son of Senator Robert F. Kennedy and nephew of President John F. Kennedy; longtime environmental attorney.",
+        "Ran for president in 2024, first as a Democrat then as an independent, before dropping out and endorsing Trump.",
+        "Launched the 'Make America Healthy Again' (MAHA) agenda targeting ultra-processed foods, food additives, and childhood chronic disease.",
+        "Cut HHS workforce by 20% and slashed CDC budget by nearly half within his first year as secretary."
+    ],
+    keyVotes: [
+        { bill: "Childhood Vaccine Schedule Review", vote: "action", date: "2025", significance: "Reconstituted the federal vaccine advisory panel with vaccine skeptics and allies, laying groundwork for revisions to the childhood immunization schedule.", source: "HHS, 2025" },
+        { bill: "mRNA Vaccine Funding Cuts", vote: "action", date: "2025", significance: "Terminated $500 million in contracts for mRNA vaccine development, citing unproven safety concerns that fact-checkers disputed.", source: "HHS/AJMC, 2025" },
+        { bill: "COVID Vaccine Schedule Removal", vote: "action", date: "2025", significance: "Removed healthy children and pregnant women from the CDC's COVID-19 vaccine recommendation schedule, prompting a federal lawsuit by medical organizations.", source: "CDC/PBS, 2025" },
+        { bill: "HHS Workforce Reduction", vote: "action", date: "2025", significance: "Reduced the HHS workforce by 20% and fired or forced out several senior agency directors, including CDC Director Susan Monarez.", source: "HHS, 2025" },
+        { bill: "Ultra-Processed Food Initiative", vote: "action", date: "2025", significance: "Launched review of food additives and ultra-processed foods in school lunch programs under the MAHA executive order signed by President Trump.", source: "HHS, 2025" }
+    ],
+    finance: [
+        { year: "2024", office: "Presidential Independent Candidate", total: 28000000, small_individual: 45, large_individual: 30, super_pac: 20, labor_pac: 0, corporate_pac: 0, party: 0, other: 5 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "mixed", stanceLabel: "MAHA Reform", description: "Kennedy's MAHA agenda focuses on reducing chronic disease through diet, food quality, and environmental factors rather than traditional pharmaceutical approaches. He has simultaneously cut HHS funding for drug research while targeting food system reform.", actions: ["Launched MAHA Commission to investigate root causes of childhood chronic disease", "Ordered FDA review of food additives, dyes, and ultra-processed foods", "Cut NIH research funding by billions while redirecting toward nutrition and environmental health"], source: "HHS, 2025" },
+        { topic: "Climate & Energy", stance: "supports", stanceLabel: "Environmental Advocate", description: "Kennedy spent decades as an environmental lawyer before his political career. He supports strong environmental protections, though this has created tension with the Trump administration's deregulatory agenda.", actions: ["Founded Waterkeeper Alliance to combat industrial water pollution", "Filed dozens of environmental lawsuits as a private attorney", "Expressed disagreement with administration rollbacks of some EPA regulations"], source: "Waterkeeper Alliance, 2024" },
+        { topic: "Immigration & Border", stance: "mixed", stanceLabel: "Moderate Enforcement", description: "Kennedy does not have a strong record on immigration enforcement. He has not been a prominent voice on border security within the Trump cabinet.", actions: ["Has not taken major immigration policy positions as HHS Secretary", "Previously expressed concern for undocumented immigrants' healthcare access as a Democrat", "Deferred to other cabinet members on immigration enforcement matters"], source: "OnTheIssues, 2024" },
+        { topic: "Abortion & Reproductive Rights", stance: "mixed", stanceLabel: "Evolved Position", description: "Kennedy's abortion position has shifted dramatically. He previously supported abortion rights through all nine months as a Democrat, then moderated to supporting limits after 3 months to win support from conservatives.", actions: ["Supported abortion rights as a Democratic presidential candidate", "Shifted to supporting a 3-month limit on abortion after ending his Democratic campaign", "Has not taken major abortion policy positions as HHS Secretary"], source: "Reuters, 2024" },
+        { topic: "Gun Control", stance: "mixed", stanceLabel: "Changed Position", description: "Kennedy previously supported gun control measures as a Democrat but moderated his position to attract independent and Republican voters during his 2024 presidential run.", actions: ["Previously supported assault weapons bans as a Democrat", "Shifted toward gun rights positions during 2024 campaign", "Has not taken gun policy positions as HHS Secretary"], source: "OnTheIssues, 2024" },
+        { topic: "Tax Policy & Economy", stance: "mixed", stanceLabel: "Populist", description: "Kennedy has expressed economic populist views, criticizing corporate power and regulatory capture rather than focusing on traditional tax-cut conservatism.", actions: ["Criticized pharmaceutical industry's influence over FDA and health agencies", "Supported breaking up corporate monopolies in food and drug sectors", "Has not articulated traditional Republican tax positions"], source: "OnTheIssues, 2024" },
+        { topic: "Foreign Policy & Military", stance: "opposes", stanceLabel: "Anti-Interventionist", description: "Kennedy has been a consistent critic of U.S. military interventionism, opposing the wars in Iraq, Afghanistan, and Ukraine. His foreign policy views align more with non-interventionist libertarians than mainstream Republicans.", actions: ["Opposed U.S. military aid to Ukraine during 2024 presidential campaign", "Criticized NATO expansion as a provocation of Russia", "Opposed ongoing U.S. military operations in the Middle East"], source: "Foreign Policy, 2024" },
+        { topic: "Education", stance: "neutral", stanceLabel: "Not a Priority", description: "Education policy falls outside Kennedy's HHS portfolio and he has not been a prominent voice on K-12 or higher education issues.", actions: ["Has not taken major education policy positions", "Supports science education reforms around nutrition and environmental health", "Did not focus on education during 2024 presidential campaign"], source: "OnTheIssues, 2024" },
+        { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Reform-Leaning", description: "Kennedy has historically supported criminal justice reform, particularly around drug policy and mass incarceration, though he has moderated these positions since joining the Trump administration.", actions: ["Supported drug policy reform and decriminalization as a Democrat", "Called for addressing root causes of crime through public health approaches", "Has not taken prominent criminal justice positions as HHS Secretary"], source: "OnTheIssues, 2024" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Kennedy expressed strong support for Israel following the October 7, 2023, Hamas attack. His pro-Israel stance was notably stronger than many on the political left.", actions: ["Issued strong statement of support for Israel after October 7, 2023, attack", "Opposed calls for a ceasefire in the early weeks of the Gaza conflict", "Aligned with Trump administration's pro-Israel policy as HHS Secretary"], source: "Kennedy campaign, 2023" },
+        { topic: "Trade & China", stance: "opposes", stanceLabel: "Anti-China Supply Chain", description: "Kennedy has raised concerns about U.S. dependence on Chinese pharmaceutical supply chains and the influence of Chinese investment in American food and agriculture.", actions: ["Raised alarms about U.S. reliance on Chinese API pharmaceutical ingredient manufacturing", "Supported reshoring of pharmaceutical and medical supply chains", "Backed tariffs on Chinese pharmaceutical and agricultural goods"], source: "HHS, 2025" }
+    ],
+    controversies: [
+        { title: "Anti-Vaccine Advocacy and Misinformation", description: "Kennedy spent two decades promoting vaccine safety concerns that mainstream medical and scientific organizations, including the CDC and WHO, have characterized as misinformation. He founded Children's Health Defense, which disseminated content questioning childhood vaccine safety. During the COVID-19 pandemic, he promoted debunked claims about mRNA vaccines.", source: "AP Fact Check, 2024" },
+        { title: "Worm in His Brain Disclosure", description: "In a 2024 court deposition that became public, Kennedy revealed that a parasitic worm had entered his brain years earlier and 'ate a portion' of it before dying. The disclosure raised questions about his fitness for office and generated significant media coverage during his presidential campaign.", source: "New York Times, 2024" },
+        { title: "Federal Judge Blocks Vaccine Policy Changes", description: "In March 2026, a federal judge issued an injunction halting Kennedy's changes to children's vaccine policies, finding that HHS had likely violated the Administrative Procedure Act by removing vaccine recommendations without adequate scientific process or public comment.", source: "NPR, 2026" }
+    ],
+    trump: {
+        relationship: "Appointee",
+        badge: "trump-ally",
+        summary: "Kennedy endorsed Trump in August 2024 after suspending his independent presidential campaign, bringing his 'Make America Healthy Again' movement into the Trump coalition. Trump nominated him for HHS in exchange.",
+        moments: [
+            { event: "Endorsed Trump After Suspending Campaign", action: "Kennedy suspended his independent 2024 presidential campaign in August and endorsed Trump, appearing at a rally in Arizona and citing shared views on bureaucratic reform.", source: "Reuters, 2024" },
+            { event: "MAHA Executive Order", action: "President Trump signed the Make America Healthy Again executive order on inauguration day, formally enshrining Kennedy's health agenda as official administration policy.", source: "HHS, 2025" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "kashpatel",
+    name: "Kash Patel",
+    initials: "KP",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Kash_Patel%2C_official_FBI_portrait_%28cropped_2%29.jpg/330px-Kash_Patel%2C_official_FBI_portrait_%28cropped_2%29.jpg",
+    party: "R",
+    title: "FBI Director",
+    state: "New York",
+    office: "Federal Bureau of Investigation",
+    currentRole: "cabinet",
+    tags: ["FBI Overhaul", "Deep State Critic", "Trump Loyalist", "Nunes Memo Author", "Anti-Establishment"],
+    highlights: [
+        "Confirmed as FBI Director in February 2025, becoming the first person of South Asian descent to lead the bureau.",
+        "Primary author of the 2018 'Nunes memo,' which alleged FBI abuses in the Russia investigation and shaped Trump's narrative about agency corruption.",
+        "Authored 'Government Gangsters' (2023), a memoir calling for gutting civil service protections, which Trump called a 'roadmap to end the Deep State.'",
+        "Began firing FBI agents and officials linked to prior Trump investigations within weeks of taking office.",
+        "Former federal public defender and DOJ terrorism prosecutor before serving on the National Security Council."
+    ],
+    keyVotes: [
+        { bill: "Nunes Memo Authorship", vote: "action", date: "2018", significance: "As a House Intelligence Committee staffer, authored the controversial memo alleging DOJ and FBI abused FISA surveillance powers in the Russia investigation.", source: "House Intelligence Committee, 2018" },
+        { bill: "FBI Agent Firings", vote: "action", date: "2025", significance: "Began purging FBI agents involved in prior investigations of Trump, including January 6-related cases, drawing a lawsuit from three fired senior officials.", source: "CNN, 2025" },
+        { bill: "Immigration Enforcement Refocus", vote: "action", date: "2025", significance: "Shifted FBI operations to prioritize cracking down on undocumented immigrants, a departure from the bureau's traditional counterterrorism and crime focus.", source: "NPR, 2025" },
+        { bill: "Nevada Headquarters Proposal", vote: "action", date: "2025", significance: "Proposed relocating FBI operations to Nevada where he lives and shifting major operations to the West Coast, away from Washington.", source: "NPR, 2025" },
+        { bill: "Defamation Lawsuit Against Critic", vote: "action", date: "2025", significance: "Filed a personal defamation lawsuit against former FBI Assistant Director Frank Figliuzzi over comments made on MSNBC.", source: "Reuters, 2025" }
+    ],
+    finance: [
+        { year: "N/A", office: "Cabinet Appointee", total: 0, small_individual: 0, large_individual: 0, super_pac: 0, labor_pac: 0, corporate_pac: 0, party: 0, other: 100 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Healthcare policy is outside the FBI Director's portfolio. Patel has not taken prominent positions on health policy.", actions: ["No significant healthcare policy positions or actions", "Health policy falls outside FBI jurisdiction", "Has not commented on healthcare legislation publicly"], source: "N/A" },
+        { topic: "Climate & Energy", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Climate and energy policy are outside the FBI's core mission. Patel has not taken prominent positions on energy or environmental issues.", actions: ["No significant climate or energy policy actions as FBI Director", "FBI has jurisdiction over environmental crimes but this has not been a Patel focus", "Has not commented on energy policy publicly"], source: "N/A" },
+        { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Enforcement Priority", description: "Patel has made immigration enforcement a top FBI priority, redirecting bureau resources toward identifying and removing undocumented immigrants, a significant shift from the FBI's traditional mission.", actions: ["Shifted FBI resources to immigration enforcement operations", "Coordinated FBI with DHS and ICE on deportation-related investigations", "Targeted sanctuary city policies with federal law enforcement tools"], source: "NPR, 2025" },
+        { topic: "Abortion & Reproductive Rights", stance: "neutral", stanceLabel: "Not a Priority", description: "Patel has not taken prominent positions on abortion policy. The FBI's role in reproductive rights issues is limited to enforcing federal laws related to clinic access.", actions: ["Has not commented publicly on abortion policy", "FBI jurisdiction over reproductive rights matters is narrow", "Aligned with Trump administration's general policy direction"], source: "N/A" },
+        { topic: "Gun Control", stance: "opposes", stanceLabel: "Pro-2nd Amendment", description: "Patel opposes gun control measures and has not prioritized gun crime enforcement as a primary FBI mission relative to immigration and political investigations.", actions: ["Opposed gun control legislation in public commentary", "Supported Second Amendment rights advocacy", "Shifted FBI resources away from gun crime enforcement toward immigration"], source: "OnTheIssues, 2024" },
+        { topic: "Tax Policy & Economy", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Economic and tax policy are outside the FBI Director's portfolio. Patel has not commented prominently on tax or fiscal policy.", actions: ["Tax policy outside FBI jurisdiction", "Has not commented on tax legislation", "Aligned with general Trump administration economic positions"], source: "N/A" },
+        { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Hawkish Intel", description: "Patel has focused the FBI on counterterrorism and foreign intelligence threats, particularly from China and Iran, while pursuing what he describes as restoring the bureau's counterintelligence mission.", actions: ["Elevated Chinese espionage as a top FBI counterintelligence priority", "Focused on state-sponsored foreign threats as core FBI mission", "Coordinated with DOJ on prosecutions of foreign intelligence operatives"], source: "FBI, 2025" },
+        { topic: "Education", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Education policy is outside Patel's portfolio as FBI Director.", actions: ["Has not commented on education policy", "No significant education policy actions as FBI Director", "Aligned with Trump administration's general education positions"], source: "N/A" },
+        { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Selective Enforcement", description: "Patel has been criticized for selectively enforcing criminal laws based on political considerations, purging agents involved in prior Trump investigations while pursuing those he views as political enemies.", actions: ["Fired agents involved in January 6 and Trump-related investigations", "Pursued investigations of individuals Patel considers 'deep state' actors", "Drew criticism from FBI Agents Association for due process violations in firings"], source: "CNN, 2025" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Patel supports Israel and has focused FBI counterterrorism resources partly on domestic threats related to anti-Israel extremism.", actions: ["Prioritized counterterrorism resources on threats to Jewish and Israeli-linked targets", "Aligned with Trump administration's pro-Israel stance", "Has not commented extensively on Gaza conflict policy"], source: "FBI, 2025" },
+        { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "China Threat Focus", description: "Patel views China as the preeminent national security and law enforcement threat and has elevated Chinese espionage, intellectual property theft, and technology competition as top FBI priorities.", actions: ["Elevated Chinese state-sponsored hacking and espionage as top FBI priority", "Expanded FBI counterintelligence operations targeting Chinese government operatives", "Coordinated with DOJ on prosecutions of Chinese nationals for IP theft and espionage"], source: "FBI, 2025" }
+    ],
+    controversies: [
+        { title: "FBI Agents Association Due Process Warning", description: "The FBI Agents Association issued a formal warning to Congress that Director Patel's firings of agents had 'purposely violated' their due process rights. Three former senior FBI officials filed a federal lawsuit accusing Patel of unlawfully firing them as political retribution for their roles in prior Trump-related investigations.", source: "CNN, 2025" },
+        { title: "'Government Gangsters' Deep State List", description: "Patel's memoir includes an appendix listing 60 named federal employees he labeled 'Members of the Executive Branch Deep State.' Critics argued the list constituted a targeting roster; several named individuals faced subsequent investigations or terminations after Trump took office.", source: "New York Times, 2024" },
+        { title: "2026 Winter Olympics Controversy", description: "In February 2026, videos circulated online of Patel partying with the U.S. men's hockey team at the Winter Olympics in Italy, drawing criticism that he was using his government position for personal leisure. The New York Times reported the visit 'blurred the lines between personal recreation and professional responsibility.'", source: "New York Times, 2026" }
+    ],
+    trump: {
+        relationship: "Strong Ally",
+        badge: "trump-ally",
+        summary: "Patel has been one of Trump's most fervent loyalists since serving on the National Security Council, and authored the Nunes memo that formed the basis of Trump's 'deep state' narrative. His FBI directorship is widely seen as the culmination of years spent advocating for Trump's version of institutional reform.",
+        moments: [
+            { event: "Nunes Memo Authorship", action: "Patel authored the 2018 memo that alleged FBI misconduct in the Russia investigation, handing Trump his most potent argument against the investigation and cementing their alliance.", source: "House Intelligence Committee, 2018" },
+            { event: "Nominated as FBI Director Despite Opposition", action: "Trump nominated Patel over the objections of former AG Bill Barr and other senior Republicans, who cited his lack of law enforcement leadership experience.", source: "Axios, 2024" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "scottbessent",
+    name: "Scott Bessent",
+    initials: "SB",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Official_portrait_of_Treasury_Secretary_Scott_Bessent_%28borderless%29_%28cropped%29.jpg/330px-Official_portrait_of_Treasury_Secretary_Scott_Bessent_%28borderless%29_%28cropped%29.jpg",
+    party: "R",
+    title: "Secretary of the Treasury",
+    state: "South Carolina",
+    office: "U.S. Department of the Treasury",
+    currentRole: "cabinet",
+    tags: ["Macro Investor", "Fiscal Hawk", "Tariff Negotiator", "Wall Street", "Tax Cutter"],
+    highlights: [
+        "Confirmed as 79th Secretary of the Treasury on January 27, 2025, in a bipartisan 68-29 vote.",
+        "Former chief investment officer and partner at Soros Fund Management; founded his own global macro hedge fund, Key Square Group.",
+        "Became a key figure in the 2025 tariff negotiations, helping broker a 90-day pause on U.S.-China tariffs in August 2025.",
+        "Championed the 'three threes' economic framework: 3% GDP growth, halving the deficit to 3% of GDP, and 3 million additional barrels of daily oil production.",
+        "First openly gay Cabinet member confirmed in Republican administration history."
+    ],
+    keyVotes: [
+        { bill: "Tax Cuts and Jobs Act Extension Push", vote: "action", date: "2025", significance: "Led Treasury's push for Congress to extend the expiring TCJA provisions, calling failure to act economic 'calamity.'", source: "Treasury, 2025" },
+        { bill: "China Tariff Pause Negotiation", vote: "action", date: "2025", significance: "Credited alongside Commerce Secretary Lutnick with convincing Trump to pause many tariffs on April 9, 2025, and later securing a 90-day pause on China-specific tariffs.", source: "Reuters, 2025" },
+        { bill: "GENIUS Act Implementation", vote: "action", date: "2025", significance: "Oversaw implementation of the GENIUS Act, signed July 18, 2025, which established the first federal regulatory framework for dollar-backed stablecoins.", source: "Treasury, 2025" },
+        { bill: "180-Day Crypto Report", vote: "action", date: "2025", significance: "Released a comprehensive crypto regulatory report with 100+ recommendations to position the U.S. as the global leader in digital assets.", source: "Treasury, 2025" },
+        { bill: "Federal Debt Reduction Framework", vote: "action", date: "2025", significance: "Articulated Treasury's position that federal debt reduction is essential to economic stability, arguing the U.S. economy has become 'addicted to government spending.'", source: "Bloomberg, 2025" }
+    ],
+    finance: [
+        { year: "N/A", office: "Cabinet Appointee", total: 0, small_individual: 0, large_individual: 0, super_pac: 0, labor_pac: 0, corporate_pac: 0, party: 0, other: 100 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "opposes", stanceLabel: "Free Market", description: "Bessent supports market-based approaches to healthcare and has backed the administration's broader effort to reduce government spending, which includes potential cuts to Medicare and Medicaid.", actions: ["Supported fiscal framework that includes entitlement spending reductions", "Backed deregulatory approach to pharmaceutical pricing", "Has not proposed specific healthcare legislation as Treasury Secretary"], source: "Treasury, 2025" },
+        { topic: "Climate & Energy", stance: "opposes", stanceLabel: "Energy Production", description: "Bessent supports the administration's energy dominance agenda, viewing increased domestic oil and gas production as integral to his three-threes economic framework.", actions: ["Incorporated 3 million additional barrels of daily oil production into his economic framework", "Opposed carbon taxes and cap-and-trade systems as economically harmful", "Supported Treasury deregulation that reduced ESG reporting requirements for financial institutions"], source: "Treasury, 2025" },
+        { topic: "Immigration & Border", stance: "opposes", stanceLabel: "Economic Impact Focus", description: "Bessent has addressed immigration primarily through its economic lens, noting the potential inflationary impact of mass deportations while generally supporting border enforcement.", actions: ["Acknowledged immigration enforcement has complex macroeconomic effects", "Has not been a prominent voice on immigration enforcement policy", "Deferred to DHS and DOJ on immigration enforcement matters"], source: "Bloomberg, 2025" },
+        { topic: "Abortion & Reproductive Rights", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Reproductive rights policy falls outside the Treasury Secretary's portfolio. Bessent has not commented publicly on abortion legislation.", actions: ["Has not commented on abortion policy", "Treasury jurisdiction does not extend to reproductive rights", "Aligned with general Trump administration policy direction"], source: "N/A" },
+        { topic: "Gun Control", stance: "neutral", stanceLabel: "Not a Priority", description: "Gun control policy is outside the Treasury Secretary's primary portfolio, though Treasury does have some jurisdiction over firearms excise taxes.", actions: ["Has not commented on gun control legislation", "No significant gun policy actions as Treasury Secretary", "Aligned with general Trump administration Second Amendment positions"], source: "N/A" },
+        { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Cut Taxes, Cut Deficit", description: "Bessent is the administration's leading voice on tax and fiscal policy, advocating for extending the TCJA tax cuts while simultaneously reducing the federal deficit through spending cuts.", actions: ["Led push to extend all expiring Tax Cuts and Jobs Act provisions", "Articulated 3-3-3 framework targeting 3% GDP growth and deficit reduction", "Supported tariffs as a revenue and negotiating tool while warning against excessive trade disruption"], source: "Treasury, 2025" },
+        { topic: "Foreign Policy & Military", stance: "supports", stanceLabel: "Economic Statecraft", description: "Bessent views economic tools — tariffs, sanctions, and financial diplomacy — as primary instruments of U.S. foreign policy, often counseling a more calibrated approach than other administration hawks.", actions: ["Led negotiations with China on tariff de-escalation", "Managed Treasury sanctions policy against Russia, Iran, and North Korea", "Brokered financial agreements with allied nations on trade and currency"], source: "Treasury, 2025" },
+        { topic: "Education", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Education policy falls outside Treasury's primary portfolio. Bessent has not commented prominently on K-12 or higher education policy.", actions: ["No significant education policy actions as Treasury Secretary", "Treasury does administer some student loan and 529 plan tax policy", "Has not commented on Department of Education restructuring plans"], source: "N/A" },
+        { topic: "Criminal Justice & Policing", stance: "neutral", stanceLabel: "Financial Crimes Focus", description: "Treasury's criminal justice role is largely limited to financial crimes, money laundering, and sanctions enforcement, which Bessent has maintained as core bureau functions.", actions: ["Continued FinCEN enforcement of anti-money-laundering rules", "Maintained OFAC sanctions enforcement programs", "Has not commented on broader criminal justice reform debates"], source: "Treasury, 2025" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Bessent has implemented Treasury sanctions and financial measures in support of U.S. policy toward Israel and against Iran and Hamas.", actions: ["Maintained and expanded Treasury sanctions on Hamas-linked financial networks", "Enforced sanctions against Iranian oil revenue funding Hamas and Hezbollah", "Aligned with administration's pro-Israel economic policy stance"], source: "Treasury, 2025" },
+        { topic: "Trade & China", stance: "opposes", stanceLabel: "Strategic Decoupling", description: "Bessent views China as an economic and national security adversary but advocates for a more measured tariff strategy than some administration hardliners, favoring strategic decoupling over blanket trade war.", actions: ["Brokered 90-day pause on U.S.-China tariffs while maintaining pressure", "Called 145% tariffs on China 'unsustainable' while supporting structured decoupling", "Released 180-day crypto report partly designed to outcompete China's digital yuan"], source: "CNBC, 2025" }
+    ],
+    controversies: [
+        { title: "Soros Fund Management Background", description: "Bessent's long career at Soros Fund Management — the investment vehicle of liberal billionaire George Soros — drew criticism from some conservatives who questioned his ideological credentials. He participated in the 1992 trade that profited $1 billion from the devaluation of the British pound.", source: "Britannica, 2024" },
+        { title: "Tariff Whipsaw Accusations", description: "Financial markets experienced significant volatility during the spring 2025 tariff announcements, with Bessent defending rapid changes in tariff policy as intentional 'strategic uncertainty.' Critics, including some economists, argued the volatility caused real economic harm to businesses and consumers.", source: "Fortune, 2025" },
+        { title: "Conflict of Interest — Farmland Holdings", description: "Bessent owns soybean and corn farmland in North Dakota worth between $5 million and $25 million, creating a potential conflict of interest given Treasury's role in agricultural trade policy and the ongoing U.S.-China trade dispute affecting farm commodity prices.", source: "CNBC, 2025" }
+    ],
+    trump: {
+        relationship: "Loyal Ally",
+        badge: "trump-ally",
+        summary: "Bessent was an early financial supporter of Trump's 2024 campaign and became an economic surrogate before being named Treasury Secretary. He is considered one of the more institutionally-minded members of the cabinet while remaining a loyal Trump ally.",
+        moments: [
+            { event: "Early Trump Economic Surrogate", action: "Bessent became a prominent media spokesperson for Trump's economic agenda during the 2024 campaign, articulating the three-threes framework that became administration policy.", source: "Wall Street Journal, 2024" },
+            { event: "Brokered China Tariff Pause", action: "Bessent played a central role in convincing Trump to pause broad tariffs in April 2025 and later securing the August 90-day China-specific tariff pause, averting a deeper trade war.", source: "Reuters, 2025" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "lindamcmahon",
+    name: "Linda McMahon",
+    initials: "LM",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/ED_Sec_Linda_McMahon_%28cropped%29.jpg/330px-ED_Sec_Linda_McMahon_%28cropped%29.jpg",
+    party: "R",
+    title: "Secretary of Education",
+    state: "Connecticut",
+    office: "U.S. Department of Education",
+    currentRole: "cabinet",
+    tags: ["School Choice", "Dept. Closure", "WWE CEO", "Former SBA", "Parental Rights"],
+    highlights: [
+        "Confirmed as 13th Secretary of Education on March 3, 2025, with a mandate to dismantle the 45-year-old Department of Education.",
+        "Former co-founder and CEO of World Wrestling Entertainment (WWE), growing it into a multi-billion dollar global entertainment company.",
+        "Served as Trump's Small Business Administration Administrator from 2017 to 2019 during his first term.",
+        "Twice ran unsuccessfully for U.S. Senate from Connecticut in 2010 and 2012.",
+        "Chairs the America First Policy Institute, which has promoted Project 2025-aligned education privatization policies."
+    ],
+    keyVotes: [
+        { bill: "Department of Education Closure Executive Order", vote: "action", date: "2025", significance: "Announced the department's 'Final Mission' to close itself under Trump's executive order directing her to prepare the agency for shutdown.", source: "Dept. of Education, 2025" },
+        { bill: "Title I and IDEA Fund Transfer", vote: "action", date: "2025", significance: "Announced plans to transfer administration of Title I education funds and IDEA special education programs to the states.", source: "Dept. of Education, 2025" },
+        { bill: "DEI Program Elimination in Schools", vote: "action", date: "2025", significance: "Issued guidance threatening to cut federal funding to schools and universities that maintain diversity, equity, and inclusion programs.", source: "Dept. of Education, 2025" },
+        { bill: "SBA Small Business Advocacy (2017-2019)", vote: "action", date: "2018", significance: "As SBA Administrator in Trump's first term, streamlined small business loan programs and advocated for deregulation affecting small businesses.", source: "SBA, 2018" },
+        { bill: "Pell Grant Expansion for Workforce Training", vote: "action", date: "2025", significance: "Supported expanding Pell Grant eligibility for short-term workforce training programs outside traditional four-year colleges.", source: "Dept. of Education, 2025" }
+    ],
+    finance: [
+        { year: "N/A", office: "Cabinet Appointee", total: 0, small_individual: 0, large_individual: 0, super_pac: 0, labor_pac: 0, corporate_pac: 0, party: 0, other: 100 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Healthcare policy is primarily outside the Education Secretary's portfolio, though McMahon has supported school mental health initiatives in the past.", actions: ["No significant healthcare policy actions as Education Secretary", "Supported some school-based mental health resources during SBA tenure", "Has not commented prominently on healthcare legislation"], source: "N/A" },
+        { topic: "Climate & Energy", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Climate and energy policy fall outside the Department of Education's core mission. McMahon has not taken prominent positions on environmental issues.", actions: ["Has not commented on climate policy", "Eliminated sustainability-focused curriculum guidelines from federal education recommendations", "Aligned with administration's deregulatory energy position"], source: "N/A" },
+        { topic: "Immigration & Border", stance: "opposes", stanceLabel: "Enforcement Aligned", description: "McMahon has aligned with the Trump administration's immigration enforcement priorities in the education context, including guidance on school admissions and undocumented student data.", actions: ["Aligned with administration's general immigration enforcement stance", "Has not issued specific guidance on undocumented students' educational rights", "Deferred to DHS and DOJ on immigration enforcement matters"], source: "Dept. of Education, 2025" },
+        { topic: "Abortion & Reproductive Rights", stance: "opposes", stanceLabel: "Pro-Life Aligned", description: "McMahon has aligned with the Trump administration's anti-abortion stance and has not taken actions that would expand access to reproductive health information through school programs.", actions: ["Aligned with administration's pro-life policy direction", "Has not funded comprehensive sex education programs as Education Secretary", "Supported abstinence-aligned educational approaches"], source: "Ballotpedia, 2024" },
+        { topic: "Gun Control", stance: "opposes", stanceLabel: "School Safety Focus", description: "McMahon has addressed gun violence in schools through a security and mental health lens rather than gun control measures, consistent with Republican policy orthodoxy.", actions: ["Supported school safety funding for security infrastructure", "Opposed gun control legislation as a Senate candidate in Connecticut", "Favored mental health intervention over firearms restrictions in school safety policy"], source: "Ballotpedia, 2024" },
+        { topic: "Tax Policy & Economy", stance: "supports", stanceLabel: "Pro-Growth", description: "McMahon supports low-tax, pro-business economic policies developed throughout her business career and Trump administration service.", actions: ["Supported Trump's Tax Cuts and Jobs Act as SBA Administrator", "Advocated for small business tax relief during SBA tenure", "Supports workforce training tax incentives"], source: "SBA, 2018" },
+        { topic: "Foreign Policy & Military", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Foreign policy and military affairs are outside the Education Secretary's primary portfolio. McMahon has not taken prominent positions on foreign policy.", actions: ["Has not commented on foreign policy or military matters", "Aligned with administration's general foreign policy direction", "No foreign policy actions relevant to education portfolio"], source: "N/A" },
+        { topic: "Education", stance: "strongly-opposes", stanceLabel: "Dismantle Dept. of Ed", description: "McMahon has embraced her role as the last Secretary of Education with a mandate to close the department, return control to states, expand school choice, and defund programs she views as promoting progressive ideology.", actions: ["Announced plan to dismantle the Department of Education per Trump's executive order", "Issued guidance eliminating DEI programs in schools under threat of federal funding cuts", "Supported universal school choice and education savings account legislation", "Proposed transferring Title I and special education funding directly to states"], source: "Dept. of Education, 2025" },
+        { topic: "Criminal Justice & Policing", stance: "neutral", stanceLabel: "Not in Portfolio", description: "Criminal justice policy is outside the Education Secretary's core portfolio, though education funding for juvenile rehabilitation programs falls under her purview.", actions: ["Has not commented on criminal justice reform", "Maintained some funding for prison education programs", "Has not taken prominent positions on policing policy"], source: "N/A" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel in Education", description: "McMahon issued guidance addressing antisemitism on college campuses and threatened to pull federal funding from universities that failed to protect Jewish students.", actions: ["Issued guidance threatening funding cuts to universities permitting antisemitic discrimination", "Aligned with administration's pro-Israel stance in higher education context", "Opened Title VI investigations into universities over campus antisemitism allegations"], source: "Dept. of Education, 2025" },
+        { topic: "Trade & China", stance: "opposes", stanceLabel: "Reduce Chinese Influence", description: "McMahon has supported reviewing and restricting Chinese influence in American higher education, including Confucius Institute programs and Chinese student visa policies.", actions: ["Supported review of Confucius Institutes on American university campuses", "Backed restrictions on Chinese nationals in sensitive research programs", "Aligned with administration's broader China competition strategy in education context"], source: "Dept. of Education, 2025" }
+    ],
+    controversies: [
+        { title: "No Formal Education Background", description: "McMahon's confirmation drew criticism because she has no formal background in education policy, teaching, or school administration. Education advocates argued her primary experience — running a professional wrestling entertainment company and a government loan agency — did not qualify her to lead the nation's education system.", source: "19th News, 2025" },
+        { title: "WWE Labor and Content Controversies", description: "During McMahon's tenure as WWE CEO, the company faced criticism for classifying wrestlers as independent contractors rather than employees, denying them health benefits. WWE programming also faced repeated controversies over violent, sexual, and racially insensitive content.", source: "ESPN, 2023" },
+        { title: "$750 Million in Connecticut Senate Races", description: "McMahon spent approximately $100 million of her own money across two unsuccessful Connecticut Senate campaigns in 2010 and 2012, making them among the most expensive in state history. Critics pointed to the losses as evidence that her political and policy judgment was questionable.", source: "CT Mirror, 2012" }
+    ],
+    trump: {
+        relationship: "Loyal Ally",
+        badge: "trump-ally",
+        summary: "McMahon has been a close Trump ally since his first administration, serving as SBA Administrator from 2017 to 2019 and donating millions to his campaigns and causes through her America First Action super PAC.",
+        moments: [
+            { event: "SBA Administrator in First Term", action: "McMahon served loyally as SBA Administrator from 2017 to 2019, implementing Trump's small business deregulation agenda before resigning to focus on political fundraising.", source: "SBA, 2019" },
+            { event: "Chair of America First Policy Institute", action: "McMahon chaired the America First Policy Institute, which served as a policy development hub for Trump's second-term agenda, including the education privatization plans she is now implementing.", source: "AFPI, 2024" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "vivekramaswamy",
+    name: "Vivek Ramaswamy",
+    initials: "VR",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Vivek_Ramaswamy_2026_%28cropped%29.jpg/330px-Vivek_Ramaswamy_2026_%28cropped%29.jpg",
+    party: "R",
+    title: "2026 Republican Nominee for Ohio Governor",
+    state: "Ohio",
+    office: "Former DOGE Co-Director (Designate) / Ohio Gubernatorial Candidate",
+    currentRole: "former",
+    tags: ["DOGE", "Anti-Woke", "Entrepreneur", "2024 Presidential", "Ohio Governor Race"],
+    highlights: [
+        "Won the 2026 Ohio Republican gubernatorial primary in May 2026, set to face Democrat Amy Acton in the general election.",
+        "Announced alongside Elon Musk as co-leader of DOGE in November 2024 but departed before taking the role on inauguration day.",
+        "Founded and ran Roivant Sciences, a biopharmaceutical company, before entering politics.",
+        "Ran as a Republican presidential candidate in 2024, finishing fourth in the Iowa caucuses before endorsing Trump.",
+        "Authored 'Woke, Inc.' (2021), arguing that corporations use progressive social causes to distract from profit motives."
+    ],
+    keyVotes: [
+        { bill: "2024 Presidential Campaign", vote: "action", date: "2024", significance: "Ran as a Republican presidential candidate on an anti-establishment, anti-DEI platform, raising $66 million before dropping out after Iowa and endorsing Trump.", source: "FEC, 2024" },
+        { bill: "DOGE Departure", vote: "action", date: "2025", significance: "Departed the DOGE co-leadership role on inauguration day amid reported friction with Elon Musk and Trump advisers, opting instead to run for Ohio governor.", source: "Reuters, 2025" },
+        { bill: "Ohio Governor Campaign Launch", vote: "action", date: "2025", significance: "Announced his Ohio gubernatorial candidacy in February 2025, campaigning on eliminating the state income tax and making Ohio the most affordable state in America.", source: "Ohio Secretary of State, 2025" },
+        { bill: "Ohio Republican Primary Win", vote: "action", date: "2026", significance: "Won the Ohio Republican gubernatorial primary by a substantial margin in May 2026, becoming the GOP nominee for governor.", source: "Ohio AP, 2026" },
+        { bill: "Federal Agencies Abolition Proposal", vote: "action", date: "2023", significance: "During his presidential campaign, proposed eliminating the FBI, DOE, DOEd, IRS, and other federal agencies, which became central themes of DOGE's formation.", source: "Ramaswamy campaign, 2023" }
+    ],
+    finance: [
+        { year: "2024", office: "Presidential Primary, Republican", total: 66000000, small_individual: 20, large_individual: 25, super_pac: 0, labor_pac: 0, corporate_pac: 0, party: 0, other: 55 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "opposes", stanceLabel: "Sick Care Reform", description: "Ramaswamy argues the U.S. has a 'sick care system' rather than a healthcare system, favoring competitive markets, preventative medicine, and elimination of insurance antitrust exemptions.", actions: ["Proposed ending antitrust exemptions for health insurance companies", "Supported competitive insurance markets covering preventative care", "Opposed the Affordable Care Act's mandates and regulatory structure"], source: "Ramaswamy campaign, 2023" },
+        { topic: "Climate & Energy", stance: "strongly-opposes", stanceLabel: "Climate Skeptic", description: "Ramaswamy has called climate change a 'hoax' and a 'mass delusion,' advocating for elimination of the EPA and full energy deregulation. He has called green energy policy one of America's greatest threats.", actions: ["Proposed eliminating the Environmental Protection Agency", "Called for unrestricted fossil fuel extraction on federal lands", "Opposed all federal subsidies for renewable energy"], source: "Ramaswamy campaign, 2023" },
+        { topic: "Immigration & Border", stance: "strongly-opposes", stanceLabel: "Militarize Border", description: "Ramaswamy supports militarizing the southern border, ending birthright citizenship for children of undocumented immigrants, and deporting all undocumented persons using military force.", actions: ["Proposed using military to seal and militarize the southern border", "Supported ending birthright citizenship via executive action", "Called for universal deportation of undocumented immigrants"], source: "Ramaswamy campaign, 2023" },
+        { topic: "Abortion & Reproductive Rights", stance: "opposes", stanceLabel: "Pro-Life", description: "Ramaswamy opposes abortion, describing it as 'murder,' but supports state-level rather than federal regulation and has endorsed six-week bans with exceptions for rape, incest, and the life of the mother.", actions: ["Supported state-level six-week abortion bans", "Opposed a federal abortion ban", "Endorsed exceptions for rape, incest, and the life of the mother"], source: "Washington Post, 2023" },
+        { topic: "Gun Control", stance: "strongly-opposes", stanceLabel: "2nd Amendment", description: "Ramaswamy strongly opposes gun control, supporting broad Second Amendment rights and opposing background check expansions, red flag laws, and assault weapons restrictions.", actions: ["Opposed universal background check legislation", "Strongly opposed red flag law proposals", "Supported Constitutional Carry expansion across states"], source: "Washington Post, 2023" },
+        { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Slash and Grow", description: "Ramaswamy has proposed eliminating the federal income tax, abolishing the IRS, and achieving massive government spending cuts. For Ohio, he proposes eliminating the state income tax.", actions: ["Proposed elimination of federal income tax and IRS during presidential campaign", "Campaigned on eliminating Ohio state income tax in 2026 governor's race", "Proposed cutting federal workforce by 75% to reduce government spending"], source: "Ramaswamy campaign, 2023/2026" },
+        { topic: "Foreign Policy & Military", stance: "opposes", stanceLabel: "Non-Interventionist", description: "Ramaswamy opposes U.S. military interventionism and foreign aid, supporting a rapid end to the Ukraine war, reduced NATO commitments, and redirecting resources to domestic needs.", actions: ["Proposed ending U.S. military aid to Ukraine and pursuing a negotiated settlement", "Opposed NATO membership expansion", "Called for reducing foreign aid and multilateral commitments"], source: "Ramaswamy campaign, 2023" },
+        { topic: "Education", stance: "strongly-opposes", stanceLabel: "Abolish Dept. of Ed", description: "Ramaswamy proposed abolishing the U.S. Department of Education and returning full control of education to states and parents, a position now partially implemented under Linda McMahon.", actions: ["Proposed abolishing the Department of Education during presidential campaign", "Supported universal school choice and education savings accounts", "Campaigned on raising academic standards in Ohio public schools in 2026 race"], source: "Ramaswamy campaign, 2023" },
+        { topic: "Criminal Justice & Policing", stance: "supports", stanceLabel: "Law and Order", description: "Ramaswamy supports strong law enforcement and opposes police defunding, while arguing that over-criminalization of non-violent offenses is a government overreach problem.", actions: ["Strongly opposed defund-the-police movement", "Supported increased law enforcement funding", "Criticized FBI and DOJ prosecutorial decisions he viewed as politically motivated"], source: "NBC News, 2023" },
+        { topic: "Israel & Gaza", stance: "supports", stanceLabel: "Pro-Israel", description: "Ramaswamy is a strong supporter of Israel, backing its right to self-defense while opposing permanent U.S. military entanglement in Middle Eastern conflicts.", actions: ["Expressed strong support for Israel's right to defend itself after October 7, 2023", "Opposed international pressure campaigns against Israel", "Supported U.S. arms transfers to Israel"], source: "Ramaswamy campaign, 2023" },
+        { topic: "Trade & China", stance: "strongly-opposes", stanceLabel: "Decouple from China", description: "Ramaswamy views China as America's primary existential adversary and advocates for full economic decoupling, restricting Chinese investment in U.S. assets, and reshoring critical supply chains.", actions: ["Proposed a complete ban on Chinese purchases of U.S. real estate and infrastructure", "Called for full economic decoupling from China within a decade", "Supported tariffs and sanctions targeting Chinese technology companies"], source: "Ramaswamy campaign, 2023" }
+    ],
+    controversies: [
+        { title: "Departed DOGE Before Taking Role Amid Reported Friction", description: "Although announced as co-leader of DOGE alongside Elon Musk, Ramaswamy never formally assumed the post. Reports indicated friction between Ramaswamy and Musk as well as with other Trump advisers, culminating in his departure on inauguration day. Ramaswamy attributed the decision to his interest in running for Ohio governor.", source: "Reuters, 2025" },
+        { title: "Roivant Sciences Controversies", description: "Ramaswamy's pharmaceutical company Roivant Sciences was criticized for its practice of licensing drug compounds from other companies and repricing them at higher costs, a business model critics called predatory. The company also saw stock volatility tied to failed drug trials.", source: "STAT News, 2023" },
+        { title: "Debate Controversy — CIA Abolition Remarks", description: "During the 2023-24 Republican presidential debates, Ramaswamy called for abolishing the FBI, CIA, DOE, DOEd, and several other agencies, prompting sharp criticism from fellow Republicans including Nikki Haley and Chris Christie, who called his positions naive and dangerous.", source: "CNN, 2023" }
+    ],
+    trump: {
+        relationship: "Loyal Ally",
+        badge: "trump-ally",
+        summary: "Ramaswamy endorsed Trump after dropping out of the 2024 primary and became one of his most energetic surrogates. Trump rewarded him with the DOGE co-designation, though Ramaswamy ultimately opted to pursue elected office instead.",
+        moments: [
+            { event: "Endorsed Trump at Iowa Caucuses", action: "After finishing fourth in Iowa, Ramaswamy gave an effusive endorsement of Trump at his caucus night event, immediately pivoting from rival to surrogate.", source: "Des Moines Register, 2024" },
+            { event: "Named DOGE Co-Leader With Musk", action: "Trump announced Ramaswamy and Musk as the co-leaders of the new Department of Government Efficiency in November 2024, signaling significant trust and a major role in the incoming administration.", source: "Trump campaign, 2024" }
+        ]
+    },
+    vision: null
+},
+{
+    id: "elonmusk",
+    name: "Elon Musk",
+    initials: "EM",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Elon_Musk_-_54820081119_%28cropped%29.jpg/330px-Elon_Musk_-_54820081119_%28cropped%29.jpg",
+    party: "R",
+    title: "Former DOGE Special Government Employee",
+    state: "Texas",
+    office: "Former U.S. DOGE Service / Senior Presidential Adviser",
+    currentRole: "former",
+    tags: ["DOGE", "Government Cuts", "Tech Billionaire", "Tesla CEO", "SpaceX CEO"],
+    highlights: [
+        "Served as a Special Government Employee and de facto leader of the Department of Government Efficiency from January to May 2025.",
+        "CEO of Tesla, SpaceX, and X (formerly Twitter); the world's wealthiest person with an estimated net worth over $300 billion.",
+        "Spent more than $270 million supporting Trump's 2024 presidential campaign through his America PAC super PAC.",
+        "DOGE claimed over $160 billion in federal savings, though independent analysts disputed the accounting and found widespread errors.",
+        "Departed the Trump administration in May 2025 after legal setbacks, clashes with Cabinet members, and declining political capital."
+    ],
+    keyVotes: [
+        { bill: "USAID Elimination", vote: "action", date: "2025", significance: "Led DOGE's effort to effectively shut down the U.S. Agency for International Development, terminating thousands of contracts and laying off nearly all of its staff.", source: "Washington Post, 2025" },
+        { bill: "Federal Workforce Reduction", vote: "action", date: "2025", significance: "Oversaw mass federal employee layoffs through DOGE, affecting agencies across the government and triggering dozens of federal lawsuits.", source: "AP, 2025" },
+        { bill: "DOGE Savings Claims", vote: "action", date: "2025", significance: "Announced DOGE had saved over $160 billion through contract cancellations and agency closures; independent analysts found repeated accounting errors and disputed a majority of claimed savings.", source: "AP / GAO, 2025" },
+        { bill: "Government Database Access", vote: "action", date: "2025", significance: "DOGE personnel gained access to sensitive federal databases including Social Security, IRS, and Treasury systems, prompting constitutional challenges in federal courts.", source: "NPR, 2025" },
+        { bill: "Social Security Fraud Claims", vote: "action", date: "2025", significance: "Musk alleged 20 million people received Social Security benefits past age 100, claiming it as 'the biggest fraud in history'; the claim was based on a database misunderstanding and was widely debunked.", source: "AP Fact Check, 2025" }
+    ],
+    finance: [
+        { year: "N/A", office: "Special Government Employee", total: 0, small_individual: 0, large_individual: 0, super_pac: 0, labor_pac: 0, corporate_pac: 0, party: 0, other: 100 }
+    ],
+    issues: [
+        { topic: "Healthcare", stance: "opposes", stanceLabel: "Cut Health Bureaucracy", description: "Musk supported DOGE's cuts to health agencies and research funding, arguing the government health bureaucracy is bloated, inefficient, and captured by pharmaceutical interests.", actions: ["Supported DOGE cuts to NIH research grants", "Backed elimination of what he described as wasteful HHS administrative spending", "Promoted private-sector health innovation over government-funded research"], source: "DOGE, 2025" },
+        { topic: "Climate & Energy", stance: "mixed", stanceLabel: "Pro-EV, Anti-Subsidy", description: "Musk's position on climate is paradoxical: he built Tesla on the premise that electric vehicles are essential to a sustainable future, yet supported DOGE's elimination of clean energy subsidies and EPA regulations.", actions: ["Supported DOGE elimination of EV competitor subsidies under the IRA", "Opposed EPA regulations he viewed as market distortions", "Continued Tesla EV and solar energy development as private ventures"], source: "Reuters, 2025" },
+        { topic: "Immigration & Border", stance: "opposes", stanceLabel: "H-1B Supporter but Border Enforcer", description: "Musk's immigration position is internally divided: he strongly supports high-skilled immigration via H-1B visas, which fueled a Republican civil war, while also supporting harsh southern border enforcement.", actions: ["Publicly defended H-1B visa program against Republican critics", "Supported DOGE cuts that affected immigration court staffing", "Backed broad border security enforcement measures"], source: "Axios, 2025" },
+        { topic: "Abortion & Reproductive Rights", stance: "neutral", stanceLabel: "Not a Priority", description: "Musk has not been a prominent voice on abortion policy. He has expressed concern about declining birth rates but has not advocated for specific abortion legislation.", actions: ["Has not commented on abortion legislation", "Expressed general concern about declining Western birth rates", "Did not prioritize reproductive rights policy in DOGE work"], source: "X / Twitter, 2024" },
+        { topic: "Gun Control", stance: "opposes", stanceLabel: "Pro-2nd Amendment", description: "Musk has expressed strong support for gun rights and opposed gun control legislation, consistent with his broadly libertarian views on individual rights.", actions: ["Opposed gun control legislation on X platform", "Supported Second Amendment advocacy groups", "Has not taken policy actions on gun issues in government role"], source: "X / Twitter, 2024" },
+        { topic: "Tax Policy & Economy", stance: "strongly-supports", stanceLabel: "Slash Government", description: "Musk's central mission with DOGE was to dramatically reduce federal spending, targeting what he characterized as waste, fraud, and abuse across every agency.", actions: ["Led DOGE campaign targeting $2 trillion in federal spending cuts", "Supported extension of Trump's Tax Cuts and Jobs Act", "Advocated for eliminating entire federal agencies and programs"], source: "DOGE, 2025" },
+        { topic: "Foreign Policy & Military", stance: "mixed", stanceLabel: "Selective Engagement", description: "Musk has expressed skepticism of open-ended foreign military commitments, including opposition to continued U.S. support for Ukraine, while maintaining strategic relationships through SpaceX Starlink contracts with the U.S. military.", actions: ["Publicly supported negotiations to end the Ukraine war, drawing criticism from Ukraine and NATO allies", "Maintained SpaceX Starlink military contracts while publicly criticizing aspects of U.S. foreign policy", "Opposed foreign aid through DOGE budget cuts"], source: "Reuters, 2025" },
+        { topic: "Education", stance: "opposes", stanceLabel: "Disrupt Education", description: "Musk has been a vocal critic of public education, calling traditional schooling outdated. He founded Ad Astra school for SpaceX employees' children and supports radical education reform and school choice.", actions: ["Supported DOGE cuts to Department of Education programs", "Endorsed radical restructuring of public education toward skills-based learning", "Founded private school (Ad Astra) emphasizing critical thinking over traditional curriculum"], source: "Bloomberg, 2023" },
+        { topic: "Criminal Justice & Policing", stance: "mixed", stanceLabel: "Anti-DOJ", description: "Musk has been sharply critical of the DOJ and FBI, which he views as politically weaponized institutions. He supported DOGE interference in law enforcement agencies while opposing policies he saw as politicized enforcement.", actions: ["Publicly attacked FBI and DOJ officials on X platform", "Supported Kash Patel's nomination as FBI Director", "Backed DOGE access to DOJ and FBI data systems"], source: "X / Twitter, 2025" },
+        { topic: "Israel & Gaza", stance: "mixed", stanceLabel: "Controversial Stance", description: "Musk's position on Israel and antisemitism became a significant controversy. He expressed support for Israel while also amplifying antisemitic content on X, for which he apologized.", actions: ["Expressed support for Israel following October 7, 2023, attacks", "Amplified an antisemitic post on X, later apologizing after advertiser backlash", "Visited Auschwitz in January 2024 in a public statement against antisemitism"], source: "ADL / Reuters, 2023" },
+        { topic: "Trade & China", stance: "mixed", stanceLabel: "Conflicted", description: "Musk faces a significant conflict of interest on China trade policy: Tesla's Gigafactory Shanghai is one of its most important production facilities, making Musk personally dependent on good U.S.-China relations even as he nominally supported the administration's China tariff strategy.", actions: ["Supported broad U.S.-China competition framework", "Maintained Tesla's Chinese manufacturing operations during trade war escalation", "Did not publicly oppose China tariffs despite Tesla's exposure to Chinese market"], source: "Financial Times, 2025" }
+    ],
+    controversies: [
+        { title: "Disputed DOGE Savings Claims and Accounting Errors", description: "DOGE claimed savings of over $160 billion but independent analysts, journalists, and the Government Accountability Office found repeated accounting errors, double-counting, and inflated figures. Many claimed savings came from contracts that were subsequently reinstated after legal challenges.", source: "AP / Washington Post, 2025" },
+        { title: "Antisemitic Post on X", description: "In November 2023, Musk agreed with an antisemitic post on X claiming Jewish communities promoted 'hatred against Whites.' The statement caused massive advertiser boycotts of X and drew condemnation from the White House, the ADL, and Jewish organizations. Musk later visited Auschwitz and expressed regret.", source: "Reuters / ADL, 2023" },
+        { title: "Legal Challenges to DOGE Data Access", description: "A multi-state lawsuit and multiple federal court rulings found that DOGE likely acted unconstitutionally in accessing government data systems, canceling contracts, and terminating federal employees without legal authority. A federal judge found Musk had likely acted as DOGE's de facto leader with authority he was never formally granted.", source: "Democracy Docket / NPR, 2025" }
+    ],
+    trump: {
+        relationship: "Strong Ally",
+        badge: "trump-ally",
+        summary: "Musk spent over $270 million backing Trump's 2024 campaign through his America PAC, making him the single largest individual donor in American political history. Trump rewarded him with the DOGE role, but the relationship cooled after Musk's departure in May 2025.",
+        moments: [
+            { event: "$270M Campaign Contribution", action: "Musk's America PAC spent over $270 million supporting Trump's 2024 election, including direct voter outreach operations in swing states, making Musk the largest single donor in American electoral history.", source: "FEC, 2025" },
+            { event: "DOGE Appointment and Departure", action: "Trump announced Musk as DOGE co-leader with Ramaswamy in November 2024. After five months of sweeping — and legally contested — federal cuts, Musk announced his departure in late May 2025 to return to managing his businesses.", source: "White House / Reuters, 2025" }
+        ]
+    },
+    vision: null
+}
 ];
 
 // ── Helpers ──────────────────────────────────────────────
