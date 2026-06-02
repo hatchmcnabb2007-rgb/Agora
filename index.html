@@ -1734,7 +1734,7 @@
 
     <div class="lp-stats">
         <div class="lp-stat">
-            <span class="lp-stat-num">200</span>
+            <span class="lp-stat-num" id="lp-profile-count">200</span>
             <span class="lp-stat-label">Profiles</span>
         </div>
         <div class="lp-stat">
@@ -1775,7 +1775,7 @@
         <div class="lp-section-eyebrow">In the Spotlight</div>
         <div class="lp-section-title">Browse the profiles</div>
         <div class="lp-preview-grid" id="lp-preview-grid"></div>
-        <button class="lp-cta-sec" onclick="enterApp()">See all 200 profiles &nbsp;→</button>
+        <button class="lp-cta-sec" id="lp-cta-count" onclick="enterApp()">See all 200 profiles &nbsp;→</button>
     </section>
 
     <section class="lp-newsletter">
@@ -19584,6 +19584,15 @@ function submitReport() {
     window.location.href = `mailto:AgoraCivicEngagement@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     document.getElementById("report-overlay").classList.remove("open");
 }
+
+// ── Sync landing page profile count from live candidates array ───
+(function () {
+    const n = candidates.length;
+    const countEl = document.getElementById("lp-profile-count");
+    const ctaEl   = document.getElementById("lp-cta-count");
+    if (countEl) countEl.textContent = n;
+    if (ctaEl)   ctaEl.textContent   = `See all ${n} profiles  →`;
+})();
 
 // Navigate to profile if URL has ?id= param on load
 (function () {
