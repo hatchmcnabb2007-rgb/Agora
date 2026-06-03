@@ -1,0 +1,7 @@
+name = "agora"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "AGORA_KV"
+id = "744def6c5f5c496d99ee16a73124ae5a"
