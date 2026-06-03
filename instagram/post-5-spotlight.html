@@ -29,86 +29,87 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #C9A84C;
-      margin-bottom: 44px;
+      margin-bottom: 40px;
     }
 
     .header-row {
       display: flex;
       align-items: flex-start;
-      gap: 40px;
+      gap: 48px;
       margin-bottom: 52px;
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 3px;
-      background: #1a1a1a;
-      border: 1px solid #222;
+      width: 160px;
+      height: 160px;
+      border-radius: 4px;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Georgia, serif;
-      font-size: 40px;
-      color: #C9A84C;
+      object-fit: cover;
+      object-position: top;
+      border: 1px solid #2a2a2a;
     }
 
-    .name-block {}
+    .name-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 8px;
+    }
 
     .candidate-name {
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: 54px;
+      font-size: 72px;
       color: #F8F6F2;
       font-weight: normal;
       line-height: 1.0;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
     .role {
       font-family: system-ui, sans-serif;
-      font-size: 14px;
+      font-size: 17px;
       color: #555;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
     }
 
     .section-label {
       font-family: system-ui, sans-serif;
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #444;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .stances {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       margin-bottom: 44px;
       flex: 1;
     }
 
     .stance-row {
       display: flex;
-      align-items: center;
-      gap: 20px;
+      align-items: baseline;
+      gap: 24px;
     }
 
     .issue-name {
       font-family: system-ui, sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #555;
-      width: 180px;
+      width: 200px;
       flex-shrink: 0;
     }
 
     .stance-badge {
       font-family: system-ui, sans-serif;
-      font-size: 14px;
+      font-size: 18px;
       color: #F8F6F2;
+      line-height: 1.3;
     }
 
     .divider {
@@ -138,16 +139,17 @@
 
     .fin-number {
       font-family: Georgia, serif;
-      font-size: 38px;
+      font-size: 52px;
       color: #F8F6F2;
       font-weight: normal;
+      line-height: 1.0;
     }
 
     .fin-label {
       font-family: system-ui, sans-serif;
-      font-size: 12px;
+      font-size: 13px;
       color: #444;
-      margin-top: 4px;
+      margin-top: 6px;
       letter-spacing: 0.04em;
     }
 
@@ -175,10 +177,10 @@
 <body>
   <div class="frame">
     <div class="gold-bar"></div>
-    <div class="label">Candidate Spotlight</div>
+    <div class="label">Profile Spotlight</div>
 
     <div class="header-row">
-      <div class="avatar">BS</div>
+      <img class="avatar" src="https://unitedstates.github.io/images/congress/450x550/S000033.jpg" alt="Bernie Sanders">
       <div class="name-block">
         <div class="candidate-name">Bernie<br>Sanders</div>
         <div class="role">U.S. Senator · Vermont · Independent</div>
@@ -201,11 +203,7 @@
       </div>
       <div class="stance-row">
         <div class="issue-name">Education</div>
-        <div class="stance-badge">Free public college, cancel student debt</div>
-      </div>
-      <div class="stance-row">
-        <div class="issue-name">Campaign Finance</div>
-        <div class="stance-badge">No PAC money — small donors only</div>
+        <div class="stance-badge">Free public college; cancel student debt</div>
       </div>
     </div>
 

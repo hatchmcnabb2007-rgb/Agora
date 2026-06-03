@@ -12,11 +12,11 @@
 **Caption:**
 > Know your candidates.
 >
-> Campaign finance. Voting records. Platform breakdowns — all in one place, no spin.
+> Agora is a free, nonpartisan tool — look up any politician and see who's funding them, how they've voted, and where they actually stand on the issues.
 >
-> Agora is a free, nonpartisan tool that lets you look up any politician and see the real picture: who funds them, how they vote, and where they actually stand.
+> Campaign finance. Voting records. Issue stances. 86 profiles. No spin.
 >
-> 86 profiles. Live FEC data. Coming soon.
+> agoracivicengagement.com
 >
 > #CivicTech #VoterEducation #KnowYourCandidates #PoliticalTransparency
 
@@ -28,17 +28,19 @@
 
 **Graphic:** `post-2-finance.html`  
 **Caption:**
-> $1.83 billion. That's what two candidates raised in a single election.
+> Every politician's funding tells a story. Here's what that looks like.
 >
-> Trump: $774M. Biden: $1.06B.
+> Bernie Sanders raised $8.2M for his 2024 Senate race — 65% from small donors under $200. Ted Cruz raised $35M — 41% from PAC money.
 >
-> Both numbers are real. Both are on Agora. We don't pick sides — we show receipts.
+> Every profile on Agora breaks down where the money came from: small donors, large donors, corporate PACs, super PACs. Live FEC data.
 >
-> Every dollar tracked. Live FEC data. Link in bio.
+> 86 politicians. Free. Link in bio.
 >
-> #CampaignFinance #FollowTheMoney #FEC #PoliticalMoney #VoterEducation
+> 🔗 agoracivicengagement.com
+>
+> #CampaignFinance #FollowTheMoney #FEC #CivicTech #VoterEducation #PoliticalTransparency
 
-**Notes:** High-impact numbers post. Best for engagement/saves.
+**Notes:** Source breakdown comparison — shows off what makes Agora different from just Googling a total. Good for saves.
 
 ---
 
@@ -48,13 +50,13 @@
 **Caption:**
 > Same issue. Opposite votes.
 >
-> On healthcare: Bernie Sanders supports Medicare for All — a federal single-payer system. Mitch McConnell has voted to repeal the ACA multiple times.
+> On healthcare: Alexandria Ocasio-Cortez supports Medicare for All — a federal single-payer system that would replace private insurance. Mitch McConnell has voted to repeal the ACA multiple times.
 >
 > No commentary. Just where they stand and what they did.
 >
-> Agora shows you this for 86 politicians across 11 issues — free, nonpartisan, sourced.
+> Agora covers 86 politicians across 11 issues — free, nonpartisan, all sourced.
 >
-> #Healthcare #MedicareForAll #ACA #PoliticalStances #KnowYourReps
+> #Healthcare #ACA #PoliticalStances #KnowYourReps #VoterEducation #CivicTech
 
 **Notes:** Issue comparison format will be a recurring series — good for saves and shares.
 
@@ -66,9 +68,9 @@
 **Caption:**
 > Real numbers. Not estimates.
 >
-> Agora pulls live campaign finance directly from the FEC — the Federal Election Commission, the government agency that tracks every dollar raised and spent in American federal politics.
+> Agora pulls campaign finance data directly from the FEC — the federal agency that tracks every dollar raised and spent in American politics.
 >
-> 86 politicians. 11 issue stances per candidate. Live data. No spin.
+> 86 politicians. 11 issue stances each. Live data.
 >
 > #FEC #CampaignFinance #OpenData #CivicTech #PoliticalTransparency
 
@@ -80,15 +82,15 @@
 
 **Graphic:** `post-5-spotlight.html`  
 **Caption:**
-> Candidate spotlight: Bernie Sanders.
+> Profile spotlight: Bernie Sanders.
 >
 > $211M raised. $0 in corporate PAC money. Average donation: $18.
 >
-> Whether you agree with him or not — the data tells a specific story about how he funds his campaigns. That's what Agora does for every politician on the app.
+> Whether you agree with him or not, the numbers are what they are. Every politician on Agora has the same breakdown.
 >
 > 86 profiles live. Link in bio.
 >
-> #BernieSanders #CampaignFinance #SmallDollarDonations #CivicData #VoterEd
+> #BernieSanders #CampaignFinance #DonorData #CivicData #VoterEducation
 
 **Notes:** Candidate spotlights are good recurring content — swap in a new politician each week.
 
@@ -102,7 +104,7 @@
 >
 > No VC money. No political agenda. Just a free tool for voters.
 >
-> Agora is and always will be free. I built it because I want to vote like I actually know what I'm doing — and I think you do too.
+> Agora is and always will be free. I built it because I want to vote like I actually know what I'm doing.
 >
 > #BehindTheBuild #CivicTech #IndieProject #MadeForVoters #Agora
 
@@ -116,7 +118,7 @@
 **Caption:**
 > Weekly candidate breakdowns — follow to stay in the loop.
 >
-> Every week: campaign finance deep dives, issue stance comparisons, voting record spotlights.
+> Every week: campaign finance breakdowns, issue comparisons, voting records.
 >
 > Nonpartisan. Free. No commentary — just data.
 >
@@ -136,15 +138,26 @@
 |--------|---------|-------------|
 | Follow the Money | Weekly | One politician's finance breakdown |
 | Issue Comparison | Weekly | Two candidates on the same topic |
-| Candidate Spotlight | Weekly | One politician profile — all stats |
+| Profile Spotlight | Weekly · Every Tuesday | One politician — full carousel (career, issues, votes, finance, controversies) |
 | Key Vote | Bi-weekly | One bill, how your reps voted |
 | App Update | As needed | New features, new profiles added |
 
 ---
 
+## Instagram Bio
+
+```
+Know your candidates.
+Finance, votes & platform — nonpartisan, no spin.
+🚧 Beta: more politicians being added.
+🔗 agoracivicengagement.com
+```
+
+---
+
 ## Before You Post
 
-- [ ] Deploy app to GitHub Pages (see Agora.md)
-- [ ] Update Instagram bio with app link
+- [x] Deploy app to GitHub Pages (live at agoracivicengagement.com)
+- [x] Update Instagram bio with app link
 - [ ] Open each `.html` file in Chrome, zoom to 100%, screenshot at full size
 - [ ] Crop to square if needed (all files are 1080×1080)

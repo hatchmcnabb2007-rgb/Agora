@@ -29,24 +29,16 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #C9A84C;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
 
-    .big-number {
+    .headline {
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: 120px;
-      line-height: 1.0;
-      color: #C9A84C;
-      font-weight: normal;
-    }
-
-    .big-sub {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 36px;
+      font-size: 42px;
       color: #F8F6F2;
       font-weight: normal;
-      margin-top: 8px;
-      margin-bottom: 56px;
+      line-height: 1.2;
+      margin-bottom: 48px;
     }
 
     .divider {
@@ -68,49 +60,57 @@
       flex-direction: column;
     }
 
-    .side-label {
-      font-family: system-ui, -apple-system, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #555;
-      margin-bottom: 12px;
-    }
-
     .candidate-name {
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: 28px;
+      font-size: 26px;
       color: #F8F6F2;
       font-weight: normal;
-      margin-bottom: 8px;
-    }
-
-    .amount {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 52px;
-      color: #F8F6F2;
-      font-weight: normal;
-      line-height: 1.0;
+      margin-bottom: 6px;
     }
 
     .cycle {
       font-family: system-ui, sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       color: #444;
-      margin-top: 8px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      margin-bottom: 14px;
+    }
+
+    .stat-number {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 44px;
+      line-height: 1.0;
+      color: #C9A84C;
+      font-weight: normal;
+    }
+
+    .stat-number.white {
+      color: #F8F6F2;
+    }
+
+    .stat-label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      color: #555;
+      letter-spacing: 0.06em;
+      margin-top: 3px;
     }
 
     .vert-divider {
       width: 1px;
       background: #222;
-      margin: 0 48px;
+      margin: 0 52px;
       align-self: stretch;
     }
 
     .tagline {
       font-family: system-ui, -apple-system, sans-serif;
-      font-size: 17px;
+      font-size: 16px;
       color: #555;
       line-height: 1.5;
       margin-bottom: 48px;
@@ -140,32 +140,55 @@
 <body>
   <div class="frame">
     <div class="gold-bar"></div>
-    <div class="label">Follow the Money</div>
+    <div class="label">Follow the Money · 2024 U.S. Senate</div>
 
-    <div class="big-number">$1.83B</div>
-    <div class="big-sub">raised in a single election.</div>
+    <div class="headline">Every candidate's funding<br>tells a different story.</div>
 
     <div class="divider"></div>
 
     <div class="split">
       <div class="side">
-        <div class="side-label">Candidate</div>
-        <div class="candidate-name">Donald Trump</div>
-        <div class="amount">$774M</div>
-        <div class="cycle">2020 Presidential</div>
+        <div class="candidate-name">Bernie Sanders</div>
+        <div class="cycle">Vermont · 2024 Senate</div>
+
+        <div class="stat">
+          <div class="stat-number">65%</div>
+          <div class="stat-label">from small donors (under $200)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number white">$0</div>
+          <div class="stat-label">from corporate PACs</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number white">$8.2M</div>
+          <div class="stat-label">total raised</div>
+        </div>
       </div>
+
       <div class="vert-divider"></div>
+
       <div class="side">
-        <div class="side-label">Candidate</div>
-        <div class="candidate-name">Joe Biden</div>
-        <div class="amount">$1.06B</div>
-        <div class="cycle">2020 Presidential</div>
+        <div class="candidate-name">Ted Cruz</div>
+        <div class="cycle">Texas · 2024 Senate</div>
+
+        <div class="stat">
+          <div class="stat-number">16%</div>
+          <div class="stat-label">from small donors (under $200)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number white">41%</div>
+          <div class="stat-label">from PAC money (corporate + super PAC)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number white">$35M</div>
+          <div class="stat-label">total raised</div>
+        </div>
       </div>
     </div>
 
     <div class="tagline">
-      Both numbers are real. Both are on Agora.<br>
-      We don't pick sides — we show receipts.
+      The source matters as much as the number.<br>
+      That's what Agora shows you — for 86 politicians, free.
     </div>
 
     <div class="footer">
