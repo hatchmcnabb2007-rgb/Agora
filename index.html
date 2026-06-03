@@ -1966,7 +1966,7 @@
         </div>
         <div class="section" id="sec-finance">
             <div class="section-title">Campaign Finance</div>
-            <div class="finance-disclaimer">Total raised sourced live from FEC · Breakdown percentages are approximate based on public filings</div>
+            <div class="finance-disclaimer">Total raised sourced live from FEC · Breakdown percentages are approximate based on public filings · Super PAC figures represent independent expenditures — money spent outside the campaign, not received by it</div>
             <div class="cycle-tabs" id="p-cycle-tabs"></div>
             <div class="finance-totals" id="p-finance-totals"></div>
             <div class="finance-quickstats" id="p-quickstats"></div>
@@ -19306,6 +19306,534 @@ const candidates = [
         ],
         trump: "trump-opponent",
         vision: null
+    },
+    {
+        id: "markgreen",
+        name: "Mark Green",
+        initials: "MG",
+        photo: "https://bioguide.congress.gov/bioguide/photo/G/G000590.jpg",
+        party: "R",
+        title: "U.S. Representative — Tennessee",
+        state: "Tennessee",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["Homeland Security Chair", "Army Veteran", "MAGA", "Border Security"],
+        highlights: [
+            "U.S. Representative from Tennessee's 7th District since 2019; House Homeland Security Committee Chair since 2023",
+            "Army Special Operations physician who has claimed he performed the medical examination of Saddam Hussein after his capture in 2003 — a claim that has been partially questioned",
+            "Tennessee state senator (2012–2019) before Congress; represents the Fort Campbell/Clarksville area and brings a strong military community perspective",
+            "Among the more conservative voices on the Homeland Security Committee — has pushed for aggressive border enforcement, scrutiny of federal law enforcement agencies, and investigations into border policy",
+            "Strong Trump ally who questioned the January 6th Committee's findings and has promoted skepticism of the FBI and intelligence agencies"
+        ],
+        keyVotes: [
+            { bill: "American Rescue Plan Act of 2021", vote: "no", date: "2021-02-27", significance: "Voted against the $1.9T COVID relief bill — argued it was fiscally reckless and loaded with Democratic priorities unrelated to pandemic relief.", source: "House roll call vote 49, February 27, 2021" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "no", date: "2021-11-05", significance: "Voted against the $1.2T infrastructure bill — called it a vehicle for wasteful spending and a stepping stone to the larger Build Back Better package.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "Inflation Reduction Act", vote: "no", date: "2022-08-12", significance: "Voted against the $739B climate and healthcare law — argued its tax increases and IRS expansion would harm businesses and middle-class families.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "Secure the Border Act", vote: "yes", date: "2023-05-11", significance: "Voted for the House Republican border security bill that would restart border wall construction, reinstate Remain in Mexico, end catch-and-release, and tighten asylum standards — passed the House but not the Senate.", source: "House roll call vote 209, May 11, 2023" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "no", date: "2024-04-20", significance: "Voted against the $95B foreign aid package — argued the U.S. should secure its own border before funding foreign military assistance.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "National Defense Authorization Act FY2024", vote: "yes", date: "2023-12-14", significance: "Voted for the $886B defense authorization bill — as Homeland Security Chair, helped shape provisions related to border security, fentanyl interdiction, and DHS oversight.", source: "House roll call vote 703, December 14, 2023" },
+            { bill: "Mayorkas Impeachment", vote: "yes", date: "2024-02-13", significance: "Voted to impeach DHS Secretary Alejandro Mayorkas — the first Cabinet officer impeached in 148 years; accused him of willful refusal to enforce immigration law. The Senate quickly dismissed the articles without a trial.", source: "House roll call vote 47, February 13, 2024" }
+        ],
+        finance: [
+            { year: 2024, office: "House, TN-7", total: 3200000, small_individual: 320000, large_individual: 1900000, super_pac: 150000, labor_pac: 0, corporate_pac: 620000, party: 170000, other: 40000 },
+            { year: 2022, office: "House, TN-7", total: 2100000, small_individual: 250000, large_individual: 1280000, super_pac: 50000, labor_pac: 0, corporate_pac: 380000, party: 110000, other: 30000 },
+            { year: 2020, office: "House, TN-7", total: 1400000, small_individual: 190000, large_individual: 820000, super_pac: 20000, labor_pac: 0, corporate_pac: 280000, party: 70000, other: 20000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "opposes", detail: "Voted to repeal the ACA; supports market-based healthcare and opposes government-mandated coverage expansion or price controls." },
+            { topic: "Climate & Energy", stance: "opposes", detail: "Voted against the Inflation Reduction Act; supports domestic fossil fuel production and opposes federal climate regulations he says eliminate jobs." },
+            { topic: "Immigration & Border", stance: "strongly-opposes", detail: "Chairs the Homeland Security Committee with a focus on aggressive border enforcement — voted to impeach DHS Secretary Mayorkas, backed Remain in Mexico, and pushed for border wall completion." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", detail: "Opposes abortion; backed Tennessee's near-total abortion ban and has supported federal legislation restricting abortion access." },
+            { topic: "Gun Control", stance: "strongly-opposes", detail: "Strong Second Amendment advocate; represents a district with significant military communities and has consistently opposed gun control legislation." },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports tax cuts and fiscal restraint; backed the 2017 Tax Cuts and Jobs Act and consistently votes against new federal spending." },
+            { topic: "Foreign Policy & Military", stance: "mixed", detail: "Strong supporter of the U.S. military given his Army Special Operations background; voted against Ukraine aid however, arguing U.S. resources should secure the home border first." },
+            { topic: "Education", stance: "opposes", detail: "Opposes federal education mandates; supports school choice and local control; backed efforts to block Biden's student loan cancellation programs." },
+            { topic: "Criminal Justice & Policing", stance: "strongly-opposes", detail: "Strong law and order supporter; backed qualified immunity protections and has been critical of what he calls the 'defund the police' movement." },
+            { topic: "Israel & Gaza", stance: "strongly-supports", detail: "Strong supporter of Israel's military operations; was a key voice pushing for more aggressive U.S. backing of Israel's Gaza campaign." },
+            { topic: "Trade & China", stance: "strongly-opposes", detail: "Views China as a primary national security threat; backed export controls, TikTok legislation, and decoupling on critical technology supply chains." }
+        ],
+        controversies: [
+            { title: "Anti-LGBTQ+ Statements (2019–2023)", description: "Green has made multiple statements that critics labeled anti-LGBTQ+, including calling transgender identity a 'disease' in a 2019 interview and making comments suggesting being gay is a choice. He also made statements in 2023 questioning whether a spike in transgender identification could be the result of social influence. LGBTQ+ groups called for his resignation from the Homeland Security Committee chairmanship; he maintained his positions were based on his medical background.", date: "2019–2023", source: "Tennessean; GLAAD; The Advocate; NBC News" },
+            { title: "'Fed-surrection' Conspiracy Theory", description: "Green promoted the conspiracy theory that federal agents were embedded among January 6th protesters and helped instigate the Capitol attack — a claim dubbed the 'fed-surrection' theory by far-right commentators. No evidence supported the claim; multiple investigations found no evidence of federal agent provocation. Green used his Homeland Security chairmanship to advance related oversight demands of the FBI and DOJ.", date: "2021–2023", source: "Rolling Stone; MSNBC; House Homeland Security Committee records" },
+            { title: "Saddam Hussein Medical Exam Claim", description: "Green has repeatedly claimed he was the physician who performed the medical examination of Saddam Hussein after his capture in December 2003. Media investigations found partial corroboration but also inconsistencies in his account; some veterans and journalists raised doubts about the details he provided. He cited the experience as central to his congressional identity and foreign policy views.", date: "2003 (claimed); questioned 2018–2022", source: "Task & Purpose; Army Times; ProPublica" }
+        ],
+        trump: "trump-ally",
+        vision: null
+    },
+    {
+        id: "samgraves",
+        name: "Sam Graves",
+        initials: "SG",
+        photo: "https://bioguide.congress.gov/bioguide/photo/G/G000546.jpg",
+        party: "R",
+        title: "U.S. Representative — Missouri",
+        state: "Missouri",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["Transportation Chair", "Infrastructure", "Farmer", "Missouri Senior Member"],
+        highlights: [
+            "U.S. Representative from Missouri's 6th District since 2001 — one of the longest-serving House Republicans; Transportation and Infrastructure Committee Chair since 2023",
+            "Voted against the Bipartisan Infrastructure Law in 2021, then became the chairman of the committee responsible for implementing it — an awkward position he navigated by focusing on oversight and Republican priorities within the law",
+            "Oversees FAA reauthorization and aviation safety — chaired committee hearings on Boeing's safety crisis following the January 2024 Alaska Airlines door plug blowout",
+            "Farmer and licensed private pilot who brings both agricultural and aviation expertise to his transportation and infrastructure policy work",
+            "Former Missouri state senator (1994–2000) before his first election to Congress; represents a sprawling northwest Missouri district from St. Joseph to the Iowa border"
+        ],
+        keyVotes: [
+            { bill: "Authorization for Use of Military Force Against Iraq", vote: "yes", date: "2002-10-10", significance: "Voted for the 2002 Iraq War AUMF in his second year in Congress — consistent with early Republican support for the authorization.", source: "House roll call vote 455, October 10, 2002" },
+            { bill: "Troubled Asset Relief Program (TARP / Bank Bailout)", vote: "no", date: "2008-10-03", significance: "Voted against the $700B bank bailout — consistent with his fiscal conservatism and skepticism of government intervention in markets.", source: "House roll call vote 681, October 3, 2008" },
+            { bill: "American Rescue Plan Act of 2021", vote: "no", date: "2021-02-27", significance: "Voted against the $1.9T COVID relief package — argued it was too large, too slow to reach those who needed it, and would fuel inflation.", source: "House roll call vote 49, February 27, 2021" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "no", date: "2021-11-05", significance: "Voted against the $1.2T bipartisan infrastructure law — argued it was too expensive and that much of the spending was not truly infrastructure. He became Transportation Chair in 2023 and oversees its implementation.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "Inflation Reduction Act", vote: "no", date: "2022-08-12", significance: "Voted against the $739B climate and healthcare package — opposed its tax increases and climate spending.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "FAA Reauthorization Act", vote: "yes", date: "2024-05-10", significance: "Voted for the five-year FAA reauthorization — passed 387-26 after months of negotiations; the bill included new Boeing safety requirements and FAA staffing increases following the aviation safety crises.", source: "House roll call vote 193, May 10, 2024" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "no", date: "2024-04-20", significance: "Voted against the $95B foreign aid package — consistent with his skepticism of open-ended foreign spending.", source: "House roll call vote 150, April 20, 2024" }
+        ],
+        finance: [
+            { year: 2024, office: "House, MO-6", total: 2600000, small_individual: 240000, large_individual: 1600000, super_pac: 0, labor_pac: 5000, corporate_pac: 610000, party: 130000, other: 15000 },
+            { year: 2022, office: "House, MO-6", total: 2000000, small_individual: 200000, large_individual: 1230000, super_pac: 0, labor_pac: 3000, corporate_pac: 460000, party: 90000, other: 17000 },
+            { year: 2020, office: "House, MO-6", total: 1400000, small_individual: 160000, large_individual: 850000, super_pac: 0, labor_pac: 2000, corporate_pac: 300000, party: 70000, other: 18000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "opposes", detail: "Voted against the ACA and supported repeal efforts; opposes government-mandated coverage expansion and supports free-market healthcare reforms." },
+            { topic: "Climate & Energy", stance: "opposes", detail: "Voted against the Inflation Reduction Act's climate provisions; supports domestic energy production and opposes what he calls burdensome environmental regulations." },
+            { topic: "Immigration & Border", stance: "strongly-opposes", detail: "Supports strong border enforcement, ending catch-and-release, and opposes amnesty — consistent conservative position from a rural Missouri district." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", detail: "Opposes abortion rights; backed Missouri's near-total abortion ban and has supported federal legislation restricting access." },
+            { topic: "Gun Control", stance: "strongly-opposes", detail: "Strong Second Amendment supporter; consistently opposed gun control legislation including universal background check bills." },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports low taxes, deregulation, and fiscal restraint; backed the 2017 Tax Cuts and Jobs Act and opposed all major Democratic spending packages." },
+            { topic: "Foreign Policy & Military", stance: "mixed", detail: "Generally supports a strong U.S. military; voted against the Ukraine/Israel/Taiwan supplemental, reflecting growing skepticism in Republican ranks about open-ended foreign commitments." },
+            { topic: "Education", stance: "opposes", detail: "Supports school choice and local education control; opposes federal education mandates and student loan forgiveness programs." },
+            { topic: "Criminal Justice & Policing", stance: "opposes", detail: "Supports law enforcement and qualified immunity; backed pro-policing legislation and opposes police reform measures." },
+            { topic: "Israel & Gaza", stance: "strongly-supports", detail: "Supports strong U.S.-Israel ties and Israel's right to self-defense; his vote against the security supplemental was framed around fiscal concerns." },
+            { topic: "Trade & China", stance: "mixed", detail: "Supports agricultural trade policies benefiting Missouri farmers; backs some China tariffs to protect domestic agriculture while supporting free trade for export markets." }
+        ],
+        controversies: [
+            { title: "Voted Against Infrastructure Law He Now Oversees", description: "Graves voted against the Bipartisan Infrastructure Law in November 2021, calling it too expensive and poorly targeted. He then became Transportation Committee Chair in 2023 and became responsible for overseeing the law's implementation. Democrats accused him of hypocrisy when he took credit for infrastructure projects funded by the law in his district; Graves argued overseeing a law you opposed is a legitimate oversight function.", date: "2021–present", source: "Kansas City Star; Politico; House Transportation Committee records" },
+            { title: "Boeing Safety Crisis Oversight", description: "As Transportation Committee Chair, Graves oversaw the congressional response to Boeing's safety crisis — including the January 2024 Alaska Airlines Boeing 737 MAX 9 door plug blowout that exposed ongoing safety failures. Critics from aviation safety advocates and some members argued the committee hearings were insufficiently aggressive and that Boeing whistleblowers faced retaliation; Graves said the FAA reauthorization bill addressed the core issues.", date: "2024", source: "New York Times; Seattle Times; House Transportation Committee hearings" },
+            { title: "Infrastructure Industry Funding and Campaign Finance", description: "As Transportation Chair overseeing hundreds of billions in infrastructure contracts, Graves receives significant contributions from construction, engineering, aviation, and transportation companies. Ethics watchdogs have pointed to the pattern of regulated-industry donations to committee chairs; Graves has defended his fundraising as reflecting support from industries that want efficient transportation policy.", date: "2023–present", source: "OpenSecrets; Politico; Sunlight Foundation" }
+        ],
+        trump: "trump-ally",
+        vision: null
+    },
+    {
+        id: "brettguthrie",
+        name: "Brett Guthrie",
+        initials: "BG",
+        photo: "https://bioguide.congress.gov/bioguide/photo/G/G000558.jpg",
+        party: "R",
+        title: "U.S. Representative — Kentucky",
+        state: "Kentucky",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["Energy & Commerce Chair", "Healthcare", "Tech Regulation", "Kentucky"],
+        highlights: [
+            "U.S. Representative from Kentucky's 2nd District since 2009; House Energy & Commerce Committee Chair since 2023 — overseeing healthcare, telecom, energy, and consumer protection",
+            "Yale mathematics graduate with a Georgetown MBA; worked as a manager at Fruit of the Loom in Bowling Green before entering politics",
+            "Former NRCC Chairman (2021–2023) — led Republican recruitment efforts for the 2022 midterm cycle when Republicans won back the House majority",
+            "Led the Energy & Commerce Committee hearings on TikTok and Chinese-owned tech platforms; co-authored the forced divestiture legislation that became law in 2024",
+            "Former Kentucky state senator (1998–2008) before Congress; represents a south-central Kentucky district centered on Bowling Green"
+        ],
+        keyVotes: [
+            { bill: "American Health Care Act (ACA Repeal and Replace)", vote: "yes", date: "2017-05-04", significance: "Voted for the Republican ACA repeal and replace bill — it passed the House but failed in the Senate when John McCain cast the deciding no vote.", source: "House roll call vote 256, May 4, 2017" },
+            { bill: "Tax Cuts and Jobs Act", vote: "yes", date: "2017-11-16", significance: "Voted for the 2017 Republican tax overhaul that cut the corporate rate and doubled the standard deduction.", source: "House roll call vote 637, November 16, 2017" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "no", date: "2021-11-05", significance: "Voted against the $1.2T bipartisan infrastructure law — argued it was too expensive and would enable larger Democratic spending packages.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "Inflation Reduction Act", vote: "no", date: "2022-08-12", significance: "Voted against the $739B climate and healthcare package — argued its tax increases and drug pricing provisions would harm businesses and innovation.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "Protecting Americans from Foreign Adversary Controlled Applications Act (TikTok)", vote: "yes", date: "2024-03-13", significance: "Voted for legislation requiring ByteDance to divest TikTok or face a ban — co-authored the bill as Energy & Commerce Chair; it passed 352-65 and was later signed into law.", source: "House roll call vote 107, March 13, 2024" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package — joined the majority of House Republicans in supporting the bill after Speaker Johnson brought it to the floor over MAGA opposition.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "Congressional Review Act (Biden Healthcare Rule)", vote: "yes", date: "2024", significance: "Voted for CRA resolutions challenging Biden administration healthcare and pharmaceutical regulations — used his Energy & Commerce authority to push back on executive regulatory overreach.", source: "House Energy & Commerce Committee records, 118th Congress" }
+        ],
+        finance: [
+            { year: 2024, office: "House, KY-2", total: 3500000, small_individual: 300000, large_individual: 2100000, super_pac: 0, labor_pac: 5000, corporate_pac: 920000, party: 140000, other: 35000 },
+            { year: 2022, office: "House, KY-2", total: 2800000, small_individual: 250000, large_individual: 1720000, super_pac: 0, labor_pac: 3000, corporate_pac: 700000, party: 100000, other: 27000 },
+            { year: 2020, office: "House, KY-2", total: 1600000, small_individual: 170000, large_individual: 980000, super_pac: 0, labor_pac: 2000, corporate_pac: 380000, party: 50000, other: 18000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "opposes", detail: "Voted to repeal the ACA; has used the Energy & Commerce Committee to challenge Biden drug pricing regulations and block what he calls government overreach in pharmaceutical markets." },
+            { topic: "Climate & Energy", stance: "opposes", detail: "Voted against the Inflation Reduction Act's climate provisions; supports domestic fossil fuel production and opposes carbon pricing or EPA climate regulations." },
+            { topic: "Immigration & Border", stance: "strongly-opposes", detail: "Supports strong border enforcement and opposes amnesty; represents a Kentucky district with strong conservative views on immigration enforcement." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", detail: "Opposes abortion rights; backed Kentucky's abortion ban and has supported federal legislative restrictions." },
+            { topic: "Gun Control", stance: "strongly-opposes", detail: "Strong Second Amendment defender; consistently opposed gun control legislation including expanded background check bills." },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports tax cuts for businesses and individuals; backed the 2017 Tax Cuts and Jobs Act and has used the Energy & Commerce Committee to push back on new corporate tax increases." },
+            { topic: "Foreign Policy & Military", stance: "supports", detail: "Voted for the Ukraine/Israel/Taiwan security supplemental — broke with the MAGA wing of his party to support allied assistance." },
+            { topic: "Education", stance: "opposes", detail: "Supports school choice and local control; opposes federal education mandates and student loan forgiveness programs." },
+            { topic: "Criminal Justice & Policing", stance: "strongly-opposes", detail: "Supports law enforcement and qualified immunity; opposes federal policing reform mandates." },
+            { topic: "Israel & Gaza", stance: "strongly-supports", detail: "Strong supporter of U.S.-Israel security cooperation; backed the Israel aid portion of the national security supplemental." },
+            { topic: "Trade & China", stance: "strongly-opposes", detail: "Views China as a serious economic and national security threat; led the TikTok forced divestiture legislation and has backed export controls and semiconductor supply chain reshoring." }
+        ],
+        controversies: [
+            { title: "Pharma Industry Funding While Overseeing Drug Pricing", description: "As Energy & Commerce Chair — the committee with direct jurisdiction over pharmaceutical regulation and the FDA — Guthrie has received some of the largest pharmaceutical industry PAC contributions of any House member. Ethics watchdogs raised conflict-of-interest concerns as he used the committee to challenge Biden's Medicare drug price negotiation rules. Guthrie argued the administration's drug pricing approach would harm pharmaceutical innovation.", date: "2023–present", source: "OpenSecrets; Campaign Legal Center; Politico" },
+            { title: "TikTok Hearings and Free Speech Debate", description: "Guthrie's Energy & Commerce Committee held the high-profile TikTok hearings in March 2023 that produced the viral exchange between Rep. Cathy McMorris Rodgers and CEO Shou Zi Chew. While the proceedings were praised for exposing data privacy risks, critics argued the questioning was uninformed about how technology works — with some members asking basic questions about internet functions. Guthrie defended the hearing as vital national security oversight.", date: "2023-03-23", source: "Washington Post, March 23, 2023; Wired; Axios" },
+            { title: "NRCC Chair and 2022 Midterm Expectations", description: "Guthrie served as NRCC chairman during the 2022 midterm cycle — widely expected to produce a 'red wave' that would give Republicans a large House majority. Republicans won the majority but by only a narrow margin (~222 seats vs. expectations of 235+), with several high-profile Republican candidates underperforming. Some Republicans blamed the NRCC's candidate recruitment and spending strategy; Guthrie attributed the smaller-than-expected gains to Senate Republican leadership decisions.", date: "2022-11", source: "Politico; National Journal; Washington Examiner" }
+        ],
+        trump: "trump-ally",
+        vision: null
+    },
+    {
+        id: "summerlee",
+        name: "Summer Lee",
+        initials: "SL",
+        photo: "https://bioguide.congress.gov/bioguide/photo/L/L000600.jpg",
+        party: "D",
+        title: "U.S. Representative — Pennsylvania",
+        state: "Pennsylvania",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["Progressive", "Pittsburgh", "First Black PA Congresswoman", "Gaza Ceasefire"],
+        highlights: [
+            "U.S. Representative from Pennsylvania's 12th District since 2023 — the first Black woman elected to Congress from Pennsylvania",
+            "Former Pennsylvania state representative (2018–2023), where she was a vocal progressive on environmental justice, labor rights, and police accountability in the Pittsburgh region",
+            "AIPAC spent millions trying to defeat her in her 2022 primary and again in 2024 — she won both times, becoming a symbol of progressive resistance to AIPAC's influence in Democratic primaries",
+            "Represents a Pittsburgh-area district with significant industrial legacy — has been a vocal advocate on environmental justice given the region's history of steel mill pollution",
+            "Member of the Congressional Progressive Caucus and an ally of Squad members; has called for a ceasefire in Gaza and conditions on U.S. military aid to Israel"
+        ],
+        keyVotes: [
+            { bill: "Fiscal Responsibility Act (Debt Ceiling Agreement)", vote: "no", date: "2023-05-31", significance: "Voted against the bipartisan debt ceiling deal — joined other progressives in opposing the spending caps negotiated by Biden and McCarthy that restricted domestic program funding.", source: "House roll call vote 264, May 31, 2023" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "no", date: "2024-04-20", significance: "Voted against the $95B foreign aid package — consistent with her position demanding conditions on Israel aid before any military assistance.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "Raise the Wage Act (Federal $15 Minimum Wage)", vote: "yes", date: "2023-01-26", significance: "Voted to raise the federal minimum wage to $15 per hour — a core economic justice issue she championed in Pennsylvania before coming to Congress.", source: "House roll call vote 30, January 26, 2023" },
+            { bill: "George Floyd Justice in Policing Act", vote: "yes", date: "2021-03-03", significance: "Supported this legislation as a state representative and backed federal policing reform as a congressional priority — the bill passed the House but failed in the Senate.", source: "Supported as PA state rep; backed as congressional priority" },
+            { bill: "Farm Bill Amendment (SNAP Protections)", vote: "yes", date: "2024", significance: "Supported progressive amendments to the Farm Bill protecting SNAP benefits from cuts — argued food security is a fundamental right for working families in her district.", source: "House Agriculture Committee proceedings, 118th Congress" },
+            { bill: "American Climate Corps Authorization", vote: "yes", date: "2024", significance: "Voted for authorizing the American Climate Corps — a clean energy jobs program that would employ young people in environmental projects, particularly relevant to industrial communities like Pittsburgh.", source: "House proceedings, 118th Congress" },
+            { bill: "DISCLOSE Act (Campaign Finance Transparency)", vote: "yes", date: "2023-07-31", significance: "Voted for the DISCLOSE Act requiring dark money groups to reveal donors — targeted the type of anonymous spending that AIPAC-affiliated groups used in her primary.", source: "House roll call vote 405, July 31, 2023" }
+        ],
+        finance: [
+            { year: 2024, office: "House, PA-12", total: 3100000, small_individual: 1350000, large_individual: 1100000, super_pac: 0, labor_pac: 440000, corporate_pac: 5000, party: 170000, other: 35000 },
+            { year: 2022, office: "House, PA-12", total: 2600000, small_individual: 1100000, large_individual: 940000, super_pac: 0, labor_pac: 380000, corporate_pac: 3000, party: 140000, other: 37000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "strongly-supports", detail: "Supports Medicare for All and universal healthcare; has called for expanding Medicaid in Pennsylvania and prioritizing healthcare access for underserved communities." },
+            { topic: "Climate & Energy", stance: "strongly-supports", detail: "Environmental justice advocate representing a district with industrial pollution legacy; supports aggressive climate legislation and a just transition away from fossil fuels for workers." },
+            { topic: "Immigration & Border", stance: "strongly-supports", detail: "Supports comprehensive immigration reform, DACA protections, and a pathway to citizenship; opposes enforcement-only border approaches." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", detail: "Strongly supports abortion rights; backed federal legislation to restore reproductive rights after the Dobbs decision." },
+            { topic: "Gun Control", stance: "strongly-supports", detail: "Supports universal background checks, assault weapons bans, and red flag laws — especially relevant given Pittsburgh's history of gun violence including the 2018 Tree of Life synagogue massacre." },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports progressive taxation and higher wages; championed the $15 federal minimum wage and has pushed for worker protections throughout her career." },
+            { topic: "Foreign Policy & Military", stance: "mixed", detail: "Skeptical of open-ended military commitments; voted against the $95B national security supplemental and has pushed for conditions on military aid to Israel." },
+            { topic: "Education", stance: "strongly-supports", detail: "Supports student debt cancellation, free community college, and investment in under-resourced schools serving low-income and minority communities." },
+            { topic: "Criminal Justice & Policing", stance: "strongly-supports", detail: "Backed the George Floyd Justice in Policing Act and has consistently pushed for police accountability, ending qualified immunity, and criminal justice reform." },
+            { topic: "Israel & Gaza", stance: "critical", detail: "Called for a ceasefire in Gaza and conditions on U.S. military aid to Israel from early in the conflict; her position drew AIPAC opposition and significant primary spending against her." },
+            { topic: "Trade & China", stance: "mixed", detail: "Supports trade policies that protect American manufacturing workers in her industrial district; skeptical of free trade frameworks that she argues have hollowed out Pittsburgh-area industry." }
+        ],
+        controversies: [
+            { title: "AIPAC Targeting — $4M+ Spent Against Her (2022 & 2024)", description: "The United Democracy Project (AIPAC's super PAC) spent over $4 million trying to defeat Summer Lee in her 2022 primary — at the time the largest independent expenditure in a House primary. She won by roughly 2,000 votes. AIPAC then returned to target her again in 2024; she won more comfortably. Her races became a flashpoint over outside money in primaries and specifically over pro-Israel groups attempting to defeat progressive candidates who questioned military aid to Israel.", date: "2022–2024", source: "OpenSecrets; Washington Post; The Intercept" },
+            { title: "2022 Primary Recount — Initially Called for Opponent", description: "On election night in May 2022, some media outlets initially called Lee's primary race for her opponent Steve Irwin before the final votes were counted. The race was extremely close — Lee ultimately won by about 2,000 votes out of nearly 100,000 cast. Critics of the initial calls said they were premature; the race highlighted how outside spending had nearly flipped an open seat the progressive wing had mobilized around.", date: "2022-05-17", source: "Pittsburgh Post-Gazette; AP; Pennsylvania state election records" },
+            { title: "DSA Membership and 'Socialist' Label", description: "Lee was a member of the Democratic Socialists of America (DSA) when she ran for Congress in 2022 — a fact that Republicans and some moderate Democrats used against her. The DSA label helped her raise small-dollar donations nationally from progressives but also became a persistent attack in her general election campaign. She focused her messaging on economic justice and healthcare rather than DSA ideology to win her Democratic-leaning district.", date: "2022–present", source: "Pittsburgh Post-Gazette; DSA records; The New York Times" }
+        ],
+        trump: "trump-opponent",
+        vision: null
+    },
+    {
+        id: "mariasalazar",
+        name: "Maria Elvira Salazar",
+        initials: "MS",
+        photo: "https://bioguide.congress.gov/bioguide/photo/S/S001213.jpg",
+        party: "R",
+        title: "U.S. Representative — Florida",
+        state: "Florida",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["Cuban-American", "Immigration Reform", "Latin America", "Former TV Anchor"],
+        highlights: [
+            "U.S. Representative from Florida's 27th District since 2021; one of the most prominent Cuban-American voices in Congress",
+            "Former Telemundo and Univision news anchor for over 30 years — reported on conflicts in El Salvador, Nicaragua, and the fall of the Soviet Union before entering politics",
+            "Daughter of Cuban exiles who fled Castro's revolution; has made Cuba, Venezuela, and Nicaragua policy a central focus of her congressional work",
+            "Co-authored the 'Dignity Act' — a bipartisan immigration reform bill with Rep. Veronica Escobar (D-TX) that would create a pathway to legal status (but not citizenship) for undocumented immigrants",
+            "Represents FL-27 (Miami-Dade/Coral Gables area) — a district that shifted toward Republicans in 2020 driven by Cuban-American and Venezuelan-American voters"
+        ],
+        keyVotes: [
+            { bill: "American Rescue Plan Act of 2021", vote: "no", date: "2021-02-27", significance: "Voted against the $1.9T COVID relief package — argued it was too large and should have been more targeted.", source: "House roll call vote 49, February 27, 2021" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "no", date: "2021-11-05", significance: "Voted against the $1.2T infrastructure bill — consistent with her Republican fiscal conservatism despite some bipartisan support for the measure.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "RENACER Act (Cuba, Venezuela, Nicaragua Sanctions)", vote: "yes", date: "2021-11-03", significance: "Voted for the bipartisan RENACER Act that imposed targeted sanctions and diplomatic restrictions on Cuban officials and others undermining democracy in Latin America — a core foreign policy priority.", source: "House roll call vote 348, November 3, 2021" },
+            { bill: "Dignity Act (Immigration Reform — introduced)", vote: "sponsored", date: "2023-05-23", significance: "Introduced the Dignity Act with Rep. Veronica Escobar (D-TX) — a bipartisan immigration framework offering a pathway to legal status (without citizenship) for undocumented immigrants, enhanced border security, and modernized legal immigration pathways.", source: "H.R. 3599, introduced May 23, 2023" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package — voted particularly to include Venezuela and Cuba-related provisions and strong Israel support.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "Inflation Reduction Act", vote: "no", date: "2022-08-12", significance: "Voted against the $739B climate and healthcare law — argued its drug pricing provisions would stifle pharmaceutical innovation.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "George Floyd Justice in Policing Act", vote: "no", date: "2021-03-03", significance: "Voted against the police reform bill — argued while police reform is needed, limiting qualified immunity would deter officers from doing their jobs.", source: "House roll call vote 62, March 3, 2021" }
+        ],
+        finance: [
+            { year: 2024, office: "House, FL-27", total: 3800000, small_individual: 540000, large_individual: 2300000, super_pac: 200000, labor_pac: 0, corporate_pac: 580000, party: 140000, other: 40000 },
+            { year: 2022, office: "House, FL-27", total: 3200000, small_individual: 450000, large_individual: 1940000, super_pac: 180000, labor_pac: 0, corporate_pac: 460000, party: 130000, other: 40000 },
+            { year: 2020, office: "House, FL-27", total: 2800000, small_individual: 390000, large_individual: 1700000, super_pac: 160000, labor_pac: 0, corporate_pac: 380000, party: 110000, other: 60000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "opposes", detail: "Opposes the ACA and government-mandated healthcare expansion; supports market-based reforms while protecting pre-existing condition coverage." },
+            { topic: "Climate & Energy", stance: "mixed", detail: "Voted against the Inflation Reduction Act's climate spending; has been more open than some Republicans to clean energy investments given Florida's climate vulnerability." },
+            { topic: "Immigration & Border", stance: "mixed", detail: "Uniquely positioned among House Republicans — co-authored bipartisan immigration reform legislation (the Dignity Act) offering legal status for undocumented immigrants while also supporting enhanced border enforcement." },
+            { topic: "Abortion & Reproductive Rights", stance: "opposes", detail: "Opposes abortion; backed Florida's abortion restrictions and supported federal legislation limiting access." },
+            { topic: "Gun Control", stance: "strongly-opposes", detail: "Strong Second Amendment supporter; consistently opposed gun control legislation while representing a Miami district with significant gun violence." },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports tax cuts for businesses and individuals; backed the 2017 Tax Cuts and Jobs Act and has consistently voted against Democratic tax increases." },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", detail: "Foreign policy hawk focused on Latin America — has pushed for strong U.S. response to Cuba, Venezuela, and Nicaragua and supports U.S. military readiness and alliances." },
+            { topic: "Education", stance: "opposes", detail: "Supports school choice and local education control; opposes federal mandates and student loan forgiveness programs." },
+            { topic: "Criminal Justice & Policing", stance: "opposes", detail: "Voted against the George Floyd Justice in Policing Act; supports law enforcement and qualified immunity while representing a minority-majority district where police-community tensions exist." },
+            { topic: "Israel & Gaza", stance: "strongly-supports", detail: "Strong supporter of Israel's military operations; voted for the national security supplemental and has been a consistent voice for U.S.-Israel security cooperation." },
+            { topic: "Trade & China", stance: "strongly-opposes", detail: "Views China as a serious geopolitical threat; has backed export controls, TikTok legislation, and countering Chinese influence in Latin America through programs like USAID." }
+        ],
+        controversies: [
+            { title: "Dignity Act — Immigration Reform Pushback From Both Sides", description: "The Dignity Act immigration bill Salazar co-authored with Rep. Veronica Escobar drew criticism from both directions: immigration hawks in the Republican conference said it was amnesty by another name; immigration advocates said offering legal status without a citizenship path left millions in permanent legal limbo. The bill failed to gain traction in a divided Congress. Salazar called it the only realistic compromise available.", date: "2023", source: "Politico; National Immigration Forum; Numbers USA" },
+            { title: "Cuba Policy and Exiles' Lobbying Influence", description: "Salazar's family background as Cuban exiles and her deep ties to the Cuban-American community have made her one of the strongest congressional voices for sanctions against Cuba. Critics have argued her positions are shaped as much by the political influence of Cuban exile organizations — which have long wielded outsize influence in South Florida politics — as by current diplomatic reality. She has rejected suggestions that lifting the embargo would improve Cubans' lives.", date: "2021–present", source: "Miami Herald; Foreign Policy; Cuba Study Group" },
+            { title: "TV Journalism Past and Political Transition", description: "Salazar's transition from 30-year Univision/Telemundo anchor to Republican congressional candidate raised eyebrows in the journalism community — where she had built a reputation as a tough interviewer of Latin American governments including the Cuban regime. Some colleagues questioned whether her political positions were consistent with her journalistic record; others noted that Cuban-American journalists who covered Castro's brutality firsthand often became strong advocates for regime change.", date: "2020", source: "Columbia Journalism Review; Miami New Times; Poynter Institute" }
+        ],
+        trump: "mixed",
+        vision: null
+    },
+    {
+        id: "joshgottheimer",
+        name: "Josh Gottheimer",
+        initials: "JG",
+        photo: "https://bioguide.congress.gov/bioguide/photo/G/G000583.jpg",
+        party: "D",
+        title: "U.S. Representative — New Jersey",
+        state: "New Jersey",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["Problem Solvers Caucus", "Moderate Democrat", "Israel Hawk", "New Jersey Swing District"],
+        highlights: [
+            "U.S. Representative from New Jersey's 5th District since 2017; Problem Solvers Caucus co-chair — the bipartisan group of moderates that has forced several legislative deals",
+            "Former Clinton White House speechwriter and Microsoft executive who unseated 22-year Republican incumbent Scott Garrett in 2016 by 4 points — winning in a district Republicans had held for decades",
+            "Led the 'Mod Squad' in 2021 — a group of nine moderates who threatened to block Build Back Better unless the bipartisan infrastructure bill passed first, infuriating progressives and Speaker Pelosi",
+            "Among the most vocal House Democrats on Israel — has repeatedly accused progressive colleagues of antisemitism and has been a central figure in intraparty conflicts over Gaza policy",
+            "Yale BA, Harvard Law JD; ran one of the most expensive House campaigns in New Jersey history — represents an affluent, swing-district constituency in Bergen County"
+        ],
+        keyVotes: [
+            { bill: "First Impeachment of Donald Trump (Abuse of Power)", vote: "yes", date: "2019-12-18", significance: "Voted to impeach Trump — notable as a Democrat representing a swing district where Trump had significant support; his vote was a political risk.", source: "House roll call vote 695, December 18, 2019" },
+            { bill: "American Rescue Plan Act of 2021", vote: "yes", date: "2021-02-27", significance: "Voted for the $1.9T COVID relief package — supported the direct payments and expanded unemployment benefits for his New Jersey constituents.", source: "House roll call vote 49, February 27, 2021" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "yes", date: "2021-11-05", significance: "Voted for the $1.2T infrastructure bill — the culmination of his 'Mod Squad' strategy demanding this vote before progressives could hold it hostage to reconciliation passage.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "Inflation Reduction Act", vote: "yes", date: "2022-08-12", significance: "Voted for the $739B climate and healthcare law — the scaled-back version of Build Back Better that ultimately passed after months of Manchin/Sinema negotiations.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package — was one of the most vocal advocates for the Israel portion, calling failure to pass it an abandonment of a key U.S. ally.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "Antisemitism Awareness Act", vote: "yes", date: "2024-05-02", significance: "Voted for legislation directing the Department of Education to use the IHRA definition of antisemitism in Title VI enforcement — championed as a tool against campus antisemitism; critics argued it would chill pro-Palestinian speech.", source: "House roll call vote 171, May 2, 2024" },
+            { bill: "Fiscal Responsibility Act (Debt Ceiling Agreement)", vote: "yes", date: "2023-05-31", significance: "Voted for the bipartisan debt ceiling deal — as a moderate, supported the compromise spending caps negotiated by Biden and McCarthy.", source: "House roll call vote 264, May 31, 2023" }
+        ],
+        finance: [
+            { year: 2024, office: "House, NJ-5", total: 8200000, small_individual: 820000, large_individual: 5600000, super_pac: 600000, labor_pac: 130000, corporate_pac: 750000, party: 250000, other: 50000 },
+            { year: 2022, office: "House, NJ-5", total: 6800000, small_individual: 680000, large_individual: 4700000, super_pac: 500000, labor_pac: 100000, corporate_pac: 600000, party: 170000, other: 50000 },
+            { year: 2020, office: "House, NJ-5", total: 5500000, small_individual: 560000, large_individual: 3800000, super_pac: 400000, labor_pac: 80000, corporate_pac: 510000, party: 120000, other: 30000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "supports", detail: "Supported the ACA and the Inflation Reduction Act's prescription drug pricing reforms; takes a more moderate approach than progressive Democrats on expanding coverage." },
+            { topic: "Climate & Energy", stance: "supports", detail: "Voted for the Inflation Reduction Act's climate investments; represents a suburban NJ district that supports clean energy and environmental protection." },
+            { topic: "Immigration & Border", stance: "mixed", detail: "Supports a path to citizenship for DACA recipients and comprehensive reform while also backing enhanced border security — the moderate Democratic position in a swing district." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", detail: "Supports abortion rights; represents a New Jersey constituency with strong support for reproductive rights access." },
+            { topic: "Gun Control", stance: "supports", detail: "Supports background check expansions and assault weapons restrictions; represents a suburban NJ district that has been responsive to gun safety advocacy after mass shootings." },
+            { topic: "Tax Policy & Economy", stance: "supports", detail: "Supports progressive taxation while opposing policies he believes harm small businesses; backed the Inflation Reduction Act's corporate minimum tax and prescription drug reforms." },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", detail: "Strongly pro-Israel and pro-NATO; voted for the $95B national security supplemental and has been one of the most vocal Democratic critics of progressive members he accuses of abandoning Israel." },
+            { topic: "Education", stance: "supports", detail: "Supports federal education investment and student debt relief measures; takes a moderate approach emphasizing both access and fiscal responsibility." },
+            { topic: "Criminal Justice & Policing", stance: "mixed", detail: "Supports some police reform while opposing what he calls excessive rhetoric about defunding police — a moderate position designed to appeal to his competitive suburban district." },
+            { topic: "Israel & Gaza", stance: "strongly-supports", detail: "Among the House's strongest Democratic defenders of Israel's military operations; has accused progressive colleagues of antisemitism and led intraparty fights over Gaza policy and ceasefire demands." },
+            { topic: "Trade & China", stance: "mixed", detail: "Supports trade policies protecting American workers while maintaining open trade frameworks; backed some China economic restrictions through his work on financial technology issues." }
+        ],
+        controversies: [
+            { title: "'Mod Squad' Infrastructure Ultimatum vs. Progressives (2021)", description: "Gottheimer led a group of nine House moderates threatening to vote against the Build Back Better reconciliation package unless the Senate bipartisan infrastructure bill was passed first — a direct confrontation with progressive members including AOC and the Squad who wanted to use the infrastructure bill as leverage for BBB. Speaker Pelosi had to negotiate around his bloc for weeks. Progressives accused him of sabotaging the larger social spending package; Gottheimer said the infrastructure bill had to stand on its own.", date: "2021-09", source: "New York Times; Politico; The Washington Post" },
+            { title: "Antisemitism Accusations Against Progressive Colleagues", description: "Gottheimer has repeatedly accused progressive House members who question military aid to Israel — particularly Squad members — of enabling or engaging in antisemitism. He called for consequences for members who walked out of Netanyahu's congressional address in 2024 and has framed the intraparty Gaza debate as fundamentally about antisemitism rather than foreign policy disagreement. Progressive members and civil liberties groups have called his framing an attempt to silence legitimate policy criticism.", date: "2023–2024", source: "The Atlantic; The Intercept; Forward" },
+            { title: "Most Expensive NJ-5 Races and Outside Money", description: "Gottheimer's congressional races have been among the most expensive in New Jersey history — he and Republican opponents combined to spend over $20M in some cycles. His fundraising from Wall Street, pharmaceutical, and financial services donors while representing a district with significant financial and pharma industry employment has drawn scrutiny from campaign finance watchdogs, who note the concentrated corporate donor support for a Democrat who chairs the Problem Solvers Caucus.", date: "2016–present", source: "OpenSecrets; New Jersey Monitor; Bergen Record" }
+        ],
+        trump: "trump-opponent",
+        vision: null
+    },
+    {
+        id: "suzandelbene",
+        name: "Suzan DelBene",
+        initials: "SD",
+        photo: "https://bioguide.congress.gov/bioguide/photo/D/D000617.jpg",
+        party: "D",
+        title: "U.S. Representative — Washington",
+        state: "Washington",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["DCCC Chair", "Ways & Means", "Tech Policy", "Data Privacy"],
+        highlights: [
+            "U.S. Representative from Washington's 1st District since 2012 (special election); served as DCCC Chair 2023–2025 — leading House Democrats' national campaign and recruitment strategy",
+            "Former Microsoft and Amazon executive who brings a tech-sector background to her work on Ways & Means and tax policy affecting the digital economy",
+            "One of Congress's leading voices on federal data privacy legislation — helped advance the American Data Privacy and Protection Act (ADPPA) out of committee in 2022 in a rare bipartisan 53-2 vote",
+            "CHIPS Act supporter — was a key advocate for domestic semiconductor manufacturing investment to reduce reliance on Asian supply chains, directly relevant to her Seattle-area tech district",
+            "Represents WA-1 in the north Puget Sound area (Bellevue/Redmond/Kirkland) — the heart of Amazon and Microsoft country; one of the wealthiest congressional districts in America"
+        ],
+        keyVotes: [
+            { bill: "American Rescue Plan Act of 2021", vote: "yes", date: "2021-02-27", significance: "Voted for the $1.9T COVID relief package; supported its direct payments, expanded unemployment, and child care provisions.", source: "House roll call vote 49, February 27, 2021" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "yes", date: "2021-11-05", significance: "Voted for the $1.2T infrastructure bill — particularly important for her district's transportation, broadband, and digital infrastructure needs.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "CHIPS and Science Act", vote: "yes", date: "2022-07-28", significance: "Voted for the $52B semiconductor manufacturing legislation — critical for her district where Microsoft, Amazon, and Boeing rely on chip supply chains; passed 243-187.", source: "House roll call vote 395, July 28, 2022" },
+            { bill: "Inflation Reduction Act", vote: "yes", date: "2022-08-12", significance: "Voted for the $739B climate and healthcare package — supported the prescription drug pricing reforms and corporate minimum tax.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "American Data Privacy and Protection Act (ADPPA)", vote: "yes", date: "2022-07-20", significance: "Voted for the bipartisan federal data privacy bill out of committee 53-2 — helped advance the most significant federal privacy legislation in years, though it ultimately did not reach the full House floor.", source: "House Energy & Commerce Committee, July 20, 2022" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package; supported continued Ukraine assistance and Israel security aid.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "First Impeachment of Donald Trump (Abuse of Power)", vote: "yes", date: "2019-12-18", significance: "Voted to impeach Trump — consistent with her position representing a strongly Democratic tech-sector district.", source: "House roll call vote 695, December 18, 2019" }
+        ],
+        finance: [
+            { year: 2024, office: "House, WA-1", total: 4800000, small_individual: 520000, large_individual: 3200000, super_pac: 300000, labor_pac: 120000, corporate_pac: 480000, party: 160000, other: 20000 },
+            { year: 2022, office: "House, WA-1", total: 3500000, small_individual: 420000, large_individual: 2300000, super_pac: 180000, labor_pac: 100000, corporate_pac: 370000, party: 110000, other: 20000 },
+            { year: 2020, office: "House, WA-1", total: 2900000, small_individual: 360000, large_individual: 1900000, super_pac: 100000, labor_pac: 90000, corporate_pac: 300000, party: 130000, other: 20000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "strongly-supports", detail: "Supports expanding healthcare access and lowering prescription drug prices; backed the Inflation Reduction Act's Medicare drug negotiation provisions." },
+            { topic: "Climate & Energy", stance: "strongly-supports", detail: "Strong climate advocate representing a tech-forward Pacific Northwest district; voted for the Inflation Reduction Act's clean energy investments and backed the CHIPS Act's green manufacturing provisions." },
+            { topic: "Immigration & Border", stance: "strongly-supports", detail: "Supports comprehensive immigration reform and DACA protections — especially relevant for her tech-sector constituents whose companies depend on skilled immigrant workers." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", detail: "Strongly supports abortion rights; represents a strongly Democratic district in Washington state where reproductive rights have broad public support." },
+            { topic: "Gun Control", stance: "strongly-supports", detail: "Supports universal background checks, assault weapons restrictions, and red flag laws — consistent with her Pacific Northwest suburban constituency." },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports progressive taxation through her Ways & Means work; backed the corporate minimum tax while also defending research and development tax incentives critical to her tech district." },
+            { topic: "Foreign Policy & Military", stance: "supports", detail: "Supports U.S. alliances and Ukraine assistance; voted for the national security supplemental and backed multilateral approaches to foreign policy." },
+            { topic: "Education", stance: "strongly-supports", detail: "Supports federal education investment, student debt relief, and workforce development programs aligned with her tech-heavy district's economy." },
+            { topic: "Criminal Justice & Policing", stance: "supports", detail: "Supported the George Floyd Justice in Policing Act; takes a moderate progressive approach on criminal justice reform consistent with her suburban constituency." },
+            { topic: "Israel & Gaza", stance: "mixed", detail: "Supports Israel's right to self-defense while calling for humanitarian aid access and protection of civilians in Gaza — a balanced position reflecting her diverse district." },
+            { topic: "Trade & China", stance: "mixed", detail: "As a former tech executive, supports strategic competition with China on semiconductors; backed the CHIPS Act and export controls while maintaining support for open trade frameworks that benefit Pacific Northwest exporters." }
+        ],
+        controversies: [
+            { title: "DCCC Chair and 2024 House Loss", description: "DelBene served as DCCC Chair when House Democrats lost the majority in the 2022 midterms by a narrow margin and then failed to win it back in 2024 — ending with Democrats again in the minority. While the 2022 loss was narrower than expected (Democrats had hoped to hold on), critics within the party argued the DCCC's candidate recruitment, spending decisions, and message strategy contributed to the defeats. DelBene's backers countered that the national political environment was difficult to overcome.", date: "2022–2024", source: "Politico; The Hill; Washington Post" },
+            { title: "Tech Industry Funding and Data Privacy Conflict", description: "As a former Microsoft/Amazon executive who receives significant contributions from tech companies while working on tax policy and data privacy legislation that directly affects the industry, DelBene has faced scrutiny over conflicts of interest. Ethics watchdogs have noted the pattern of concentrated tech company donations to a member who represents Amazon and Microsoft's home territory while serving on Ways & Means. She has defended her work as consistently pro-consumer and pro-innovation.", date: "2019–present", source: "OpenSecrets; Campaign Legal Center; Seattle Times" },
+            { title: "Data Privacy Legislation Stalled (2022–2024)", description: "DelBene was a key architect of the American Data Privacy and Protection Act — which passed committee 53-2 in July 2022 in what appeared to be a landmark bipartisan moment. The bill then stalled and never reached the full House floor, frustrating privacy advocates who had waited decades for comprehensive federal privacy law. Critics blamed intraparty disagreements over California's preemption provisions; supporters blamed the lack of Senate action.", date: "2022–2024", source: "Wired; Politico; Electronic Frontier Foundation" }
+        ],
+        trump: "trump-opponent",
+        vision: null
+    },
+    {
+        id: "deanphillips",
+        name: "Dean Phillips",
+        initials: "DP",
+        photo: "https://bioguide.congress.gov/bioguide/photo/P/P000616.jpg",
+        party: "D",
+        title: "Former U.S. Representative — Minnesota",
+        state: "Minnesota",
+        office: "Former U.S. House of Representatives",
+        currentRole: "former",
+        tags: ["Former Member", "Presidential Primary Challenge", "Moderate Democrat", "MN-3"],
+        highlights: [
+            "U.S. Representative from Minnesota's 3rd District 2019–2025; left Congress after running against President Biden in the 2024 Democratic presidential primary",
+            "Heir to Phillips Distilleries (Pinnacle Vodka, UV Vodka) and co-owner of Talenti Gelato before it was sold to Unilever — one of the wealthiest members of Congress",
+            "Challenged Biden in the 2024 Democratic presidential primary, arguing Biden was too old to win in November — received ~15-20% in some states before Biden dropped out and was replaced by Kamala Harris",
+            "Problem Solvers Caucus member who emphasized bipartisanship and working across the aisle; voted with Republicans on several fiscal matters more than most Democrats",
+            "Won a suburban Minneapolis district in 2018 that Republicans had held for decades; the district voted for Trump in 2016 and then flipped to Democrats under Phillips"
+        ],
+        keyVotes: [
+            { bill: "American Rescue Plan Act of 2021", vote: "yes", date: "2021-02-27", significance: "Voted for the $1.9T COVID relief package; supported the direct payments and enhanced unemployment benefits for Minnesota constituents.", source: "House roll call vote 49, February 27, 2021" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "yes", date: "2021-11-05", significance: "Voted for the $1.2T infrastructure bill — as a moderate, supported the bipartisan deal that he argued would deliver real results for his suburban district.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "Inflation Reduction Act", vote: "yes", date: "2022-08-12", significance: "Voted for the $739B climate and healthcare law — supported the prescription drug pricing reforms and climate investments.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "Fiscal Responsibility Act (Debt Ceiling Agreement)", vote: "yes", date: "2023-05-31", significance: "Voted for the bipartisan debt ceiling deal — as a Problem Solvers Caucus member, supported the negotiated spending caps.", source: "House roll call vote 264, May 31, 2023" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package — supported continued Ukraine assistance and Israel security aid.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "Social Security Fairness Act", vote: "yes", date: "2024-11-12", significance: "Voted for legislation eliminating the Windfall Elimination Provision and Government Pension Offset — expanded Social Security benefits for roughly 3 million public employees; passed 327-75.", source: "House roll call vote 479, November 12, 2024" },
+            { bill: "George Floyd Justice in Policing Act", vote: "yes", date: "2021-03-03", significance: "Voted for the police reform bill — meaningful given his suburban Minneapolis district was directly affected by the George Floyd murder in 2020 and the subsequent protests.", source: "House roll call vote 62, March 3, 2021" }
+        ],
+        finance: [
+            { year: 2022, office: "House, MN-3", total: 5200000, small_individual: 620000, large_individual: 3600000, super_pac: 250000, labor_pac: 130000, corporate_pac: 380000, party: 180000, other: 40000 },
+            { year: 2020, office: "House, MN-3", total: 4100000, small_individual: 490000, large_individual: 2800000, super_pac: 180000, labor_pac: 110000, corporate_pac: 320000, party: 160000, other: 40000 },
+            { year: 2018, office: "House, MN-3", total: 3800000, small_individual: 430000, large_individual: 2600000, super_pac: 150000, labor_pac: 90000, corporate_pac: 330000, party: 160000, other: 40000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "supports", detail: "Voted for the ACA and the Inflation Reduction Act's prescription drug reforms; takes a more moderate approach than progressives — focused on affordability and expanding access through market reforms." },
+            { topic: "Climate & Energy", stance: "supports", detail: "Voted for the Inflation Reduction Act's clean energy investments; represents a suburban district where climate action has significant constituency support." },
+            { topic: "Immigration & Border", stance: "supports", detail: "Supports comprehensive immigration reform and DACA protections; takes a moderate approach emphasizing both humanitarian concerns and border security." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", detail: "Supports abortion rights; condemned the Dobbs decision and backed federal legislation to restore reproductive rights." },
+            { topic: "Gun Control", stance: "supports", detail: "Supports background check expansions and assault weapons restrictions — meaningful positions given the mass shootings his suburban Minneapolis district has experienced." },
+            { topic: "Tax Policy & Economy", stance: "supports", detail: "Supports progressive taxation while opposing policies he believes discourage investment; backed the Inflation Reduction Act's corporate minimum tax while emphasizing fiscal responsibility." },
+            { topic: "Foreign Policy & Military", stance: "supports", detail: "Supports U.S. alliances and Ukraine assistance; voted for the national security supplemental and supported multilateral foreign policy approaches." },
+            { topic: "Education", stance: "supports", detail: "Supports federal education investment and some student debt relief; takes a moderate approach balancing access with fiscal sustainability." },
+            { topic: "Criminal Justice & Policing", stance: "supports", detail: "Voted for the George Floyd Justice in Policing Act; his suburban Minneapolis district was particularly affected by the 2020 murder of George Floyd, making this a central issue." },
+            { topic: "Israel & Gaza", stance: "supports", detail: "Supported Israel's right to self-defense and voted for the national security supplemental; took a more moderate position on Gaza than progressive colleagues." },
+            { topic: "Trade & China", stance: "mixed", detail: "Supported the CHIPS Act and strategic competition with China on technology; backs trade policies that protect American jobs while maintaining open trade for Minnesota agriculture exporters." }
+        ],
+        controversies: [
+            { title: "2024 Presidential Primary Challenge Against Biden", description: "Phillips announced in October 2023 that he would challenge President Biden in the 2024 Democratic primary, arguing Biden was too old to run effectively and that Democrats needed an open primary. The Democratic establishment united against him; Speaker Emerita Pelosi, former President Obama, and virtually all elected Democrats endorsed Biden. Phillips said Biden's age was an obvious problem others wouldn't acknowledge; Democrats called his campaign destabilizing. After Biden dropped out in July 2024 and endorsed Harris, Phillips ended his campaign.", date: "2023-10–2024-07", source: "New York Times; Politico; Minneapolis Star Tribune" },
+            { title: "Hired Robert F. Kennedy Jr.-Aligned Consultant", description: "During his presidential campaign, Phillips hired political consultant Steve Kramer, who had previously worked with Robert F. Kennedy Jr.'s independent campaign. Critics within the Democratic Party said the hire showed poor judgment and suggested Phillips was willing to take help from sources that weakened Democratic unity. The revelation deepened establishment hostility to his campaign.", date: "2024-02", source: "Politico; Washington Post; The Atlantic" },
+            { title: "Criticism From MN Progressive Democrats", description: "Phillips's moderate, problem-solver positioning drew criticism from progressive Democrats in Minnesota who argued he too often worked across the aisle in ways that undermined Democratic priorities. His vote for the Fiscal Responsibility Act's spending caps drew particular criticism. His decision to run for president while still serving in Congress — effectively abandoning his district mid-term — frustrated some of his own constituents and Minnesota Democratic leaders.", date: "2023–2024", source: "Minneapolis Star Tribune; Minnesota Reformer; The Progressive" }
+        ],
+        trump: "trump-opponent",
+        vision: null
+    },
+    {
+        id: "dustyjohnson",
+        name: "Dusty Johnson",
+        initials: "DJ",
+        photo: "https://bioguide.congress.gov/bioguide/photo/J/J000301.jpg",
+        party: "R",
+        title: "U.S. Representative — South Dakota",
+        state: "South Dakota",
+        office: "U.S. House of Representatives",
+        currentRole: "representative",
+        tags: ["Main Street Caucus Chair", "Agriculture", "Bipartisan", "South Dakota"],
+        highlights: [
+            "U.S. Representative for South Dakota's at-large seat since 2019; House Main Street Caucus Chairman — the coalition of pragmatic conservatives that pushed back against the Freedom Caucus's brinkmanship tactics",
+            "Former South Dakota Public Utilities Commissioner (2011–2017) and VP at Great Plains Energy before Congress; brings a utility regulation and energy policy background to his work",
+            "Voted for the Bipartisan Infrastructure Law in 2021 — one of 13 Republicans who crossed the aisle; faced criticism from some South Dakota conservatives but argued the rural infrastructure investment was essential",
+            "Key voice for agricultural policy as South Dakota's sole House representative — has fought for farm bill provisions protecting commodity payments and crop insurance for the Great Plains",
+            "Known for working across the aisle on farm bills, infrastructure, and rural broadband — one of the more pragmatic House Republicans who has often clashed with the Freedom Caucus over government shutdown threats"
+        ],
+        keyVotes: [
+            { bill: "American Rescue Plan Act of 2021", vote: "no", date: "2021-02-27", significance: "Voted against the $1.9T COVID relief package — argued it was too large and would fuel inflation, consistent with his fiscal conservatism.", source: "House roll call vote 49, February 27, 2021" },
+            { bill: "Bipartisan Infrastructure Investment and Jobs Act", vote: "yes", date: "2021-11-05", significance: "Voted for the $1.2T bipartisan infrastructure law — one of 13 Republicans to cross the aisle. Said the rural broadband, road, and water infrastructure investments were essential for South Dakota.", source: "House roll call vote 369, November 5, 2021" },
+            { bill: "Inflation Reduction Act", vote: "no", date: "2022-08-12", significance: "Voted against the $739B climate and healthcare law — opposed its tax increases and what he called energy provisions that would harm agriculture and the fossil fuel industry.", source: "House roll call vote 420, August 12, 2022" },
+            { bill: "Fiscal Responsibility Act (Debt Ceiling Agreement)", vote: "yes", date: "2023-05-31", significance: "Voted for the bipartisan debt ceiling deal — as Main Street Caucus Chair, was a key voice urging Republicans to accept the negotiated compromise rather than risk default.", source: "House roll call vote 264, May 31, 2023" },
+            { bill: "Farm Bill Reauthorization", vote: "yes", date: "2024", significance: "Consistently supported Farm Bill reauthorization provisions protecting commodity payments, crop insurance, and SNAP — argues that rural America depends on the farm safety net and that bipartisan compromise is necessary.", source: "House Agriculture Committee records, 118th Congress" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package — said the U.S. commitment to NATO and democratic allies is non-negotiable.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "Government Funding CR (Preventing Shutdown)", vote: "yes", date: "2023-09-30", significance: "Voted for continuing resolutions to prevent government shutdowns — as Main Street Caucus Chair, was a leading Republican voice arguing that shutdowns hurt constituents and are not effective leverage.", source: "House roll call vote 520, September 30, 2023" }
+        ],
+        finance: [
+            { year: 2024, office: "House, SD-AL", total: 1600000, small_individual: 250000, large_individual: 890000, super_pac: 0, labor_pac: 15000, corporate_pac: 340000, party: 80000, other: 25000 },
+            { year: 2022, office: "House, SD-AL", total: 1300000, small_individual: 210000, large_individual: 720000, super_pac: 0, labor_pac: 10000, corporate_pac: 270000, party: 70000, other: 20000 },
+            { year: 2020, office: "House, SD-AL", total: 950000, small_individual: 170000, large_individual: 510000, super_pac: 0, labor_pac: 8000, corporate_pac: 190000, party: 50000, other: 22000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "opposes", detail: "Voted against the ACA; supports free-market healthcare reforms; opposes government-mandated coverage expansion while supporting protections for pre-existing conditions." },
+            { topic: "Climate & Energy", stance: "opposes", detail: "Voted against the Inflation Reduction Act's climate provisions; supports domestic energy production including natural gas and wind (South Dakota has significant wind energy development)." },
+            { topic: "Immigration & Border", stance: "opposes", detail: "Supports strong border enforcement and opposes amnesty; takes a standard conservative position on immigration consistent with his South Dakota constituency." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-opposes", detail: "Opposes abortion rights; backed South Dakota's near-total abortion ban and has supported federal legislation restricting access." },
+            { topic: "Gun Control", stance: "strongly-opposes", detail: "Strong Second Amendment supporter; consistently opposed gun control legislation representing a rural South Dakota district with strong hunting and firearms culture." },
+            { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports low taxes and deregulation; backed the 2017 Tax Cuts and Jobs Act and consistently opposes new federal spending, though he carves out exceptions for rural infrastructure." },
+            { topic: "Foreign Policy & Military", stance: "supports", detail: "Supports U.S. alliances and Ukraine assistance — voted for the national security supplemental even as MAGA Republicans opposed it; sees U.S. global commitments as aligned with South Dakota's values." },
+            { topic: "Education", stance: "opposes", detail: "Supports school choice and local education control; opposes federal education mandates and student loan forgiveness programs." },
+            { topic: "Criminal Justice & Policing", stance: "strongly-opposes", detail: "Strong law and order supporter; backed qualified immunity and has consistently opposed criminal justice reform legislation he sees as undermining law enforcement." },
+            { topic: "Israel & Gaza", stance: "strongly-supports", detail: "Supports strong U.S.-Israel security ties and voted for the national security supplemental's Israel aid provisions." },
+            { topic: "Trade & China", stance: "mixed", detail: "Supports agricultural trade policies benefiting South Dakota farmers, including soybean and corn exports; backs some China tariffs on industrial goods while being cautious about agricultural trade retaliation." }
+        ],
+        controversies: [
+            { title: "Infrastructure Vote Blowback From South Dakota Conservatives", description: "When Johnson voted for the Bipartisan Infrastructure Law in November 2021, he faced significant criticism from conservative Republicans in South Dakota who called it a vote for Biden's agenda. Some Freedom Caucus-aligned critics argued he should have held firm against any bipartisan deal. Johnson defended the vote by pointing to the specific rural broadband, road, and water infrastructure funding for South Dakota — and won re-election comfortably.", date: "2021-11", source: "Sioux Falls Argus Leader; South Dakota Public Broadcasting" },
+            { title: "Main Street Caucus vs. Freedom Caucus Conflict", description: "As Main Street Caucus Chair, Johnson has repeatedly clashed with Freedom Caucus members who used government shutdown threats and debt ceiling brinkmanship as legislative leverage. He called the January 2023 Kevin McCarthy Speaker fight 'embarrassing' and argued that the Freedom Caucus's tactics made Republicans appear chaotic and ungovernable. Freedom Caucus members accused him of enabling Democratic spending by refusing to use hardball tactics.", date: "2023–2024", source: "Politico; CNN; The Hill" },
+            { title: "Farm Bill Impasse and Rural America Frustration", description: "The 2023-2024 Farm Bill reauthorization stalled for over a year — affecting crop insurance programs and commodity payments that South Dakota farmers depend on. While Johnson was a consistent voice for getting the bill done, the impasse reflected broader Republican intraparty conflicts over SNAP spending and Democratic positions on nutrition programs. South Dakota farm organizations grew frustrated with Congress's inability to act on the bill.", date: "2023–2024", source: "South Dakota Farm Bureau; Agri-Pulse; Politico Agriculture" }
+        ],
+        trump: "trump-ally",
+        vision: null
+    },
+    {
+        id: "jeffjackson",
+        name: "Jeff Jackson",
+        initials: "JJ",
+        photo: "https://bioguide.congress.gov/bioguide/photo/J/J000308.jpg",
+        party: "D",
+        title: "Former U.S. Representative — North Carolina",
+        state: "North Carolina",
+        office: "Former U.S. House of Representatives",
+        currentRole: "former",
+        tags: ["Former Member", "NC Attorney General", "Army Veteran", "Social Media Congressman"],
+        highlights: [
+            "U.S. Representative from North Carolina's 14th District 2023–2025; became North Carolina Attorney General in January 2025 after winning the 2024 election",
+            "Army JAG (Judge Advocate General) officer who served in Afghanistan — brought a veteran's perspective to his work on military and veterans issues in Congress",
+            "Went viral on TikTok and YouTube by posting frank, behind-the-scenes videos explaining how Congress actually works — amassing millions of followers and changing how many Americans understood the legislative process",
+            "North Carolina state senator (2014–2022) before Congress; had unsuccessfully run for U.S. Senate in 2022 before winning the newly created NC-14 House seat",
+            "Known for a bipartisan, pragmatic approach — voted with Republicans on some fiscal measures and tried to represent the competitive Charlotte-area district from the center-left"
+        ],
+        keyVotes: [
+            { bill: "Fiscal Responsibility Act (Debt Ceiling Agreement)", vote: "yes", date: "2023-05-31", significance: "Voted for the bipartisan debt ceiling deal — as a Problem Solvers-adjacent moderate, supported the compromise spending caps to prevent default.", source: "House roll call vote 264, May 31, 2023" },
+            { bill: "National Security Supplemental (Ukraine, Israel, Taiwan)", vote: "yes", date: "2024-04-20", significance: "Voted for the $95B foreign aid package — consistent with his national security focus as an Army veteran who served in Afghanistan.", source: "House roll call vote 150, April 20, 2024" },
+            { bill: "George Floyd Justice in Policing Act (supported as NC state senator)", vote: "yes", date: "2021-03-03", significance: "Backed police reform legislation before entering Congress; continued supporting accountability measures as a House member representing the Charlotte area.", source: "Supported as NC state senator; backed as House priority" },
+            { bill: "Expanding Background Checks Act", vote: "yes", date: "2023", significance: "Voted for universal background check legislation — consistent with his positions as an NC state senator who supported gun safety measures.", source: "House proceedings, 118th Congress" },
+            { bill: "Servicemembers Civil Relief Act Update", vote: "yes", date: "2023", significance: "Voted for updates to servicemember legal protections — bringing his JAG perspective to military-specific legislation.", source: "House proceedings, 118th Congress" },
+            { bill: "American Climate Corps Authorization", vote: "yes", date: "2024", significance: "Supported the climate jobs program authorization — relevant to North Carolina communities affected by extreme weather events including Hurricane Helene (September 2024).", source: "House proceedings, 118th Congress" },
+            { bill: "Social Security Fairness Act", vote: "yes", date: "2024-11-12", significance: "Voted for the bipartisan bill expanding Social Security benefits for roughly 3 million public employees, including many North Carolina teachers and first responders.", source: "House roll call vote 479, November 12, 2024" }
+        ],
+        finance: [
+            { year: 2024, office: "House, NC-14 (left for AG race)", total: 2100000, small_individual: 780000, large_individual: 990000, super_pac: 0, labor_pac: 170000, corporate_pac: 30000, party: 110000, other: 20000 },
+            { year: 2022, office: "House, NC-14", total: 3400000, small_individual: 1200000, large_individual: 1580000, super_pac: 0, labor_pac: 280000, corporate_pac: 20000, party: 280000, other: 40000 }
+        ],
+        issues: [
+            { topic: "Healthcare", stance: "strongly-supports", detail: "Supports expanding healthcare access and the ACA; backed prescription drug pricing reforms and Medicaid expansion in North Carolina." },
+            { topic: "Climate & Energy", stance: "strongly-supports", detail: "Supports climate action; backed the American Climate Corps and clean energy investments — especially relevant after Hurricane Helene devastated western North Carolina in September 2024." },
+            { topic: "Immigration & Border", stance: "supports", detail: "Supports comprehensive immigration reform and a pathway to citizenship for DACA recipients; takes a moderate approach on border security." },
+            { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", detail: "Supports abortion rights; condemned the Dobbs decision and backed federal legislation to restore reproductive rights in a state that passed a 12-week abortion ban." },
+            { topic: "Gun Control", stance: "supports", detail: "Supports universal background checks and assault weapons restrictions — meaningful positions for a Charlotte-area district affected by gun violence." },
+            { topic: "Tax Policy & Economy", stance: "supports", detail: "Supports progressive taxation and worker protections; voted for the Fiscal Responsibility Act as a fiscal compromise while backing investments in North Carolina's economy." },
+            { topic: "Foreign Policy & Military", stance: "strongly-supports", detail: "Army veteran who supports U.S. alliances, Ukraine assistance, and a strong military — voted for the national security supplemental and brought a JAG perspective to military legislation." },
+            { topic: "Education", stance: "strongly-supports", detail: "Supports federal education investment, student debt relief, and support for North Carolina's public university system." },
+            { topic: "Criminal Justice & Policing", stance: "supports", detail: "Backed police reform legislation; now serves as NC Attorney General with a direct role in criminal justice policy — focused on accountability and public safety." },
+            { topic: "Israel & Gaza", stance: "supports", detail: "Supported Israel's right to self-defense and voted for the national security supplemental; took a more moderate position than progressive colleagues on Gaza." },
+            { topic: "Trade & China", stance: "mixed", detail: "Supports trade policies protecting North Carolina's manufacturing workers; backed strategic competition with China on technology and semiconductor supply chains." }
+        ],
+        controversies: [
+            { title: "Running for AG While Still Serving in Congress", description: "Jackson announced his run for North Carolina Attorney General in early 2024 while still serving in his first House term — raising questions from some constituents about whether he was fully committed to representing NC-14 through the end of his term. He argued the AG office was the right next step for his skills and that he could do both effectively. He won the AG race in November 2024 and resigned from Congress in January 2025.", date: "2024", source: "Charlotte Observer; NC Policy Watch; Roll Call" },
+            { title: "'Politics as Entertainment' Criticism of TikTok Strategy", description: "Jackson's viral social media videos explaining Congress drew millions of followers and significantly raised his national profile, but some critics — including Democratic colleagues and media observers — questioned whether the approachable, behind-the-scenes format trivialized the legislative process or reduced complex policy to easy-to-share content. Supporters argued he was doing essential public education about how Congress works; detractors said he was making governing entertaining rather than effective.", date: "2023–2024", source: "Politico; The Atlantic; Columbia Journalism Review" },
+            { title: "Moderate Votes Drew Progressive Criticism", description: "Jackson voted for the Fiscal Responsibility Act's spending caps — which progressive groups called austerity measures — and generally positioned himself in the moderate wing of the Democratic caucus. Some progressive North Carolina Democrats argued he wasn't fighting hard enough on healthcare, climate, and social spending; his moderate positioning reflected the competitive nature of his Charlotte-area swing district.", date: "2023–2024", source: "North Carolina Policy Watch; The Intercept; Charlotte Observer" }
+        ],
+        trump: "trump-opponent",
+        vision: null
     }
 
 ];
@@ -19587,9 +20115,9 @@ function renderFinance(c, cycleIndex) {
             <div class="quickstat-sub">${formatMoney(Math.round(cycle.total * indPct / 100))} total</div>
         </div>
         <div class="quickstat">
-            <div class="quickstat-label">Super PAC Money</div>
+            <div class="quickstat-label">Super PAC Outside Spending</div>
             <div class="quickstat-value ${supPct > 0 ? "qs-red" : "qs-green"}">${supPct}%</div>
-            <div class="quickstat-sub">${supPct === 0 ? "None accepted" : formatMoney(Math.round(cycle.total * supPct / 100)) + " total"}</div>
+            <div class="quickstat-sub">${supPct === 0 ? "No outside spending reported" : formatMoney(Math.round(cycle.total * supPct / 100)) + " spent independently"}</div>
         </div>
         <div class="quickstat">
             <div class="quickstat-label">Labor & Ethical PACs</div>
