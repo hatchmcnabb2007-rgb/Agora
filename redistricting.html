@@ -96,8 +96,19 @@
     }
     .legend-label { font-size: 11px; color: var(--text-muted); font-weight: 500; }
 
-    #map-container { width: 100%; min-height: 480px; cursor: pointer; }
-    #map-container svg { display: block; width: 100%; }
+    #map-container { width: 100%; cursor: pointer; position: relative; }
+    #map-container svg { display: block; width: 100%; height: auto; }
+    .map-loading {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      min-height: 300px; background: #F9FAFB; border-radius: 0 0 10px 10px;
+    }
+    .map-loading-inner { text-align: center; color: var(--text-muted); font-size: 13px; }
+    .spinner {
+      width: 32px; height: 32px; border: 3px solid var(--border);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin .8s linear infinite; margin: 0 auto 10px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .district-path { stroke: #fff; stroke-width: .4; transition: opacity .1s; }
     .district-path:hover { opacity: .8; stroke-width: 1.2; stroke: var(--dark); }
@@ -270,7 +281,14 @@
         <span class="legend-label">D+40</span>
       </div>
     </div>
-    <div id="map-container"></div>
+    <div id="map-container">
+      <div class="map-loading" id="map-loading">
+        <div class="map-loading-inner">
+          <div class="spinner"></div>
+          Loading district boundaries…
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- District Detail Panel -->
@@ -819,8 +837,8 @@ async function initMap() {
   mapSvg = d3.select("#map-container")
     .append("svg")
     .attr("viewBox", `0 0 ${width} ${height}`)
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", "100%")
+    .style("display", "block");
 
   const projection = d3.geoAlbersUsa()
     .scale(width * 1.22)
@@ -840,6 +858,7 @@ async function initMap() {
 
   // Load default year
   await loadYear(currentYearIdx);
+  document.getElementById("map-loading")?.remove();
 }
 
 // ─────────────────────────────────────────────
