@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redistricting in America — Agora</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <style>
+    :root {
+      --bg: #F8F6F2;
+      --text-primary: #1A1A1A;
+      --text-secondary: #6B7280;
+      --text-muted: #9CA3AF;
+      --border: #E5E1D8;
+      --accent: #8B6914;
+      --gold: #D4A853;
+      --dark: #1F2937;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; }
+
+    /* ── Header ── */
+    header {
+      background: var(--dark); padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .wordmark { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; letter-spacing: .05em; font-weight: 700; text-decoration: none; }
+    .wordmark span { color: var(--gold); }
+    .header-nav { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      font-size: 13px; font-weight: 500; color: #9CA3AF; text-decoration: none;
+      padding: 6px 14px; border-radius: 6px; transition: color .15s, background .15s;
+    }
+    .nav-link:hover { color: white; }
+    .nav-link.active { color: var(--gold); background: rgba(212,168,83,.1); }
+
+    /* ── Page Header ── */
+    .page-hero {
+      background: var(--dark); color: white;
+      padding: 48px 24px 44px; text-align: center;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 900;
+      margin-bottom: 12px; line-height: 1.1;
+    }
+    .page-hero p { font-size: 15px; color: #9CA3AF; max-width: 520px; margin: 0 auto; line-height: 1.6; }
+
+    /* ── Content ── */
+    .content { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ── Control Bar ── */
+    .control-bar {
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 20px; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .control-group { display: flex; align-items: center; gap: 8px; }
+    .control-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+    .layer-btn {
+      font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 6px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg); color: var(--text-secondary);
+      font-family: 'Inter', sans-serif; transition: all .15s;
+    }
+    .layer-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .layer-btn.active { background: var(--dark); border-color: var(--dark); color: white; }
+    .layer-btn.coming-soon { opacity: .5; cursor: default; }
+    .layer-btn.coming-soon:hover { border-color: var(--border); color: var(--text-secondary); }
+    .coming-tag { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: .05em; }
+
+    /* ── Map Card ── */
+    .map-card {
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .map-card-header {
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .congress-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--dark);
+    }
+    .congress-badge .year-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
+    }
+    .map-legend { display: flex; align-items: center; gap: 6px; }
+    .legend-bar {
+      width: 140px; height: 10px; border-radius: 5px;
+      background: linear-gradient(to right, #B2182B, #EF8A62, #FDDBC7, #F7F7F7, #D1E5F0, #4393C3, #2166AC);
+    }
+    .legend-label { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+
+    #map-container { width: 100%; min-height: 480px; cursor: pointer; }
+    #map-container svg { display: block; width: 100%; }
+
+    .district-path { stroke: #fff; stroke-width: .4; transition: opacity .1s; }
+    .district-path:hover { opacity: .8; stroke-width: 1.2; stroke: var(--dark); }
+    .district-path.selected { stroke-width: 1.8; stroke: var(--dark); opacity: 1; }
+    .state-border { fill: none; stroke: #4B5563; stroke-width: .8; pointer-events: none; }
+    .district-path.uncolored { fill: #D1D5DB; }
+
+    /* ── Tooltip ── */
+    .map-tooltip {
+      position: fixed; pointer-events: none; z-index: 200;
+      background: white; border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px 14px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+      max-width: 220px; font-size: 13px;
+    }
+    .tooltip-district { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+    .tooltip-rep { color: var(--text-secondary); font-size: 12px; margin-bottom: 8px; }
+    .tooltip-lean {
+      font-weight: 700; font-size: 13px; padding: 3px 8px; border-radius: 4px; display: inline-block;
+    }
+    .lean-d { background: #DBEAFE; color: #1D4ED8; }
+    .lean-r { background: #FEE2E2; color: #B91C1C; }
+    .lean-e { background: #F3F4F6; color: #374151; }
+    .tooltip-mm { font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 5px; }
+
+    /* ── Detail Panel ── */
+    .detail-panel {
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      padding: 24px; margin-bottom: 20px; display: none;
+    }
+    .detail-panel.visible { display: block; }
+    .detail-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; gap: 16px; flex-wrap: wrap; }
+    .detail-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .detail-rep { font-size: 15px; color: var(--text-secondary); margin-bottom: 10px; }
+    .detail-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .detail-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px;
+    }
+    .tag-lean-d { background: #DBEAFE; color: #1D4ED8; }
+    .tag-lean-r { background: #FEE2E2; color: #B91C1C; }
+    .tag-mm { background: #FEF9F0; color: var(--accent); border: 1px solid var(--border); }
+    .tag-competitive { background: #F3F4F6; color: #374151; border: 1px solid var(--border); }
+    .tag-safe { background: #F9FAFB; color: var(--text-muted); border: 1px solid var(--border); }
+    .detail-close { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px; color: var(--text-secondary); font-family: 'Inter', sans-serif; flex-shrink: 0; }
+    .detail-close:hover { background: var(--bg); }
+    .detail-body { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 600px) { .detail-body { grid-template-columns: 1fr; } }
+    .detail-section-title { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .race-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; }
+    .race-label { width: 72px; color: var(--text-secondary); flex-shrink: 0; }
+    .race-bar-wrap { flex: 1; background: var(--bg); border-radius: 3px; height: 10px; overflow: hidden; }
+    .race-bar { height: 100%; border-radius: 3px; }
+    .race-pct { width: 34px; text-align: right; font-weight: 600; color: var(--text-primary); }
+    .detail-note { font-size: 13px; line-height: 1.65; color: var(--text-secondary); margin-top: 8px; }
+    .detail-generic { font-size: 13px; color: var(--text-muted); font-style: italic; padding: 16px 0; }
+
+    /* ── Efficiency Gap Table ── */
+    .section-header { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 32px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .gap-table-wrap { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--bg); }
+    th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    td { padding: 11px 16px; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg); }
+    .favors-r { color: #B91C1C; font-weight: 600; }
+    .favors-d { color: #1D4ED8; font-weight: 600; }
+    .favors-fair { color: #059669; font-weight: 600; }
+
+    /* ── Source Footer ── */
+    .source-note { font-size: 11px; color: var(--text-muted); margin-top: 24px; line-height: 1.6; }
+    .source-note a { color: var(--accent); }
+
+    /* ── Phase 2 Notice ── */
+    .phase2-notice {
+      background: #FEF9F0; border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px 16px; font-size: 13px; color: var(--text-secondary);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .phase2-notice strong { color: var(--dark); }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">AG<span>ORA</span></a>
+  <nav class="header-nav">
+    <a class="nav-link" href="/">Candidates</a>
+    <a class="nav-link active" href="/redistricting.html">Redistricting</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h1>Redistricting in America</h1>
+  <p>How district lines shape political power — and who draws them.</p>
+</div>
+
+<div class="content">
+
+  <div class="phase2-notice">
+    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="#D4A853" stroke-width="1.5"/><path d="M10 6v4M10 14h.01" stroke="#D4A853" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span><strong>118th Congress · 2022 Elections.</strong> Historical maps (2000–2020) are in progress. Full time-scrubber coming soon.</span>
+  </div>
+
+  <!-- Control Bar -->
+  <div class="control-bar">
+    <div class="control-group">
+      <span class="control-label">Show</span>
+      <button class="layer-btn active" id="btn-partisan" onclick="setLayer('partisan')">Partisan Lean</button>
+      <button class="layer-btn coming-soon" title="Coming soon">Racial Makeup <span class="coming-tag">soon</span></button>
+      <button class="layer-btn coming-soon" title="Coming soon">Both <span class="coming-tag">soon</span></button>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Highlight</span>
+      <button class="layer-btn active" id="btn-all" onclick="setHighlight('all')">All Districts</button>
+      <button class="layer-btn" id="btn-mm" onclick="setHighlight('mm')">Majority-Minority</button>
+      <button class="layer-btn" id="btn-comp" onclick="setHighlight('competitive')">Competitive</button>
+    </div>
+  </div>
+
+  <!-- Map Card -->
+  <div class="map-card">
+    <div class="map-card-header">
+      <div class="congress-badge">
+        <span class="year-dot"></span>
+        118th Congress &nbsp;·&nbsp; 2022 Election Results
+      </div>
+      <div class="map-legend">
+        <span class="legend-label">R+40</span>
+        <div class="legend-bar"></div>
+        <span class="legend-label">D+40</span>
+      </div>
+    </div>
+    <div id="map-container"></div>
+  </div>
+
+  <!-- District Detail Panel -->
+  <div class="detail-panel" id="detail-panel">
+    <div class="detail-top">
+      <div>
+        <div class="detail-title" id="dp-title"></div>
+        <div class="detail-rep" id="dp-rep"></div>
+        <div class="detail-tags" id="dp-tags"></div>
+      </div>
+      <button class="detail-close" onclick="closeDetail()">Close ✕</button>
+    </div>
+    <div class="detail-body">
+      <div>
+        <div class="detail-section-title">Racial Makeup</div>
+        <div id="dp-race"></div>
+      </div>
+      <div>
+        <div class="detail-section-title">Gerrymandering Context</div>
+        <div id="dp-note" class="detail-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Efficiency Gap Table -->
+  <div class="section-header">Efficiency Gap by State — Most Gerrymandered Maps</div>
+  <div class="gap-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>Districts</th>
+          <th>2022 Seats (D / R)</th>
+          <th>Statewide Vote Share</th>
+          <th>Map Favors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Texas</strong></td><td>38</td><td>13 D / 25 R</td><td>D ~43% · R ~57%</td><td class="favors-r">Republican</td></tr>
+        <tr><td><strong>Florida</strong></td><td>28</td><td>8 D / 20 R</td><td>D ~44% · R ~56%</td><td class="favors-r">Republican</td></tr>
+        <tr><td><strong>North Carolina</strong></td><td>14</td><td>7 D / 7 R</td><td>D ~46% · R ~54%</td><td class="favors-r">Republican (contested)</td></tr>
+        <tr><td><strong>Georgia</strong></td><td>14</td><td>5 D / 9 R</td><td>D ~46% · R ~54%</td><td class="favors-r">Republican</td></tr>
+        <tr><td><strong>Ohio</strong></td><td>15</td><td>5 D / 10 R</td><td>D ~44% · R ~56%</td><td class="favors-r">Republican</td></tr>
+        <tr><td><strong>Wisconsin</strong></td><td>8</td><td>3 D / 5 R</td><td>D ~48% · R ~52%</td><td class="favors-r">Republican</td></tr>
+        <tr><td><strong>Illinois</strong></td><td>17</td><td>14 D / 3 R</td><td>D ~55% · R ~45%</td><td class="favors-d">Democratic</td></tr>
+        <tr><td><strong>Maryland</strong></td><td>8</td><td>7 D / 1 R</td><td>D ~55% · R ~45%</td><td class="favors-d">Democratic</td></tr>
+        <tr><td><strong>Massachusetts</strong></td><td>9</td><td>9 D / 0 R</td><td>D ~64% · R ~36%</td><td class="favors-d">Democratic</td></tr>
+        <tr><td><strong>Pennsylvania</strong></td><td>17</td><td>9 D / 8 R</td><td>D ~50% · R ~50%</td><td class="favors-fair">Competitive / Fair</td></tr>
+        <tr><td><strong>Michigan</strong></td><td>13</td><td>7 D / 6 R</td><td>D ~49% · R ~51%</td><td class="favors-fair">Competitive / Fair</td></tr>
+        <tr><td><strong>Arizona</strong></td><td>9</td><td>4 D / 5 R</td><td>D ~49% · R ~51%</td><td class="favors-fair">Competitive / Fair</td></tr>
+        <tr><td><strong>Virginia</strong></td><td>11</td><td>7 D / 4 R</td><td>D ~52% · R ~48%</td><td class="favors-fair">Competitive / Fair</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="source-note">
+    District boundaries: U.S. Census Bureau TIGER/Line Cartographic Boundary Files, 118th Congress (2022). Election results: MIT Election Data and Science Lab. Efficiency gap methodology adapted from Stephanopoulos &amp; McGhee (2015). Racial demographics: U.S. Census Bureau ACS 5-Year Estimates.
+  </p>
+
+</div>
+
+<div class="map-tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+// ─────────────────────────────────────────────
+//  DATA
+//  lean: positive = D+, negative = R+
+//  mm: majority-minority (>50% non-white)
+//  comp: competitive (|lean| < 7)
+// ─────────────────────────────────────────────
+
+const DISTRICTS = {
+  // ALABAMA
+  "0101":{lean:-28,party:"R"}, "0102":{lean:-24,party:"R"}, "0103":{lean:-28,party:"R"},
+  "0104":{lean:-50,party:"R"}, "0105":{lean:-28,party:"R"}, "0106":{lean:-32,party:"R"},
+  "0107":{lean:35,party:"D",mm:true},
+  // ALASKA (at-large)
+  "0200":{lean:-6,party:"R"},
+  // ARIZONA
+  "0401":{lean:-7,party:"R"}, "0402":{lean:-25,party:"R"}, "0403":{lean:15,party:"D"},
+  "0404":{lean:8,party:"D"}, "0405":{lean:-22,party:"R"}, "0406":{lean:-4,party:"R",comp:true},
+  "0407":{lean:25,party:"D",mm:true}, "0408":{lean:-28,party:"R"}, "0409":{lean:-28,party:"R"},
+  // ARKANSAS
+  "0501":{lean:-35,party:"R"}, "0502":{lean:-18,party:"R"}, "0503":{lean:-40,party:"R"}, "0504":{lean:-30,party:"R"},
+  // CALIFORNIA
+  "0601":{lean:-18,party:"R"}, "0602":{lean:38,party:"D"}, "0603":{lean:-10,party:"R"},
+  "0604":{lean:-8,party:"R"}, "0605":{lean:20,party:"D"}, "0606":{lean:42,party:"D",mm:true},
+  "0607":{lean:15,party:"D"}, "0608":{lean:18,party:"D"}, "0609":{lean:28,party:"D",mm:true},
+  "0610":{lean:22,party:"D"}, "0611":{lean:38,party:"D"}, "0612":{lean:45,party:"D"},
+  "0613":{lean:-5,party:"R",comp:true}, "0614":{lean:27,party:"D"}, "0615":{lean:35,party:"D"},
+  "0616":{lean:30,party:"D"}, "0617":{lean:25,party:"D"}, "0618":{lean:28,party:"D"},
+  "0619":{lean:25,party:"D"}, "0620":{lean:-7,party:"R"}, "0621":{lean:-12,party:"R"},
+  "0622":{lean:4,party:"D",comp:true}, "0623":{lean:-10,party:"R"}, "0624":{lean:14,party:"D"},
+  "0625":{lean:15,party:"D"}, "0626":{lean:12,party:"D"}, "0627":{lean:4,party:"D",comp:true},
+  "0628":{lean:28,party:"D"}, "0629":{lean:43,party:"D",mm:true}, "0630":{lean:35,party:"D"},
+  "0631":{lean:30,party:"D"}, "0632":{lean:26,party:"D"}, "0633":{lean:24,party:"D"},
+  "0634":{lean:47,party:"D",mm:true}, "0635":{lean:33,party:"D"}, "0636":{lean:27,party:"D",mm:true},
+  "0637":{lean:45,party:"D",mm:true}, "0638":{lean:22,party:"D"}, "0639":{lean:9,party:"D"},
+  "0640":{lean:-3,party:"R",comp:true}, "0641":{lean:5,party:"D",comp:true}, "0642":{lean:-14,party:"R"},
+  "0643":{lean:42,party:"D",mm:true}, "0644":{lean:44,party:"D",mm:true}, "0645":{lean:-2,party:"R",comp:true},
+  "0646":{lean:27,party:"D",mm:true}, "0647":{lean:5,party:"D",comp:true}, "0648":{lean:-5,party:"R",comp:true},
+  "0649":{lean:12,party:"D"}, "0650":{lean:-12,party:"R"}, "0651":{lean:40,party:"D",mm:true},
+  "0652":{lean:27,party:"D"},
+  // COLORADO
+  "0801":{lean:-5,party:"R",comp:true}, "0802":{lean:25,party:"D"}, "0803":{lean:-35,party:"R"},
+  "0804":{lean:-18,party:"R"}, "0805":{lean:-15,party:"R"}, "0806":{lean:-10,party:"R"},
+  "0807":{lean:12,party:"D"}, "0808":{lean:8,party:"D"},
+  // CONNECTICUT
+  "0901":{lean:10,party:"D"}, "0902":{lean:15,party:"D"}, "0903":{lean:12,party:"D"},
+  "0904":{lean:8,party:"D"}, "0905":{lean:20,party:"D"},
+  // DELAWARE
+  "1000":{lean:18,party:"D"},
+  // FLORIDA
+  "1201":{lean:-32,party:"R"}, "1202":{lean:-28,party:"R"}, "1203":{lean:-15,party:"R"},
+  "1204":{lean:-18,party:"R"}, "1205":{lean:-15,party:"R"}, "1206":{lean:-15,party:"R"},
+  "1207":{lean:-3,party:"R",comp:true}, "1208":{lean:-20,party:"R"}, "1209":{lean:-22,party:"R"},
+  "1210":{lean:18,party:"D",mm:true}, "1211":{lean:-24,party:"R"}, "1212":{lean:-22,party:"R"},
+  "1213":{lean:-28,party:"R"}, "1214":{lean:-30,party:"R"}, "1215":{lean:-28,party:"R"},
+  "1216":{lean:-22,party:"R"}, "1217":{lean:-25,party:"R"}, "1218":{lean:-28,party:"R"},
+  "1219":{lean:-10,party:"R"}, "1220":{lean:-18,party:"R"}, "1221":{lean:-20,party:"R"},
+  "1222":{lean:-22,party:"R"}, "1223":{lean:20,party:"D",mm:true}, "1224":{lean:18,party:"D",mm:true},
+  "1225":{lean:-3,party:"R",comp:true}, "1226":{lean:-25,party:"R"}, "1227":{lean:-28,party:"R"},
+  "1228":{lean:25,party:"D"},
+  // GEORGIA
+  "1301":{lean:-25,party:"R"}, "1302":{lean:14,party:"D",mm:true}, "1303":{lean:-18,party:"R"},
+  "1304":{lean:30,party:"D",mm:true}, "1305":{lean:47,party:"D",mm:true}, "1306":{lean:-15,party:"R"},
+  "1307":{lean:-15,party:"R"}, "1308":{lean:25,party:"D",mm:true}, "1309":{lean:-25,party:"R"},
+  "1310":{lean:-20,party:"R"}, "1311":{lean:-25,party:"R"}, "1312":{lean:35,party:"D",mm:true},
+  "1313":{lean:15,party:"D"}, "1314":{lean:-42,party:"R"},
+  // HAWAII
+  "1501":{lean:32,party:"D",mm:true}, "1502":{lean:40,party:"D",mm:true},
+  // IDAHO
+  "1601":{lean:-28,party:"R"}, "1602":{lean:-35,party:"R"},
+  // ILLINOIS
+  "1701":{lean:10,party:"D"}, "1702":{lean:12,party:"D"}, "1703":{lean:25,party:"D",mm:true},
+  "1704":{lean:40,party:"D",mm:true}, "1705":{lean:-15,party:"R"}, "1706":{lean:15,party:"D"},
+  "1707":{lean:44,party:"D",mm:true}, "1708":{lean:-25,party:"R"}, "1709":{lean:12,party:"D"},
+  "1710":{lean:10,party:"D"}, "1711":{lean:-8,party:"R"}, "1712":{lean:-10,party:"R"},
+  "1713":{lean:-15,party:"R"}, "1714":{lean:-20,party:"R"}, "1715":{lean:-20,party:"R"},
+  "1716":{lean:-12,party:"R"}, "1717":{lean:-15,party:"R"},
+  // INDIANA
+  "1801":{lean:-25,party:"R"}, "1802":{lean:10,party:"D"}, "1803":{lean:-12,party:"R"},
+  "1804":{lean:-18,party:"R"}, "1805":{lean:-22,party:"R"}, "1806":{lean:-15,party:"R"},
+  "1807":{lean:-20,party:"R"}, "1808":{lean:-20,party:"R"}, "1809":{lean:-22,party:"R"},
+  // IOWA
+  "1901":{lean:-8,party:"R"}, "1902":{lean:-12,party:"R"}, "1903":{lean:5,party:"D",comp:true}, "1904":{lean:-18,party:"R"},
+  // KANSAS
+  "2001":{lean:-20,party:"R"}, "2002":{lean:-18,party:"R"}, "2003":{lean:8,party:"D"}, "2004":{lean:-28,party:"R"},
+  // KENTUCKY
+  "2101":{lean:-28,party:"R"}, "2102":{lean:25,party:"D",mm:true}, "2103":{lean:-20,party:"R"},
+  "2104":{lean:-22,party:"R"}, "2105":{lean:-35,party:"R"}, "2106":{lean:-25,party:"R"},
+  // LOUISIANA
+  "2201":{lean:-28,party:"R"}, "2202":{lean:30,party:"D",mm:true}, "2203":{lean:-25,party:"R"},
+  "2204":{lean:-28,party:"R"}, "2205":{lean:-30,party:"R"}, "2206":{lean:20,party:"D",mm:true},
+  // MAINE
+  "2301":{lean:8,party:"D"}, "2302":{lean:-4,party:"R",comp:true},
+  // MARYLAND
+  "2401":{lean:-15,party:"R"}, "2402":{lean:12,party:"D"}, "2403":{lean:15,party:"D"},
+  "2404":{lean:36,party:"D",mm:true}, "2405":{lean:8,party:"D"}, "2406":{lean:18,party:"D"},
+  "2407":{lean:25,party:"D"}, "2408":{lean:40,party:"D",mm:true},
+  // MASSACHUSETTS
+  "2501":{lean:18,party:"D"}, "2502":{lean:28,party:"D"}, "2503":{lean:25,party:"D"},
+  "2504":{lean:25,party:"D"}, "2505":{lean:35,party:"D"}, "2506":{lean:30,party:"D"},
+  "2507":{lean:25,party:"D"}, "2508":{lean:15,party:"D"}, "2509":{lean:38,party:"D"},
+  // MICHIGAN
+  "2601":{lean:-5,party:"R",comp:true}, "2602":{lean:12,party:"D"}, "2603":{lean:4,party:"D",comp:true},
+  "2604":{lean:20,party:"D"}, "2605":{lean:-15,party:"R"}, "2606":{lean:-12,party:"R"},
+  "2607":{lean:3,party:"D",comp:true}, "2608":{lean:5,party:"D",comp:true}, "2609":{lean:40,party:"D",mm:true},
+  "2610":{lean:-20,party:"R"}, "2611":{lean:-10,party:"R"}, "2612":{lean:-22,party:"R"},
+  "2613":{lean:25,party:"D"},
+  // MINNESOTA
+  "2701":{lean:5,party:"D",comp:true}, "2702":{lean:-10,party:"R"}, "2703":{lean:25,party:"D"},
+  "2704":{lean:30,party:"D"}, "2705":{lean:-12,party:"R"}, "2706":{lean:-5,party:"R",comp:true},
+  "2707":{lean:-20,party:"R"}, "2708":{lean:40,party:"D",mm:true},
+  // MISSISSIPPI
+  "2801":{lean:-28,party:"R"}, "2802":{lean:25,party:"D",mm:true}, "2803":{lean:-25,party:"R"}, "2804":{lean:-35,party:"R"},
+  // MISSOURI
+  "2901":{lean:-25,party:"R"}, "2902":{lean:35,party:"D",mm:true}, "2903":{lean:-15,party:"R"},
+  "2904":{lean:-28,party:"R"}, "2905":{lean:-28,party:"R"}, "2906":{lean:-20,party:"R"},
+  "2907":{lean:-22,party:"R"}, "2908":{lean:-35,party:"R"},
+  // MONTANA
+  "3001":{lean:-12,party:"R"}, "3002":{lean:-25,party:"R"},
+  // NEBRASKA
+  "3101":{lean:-22,party:"R"}, "3102":{lean:4,party:"D",comp:true}, "3103":{lean:-35,party:"R"},
+  // NEVADA
+  "3201":{lean:8,party:"D"}, "3202":{lean:-8,party:"R"}, "3203":{lean:2,party:"D",comp:true}, "3204":{lean:6,party:"D"},
+  // NEW HAMPSHIRE
+  "3301":{lean:3,party:"D",comp:true}, "3302":{lean:8,party:"D"},
+  // NEW JERSEY
+  "3401":{lean:15,party:"D"}, "3402":{lean:30,party:"D"}, "3403":{lean:15,party:"D"},
+  "3404":{lean:35,party:"D",mm:true}, "3405":{lean:25,party:"D"}, "3406":{lean:35,party:"D",mm:true},
+  "3407":{lean:-3,party:"R",comp:true}, "3408":{lean:40,party:"D",mm:true}, "3409":{lean:12,party:"D"},
+  "3410":{lean:20,party:"D"}, "3411":{lean:22,party:"D"}, "3412":{lean:25,party:"D"},
+  // NEW MEXICO
+  "3501":{lean:12,party:"D"}, "3502":{lean:-3,party:"R",comp:true}, "3503":{lean:15,party:"D"},
+  // NEW YORK
+  "3601":{lean:5,party:"D",comp:true}, "3602":{lean:8,party:"D"}, "3603":{lean:-8,party:"R"},
+  "3604":{lean:30,party:"D",mm:true}, "3605":{lean:-3,party:"R",comp:true}, "3606":{lean:8,party:"D"},
+  "3607":{lean:-3,party:"R",comp:true}, "3608":{lean:5,party:"D",comp:true}, "3609":{lean:35,party:"D",mm:true},
+  "3610":{lean:30,party:"D",mm:true}, "3611":{lean:35,party:"D",mm:true}, "3612":{lean:20,party:"D"},
+  "3613":{lean:-6,party:"R"}, "3614":{lean:15,party:"D"}, "3615":{lean:20,party:"D"},
+  "3616":{lean:15,party:"D"}, "3617":{lean:6,party:"D",comp:true}, "3618":{lean:4,party:"D",comp:true},
+  "3619":{lean:3,party:"D",comp:true}, "3620":{lean:5,party:"D",comp:true}, "3621":{lean:8,party:"D"},
+  "3622":{lean:-5,party:"R",comp:true}, "3623":{lean:40,party:"D",mm:true}, "3624":{lean:40,party:"D",mm:true},
+  "3625":{lean:38,party:"D",mm:true}, "3626":{lean:35,party:"D",mm:true},
+  // NORTH CAROLINA
+  "3701":{lean:10,party:"D",mm:true}, "3702":{lean:-12,party:"R"}, "3703":{lean:-18,party:"R"},
+  "3704":{lean:35,party:"D",mm:true}, "3705":{lean:-25,party:"R"}, "3706":{lean:-22,party:"R"},
+  "3707":{lean:-20,party:"R"}, "3708":{lean:-15,party:"R"}, "3709":{lean:-25,party:"R"},
+  "3710":{lean:-22,party:"R"}, "3711":{lean:-28,party:"R"}, "3712":{lean:20,party:"D",mm:true},
+  "3713":{lean:-5,party:"R",comp:true}, "3714":{lean:-12,party:"R"},
+  // NORTH DAKOTA
+  "3800":{lean:-28,party:"R"},
+  // OHIO
+  "3901":{lean:-30,party:"R"}, "3902":{lean:-25,party:"R"}, "3903":{lean:35,party:"D",mm:true},
+  "3904":{lean:-25,party:"R"}, "3905":{lean:-5,party:"R",comp:true}, "3906":{lean:12,party:"D"},
+  "3907":{lean:-20,party:"R"}, "3908":{lean:-25,party:"R"}, "3909":{lean:-22,party:"R"},
+  "3910":{lean:-15,party:"R"}, "3911":{lean:40,party:"D",mm:true}, "3912":{lean:35,party:"D",mm:true},
+  "3913":{lean:-20,party:"R"}, "3914":{lean:-22,party:"R"}, "3915":{lean:-20,party:"R"},
+  // OKLAHOMA
+  "4001":{lean:-28,party:"R"}, "4002":{lean:-35,party:"R"}, "4003":{lean:-35,party:"R"},
+  "4004":{lean:-30,party:"R"}, "4005":{lean:-20,party:"R"},
+  // OREGON
+  "4101":{lean:-12,party:"R"}, "4102":{lean:25,party:"D"}, "4103":{lean:35,party:"D"},
+  "4104":{lean:15,party:"D"}, "4105":{lean:-8,party:"R"}, "4106":{lean:3,party:"D",comp:true},
+  // PENNSYLVANIA
+  "4201":{lean:-12,party:"R"}, "4202":{lean:40,party:"D",mm:true}, "4203":{lean:-12,party:"R"},
+  "4204":{lean:25,party:"D"}, "4205":{lean:-25,party:"R"}, "4206":{lean:15,party:"D"},
+  "4207":{lean:5,party:"D",comp:true}, "4208":{lean:6,party:"D",comp:true}, "4209":{lean:-18,party:"R"},
+  "4210":{lean:20,party:"D"}, "4211":{lean:-22,party:"R"}, "4212":{lean:12,party:"D"},
+  "4213":{lean:-12,party:"R"}, "4214":{lean:15,party:"D"}, "4215":{lean:-20,party:"R"},
+  "4216":{lean:12,party:"D"}, "4217":{lean:3,party:"D",comp:true},
+  // RHODE ISLAND
+  "4401":{lean:18,party:"D"}, "4402":{lean:8,party:"D"},
+  // SOUTH CAROLINA
+  "4501":{lean:-22,party:"R"}, "4502":{lean:30,party:"D",mm:true}, "4503":{lean:-20,party:"R"},
+  "4504":{lean:-25,party:"R"}, "4505":{lean:-28,party:"R"}, "4506":{lean:-22,party:"R"}, "4507":{lean:-10,party:"R"},
+  // SOUTH DAKOTA
+  "4600":{lean:-25,party:"R"},
+  // TENNESSEE
+  "4701":{lean:-28,party:"R"}, "4702":{lean:-22,party:"R"}, "4703":{lean:-28,party:"R"},
+  "4704":{lean:-22,party:"R"}, "4705":{lean:-35,party:"R"}, "4706":{lean:-15,party:"R"},
+  "4707":{lean:-20,party:"R"}, "4708":{lean:-25,party:"R"}, "4709":{lean:-25,party:"R"},
+  // TEXAS
+  "4801":{lean:-42,party:"R"}, "4802":{lean:-35,party:"R"}, "4803":{lean:-25,party:"R"},
+  "4804":{lean:-28,party:"R"}, "4805":{lean:-30,party:"R"}, "4806":{lean:-35,party:"R"},
+  "4807":{lean:-20,party:"R"}, "4808":{lean:-35,party:"R"}, "4809":{lean:-22,party:"R"},
+  "4810":{lean:-12,party:"R"}, "4811":{lean:-28,party:"R"}, "4812":{lean:-30,party:"R"},
+  "4813":{lean:-22,party:"R"}, "4814":{lean:-30,party:"R"}, "4815":{lean:-8,party:"R"},
+  "4816":{lean:-22,party:"R"}, "4817":{lean:-12,party:"R"}, "4818":{lean:36,party:"D",mm:true},
+  "4819":{lean:-30,party:"R"}, "4820":{lean:-22,party:"R"}, "4821":{lean:12,party:"D"},
+  "4822":{lean:-8,party:"R"}, "4823":{lean:-35,party:"R"}, "4824":{lean:-25,party:"R"},
+  "4825":{lean:-35,party:"R"}, "4826":{lean:15,party:"D"}, "4827":{lean:-12,party:"R"},
+  "4828":{lean:-15,party:"R"}, "4829":{lean:20,party:"D",mm:true}, "4830":{lean:35,party:"D",mm:true},
+  "4831":{lean:-30,party:"R"}, "4832":{lean:12,party:"D"}, "4833":{lean:-30,party:"R"},
+  "4834":{lean:-35,party:"R"}, "4835":{lean:22,party:"D",mm:true}, "4836":{lean:-38,party:"R"},
+  "4837":{lean:-10,party:"R"}, "4838":{lean:-28,party:"R"},
+  // UTAH
+  "4901":{lean:-12,party:"R"}, "4902":{lean:-25,party:"R"}, "4903":{lean:-22,party:"R"}, "4904":{lean:-28,party:"R"},
+  // VERMONT
+  "5000":{lean:28,party:"D"},
+  // VIRGINIA
+  "5101":{lean:-12,party:"R"}, "5102":{lean:-8,party:"R"}, "5103":{lean:-18,party:"R"},
+  "5104":{lean:30,party:"D",mm:true}, "5105":{lean:-25,party:"R"}, "5106":{lean:15,party:"D"},
+  "5107":{lean:5,party:"D",comp:true}, "5108":{lean:25,party:"D"}, "5109":{lean:-20,party:"R"},
+  "5110":{lean:10,party:"D"}, "5111":{lean:35,party:"D",mm:true},
+  // WASHINGTON
+  "5301":{lean:5,party:"D",comp:true}, "5302":{lean:15,party:"D"}, "5303":{lean:-5,party:"R",comp:true},
+  "5304":{lean:-8,party:"R"}, "5305":{lean:18,party:"D"}, "5306":{lean:35,party:"D",mm:true},
+  "5307":{lean:25,party:"D"}, "5308":{lean:5,party:"D",comp:true}, "5309":{lean:-15,party:"R"},
+  "5310":{lean:38,party:"D"},
+  // WEST VIRGINIA
+  "5401":{lean:-22,party:"R"}, "5402":{lean:-30,party:"R"},
+  // WISCONSIN
+  "5501":{lean:4,party:"D",comp:true}, "5502":{lean:-22,party:"R"}, "5503":{lean:-25,party:"R"},
+  "5504":{lean:-20,party:"R"}, "5505":{lean:-22,party:"R"}, "5506":{lean:-12,party:"R"},
+  "5507":{lean:-18,party:"R"}, "5508":{lean:35,party:"D",mm:true},
+  // WYOMING
+  "5600":{lean:-30,party:"R"}
+};
+
+// ─────────────────────────────────────────────
+//  30 KEY DISTRICTS — full detail panel data
+// ─────────────────────────────────────────────
+const DETAIL = {
+  "1305": {
+    name: "Georgia's 5th District", rep: "Nikema Williams (D)", lean: 47,
+    race: [{label:"White",pct:28,color:"#9CA3AF"},{label:"Black",pct:58,color:"#1D4ED8"},{label:"Hispanic",pct:7,color:"#10B981"},{label:"Asian",pct:5,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "The John Lewis seat. Atlanta's Black community is packed into this one district — D+47 — while surrounding suburban districts were drawn safely Republican. The clearest example of packing in the South."
+  },
+  "4818": {
+    name: "Texas' 18th District", rep: "Sheila Jackson Lee (D)", lean: 36,
+    race: [{label:"White",pct:18,color:"#9CA3AF"},{label:"Black",pct:54,color:"#1D4ED8"},{label:"Hispanic",pct:22,color:"#10B981"},{label:"Asian",pct:5,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Central Houston's Black community packed into a single district. Republican mapmakers concentrated Black voters here while cracking them out of surrounding suburban districts, creating six safe-R Houston-area seats."
+  },
+  "0107": {
+    name: "Alabama's 7th District", rep: "Terri Sewell (D)", lean: 35,
+    race: [{label:"White",pct:30,color:"#9CA3AF"},{label:"Black",pct:65,color:"#1D4ED8"},{label:"Hispanic",pct:3,color:"#10B981"},{label:"Asian",pct:1,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Alabama's only majority-Black district — required by the Voting Rights Act. The Supreme Court ruled in 2023 (Allen v. Milligan) that Alabama's 2020 maps violated the VRA by failing to create a second majority-Black district. New maps were drawn for 2024."
+  },
+  "3911": {
+    name: "Ohio's 11th District", rep: "Shontel Brown (D)", lean: 40,
+    race: [{label:"White",pct:30,color:"#9CA3AF"},{label:"Black",pct:52,color:"#1D4ED8"},{label:"Hispanic",pct:10,color:"#10B981"},{label:"Asian",pct:5,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Cleveland's majority-Black district packed at D+40. Ohio's Republican gerrymander concentrated Black voters here while cracking Columbus (OH-03 packed D+35) and making 10 of 15 districts safe-R despite Republicans winning only ~54% of the statewide vote."
+  },
+  "3701": {
+    name: "North Carolina's 1st District", rep: "Don Davis (D)", lean: 10,
+    race: [{label:"White",pct:48,color:"#9CA3AF"},{label:"Black",pct:45,color:"#1D4ED8"},{label:"Hispanic",pct:5,color:"#10B981"},{label:"Asian",pct:1,color:"#F59E0B"}],
+    type: "Majority-Minority · Lean D",
+    note: "Eastern NC majority-minority district required by court order under the Voting Rights Act. NC-01 has been redrawn multiple times after court rulings, most recently as part of the 2022 redistricting cycle. One of the most litigated districts in the country."
+  },
+  "2202": {
+    name: "Louisiana's 2nd District", rep: "Troy Carter (D)", lean: 30,
+    race: [{label:"White",pct:28,color:"#9CA3AF"},{label:"Black",pct:57,color:"#1D4ED8"},{label:"Hispanic",pct:10,color:"#10B981"},{label:"Asian",pct:4,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "New Orleans' majority-Black district. A federal court in 2022 ordered Louisiana to create a second majority-Black district — Republicans had drawn only one despite Black residents comprising 33% of the state's population. The case went to the Supreme Court."
+  },
+  "1210": {
+    name: "Florida's 10th District", rep: "Maxwell Frost (D)", lean: 18,
+    race: [{label:"White",pct:32,color:"#9CA3AF"},{label:"Black",pct:35,color:"#1D4ED8"},{label:"Hispanic",pct:28,color:"#10B981"},{label:"Asian",pct:4,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Central Orlando's diverse district. Won in 2022 by 25-year-old Maxwell Frost, the first member of Gen Z elected to Congress. Florida's maps were controversially redrawn by Gov. DeSantis in 2022, eliminating a majority-Black district in north Florida (FL-05)."
+  },
+  "1205": {
+    name: "Florida's 5th District", rep: "John Rutherford (R)", lean: -15,
+    race: [{label:"White",pct:68,color:"#9CA3AF"},{label:"Black",pct:20,color:"#1D4ED8"},{label:"Hispanic",pct:8,color:"#10B981"},{label:"Asian",pct:3,color:"#F59E0B"}],
+    type: "Safe R (redrawn)",
+    note: "Governor DeSantis's 2022 congressional remap converted this district from a D+15 majority-Black seat (held by Rep. Al Lawson) into a safe Republican district. The remap eliminated the only Black-majority district in north Florida. Civil rights groups sued; courts ultimately allowed the maps for the 118th Congress."
+  },
+  "3704": {
+    name: "North Carolina's 4th District", rep: "Valerie Foushee (D)", lean: 35,
+    race: [{label:"White",pct:38,color:"#9CA3AF"},{label:"Black",pct:38,color:"#1D4ED8"},{label:"Hispanic",pct:12,color:"#10B981"},{label:"Asian",pct:10,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Durham and Chapel Hill — Research Triangle core. High Black population and large university community packed together at D+35. Surrounding districts were redrawn to be safely Republican, diluting the Research Triangle's broader influence."
+  },
+  "1704": {
+    name: "Illinois' 4th District", rep: "Jesús 'Chuy' García (D)", lean: 40,
+    race: [{label:"White",pct:10,color:"#9CA3AF"},{label:"Black",pct:8,color:"#1D4ED8"},{label:"Hispanic",pct:75,color:"#10B981"},{label:"Asian",pct:5,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "The 'earmuffs' district — two separate Hispanic Chicago neighborhoods connected only by the I-294 expressway median. Drawn by Illinois Democrats to create a Hispanic-majority district, it is perhaps the most unusual congressional shape in America. A textbook example of creative packing."
+  },
+  "1707": {
+    name: "Illinois' 7th District", rep: "Danny Davis (D)", lean: 44,
+    race: [{label:"White",pct:28,color:"#9CA3AF"},{label:"Black",pct:42,color:"#1D4ED8"},{label:"Hispanic",pct:22,color:"#10B981"},{label:"Asian",pct:6,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Chicago's west side, D+44. Drawn by Illinois Democrats and packed with urban Democratic voters. This level of packing, combined with Democratic control of the statewide map, helped flip several competitive suburban seats."
+  },
+  "2404": {
+    name: "Maryland's 4th District", rep: "Glenn Ivey (D)", lean: 36,
+    race: [{label:"White",pct:18,color:"#9CA3AF"},{label:"Black",pct:58,color:"#1D4ED8"},{label:"Hispanic",pct:16,color:"#10B981"},{label:"Asian",pct:8,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Prince George's County — Maryland's largest majority-Black jurisdiction packed into a single D+36 district. Maryland's Democratic-drawn maps concentrate Black voters here, contributing to a 7-1 D/R delegation that critics say wastes Democratic votes that could be spread across more competitive districts."
+  },
+  "1314": {
+    name: "Georgia's 14th District", rep: "Marjorie Taylor Greene (R)", lean: -42,
+    race: [{label:"White",pct:85,color:"#9CA3AF"},{label:"Black",pct:8,color:"#1D4ED8"},{label:"Hispanic",pct:6,color:"#10B981"},{label:"Asian",pct:1,color:"#F59E0B"}],
+    type: "Safe R",
+    note: "Northwest Georgia — one of the most Republican congressional districts in the country. Home of Rep. Marjorie Taylor Greene. Black voters in northwest Georgia are dispersed across multiple safe-R districts, diluting their collective influence (cracking)."
+  },
+  "4801": {
+    name: "Texas' 1st District", rep: "Nathaniel Moran (R)", lean: -42,
+    race: [{label:"White",pct:72,color:"#9CA3AF"},{label:"Black",pct:18,color:"#1D4ED8"},{label:"Hispanic",pct:8,color:"#10B981"},{label:"Asian",pct:1,color:"#F59E0B"}],
+    type: "Safe R",
+    note: "Deep East Texas — historically one of America's most conservative districts. Despite an 18% Black population, the district is drawn to ensure an overwhelming white majority. Black voters are cracked across multiple East Texas districts, preventing any majority-minority district in the region."
+  },
+  "3710": {
+    name: "North Carolina's 10th District", rep: "Patrick McHenry (R)", lean: -22,
+    race: [{label:"White",pct:82,color:"#9CA3AF"},{label:"Black",pct:8,color:"#1D4ED8"},{label:"Hispanic",pct:8,color:"#10B981"},{label:"Asian",pct:1,color:"#F59E0B"}],
+    type: "Safe R",
+    note: "Western NC drawn safely Republican. Former Speaker pro tempore Patrick McHenry's district. NC's Republican legislature has faced repeated court challenges to its maps; this district's shape has changed in every redistricting cycle since 2010 as courts struck down earlier versions."
+  },
+  "2403": {
+    name: "Maryland's 3rd District", rep: "John Sarbanes (D)", lean: 15,
+    race: [{label:"White",pct:65,color:"#9CA3AF"},{label:"Black",pct:22,color:"#1D4ED8"},{label:"Hispanic",pct:8,color:"#10B981"},{label:"Asian",pct:4,color:"#F59E0B"}],
+    type: "Safe D",
+    note: "Nicknamed the 'broken-winged pterodactyl' for its contorted shape. A federal court described it as 'reminiscent of a Rorschach test.' Drawn by Maryland Democrats to protect incumbents, it snakes through multiple counties collecting Democratic-leaning communities. A canonical example of Democratic gerrymandering."
+  },
+  "1703": {
+    name: "Illinois' 3rd District", rep: "Delia Ramirez (D)", lean: 25,
+    race: [{label:"White",pct:28,color:"#9CA3AF"},{label:"Black",pct:8,color:"#1D4ED8"},{label:"Hispanic",pct:58,color:"#10B981"},{label:"Asian",pct:4,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "A new majority-Hispanic district drawn by Illinois Democrats in 2022, designed to give Chicago's Latino community a second opportunity district. Delia Ramirez became the first Guatemalan-American woman elected to Congress. An example of affirmative use of redistricting to create minority representation."
+  },
+  "4207": {
+    name: "Pennsylvania's 7th District", rep: "Susan Wild (D)", lean: 5,
+    race: [{label:"White",pct:74,color:"#9CA3AF"},{label:"Black",pct:8,color:"#1D4ED8"},{label:"Hispanic",pct:14,color:"#10B981"},{label:"Asian",pct:3,color:"#F59E0B"}],
+    type: "Competitive",
+    note: "Lehigh Valley — one of the most competitive districts in 2022. Susan Wild won by less than 3 points. Pennsylvania's maps were drawn by an independent commission after years of court battles over gerrymandering, making it one of the fairest delegations in the country."
+  },
+  "2607": {
+    name: "Michigan's 7th District", rep: "Elissa Slotkin (D)", lean: 3,
+    race: [{label:"White",pct:78,color:"#9CA3AF"},{label:"Black",pct:12,color:"#1D4ED8"},{label:"Hispanic",pct:5,color:"#10B981"},{label:"Asian",pct:3,color:"#F59E0B"}],
+    type: "Competitive",
+    note: "Lansing-area competitive district. Michigan's maps were drawn by the state's new Independent Citizens Redistricting Commission, making them among the fairest in the Midwest. Slotkin won narrowly in 2022, then ran successfully for Senate in 2024 — another indicator of a true swing district."
+  },
+  "0406": {
+    name: "Arizona's 6th District", rep: "Juan Ciscomani (R)", lean: -4,
+    race: [{label:"White",pct:55,color:"#9CA3AF"},{label:"Black",pct:5,color:"#1D4ED8"},{label:"Hispanic",pct:32,color:"#10B981"},{label:"Asian",pct:5,color:"#F59E0B"}],
+    type: "Competitive",
+    note: "Tucson suburbs — one of the most watched races in 2022. Juan Ciscomani won by less than 2 points. High Hispanic population in an R-leaning district illustrates how Hispanic voters are not monolithic. Arizona uses an Independent Redistricting Commission, producing genuinely competitive maps."
+  },
+  "3203": {
+    name: "Nevada's 3rd District", rep: "Susie Lee (D)", lean: 2,
+    race: [{label:"White",pct:58,color:"#9CA3AF"},{label:"Black",pct:10,color:"#1D4ED8"},{label:"Hispanic",pct:20,color:"#10B981"},{label:"Asian",pct:10,color:"#F59E0B"}],
+    type: "Competitive",
+    note: "Las Vegas suburbs — a true swing district. Susie Lee won by ~5 points in 2022. Nevada's diverse, rapidly growing suburban communities make this one of the most competitive districts in the West."
+  },
+  "3622": {
+    name: "New York's 22nd District", rep: "Brandon Williams (R)", lean: -5,
+    race: [{label:"White",pct:80,color:"#9CA3AF"},{label:"Black",pct:10,color:"#1D4ED8"},{label:"Hispanic",pct:7,color:"#10B981"},{label:"Asian",pct:3,color:"#F59E0B"}],
+    type: "Competitive",
+    note: "Central New York — one of the most competitive districts nationally. Brandon Williams won by less than 1 point in 2022 in a seat that flipped from Democrat to Republican. NY's maps were redrawn by court order after the legislature's aggressive gerrymander was struck down, creating more competitive seats."
+  },
+  "4830": {
+    name: "Texas' 30th District", rep: "Jasmine Crockett (D)", lean: 35,
+    race: [{label:"White",pct:22,color:"#9CA3AF"},{label:"Black",pct:52,color:"#1D4ED8"},{label:"Hispanic",pct:22,color:"#10B981"},{label:"Asian",pct:3,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Dallas's majority-Black district packed at D+35. Concentrating Black voters here allowed Republicans to draw five safe-R suburban Dallas seats. Jasmine Crockett won this seat in 2022 after Eddie Bernice Johnson retired after 30 years."
+  },
+  "4835": {
+    name: "Texas' 35th District", rep: "Lloyd Doggett (D)", lean: 22,
+    race: [{label:"White",pct:28,color:"#9CA3AF"},{label:"Black",pct:8,color:"#1D4ED8"},{label:"Hispanic",pct:58,color:"#10B981"},{label:"Asian",pct:4,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "The 'corridor district' — a narrow strip along I-35 connecting Austin's east side to San Antonio's west side. Packs Hispanic voters from two major cities into one district, freeing both cities' surrounding suburbs to be drawn safely Republican. A textbook cracking-and-packing strategy."
+  },
+  "3709": {
+    name: "North Carolina's 9th District", rep: "Richard Hudson (R)", lean: -25,
+    race: [{label:"White",pct:76,color:"#9CA3AF"},{label:"Black",pct:18,color:"#1D4ED8"},{label:"Hispanic",pct:5,color:"#10B981"},{label:"Asian",pct:1,color:"#F59E0B"}],
+    type: "Safe R",
+    note: "The district where a Republican political operative orchestrated an absentee ballot fraud scheme in 2018, invalidating the election result. The seat was left vacant until a new election in 2019. The scandal drew national attention to North Carolina's redistricting battles."
+  },
+  "4829": {
+    name: "Texas' 29th District", rep: "Sylvia Garcia (D)", lean: 20,
+    race: [{label:"White",pct:12,color:"#9CA3AF"},{label:"Black",pct:6,color:"#1D4ED8"},{label:"Hispanic",pct:76,color:"#10B981"},{label:"Asian",pct:4,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Northeast Houston's majority-Hispanic district — 76% Latino. A classic packing example: concentrating Houston's Hispanic community here allowed Republicans to draw surrounding suburban districts with lower Hispanic percentages, keeping them safely Republican despite the region's growing diversity."
+  },
+  "3915": {
+    name: "Ohio's 15th District", rep: "Mike Carey (R)", lean: -20,
+    race: [{label:"White",pct:82,color:"#9CA3AF"},{label:"Black",pct:12,color:"#1D4ED8"},{label:"Hispanic",pct:4,color:"#10B981"},{label:"Asian",pct:2,color:"#F59E0B"}],
+    type: "Safe R",
+    note: "Columbus suburbs cracked away from the city. Ohio's Republican gerrymander packed Columbus's population into OH-03 (D+35) while drawing these suburbs safely Republican. Despite Columbus being one of America's fastest-growing cities, its congressional influence is artificially contained."
+  },
+  "1304": {
+    name: "Georgia's 4th District", rep: "Hank Johnson (D)", lean: 30,
+    race: [{label:"White",pct:30,color:"#9CA3AF"},{label:"Black",pct:54,color:"#1D4ED8"},{label:"Hispanic",pct:10,color:"#10B981"},{label:"Asian",pct:5,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "DeKalb County packed D+30. Georgia's Republican maps concentrated DeKalb's Black voters here, allowing districts 3, 7, 10, 11, and 13 — ringing Atlanta — to be drawn safely Republican. Georgia's efficiency gap is one of the worst in the South."
+  },
+  "5308": {
+    name: "Washington's 8th District", rep: "Kim Schrier (D)", lean: 5,
+    race: [{label:"White",pct:70,color:"#9CA3AF"},{label:"Black",pct:3,color:"#1D4ED8"},{label:"Hispanic",pct:12,color:"#10B981"},{label:"Asian",pct:12,color:"#F59E0B"}],
+    type: "Competitive",
+    note: "Seattle exurbs — one of the most competitive districts in the Pacific Northwest. Kim Schrier has won narrowly three times. High Asian-American population reflects the Eastside tech corridor. Washington uses an independent commission, producing genuinely competitive suburban districts."
+  },
+  "3903": {
+    name: "Ohio's 3rd District", rep: "Joyce Beatty (D)", lean: 35,
+    race: [{label:"White",pct:32,color:"#9CA3AF"},{label:"Black",pct:50,color:"#1D4ED8"},{label:"Hispanic",pct:8,color:"#10B981"},{label:"Asian",pct:7,color:"#F59E0B"}],
+    type: "Majority-Minority · Safe D",
+    note: "Columbus packed D+35. One of America's fastest-growing cities has its congressional power artificially limited — Black voters concentrated here while surrounding suburbs (OH-12, OH-15) were drawn safely Republican. Ohio's maps have been struck down multiple times by the Ohio Supreme Court for partisan gerrymandering."
+  },
+  "1302": {
+    name: "Georgia's 2nd District", rep: "Sanford Bishop (D)", lean: 14,
+    race: [{label:"White",pct:45,color:"#9CA3AF"},{label:"Black",pct:48,color:"#1D4ED8"},{label:"Hispanic",pct:5,color:"#10B981"},{label:"Asian",pct:1,color:"#F59E0B"}],
+    type: "Majority-Minority · Lean D",
+    note: "Southwest Georgia's rural majority-minority district. Sanford Bishop, one of Congress's longest-serving members, represents this district. Under court order related to the Allen v. Milligan ruling in Alabama, civil rights groups have also challenged Georgia's failure to create a second majority-Black district in southwest Georgia."
+  }
+};
+
+// ─────────────────────────────────────────────
+//  STATE FIPS → NAME
+// ─────────────────────────────────────────────
+const STATE_NAMES = {
+  "01":"Alabama","02":"Alaska","04":"Arizona","05":"Arkansas","06":"California",
+  "08":"Colorado","09":"Connecticut","10":"Delaware","12":"Florida","13":"Georgia",
+  "15":"Hawaii","16":"Idaho","17":"Illinois","18":"Indiana","19":"Iowa",
+  "20":"Kansas","21":"Kentucky","22":"Louisiana","23":"Maine","24":"Maryland",
+  "25":"Massachusetts","26":"Michigan","27":"Minnesota","28":"Mississippi","29":"Missouri",
+  "30":"Montana","31":"Nebraska","32":"Nevada","33":"New Hampshire","34":"New Jersey",
+  "35":"New Mexico","36":"New York","37":"North Carolina","38":"North Dakota","39":"Ohio",
+  "40":"Oklahoma","41":"Oregon","42":"Pennsylvania","44":"Rhode Island","45":"South Carolina",
+  "46":"South Dakota","47":"Tennessee","48":"Texas","49":"Utah","50":"Vermont",
+  "51":"Virginia","53":"Washington","54":"West Virginia","55":"Wisconsin","56":"Wyoming"
+};
+
+function districtLabel(props) {
+  const state = STATE_NAMES[props.STATEFP] || props.STATEFP;
+  const cd = props.CD118FP;
+  if (cd === "00") return `${state} (At-Large)`;
+  const n = parseInt(cd, 10);
+  const suffix = n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th";
+  return `${state}'s ${n}${suffix} District`;
+}
+
+function leanLabel(lean) {
+  if (lean === 0) return "EVEN";
+  return lean > 0 ? `D+${lean}` : `R+${Math.abs(lean)}`;
+}
+
+// ─────────────────────────────────────────────
+//  MAP
+// ─────────────────────────────────────────────
+let currentHighlight = "all";
+let selectedGeoid = null;
+
+const tooltip = document.getElementById("tooltip");
+
+function colorForLean(lean) {
+  if (lean == null) return "#D1D5DB";
+  const t = (lean + 50) / 100;
+  return d3.interpolateRdBu(Math.max(0, Math.min(1, t)));
+}
+
+async function buildMap() {
+  const container = document.getElementById("map-container");
+  const width = container.clientWidth || 960;
+  const height = Math.round(width * 0.55);
+
+  const svg = d3.select("#map-container")
+    .append("svg")
+    .attr("viewBox", `0 0 ${width} ${height}`)
+    .attr("width", width)
+    .attr("height", height);
+
+  const projection = d3.geoAlbersUsa()
+    .scale(width * 1.22)
+    .translate([width / 2, height / 2]);
+
+  const path = d3.geoPath().projection(projection);
+
+  let topo;
+  try {
+    topo = await d3.json("districts/2020.json");
+  } catch(e) {
+    container.innerHTML = '<p style="padding:40px;color:#9CA3AF;text-align:center;">Map data failed to load.</p>';
+    return;
+  }
+
+  const objKey = Object.keys(topo.objects)[0];
+  const districts = topojson.feature(topo, topo.objects[objKey]);
+
+  // States layer (load from us-atlas)
+  let statesMesh = null;
+  try {
+    const statesTopo = await d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json");
+    statesMesh = topojson.mesh(statesTopo, statesTopo.objects.states, (a, b) => a !== b);
+  } catch(e) { /* skip state borders if offline */ }
+
+  // District paths
+  svg.selectAll(".district-path")
+    .data(districts.features)
+    .join("path")
+    .attr("class", d => {
+      const geoid = d.properties.GEOID;
+      const data = DISTRICTS[geoid];
+      let cls = "district-path";
+      if (!data) cls += " uncolored";
+      return cls;
+    })
+    .attr("d", path)
+    .attr("fill", d => {
+      const data = DISTRICTS[d.properties.GEOID];
+      return data ? colorForLean(data.lean) : "#D1D5DB";
+    })
+    .on("mousemove", function(event, d) {
+      const geoid = d.properties.GEOID;
+      const data = DISTRICTS[geoid];
+      const label = districtLabel(d.properties);
+      const detail = DETAIL[geoid];
+
+      let html = `<div class="tooltip-district">${label}</div>`;
+      if (detail) {
+        html += `<div class="tooltip-rep">${detail.rep}</div>`;
+      } else if (data) {
+        html += `<div class="tooltip-rep">${data.party === "R" ? "Republican" : "Democratic"} Representative</div>`;
+      }
+      if (data) {
+        const lean = data.lean;
+        const cls = lean > 0 ? "lean-d" : lean < 0 ? "lean-r" : "lean-e";
+        html += `<span class="tooltip-lean ${cls}">${leanLabel(lean)}</span>`;
+        if (data.mm) html += `<div class="tooltip-mm">Majority-Minority District</div>`;
+      }
+      tooltip.innerHTML = html;
+      tooltip.style.display = "block";
+      positionTooltip(event);
+    })
+    .on("mouseleave", function() {
+      tooltip.style.display = "none";
+    })
+    .on("click", function(event, d) {
+      const geoid = d.properties.GEOID;
+      // Deselect
+      svg.selectAll(".district-path").classed("selected", false);
+      if (selectedGeoid === geoid) {
+        selectedGeoid = null;
+        closeDetail();
+        return;
+      }
+      selectedGeoid = geoid;
+      d3.select(this).classed("selected", true);
+      showDetail(geoid, d.properties);
+    });
+
+  // State borders
+  if (statesMesh) {
+    svg.append("path")
+      .datum(statesMesh)
+      .attr("class", "state-border")
+      .attr("d", path);
+  }
+
+  applyHighlight();
+}
+
+function positionTooltip(event) {
+  const tw = tooltip.offsetWidth;
+  const th = tooltip.offsetHeight;
+  let x = event.clientX + 14;
+  let y = event.clientY - 14;
+  if (x + tw > window.innerWidth - 8) x = event.clientX - tw - 14;
+  if (y + th > window.innerHeight - 8) y = event.clientY - th - 14;
+  tooltip.style.left = x + "px";
+  tooltip.style.top = y + "px";
+}
+
+function setLayer(layer) {
+  document.querySelectorAll(".layer-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("btn-" + layer).classList.add("active");
+}
+
+function setHighlight(mode) {
+  currentHighlight = mode;
+  document.getElementById("btn-all").classList.toggle("active", mode === "all");
+  document.getElementById("btn-mm").classList.toggle("active", mode === "mm");
+  document.getElementById("btn-comp").classList.toggle("active", mode === "competitive");
+  applyHighlight();
+}
+
+function applyHighlight() {
+  d3.selectAll(".district-path").each(function(d) {
+    const geoid = d.properties.GEOID;
+    const data = DISTRICTS[geoid];
+    let dim = false;
+    if (currentHighlight === "mm") dim = !data?.mm;
+    if (currentHighlight === "competitive") dim = !data?.comp;
+    d3.select(this).style("opacity", dim ? 0.12 : 1);
+  });
+}
+
+function showDetail(geoid, props) {
+  const panel = document.getElementById("detail-panel");
+  const detail = DETAIL[geoid];
+  const distData = DISTRICTS[geoid];
+  const label = districtLabel(props);
+
+  document.getElementById("dp-title").textContent = label;
+
+  if (detail) {
+    document.getElementById("dp-rep").textContent = detail.rep;
+
+    const lean = detail.lean;
+    const leanCls = lean > 0 ? "tag-lean-d" : "tag-lean-r";
+    const leanText = leanLabel(lean);
+    const mmTag = distData?.mm ? `<span class="detail-tag tag-mm">Majority-Minority</span>` : "";
+    const typeTag = `<span class="detail-tag ${detail.type.includes("Competitive") ? "tag-competitive" : "tag-safe"}">${detail.type}</span>`;
+    document.getElementById("dp-tags").innerHTML =
+      `<span class="detail-tag ${leanCls}">${leanText}</span>${mmTag}${typeTag}`;
+
+    // Race bars
+    const raceHtml = detail.race.map(r => `
+      <div class="race-bar-row">
+        <span class="race-label">${r.label}</span>
+        <div class="race-bar-wrap">
+          <div class="race-bar" style="width:${r.pct}%;background:${r.color}"></div>
+        </div>
+        <span class="race-pct">${r.pct}%</span>
+      </div>`).join("");
+    document.getElementById("dp-race").innerHTML = raceHtml;
+    document.getElementById("dp-note").textContent = detail.note;
+  } else {
+    const lean = distData?.lean;
+    const leanCls = lean > 0 ? "tag-lean-d" : lean < 0 ? "tag-lean-r" : "tag-competitive";
+    document.getElementById("dp-rep").textContent = distData?.party === "D" ? "Democratic Representative" : "Republican Representative";
+    document.getElementById("dp-tags").innerHTML = lean != null
+      ? `<span class="detail-tag ${leanCls}">${leanLabel(lean)}</span>`
+      : "";
+    document.getElementById("dp-race").innerHTML = '<p class="detail-generic">Full demographic data coming soon for this district.</p>';
+    document.getElementById("dp-note").textContent = "Extended detail available for 30 key districts. Additional districts are being added.";
+  }
+
+  panel.classList.add("visible");
+  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function closeDetail() {
+  document.getElementById("detail-panel").classList.remove("visible");
+  selectedGeoid = null;
+  d3.selectAll(".district-path").classed("selected", false);
+}
+
+buildMap();
+</script>
+</body>
+</html>
