@@ -171,13 +171,35 @@
     .source-note { font-size: 11px; color: var(--text-muted); margin-top: 24px; line-height: 1.6; }
     .source-note a { color: var(--accent); }
 
-    /* ── Phase 2 Notice ── */
-    .phase2-notice {
-      background: #FEF9F0; border: 1px solid var(--border); border-radius: 8px;
-      padding: 12px 16px; font-size: 13px; color: var(--text-secondary);
-      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    /* ── Scrubber ── */
+    .scrubber-card {
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 24px; margin-bottom: 20px;
     }
-    .phase2-notice strong { color: var(--dark); }
+    .scrubber-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .play-btn {
+      width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--border);
+      background: white; cursor: pointer; font-size: 13px; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; transition: all .15s; color: var(--dark);
+      font-family: 'Inter', sans-serif;
+    }
+    .play-btn:hover { background: var(--dark); color: white; border-color: var(--dark); }
+    .scrubber-year-label { font-weight: 700; font-size: 15px; color: var(--dark); }
+    .scrubber-note { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+    .scrubber-track { position: relative; padding-bottom: 36px; }
+    input[type=range] {
+      width: 100%; height: 4px; -webkit-appearance: none; appearance: none;
+      background: var(--border); border-radius: 2px; outline: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--dark); cursor: pointer; border: 2px solid white;
+      box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    }
+    .era-markers { position: absolute; top: 12px; left: 0; right: 0; pointer-events: none; }
+    .era-marker { position: absolute; transform: translateX(-50%); text-align: center; }
+    .era-tick { display: block; width: 2px; height: 8px; background: var(--gold); margin: 0 auto 4px; border-radius: 1px; }
+    .era-label { font-size: 10px; color: var(--accent); font-weight: 600; line-height: 1.3; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -197,11 +219,6 @@
 
 <div class="content">
 
-  <div class="phase2-notice">
-    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="#D4A853" stroke-width="1.5"/><path d="M10 6v4M10 14h.01" stroke="#D4A853" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span><strong>118th Congress · 2022 Elections.</strong> Historical maps (2000–2020) are in progress. Full time-scrubber coming soon.</span>
-  </div>
-
   <!-- Control Bar -->
   <div class="control-bar">
     <div class="control-group">
@@ -215,6 +232,28 @@
       <button class="layer-btn active" id="btn-all" onclick="setHighlight('all')">All Districts</button>
       <button class="layer-btn" id="btn-mm" onclick="setHighlight('mm')">Majority-Minority</button>
       <button class="layer-btn" id="btn-comp" onclick="setHighlight('competitive')">Competitive</button>
+    </div>
+  </div>
+
+  <!-- Scrubber -->
+  <div class="scrubber-card">
+    <div class="scrubber-top">
+      <button class="play-btn" id="play-btn" onclick="togglePlay()" title="Play/pause">▶</button>
+      <span class="scrubber-year-label" id="scrubber-label">2022 · 118th Congress</span>
+      <span class="scrubber-note">Partisan lean data shown for 2022. Boundary lines change at redistricting years.</span>
+    </div>
+    <div class="scrubber-track">
+      <input type="range" min="0" max="5" value="4" id="year-scrubber" oninput="onScrub(this.value)">
+      <div class="era-markers">
+        <div class="era-marker" style="left:0%">
+          <span class="era-tick"></span>
+          <span class="era-label">2014<br>2010 Census</span>
+        </div>
+        <div class="era-marker" style="left:100%">
+          <span class="era-tick"></span>
+          <span class="era-label">2024<br>2020 Census</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -736,8 +775,28 @@ function leanLabel(lean) {
 }
 
 // ─────────────────────────────────────────────
-//  MAP
+//  SCRUBBER CONFIG
 // ─────────────────────────────────────────────
+const YEARS    = [2014, 2016, 2018, 2020, 2022, 2024];
+const CONGRESS = [114,  115,  116,  117,  118,  119];
+const BOUNDARY = {
+  2014: "districts/2010.json",
+  2016: "districts/2010.json",
+  2018: "districts/2010.json",
+  2020: "districts/2010.json",
+  2022: "districts/2010.json",
+  2024: "districts/2020.json"
+};
+
+const topoCache = {};
+let currentYearIdx = 4; // default: 2022
+let playing = false;
+let playTimer = null;
+
+// ─────────────────────────────────────────────
+//  MAP STATE
+// ─────────────────────────────────────────────
+let mapSvg, mapPath, districtGroup;
 let currentHighlight = "all";
 let selectedGeoid = null;
 
@@ -749,12 +808,15 @@ function colorForLean(lean) {
   return d3.interpolateRdBu(Math.max(0, Math.min(1, t)));
 }
 
-async function buildMap() {
+// ─────────────────────────────────────────────
+//  MAP INIT (runs once)
+// ─────────────────────────────────────────────
+async function initMap() {
   const container = document.getElementById("map-container");
   const width = container.clientWidth || 960;
   const height = Math.round(width * 0.55);
 
-  const svg = d3.select("#map-container")
+  mapSvg = d3.select("#map-container")
     .append("svg")
     .attr("viewBox", `0 0 ${width} ${height}`)
     .attr("width", width)
@@ -764,92 +826,155 @@ async function buildMap() {
     .scale(width * 1.22)
     .translate([width / 2, height / 2]);
 
-  const path = d3.geoPath().projection(projection);
+  mapPath = d3.geoPath().projection(projection);
+  districtGroup = mapSvg.append("g").attr("class", "districts-layer");
 
-  let topo;
-  try {
-    topo = await d3.json("districts/2020.json");
-  } catch(e) {
-    container.innerHTML = '<p style="padding:40px;color:#9CA3AF;text-align:center;">Map data failed to load.</p>';
-    return;
-  }
-
-  const objKey = Object.keys(topo.objects)[0];
-  const districts = topojson.feature(topo, topo.objects[objKey]);
-
-  // States layer (load from us-atlas)
-  let statesMesh = null;
+  // Load state borders once
   try {
     const statesTopo = await d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json");
-    statesMesh = topojson.mesh(statesTopo, statesTopo.objects.states, (a, b) => a !== b);
-  } catch(e) { /* skip state borders if offline */ }
-
-  // District paths
-  svg.selectAll(".district-path")
-    .data(districts.features)
-    .join("path")
-    .attr("class", d => {
-      const geoid = d.properties.GEOID;
-      const data = DISTRICTS[geoid];
-      let cls = "district-path";
-      if (!data) cls += " uncolored";
-      return cls;
-    })
-    .attr("d", path)
-    .attr("fill", d => {
-      const data = DISTRICTS[d.properties.GEOID];
-      return data ? colorForLean(data.lean) : "#D1D5DB";
-    })
-    .on("mousemove", function(event, d) {
-      const geoid = d.properties.GEOID;
-      const data = DISTRICTS[geoid];
-      const label = districtLabel(d.properties);
-      const detail = DETAIL[geoid];
-
-      let html = `<div class="tooltip-district">${label}</div>`;
-      if (detail) {
-        html += `<div class="tooltip-rep">${detail.rep}</div>`;
-      } else if (data) {
-        html += `<div class="tooltip-rep">${data.party === "R" ? "Republican" : "Democratic"} Representative</div>`;
-      }
-      if (data) {
-        const lean = data.lean;
-        const cls = lean > 0 ? "lean-d" : lean < 0 ? "lean-r" : "lean-e";
-        html += `<span class="tooltip-lean ${cls}">${leanLabel(lean)}</span>`;
-        if (data.mm) html += `<div class="tooltip-mm">Majority-Minority District</div>`;
-      }
-      tooltip.innerHTML = html;
-      tooltip.style.display = "block";
-      positionTooltip(event);
-    })
-    .on("mouseleave", function() {
-      tooltip.style.display = "none";
-    })
-    .on("click", function(event, d) {
-      const geoid = d.properties.GEOID;
-      // Deselect
-      svg.selectAll(".district-path").classed("selected", false);
-      if (selectedGeoid === geoid) {
-        selectedGeoid = null;
-        closeDetail();
-        return;
-      }
-      selectedGeoid = geoid;
-      d3.select(this).classed("selected", true);
-      showDetail(geoid, d.properties);
-    });
-
-  // State borders
-  if (statesMesh) {
-    svg.append("path")
-      .datum(statesMesh)
+    mapSvg.append("path")
+      .datum(topojson.mesh(statesTopo, statesTopo.objects.states, (a, b) => a !== b))
       .attr("class", "state-border")
-      .attr("d", path);
+      .attr("d", mapPath);
+  } catch(e) {}
+
+  // Load default year
+  await loadYear(currentYearIdx);
+}
+
+// ─────────────────────────────────────────────
+//  LOAD + RENDER for a year index
+// ─────────────────────────────────────────────
+async function loadYear(idx) {
+  const year = YEARS[idx];
+  const file = BOUNDARY[year];
+
+  if (!topoCache[file]) {
+    try {
+      topoCache[file] = await d3.json(file);
+    } catch(e) {
+      document.getElementById("map-container").innerHTML =
+        '<p style="padding:40px;color:#9CA3AF;text-align:center;">Map data failed to load.</p>';
+      return;
+    }
   }
+
+  renderDistricts(topoCache[file]);
+  updateLabels(idx);
+}
+
+function renderDistricts(topo) {
+  const objKey = Object.keys(topo.objects)[0];
+  const features = topojson.feature(topo, topo.objects[objKey]).features;
+
+  districtGroup.selectAll(".district-path")
+    .data(features, d => d.properties.GEOID)
+    .join(
+      enter => enter.append("path")
+        .attr("class", d => "district-path" + (DISTRICTS[d.properties.GEOID] ? "" : " uncolored"))
+        .attr("fill", d => colorForLean(DISTRICTS[d.properties.GEOID]?.lean))
+        .attr("d", mapPath)
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", () => { tooltip.style.display = "none"; })
+        .on("click", handleClick),
+      update => update
+        .transition().duration(700).ease(d3.easeCubicInOut)
+        .attr("d", mapPath),
+      exit => exit.remove()
+    );
 
   applyHighlight();
 }
 
+function updateLabels(idx) {
+  const year = YEARS[idx];
+  const congress = CONGRESS[idx];
+  const nth = congress === 1 ? "1st" : congress === 2 ? "2nd" : `${congress}th`;
+  document.getElementById("scrubber-label").textContent = `${year} · ${nth} Congress`;
+  document.getElementById("year-scrubber").value = idx;
+  // Map card header
+  const badge = document.querySelector(".congress-badge");
+  if (badge) badge.innerHTML = `<span class="year-dot"></span> ${nth} Congress &nbsp;·&nbsp; ${year} Election`;
+}
+
+// ─────────────────────────────────────────────
+//  EVENT HANDLERS
+// ─────────────────────────────────────────────
+function handleMouseMove(event, d) {
+  const geoid = d.properties.GEOID;
+  const data = DISTRICTS[geoid];
+  const label = districtLabel(d.properties);
+  const detail = DETAIL[geoid];
+
+  let html = `<div class="tooltip-district">${label}</div>`;
+  if (detail) {
+    html += `<div class="tooltip-rep">${detail.rep}</div>`;
+  } else if (data) {
+    html += `<div class="tooltip-rep">${data.party === "R" ? "Republican" : "Democratic"} Representative</div>`;
+  }
+  if (data) {
+    const lean = data.lean;
+    const cls = lean > 0 ? "lean-d" : lean < 0 ? "lean-r" : "lean-e";
+    html += `<span class="tooltip-lean ${cls}">${leanLabel(lean)}</span>`;
+    if (data.mm) html += `<div class="tooltip-mm">Majority-Minority District</div>`;
+  }
+  tooltip.innerHTML = html;
+  tooltip.style.display = "block";
+  positionTooltip(event);
+}
+
+function handleClick(event, d) {
+  const geoid = d.properties.GEOID;
+  mapSvg.selectAll(".district-path").classed("selected", false);
+  if (selectedGeoid === geoid) {
+    selectedGeoid = null;
+    closeDetail();
+    return;
+  }
+  selectedGeoid = geoid;
+  d3.select(this).classed("selected", true);
+  showDetail(geoid, d.properties);
+}
+
+// ─────────────────────────────────────────────
+//  SCRUBBER CONTROLS
+// ─────────────────────────────────────────────
+async function onScrub(val) {
+  if (playing) stopPlay();
+  currentYearIdx = parseInt(val);
+  await loadYear(currentYearIdx);
+}
+
+function togglePlay() {
+  playing ? stopPlay() : startPlay();
+}
+
+function startPlay() {
+  playing = true;
+  document.getElementById("play-btn").textContent = "⏸";
+  advanceYear();
+}
+
+function stopPlay() {
+  playing = false;
+  clearTimeout(playTimer);
+  document.getElementById("play-btn").textContent = "▶";
+}
+
+async function advanceYear() {
+  if (!playing) return;
+  currentYearIdx = (currentYearIdx + 1) % YEARS.length;
+  await loadYear(currentYearIdx);
+  if (currentYearIdx === YEARS.length - 1) {
+    stopPlay();
+  } else {
+    playTimer = setTimeout(advanceYear, 1400);
+  }
+}
+
+// ─────────────────────────────────────────────
+//  UI HELPERS
+// ─────────────────────────────────────────────
 function positionTooltip(event) {
   const tw = tooltip.offsetWidth;
   const th = tooltip.offsetHeight;
@@ -875,9 +1000,8 @@ function setHighlight(mode) {
 }
 
 function applyHighlight() {
-  d3.selectAll(".district-path").each(function(d) {
-    const geoid = d.properties.GEOID;
-    const data = DISTRICTS[geoid];
+  districtGroup.selectAll(".district-path").each(function(d) {
+    const data = DISTRICTS[d.properties.GEOID];
     let dim = false;
     if (currentHighlight === "mm") dim = !data?.mm;
     if (currentHighlight === "competitive") dim = !data?.comp;
@@ -895,16 +1019,12 @@ function showDetail(geoid, props) {
 
   if (detail) {
     document.getElementById("dp-rep").textContent = detail.rep;
-
     const lean = detail.lean;
     const leanCls = lean > 0 ? "tag-lean-d" : "tag-lean-r";
-    const leanText = leanLabel(lean);
     const mmTag = distData?.mm ? `<span class="detail-tag tag-mm">Majority-Minority</span>` : "";
     const typeTag = `<span class="detail-tag ${detail.type.includes("Competitive") ? "tag-competitive" : "tag-safe"}">${detail.type}</span>`;
     document.getElementById("dp-tags").innerHTML =
-      `<span class="detail-tag ${leanCls}">${leanText}</span>${mmTag}${typeTag}`;
-
-    // Race bars
+      `<span class="detail-tag ${leanCls}">${leanLabel(lean)}</span>${mmTag}${typeTag}`;
     const raceHtml = detail.race.map(r => `
       <div class="race-bar-row">
         <span class="race-label">${r.label}</span>
@@ -920,8 +1040,7 @@ function showDetail(geoid, props) {
     const leanCls = lean > 0 ? "tag-lean-d" : lean < 0 ? "tag-lean-r" : "tag-competitive";
     document.getElementById("dp-rep").textContent = distData?.party === "D" ? "Democratic Representative" : "Republican Representative";
     document.getElementById("dp-tags").innerHTML = lean != null
-      ? `<span class="detail-tag ${leanCls}">${leanLabel(lean)}</span>`
-      : "";
+      ? `<span class="detail-tag ${leanCls}">${leanLabel(lean)}</span>` : "";
     document.getElementById("dp-race").innerHTML = '<p class="detail-generic">Full demographic data coming soon for this district.</p>';
     document.getElementById("dp-note").textContent = "Extended detail available for 30 key districts. Additional districts are being added.";
   }
@@ -933,10 +1052,10 @@ function showDetail(geoid, props) {
 function closeDetail() {
   document.getElementById("detail-panel").classList.remove("visible");
   selectedGeoid = null;
-  d3.selectAll(".district-path").classed("selected", false);
+  if (mapSvg) mapSvg.selectAll(".district-path").classed("selected", false);
 }
 
-buildMap();
+initMap();
 </script>
 </body>
 </html>
