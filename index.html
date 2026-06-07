@@ -85,6 +85,7 @@
         .status-former { color: var(--text-muted); }
         .status-former .card-status-dot { background: var(--text-muted); }
         .tag { font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; color: var(--text-secondary); }
+        .new-badge { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: #8B6914; color: #fff; border-radius: 4px; padding: 2px 7px; margin-left: 6px; vertical-align: middle; }
 
         /* ── Profile ── */
         #profile-view { display: none; }
@@ -20296,69 +20297,6 @@ const candidates = [
       vision: null
     },
     {
-      id: "mikelawler",
-      name: "Mike Lawler",
-      initials: "ML",
-      photo: "https://bioguide.congress.gov/bioguide/photo/L/L000599.jpg",
-      party: "Republican",
-      title: "U.S. Representative",
-      state: "NY",
-      office: "U.S. Representative, NY-17",
-      currentRole: "representative",
-      tags: ["Moderate Republican", "Swing District", "New York", "Rising Republican"],
-      highlights: [
-        "Represents NY-17 (Hudson Valley/Rockland County), one of the most competitive House districts; first elected in 2022 defeating DCCC Chairman Sean Patrick Maloney",
-        "Won re-election in 2024 against Mondaire Jones, maintaining Republican hold on a district that has voted Democratic for president",
-        "Former New York State Assembly member; one of the youngest members of the Republican House conference at age 38",
-        "Moderate Republican who has shown independence on Ukraine aid, IVF access, and avoiding government shutdowns in a district that trends Democratic at the presidential level",
-        "Considered a rising Republican star and frequently discussed as a potential candidate for statewide office in New York"
-      ],
-      keyVotes: [
-        { year: 2023, vote: "YES", bill: "Fiscal Responsibility Act (Debt Ceiling)", description: "Backed the bipartisan debt ceiling deal brokered by Biden and McCarthy, averting default despite Freedom Caucus opposition" },
-        { year: 2024, vote: "YES", bill: "Ukraine/Israel/Taiwan Aid Package", description: "Supported the $95 billion foreign aid package after months of Republican delays, one of the more vocal moderate Republicans for Ukraine funding" },
-        { year: 2024, vote: "YES", bill: "Government Funding Continuing Resolutions", description: "Voted consistently to fund the government and prevent shutdowns, bucking hardliners who sought to use funding as political leverage" },
-        { year: 2024, vote: "YES", bill: "IVF Access Legislation", description: "Backed legislation to protect in vitro fertilization access after the Dobbs ruling raised concerns about reproductive technology restrictions — breaking with some Republicans" },
-        { year: 2024, vote: "YES", bill: "National Defense Authorization Act", description: "Supported annual defense authorization legislation through his work on the House Foreign Affairs Committee" },
-        { year: 2023, vote: "YES", bill: "Santos Expulsion Resolution", description: "Voted to expel Rep. George Santos after an Ethics Committee report documented extensive fraud, reflecting his stated commitment to congressional integrity" }
-      ],
-      finance: [
-        { year: 2022, raised: 3500000, spent: 3400000 },
-        { year: 2024, raised: 6200000, spent: 6000000 }
-      ],
-      issues: [
-        { topic: "Healthcare", stance: "mixed", summary: "Opposes the ACA and government-run healthcare but has backed some pharmaceutical pricing reforms and supported IVF access protections. Balances fiscal conservatism with the healthcare concerns of his suburban district." },
-        { topic: "Climate & Energy", stance: "mixed", summary: "More open than most Republicans to some clean energy investment given the environmental concerns of his Hudson Valley constituents. Skeptical of aggressive climate mandates but supports responsible energy policy." },
-        { topic: "Immigration & Border", stance: "mixed", summary: "Supports stronger border security and opposes open borders policies. Has been less extreme in his rhetoric than many House Republicans, recognizing the immigrant community ties in his diverse suburban district." },
-        { topic: "Abortion & Reproductive Rights", stance: "mixed", summary: "Broadly pro-life but has taken more moderate public positions on reproductive issues given his competitive district. Backed IVF access protections and has avoided the most extreme anti-abortion legislation." },
-        { topic: "Gun Control", stance: "mixed", summary: "Generally supportive of Second Amendment rights but more open than most House Republicans to limited gun safety discussions given suburban constituents' concerns about mass shootings." },
-        { topic: "Tax Policy & Economy", stance: "supports", summary: "Supports lower taxes and reduced government spending. Backed extending the 2017 Tax Cuts and Jobs Act. Focuses on economic growth and fiscal restraint as contrasts with Democratic incumbents." },
-        { topic: "Foreign Policy & Military", stance: "supports", summary: "Supports NATO and Ukraine aid; one of the more consistent moderate House Republicans on Ukraine funding. Uses his Foreign Affairs Committee position to advocate for strong U.S. alliances." },
-        { topic: "Education", stance: "mixed", summary: "Supports school choice and parental rights in education. More nuanced than hardline Republicans on public school funding given suburban district families who rely on public schools." },
-        { topic: "Criminal Justice & Policing", stance: "supports", summary: "Strong law and order Republican; supports law enforcement and opposes 'defund' policies. Highlights public safety as a contrast issue with Democrats in his competitive district." },
-        { topic: "Israel & Gaza", stance: "supports", summary: "Strong supporter of Israel; backed military aid packages including the foreign aid bill. Represents a district with a significant Jewish community and has been vocal about U.S.-Israel alliance." },
-        { topic: "Trade & China", stance: "supports", summary: "Supports confronting Chinese economic threats and backing domestic manufacturing competitiveness. Backs CHIPS Act-style investment and a tougher posture on Chinese trade practices." }
-      ],
-      controversies: [
-        {
-          title: "Competitive District Survival Strategy",
-          description: "Lawler has had to navigate a district that trends Democratic at the presidential level while maintaining Republican backing in primaries. Some conservatives have criticized him as insufficiently loyal to the MAGA agenda, while Democrats portray him as a Trump enabler.",
-          outcome: "Lawler has won two consecutive elections in the competitive seat by emphasizing bipartisan constituent service and selective independence. His political future — whether in NY-17, statewide, or elsewhere — remains closely watched."
-        },
-        {
-          title: "Santos Expulsion Vote",
-          description: "Lawler was one of the Republicans who voted to expel fellow New Yorker George Santos after the Ethics Committee documented extensive fraud. This put him at odds with some Republican colleagues who opposed expulsion on precedent grounds.",
-          outcome: "Santos was expelled in December 2023. Lawler's vote was widely praised but illustrated the difficult votes moderate Republicans in competitive districts must make against party consensus."
-        },
-        {
-          title: "Government Shutdown Standoffs",
-          description: "During multiple House Republican-driven funding standoffs in 2023 and 2024, Lawler was vocal in criticizing hardline Freedom Caucus members whose shutdown tactics threatened the economy and military pay — attracting backlash from the conservative wing of his party.",
-          outcome: "Government shutdowns were ultimately averted in most cases. Lawler's public criticism of shutdown tactics distinguished him from the Freedom Caucus but created tensions within the Republican conference."
-        }
-      ],
-      trump: "mixed",
-      vision: null
-    },
-    {
       id: "youngkim",
       name: "Young Kim",
       initials: "YK",
@@ -22379,57 +22317,6 @@ const candidates = [
         { title: "Defense Earmarks", description: "Has secured significant defense earmarks for Virginia military bases; critics occasionally question whether district interests align with national policy.", year: "2022" }
       ],
       trump: "trump-ally",
-      vision: null
-    },
-    {
-      id: "jimmcgovern",
-      name: "Jim McGovern",
-      initials: "JM",
-      photo: "https://bioguide.congress.gov/bioguide/photo/M/M000312.jpg",
-      party: "Democrat",
-      title: "Rep.",
-      state: "MA",
-      office: "MA-02",
-      currentRole: "representative",
-      tags: ["House", "Democrat", "Massachusetts", "Rules Committee", "Hunger", "Human Rights"],
-      highlights: [
-        "Ranking Member of the House Rules Committee, a powerful gatekeeper of floor legislation",
-        "One of Congress's most prominent advocates for ending hunger and food insecurity domestically and globally",
-        "Led efforts to reform and strengthen the Farm Bill's nutrition programs (SNAP)",
-        "Has served since 1997 representing Worcester and western Massachusetts",
-        "Outspoken critic of US military interventions; strong progressive on foreign policy"
-      ],
-      keyVotes: [
-        { vote: "For", bill: "Inflation Reduction Act (2022)" },
-        { vote: "For", bill: "American Rescue Plan (2021)" },
-        { vote: "For", bill: "George Floyd Justice in Policing Act (2021)" },
-        { vote: "For", bill: "SNAP expansion provisions (Farm Bill)" },
-        { vote: "Against", bill: "Authorization for Use of Military Force measures" },
-        { vote: "Against", bill: "Tax Cuts and Jobs Act (2017)" }
-      ],
-      finance: [
-        { year: "2024", raised: 2300000, spent: 2100000, source: "FEC" },
-        { year: "2022", raised: 2000000, spent: 1850000, source: "FEC" }
-      ],
-      issues: [
-        { topic: "Healthcare", stance: "strongly-supports", detail: "Supports Medicare for All; longtime advocate for universal coverage and expanded Medicaid; fights hospital consolidation that raises costs." },
-        { topic: "Climate & Energy", stance: "strongly-supports", detail: "Strong climate action advocate; supported Green New Deal and Inflation Reduction Act; calls for urgent transition away from fossil fuels." },
-        { topic: "Immigration & Border", stance: "strongly-supports", detail: "Supports comprehensive immigration reform with pathway to citizenship; has been critical of detention conditions and deportation policies." },
-        { topic: "Abortion & Reproductive Rights", stance: "strongly-supports", detail: "Consistent defender of abortion rights; supports codifying Roe and full federal protection of reproductive healthcare access." },
-        { topic: "Gun Control", stance: "strongly-supports", detail: "Supports assault weapons ban and universal background checks; has co-sponsored multiple gun safety bills throughout career." },
-        { topic: "Tax Policy & Economy", stance: "strongly-supports", detail: "Supports progressive taxation, wealth taxes, and corporate minimum taxes; prioritizes anti-poverty programs and workers' rights." },
-        { topic: "Foreign Policy & Military", stance: "mixed", detail: "Skeptic of military interventionism; has opposed AUMF extensions and arms sales to Saudi Arabia; supports diplomatic solutions and human rights-based foreign policy." },
-        { topic: "Education", stance: "strongly-supports", detail: "Advocates for student debt cancellation, free community college, and fully funding public K-12 education; opposes school privatization." },
-        { topic: "Criminal Justice & Policing", stance: "strongly-supports", detail: "Backed George Floyd Justice in Policing Act; supports ending mass incarceration and investing in community-based public safety approaches." },
-        { topic: "Israel & Gaza", stance: "mixed", detail: "Has been critical of Israeli military operations in Gaza; called for immediate ceasefire and humanitarian aid; one of few Democrats to vote against some Israel aid packages." },
-        { topic: "Trade & China", stance: "mixed", detail: "Supports trade deals that protect workers and include strong labor/environmental standards; skeptical of agreements that prioritize corporate interests over communities." }
-      ],
-      controversies: [
-        { title: "China Policy Dissent", description: "Has broken with party leadership on China by co-chairing the Congressional-Executive Commission on China and pushing harder on human rights accountability.", year: "2021" },
-        { title: "Gaza Ceasefire Push", description: "Faced pressure from pro-Israel groups and some Democratic colleagues for consistently calling for ceasefire in Gaza amid the 2023–24 conflict.", year: "2024" },
-        { title: "Rules Committee Power", description: "As Ranking Member of Rules Committee, he has been at center of procedural battles over which bills get floor votes, drawing both praise and criticism.", year: "2023" }
-      ],
-      trump: "trump-opponent",
       vision: null
     },
     {
@@ -24957,7 +24844,7 @@ function renderLandingPreview() {
                 ${makeAvatar(c, "avatar-sm")}
                 <div class="card-header-text">
                     <div class="card-party party-${c.party}">${partyLabel(c.party)}</div>
-                    <div class="card-name">${c.name}</div>
+                    <div class="card-name">${c.name}${isNew(c) ? ' <span class="new-badge">New</span>' : ''}</div>
                 </div>
             </div>
             <div class="card-title">${c.title}</div>
@@ -25647,7 +25534,7 @@ function renderFeatured() {
                     ${makeAvatar(c, "avatar-sm")}
                     <div class="card-header-text">
                         <div class="card-party party-${c.party}">${partyLabel(c.party)}</div>
-                        <div class="card-name">${c.name}${isFollowing(c.id) ? ' <span class="follow-star">★</span>' : ''}</div>
+                        <div class="card-name">${c.name}${isFollowing(c.id) ? ' <span class="follow-star">★</span>' : ''}${isNew(c) ? ' <span class="new-badge">New</span>' : ''}</div>
                     </div>
                 </div>
                 <div class="card-title">${c.title}</div>
@@ -25745,6 +25632,13 @@ const NOTIFY_EMAIL_KEY = "agora_notify_email";
 
 function getFollowed() { return JSON.parse(localStorage.getItem(FOLLOWS_KEY) || "[]"); }
 function isFollowing(id) { return getFollowed().includes(id); }
+function isNew(c) {
+    if (!c.dateAdded) return false;
+    const added = new Date(c.dateAdded);
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 5);
+    return added >= cutoff;
+}
 
 function toggleFollow(id) {
     const f = getFollowed();
