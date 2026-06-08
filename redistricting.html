@@ -132,6 +132,12 @@
     .lean-r { background: #FEE2E2; color: #B91C1C; }
     .lean-e { background: #F3F4F6; color: #374151; }
     .tooltip-mm { font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 5px; }
+    .tooltip-race-bars { margin-top: 8px; }
+    .tooltip-race-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 11px; }
+    .tr-label { width: 56px; color: var(--text-secondary); flex-shrink: 0; }
+    .tr-bar-wrap { flex: 1; height: 6px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+    .tr-bar { height: 100%; border-radius: 3px; }
+    .tr-pct { width: 28px; text-align: right; color: var(--text-secondary); font-weight: 600; }
 
     /* ── Detail Panel ── */
     .detail-panel {
@@ -235,7 +241,7 @@
     <div class="control-group">
       <span class="control-label">Show</span>
       <button class="layer-btn active" id="btn-partisan" onclick="setLayer('partisan')">Partisan Lean</button>
-      <button class="layer-btn coming-soon" title="Coming soon">Racial Makeup <span class="coming-tag">soon</span></button>
+      <button class="layer-btn" id="btn-racial" onclick="setLayer('racial')">Racial Makeup</button>
       <button class="layer-btn coming-soon" title="Coming soon">Both <span class="coming-tag">soon</span></button>
     </div>
     <div class="control-group">
@@ -275,7 +281,7 @@
         <span class="year-dot"></span>
         118th Congress &nbsp;·&nbsp; 2022 Election Results
       </div>
-      <div class="map-legend">
+      <div class="map-legend" id="map-legend">
         <span class="legend-label">R+40</span>
         <div class="legend-bar"></div>
         <span class="legend-label">D+40</span>
@@ -817,6 +823,8 @@ let playTimer = null;
 let mapSvg, mapPath, districtGroup;
 let currentHighlight = "all";
 let selectedGeoid = null;
+let currentLayer = 'partisan';
+let demoCache = null;
 
 const tooltip = document.getElementById("tooltip");
 
@@ -824,6 +832,56 @@ function colorForLean(lean) {
   if (lean == null) return "#D1D5DB";
   const t = (lean + 50) / 100;
   return d3.interpolateRdBu(Math.max(0, Math.min(1, t)));
+}
+
+function colorForDistrict(geoid) {
+  if (currentLayer === 'racial') return colorForRace(geoid);
+  return colorForLean(DISTRICTS[geoid]?.lean);
+}
+
+function colorForRace(geoid) {
+  const d = demoCache?.[geoid];
+  if (!d) return '#D1D5DB';
+  return d3.interpolatePurples(Math.min(d.nonWhite / 100 * 1.1, 1));
+}
+
+async function fetchDemographics() {
+  // B03002: race by Hispanic origin — gives non-Hispanic White, Black, Asian separately
+  // B03003: Hispanic or Latino total
+  const url = 'https://api.census.gov/data/2022/acs/acs5' +
+    '?get=B03002_001E,B03002_003E,B03002_004E,B03002_006E,B03003_003E' +
+    '&for=congressional%20district:*&in=state:*';
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('Census API ' + resp.status);
+  const rows = await resp.json();
+  const h = rows[0];
+  const iTotal = h.indexOf('B03002_001E');
+  const iWhite = h.indexOf('B03002_003E');
+  const iBlack = h.indexOf('B03002_004E');
+  const iAsian = h.indexOf('B03002_006E');
+  const iHisp  = h.indexOf('B03003_003E');
+  const iState = h.indexOf('state');
+  const iCd    = h.indexOf('congressional district');
+  demoCache = {};
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    const total = +r[iTotal];
+    if (!total) continue;
+    const geoid = r[iState] + r[iCd].padStart(2, '0');
+    const white = Math.max(0, +r[iWhite]);
+    const black = Math.max(0, +r[iBlack]);
+    const asian = Math.max(0, +r[iAsian]);
+    const hisp  = Math.max(0, +r[iHisp]);
+    const other = Math.max(0, total - white - black - asian - hisp);
+    demoCache[geoid] = {
+      white: Math.round(white / total * 100),
+      black: Math.round(black / total * 100),
+      asian: Math.round(asian / total * 100),
+      hisp:  Math.round(hisp  / total * 100),
+      other: Math.round(other / total * 100),
+      nonWhite: Math.round((total - white) / total * 100)
+    };
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -891,7 +949,7 @@ function renderDistricts(topo) {
     .join(
       enter => enter.append("path")
         .attr("class", d => "district-path" + (DISTRICTS[d.properties.GEOID] ? "" : " uncolored"))
-        .attr("fill", d => colorForLean(DISTRICTS[d.properties.GEOID]?.lean))
+        .attr("fill", d => colorForDistrict(d.properties.GEOID))
         .attr("d", mapPath)
         .on("mousemove", handleMouseMove)
         .on("mouseleave", () => { tooltip.style.display = "none"; })
@@ -931,7 +989,24 @@ function handleMouseMove(event, d) {
   } else if (data) {
     html += `<div class="tooltip-rep">${data.party === "R" ? "Republican" : "Democratic"} Representative</div>`;
   }
-  if (data) {
+  if (currentLayer === 'racial') {
+    const demo = demoCache?.[geoid];
+    if (demo) {
+      const bars = [
+        {label:"White",    pct:demo.white, color:"#9CA3AF"},
+        {label:"Black",    pct:demo.black, color:"#1D4ED8"},
+        {label:"Hispanic", pct:demo.hisp,  color:"#10B981"},
+        {label:"Asian",    pct:demo.asian, color:"#F59E0B"},
+        {label:"Other",    pct:demo.other, color:"#6B7280"},
+      ].filter(b => b.pct > 0);
+      html += `<div class="tooltip-race-bars">` +
+        bars.map(b => `<div class="tooltip-race-row">
+          <span class="tr-label">${b.label}</span>
+          <div class="tr-bar-wrap"><div class="tr-bar" style="width:${b.pct}%;background:${b.color}"></div></div>
+          <span class="tr-pct">${b.pct}%</span>
+        </div>`).join('') + `</div>`;
+    }
+  } else if (data) {
     const lean = data.lean;
     const cls = lean > 0 ? "lean-d" : lean < 0 ? "lean-r" : "lean-e";
     html += `<span class="tooltip-lean ${cls}">${leanLabel(lean)}</span>`;
@@ -1005,9 +1080,52 @@ function positionTooltip(event) {
   tooltip.style.top = y + "px";
 }
 
-function setLayer(layer) {
+async function setLayer(layer) {
+  if (layer === currentLayer) return;
+  currentLayer = layer;
   document.querySelectorAll(".layer-btn").forEach(b => b.classList.remove("active"));
   document.getElementById("btn-" + layer).classList.add("active");
+
+  if (layer === 'racial' && !demoCache) {
+    const btn = document.getElementById("btn-racial");
+    btn.textContent = "Loading…";
+    btn.disabled = true;
+    try {
+      await fetchDemographics();
+    } catch(e) {
+      btn.textContent = "Racial Makeup";
+      btn.disabled = false;
+      currentLayer = 'partisan';
+      document.getElementById("btn-partisan").classList.add("active");
+      btn.classList.remove("active");
+      alert("Could not load demographic data. Check your connection and try again.");
+      return;
+    }
+    btn.textContent = "Racial Makeup";
+    btn.disabled = false;
+    btn.classList.add("active");
+  }
+
+  if (districtGroup) {
+    districtGroup.selectAll(".district-path")
+      .transition().duration(600).ease(d3.easeCubicInOut)
+      .attr("fill", d => colorForDistrict(d.properties.GEOID));
+  }
+
+  const legendEl = document.getElementById("map-legend");
+  if (legendEl) {
+    if (layer === 'racial') {
+      legendEl.innerHTML = `
+        <span class="legend-label" style="white-space:nowrap">Majority White</span>
+        <div class="legend-bar" style="background:linear-gradient(to right,#FCFBFD,#BCBDDC,#756BB1,#3F007D)"></div>
+        <span class="legend-label" style="white-space:nowrap">Majority Non-White</span>`;
+    } else {
+      legendEl.innerHTML = `
+        <span class="legend-label">R+40</span>
+        <div class="legend-bar"></div>
+        <span class="legend-label">D+40</span>`;
+    }
+  }
 }
 
 function setHighlight(mode) {
@@ -1060,8 +1178,25 @@ function showDetail(geoid, props) {
     document.getElementById("dp-rep").textContent = distData?.party === "D" ? "Democratic Representative" : "Republican Representative";
     document.getElementById("dp-tags").innerHTML = lean != null
       ? `<span class="detail-tag ${leanCls}">${leanLabel(lean)}</span>` : "";
-    document.getElementById("dp-race").innerHTML = '<p class="detail-generic">Full demographic data coming soon for this district.</p>';
-    document.getElementById("dp-note").textContent = "Extended detail available for 30 key districts. Additional districts are being added.";
+    const demo = demoCache?.[geoid];
+    if (demo) {
+      const raceHtml = [
+        {label:"White",    pct:demo.white, color:"#9CA3AF"},
+        {label:"Black",    pct:demo.black, color:"#1D4ED8"},
+        {label:"Hispanic", pct:demo.hisp,  color:"#10B981"},
+        {label:"Asian",    pct:demo.asian, color:"#F59E0B"},
+        {label:"Other",    pct:demo.other, color:"#6B7280"},
+      ].filter(r => r.pct > 0).map(r => `
+        <div class="race-bar-row">
+          <span class="race-label">${r.label}</span>
+          <div class="race-bar-wrap"><div class="race-bar" style="width:${r.pct}%;background:${r.color}"></div></div>
+          <span class="race-pct">${r.pct}%</span>
+        </div>`).join("");
+      document.getElementById("dp-race").innerHTML = raceHtml + `<p class="detail-generic" style="margin-top:8px">Source: U.S. Census Bureau ACS 5-Year Estimates (2022)</p>`;
+    } else {
+      document.getElementById("dp-race").innerHTML = '<p class="detail-generic">Demographic data unavailable for this district.</p>';
+    }
+    document.getElementById("dp-note").textContent = "Extended gerrymandering context available for 30 key districts. Additional districts being added.";
   }
 
   panel.classList.add("visible");
