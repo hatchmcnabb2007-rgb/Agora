@@ -24424,6 +24424,7 @@ function makeAvatar(c, sizeClass) {
 function renderVision(c) {
     const v = c.vision;
     if (!v) { document.getElementById("p-vision").innerHTML = `<p class="no-concerns">No data on file.</p>`; return; }
+    if (typeof v === "string") { document.getElementById("p-vision").innerHTML = `<p style="line-height:1.7;color:var(--text-secondary);font-size:15px">${v}</p>`; return; }
 
     document.getElementById("p-vision").innerHTML = `
         <div class="vision-core">
@@ -24553,6 +24554,18 @@ function renderTrump(c) {
     const t = c.trump;
     if (!t) {
         document.getElementById("p-trump").innerHTML = `<p class="no-concerns">No data on file.</p>`;
+        return;
+    }
+    if (typeof t === "string") {
+        const labelMap = { "trump-ally": "Trump Ally", "trump-opponent": "Trump Critic", "mixed": "Mixed Record", "neutral": "Neutral" };
+        document.getElementById("p-trump").innerHTML = `
+            <div class="trump-header-card">
+                <div style="flex:1">
+                    <div style="margin-bottom:10px"><span class="trump-rel-badge ${t}">${labelMap[t] || t}</span></div>
+                    <div class="trump-rel-label">Relationship with Trump</div>
+                    <div class="trump-summary">Extended detail not yet available for this profile.</div>
+                </div>
+            </div>`;
         return;
     }
 
@@ -26071,11 +26084,11 @@ function addTypingIndicator() {
 }
 
 function replaceTypingWithMessage(text) {
-    const typingEl = document.getElementById('aca-typing');
     const area = document.getElementById('aca-messages');
-    if (typingEl) {
-        typingEl.id = 'aca-streaming';
-        typingEl.innerHTML = `<div class="aca-bubble">${escapeHtml(text)}</div>`;
+    const el = document.getElementById('aca-typing') || document.getElementById('aca-streaming');
+    if (el) {
+        el.id = 'aca-streaming';
+        el.innerHTML = `<div class="aca-bubble">${escapeHtml(text)}</div>`;
     } else {
         const div = document.createElement('div');
         div.className = 'aca-msg assistant';
