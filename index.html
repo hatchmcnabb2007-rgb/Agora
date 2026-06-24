@@ -23675,7 +23675,7 @@ const candidates = [
         trump: "trump-ally",
         vision: "David Schweikert is a deeply unusual politician — someone who genuinely appears to care about fiscal mathematics in a legislative body that mostly uses budget numbers as talking points. He delivers detailed, actuarial-style presentations on the national debt that would put most audiences to sleep but reflect a genuine belief that America is on an unsustainable fiscal trajectory. The 2020 ethics censure was a serious blow and he acknowledges it. He has survived by being relentlessly hardworking and technically credible on the issues his district and committee care about. Whether he can translate that technical expertise into actual legislative outcomes on the debt — the defining challenge of his career — remains to be seen."
     },
-    ,
+    
     {
         id: "hageman",
         name: "Harriet Hageman", initials: "HH", photo: "https://bioguide.congress.gov/bioguide/photo/H/H001089.jpg", party: "R",
@@ -25503,6 +25503,14 @@ function renderEthics(c) {
 let currentFinanceCycle = 0;
 
 function renderFinance(c, cycleIndex) {
+    if (!c.finance || !c.finance.length || !c.finance[cycleIndex]) {
+        document.getElementById("p-cycle-tabs").innerHTML = "";
+        document.getElementById("p-finance-totals").innerHTML = `<p class="no-concerns">No campaign finance data on file.</p>`;
+        document.getElementById("p-quickstats").innerHTML = "";
+        document.getElementById("p-stacked-bar").innerHTML = "";
+        document.getElementById("p-finance-legend").innerHTML = "";
+        return;
+    }
     const cycle = c.finance[cycleIndex];
 
     // Tabs
