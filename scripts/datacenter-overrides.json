@@ -1,0 +1,18 @@
+{
+  "force_merge": [
+    ["OpenAI Stargate Abilene", "Open AI/ SoftBank Stargate Data Center (Lancium Clean Campus)"],
+    ["OpenAI Stargate Milam", "Open AI/ SoftBank \"Freebird\""],
+    ["OpenAI Stargate Shackelford", "Frontier Vantage Data Center"],
+    ["OpenAI Stargate New Mexico", "Project Jupiter"],
+    ["OpenAI Stargate Wisconsin", "Project Lighthouse"]
+  ],
+  "force_split": [],
+  "manual_coords": {
+    "Meta Los Lunas": { "lat": 34.83016, "lng": -106.78383 },
+    "Google Midlothian": { "lat": 32.43893, "lng": -97.0508 },
+    "CoreWeave Muskogee OK": { "lat": 35.69679, "lng": -95.49516 },
+    "Crusoe Abilene Expansion": { "lat": 32.49423, "lng": -99.80091 },
+    "QTS Richmond 2": { "lat": 37.607, "lng": -77.419 },
+    "QTS Richmond 3": { "lat": 37.604, "lng": -77.423 }
+  }
+}

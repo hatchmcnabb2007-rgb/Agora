@@ -1,0 +1,190 @@
+{
+ "addr:1 Community Cir, New Albany, OH 43054": null,
+ "addr:1 Meta Lp, Gallatin, TN 37066": null,
+ "addr:10001 Lima Rd, Claude, TX 79019": null,
+ "addr:10410 Bunge Ave, Council Bluffs, IA 51503": {
+  "county": "Pottawattamie",
+  "lat": 41.16742,
+  "lng": -95.79311,
+  "state": "IA"
+ },
+ "addr:105 Whiley Rd, Lancaster, OH 43130": {
+  "county": "Fairfield",
+  "lat": 39.72703,
+  "lng": -82.68311,
+  "state": "OH"
+ },
+ "addr:1101 Beech Rd SW, New Albany, OH 43054": null,
+ "addr:11110 State St, Omaha, NE 68142": {
+  "county": "Douglas",
+  "lat": 41.33573,
+  "lng": -96.08847,
+  "state": "NE"
+ },
+ "addr:1401 Meadowville Technology Parkway, Chester, VA": {
+  "county": "Chesterfield",
+  "lat": 37.36175,
+  "lng": -77.32526,
+  "state": null
+ },
+ "addr:14250 W Broadway Rd, Goodyear, AZ 85338": null,
+ "addr:1435 Hwy 54 W, Fayetteville, GA 30214": {
+  "county": "Fayette",
+  "lat": 33.44534,
+  "lng": -84.52545,
+  "state": "GA"
+ },
+ "addr:14436-14998 Fairview Rd, Springfield, NE 68059, USA": {
+  "county": "Sarpy",
+  "lat": 41.10357,
+  "lng": -96.14791,
+  "state": "NE"
+ },
+ "addr:14651-15249 Gold Coast Rd 68138 Papillion Nebraska, USA": null,
+ "addr:15000 Lambda Drive, San Antonio, TX 78245": null,
+ "addr:1525 W 43rd St S, Muskogee, OK 74401, USA": null,
+ "addr:155 Palmer Ln, Marble, NC 28905": {
+  "county": "Cherokee",
+  "lat": 35.18499,
+  "lng": -83.91409,
+  "state": "NC"
+ },
+ "addr:1626 County Line Road Ridgeland, Mississippi": {
+  "county": "Madison",
+  "lat": 32.39955,
+  "lng": -90.12048,
+  "state": null
+ },
+ "addr:175 Private Road 1604, Abilene, TX 79601, Shackelford County": null,
+ "addr:1772-2396 145th St, Rosemount, MN 55068, USA": {
+  "county": "Dakota",
+  "lat": 44.73882,
+  "lng": -93.057,
+  "state": "MN"
+ },
+ "addr:2205 Industrial South Rd, Dalton, GA, 30721": {
+  "county": "Whitfield",
+  "lat": 34.71351,
+  "lng": -84.95219,
+  "state": null
+ },
+ "addr:2300 Hallock Young Rd, Warren, OH 44481": {
+  "county": "Trumbull",
+  "lat": 41.14372,
+  "lng": -80.88329,
+  "state": "OH"
+ },
+ "addr:2310 Eberhardt Rd, Temple, TX 76504": null,
+ "addr:2950 S. Litchfield Road": {
+  "county": "Maricopa",
+  "lat": 33.47928,
+  "lng": -112.35933,
+  "state": null
+ },
+ "addr:3231 Riverport Rd, Memphis, TN 38109": null,
+ "addr:3250 Railport Parkway, Midlothian, TX 76065": null,
+ "addr:330 Austin Blvd, Red Oak, TX 75154": {
+  "county": "Ellis",
+  "lat": 32.52998,
+  "lng": -96.79979,
+  "state": "TX"
+ },
+ "addr:3500 River Rd, The Dalles, OR": null,
+ "addr:3545 Wiseman Boulevard, San Antonio, TX 78251": {
+  "county": "Bexar",
+  "lat": 29.47318,
+  "lng": -98.68151,
+  "state": "TX"
+ },
+ "addr:4250 Messenger Lp, Los Lunas, NM 87031": null,
+ "addr:42575 Arcola Blvd, Sterling, VA 20166": null,
+ "addr:4581 Webb St, Pryor, OK 74361": null,
+ "addr:4800 90th St, Mount Pleasant, WI 53403": {
+  "county": "Racine",
+  "lat": 42.67489,
+  "lng": -87.89485,
+  "state": "WI"
+ },
+ "addr:500 8th St, Jeffersonville, IN 47130, USA": {
+  "county": "Clark",
+  "lat": 38.27912,
+  "lng": -85.7391,
+  "state": "IN"
+ },
+ "addr:5076 S High St, Columbus, OH 43207": null,
+ "addr:5420 Tulane Rd, Memphis, TN 38109": {
+  "county": "Shelby",
+  "lat": 34.99949,
+  "lng": -90.04298,
+  "state": "TN"
+ },
+ "addr:5475 Cloud Ct, Lincoln, NE 68514": null,
+ "addr:55001 Larrison Blvd, New Carlisle, IN 46552": {
+  "county": "St. Joseph",
+  "lat": 41.69378,
+  "lng": -86.46052,
+  "state": "IN"
+ },
+ "addr:5502 Spinks Rd, Abilene, TX 79601": null,
+ "addr:5800 EDGEWOOD RD SW CEDAR RAPIDS, IA 52404": {
+  "county": "Linn",
+  "lat": 41.92195,
+  "lng": -91.71563,
+  "state": "IA"
+ },
+ "addr:5855 SW Kerry St, Cumming, IA 50061": null,
+ "addr:6000 Technology Blvd, Sandston, VA 23150": null,
+ "addr:601 Kuna Mora Rd,  Kuna ID 83634": {
+  "county": "Ada",
+  "lat": 43.45923,
+  "lng": -116.42108,
+  "state": null
+ },
+ "addr:6015 Adams Center Road, Fort Wayne, IN 46806": {
+  "county": "Allen",
+  "lat": 41.03117,
+  "lng": -85.05777,
+  "state": "IN"
+ },
+ "addr:6200 76th Ave SW, Fairfax, IA 52228": {
+  "county": "Linn",
+  "lat": 41.9056,
+  "lng": -91.75108,
+  "state": "IA"
+ },
+ "addr:7601 State Hwy 105, Trenton, SC 29847, USA": null,
+ "addr:7725 Lake Rd, Barker, NY 14012": {
+  "county": "Niagara",
+  "lat": 43.34894,
+  "lng": -78.60291,
+  "state": "NY"
+ },
+ "addr:8171 Jim Christal Rd, Denton, TX 76207": null,
+ "addr:9590 Hornbaker Rd, Manassas, VA 20109": {
+  "county": "Prince William",
+  "lat": 38.74982,
+  "lng": -77.53585,
+  "state": "VA"
+ },
+ "addr:9685 87th Ave SE, Ellendale, ND 58436": {
+  "county": "Dickey",
+  "lat": 46.02147,
+  "lng": -98.5685,
+  "state": "ND"
+ },
+ "addr:984 County Road 112, Afton, TX 79920": {
+  "county": "Dickens",
+  "lat": 33.78064,
+  "lng": -100.8671,
+  "state": "TX"
+ },
+ "addr:Cheyenne, WY 82007, USA": null,
+ "addr:Co Rd 42, Montgomery, AL 36105, USA": {
+  "county": "Montgomery",
+  "lat": 32.265,
+  "lng": -86.36351,
+  "state": "AL"
+ },
+ "addr:Goodyear, Arizona 85338": null,
+ "addr:Holly Ridge, LA 71269": null
+}
