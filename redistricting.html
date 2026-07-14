@@ -110,11 +110,10 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .district-path { stroke: #fff; stroke-width: .4; transition: opacity .1s; }
-    .district-path:hover { opacity: .8; stroke-width: 1.2; stroke: var(--dark); }
-    .district-path.selected { stroke-width: 1.8; stroke: var(--dark); opacity: 1; }
-    .state-border { fill: none; stroke: #4B5563; stroke-width: .8; pointer-events: none; }
-    .district-path.uncolored { fill: #D1D5DB; }
+    .district-path { stroke: #fff; stroke-width: calc(.4px / var(--zk, 1)); transition: opacity .1s; }
+    .district-path:hover { opacity: .8; stroke-width: calc(1.2px / var(--zk, 1)); stroke: var(--dark); }
+    .district-path.selected { stroke-width: calc(1.8px / var(--zk, 1)); stroke: var(--dark); opacity: 1; }
+    .state-border { fill: none; stroke: #4B5563; stroke-width: calc(.8px / var(--zk, 1)); pointer-events: none; }
 
     /* ── Tooltip ── */
     .map-tooltip {
@@ -233,6 +232,26 @@
       background: var(--dark); cursor: pointer; border: 2px solid white;
       box-shadow: 0 1px 4px rgba(0,0,0,.2);
     }
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .layer-btn { padding: 12px 14px; }
+      .detail-close { padding: 12px 14px; }
+      .wave-btn { padding: 12px 14px; }
+      .control-group { flex-wrap: wrap; }
+      input[type=range]::-webkit-slider-thumb { width: 24px; height: 24px; }
+      .era-label { font-size: 9px; }
+      #zoom-hint { display: none; }
+      .page-hero h1 { font-size: 30px; }
+    }
+    @media (max-width: 480px) {
+      header { padding: 10px 12px; flex-wrap: wrap; justify-content: center; row-gap: 2px; }
+      .wordmark { font-size: 18px; }
+      .nav-link { padding: 5px 9px; font-size: 12px; white-space: nowrap; }
+    }
+    @media (pointer: coarse) {
+      .layer-btn, .zip-btn, .detail-close, .wave-btn { min-height: 44px; }
+    }
+
     .era-markers { position: absolute; top: 12px; left: 0; right: 0; pointer-events: none; }
     .era-marker { position: absolute; transform: translateX(-50%); text-align: center; }
     .era-tick { display: block; width: 2px; height: 8px; background: var(--gold); margin: 0 auto 4px; border-radius: 1px; }
@@ -263,7 +282,7 @@
       <span class="control-label">Show</span>
       <button class="layer-btn active" id="btn-partisan" onclick="setLayer('partisan')">Partisan Lean</button>
       <button class="layer-btn" id="btn-racial" onclick="setLayer('racial')">Racial Makeup</button>
-      <button class="layer-btn coming-soon" title="Coming soon">Both <span class="coming-tag">soon</span></button>
+      <button class="layer-btn" id="btn-bivariate" onclick="setLayer('bivariate')">Both</button>
     </div>
     <div class="control-group">
       <span class="control-label">Highlight</span>
@@ -289,9 +308,13 @@
   <!-- Map Card -->
   <div class="map-card">
     <div class="map-card-header">
-      <div class="congress-badge">
-        <span class="year-dot"></span>
-        118th Congress &nbsp;·&nbsp; 2022 Election Results
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="detail-close" id="zoom-back" style="display:none;" onclick="resetZoom()">◂ United States</button>
+        <div class="congress-badge">
+          <span class="year-dot"></span>
+          118th Congress &nbsp;·&nbsp; 2022 Election Results
+        </div>
+        <span class="legend-label" id="zoom-hint">Click a state to zoom in</span>
       </div>
       <div class="map-legend" id="map-legend">
         <span class="legend-label">R+40</span>
@@ -754,10 +777,13 @@ let playTimer = null;
 // ─────────────────────────────────────────────
 //  MAP STATE
 // ─────────────────────────────────────────────
-let mapSvg, mapPath, districtGroup;
+let mapSvg, mapPath, districtGroup, mapRoot, zoomBehavior;
+let currentZoomK = 1;
+let zoomedState = null;
 let currentHighlight = "all";
 let selectedGeoid = null;
 let currentLayer = 'partisan';
+const COARSE_POINTER = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
 
 const tooltip = document.getElementById("tooltip");
 
@@ -769,6 +795,7 @@ function colorForLean(lean) {
 
 function colorForDistrict(geoid) {
   if (currentLayer === 'racial') return colorForRace(geoid);
+  if (currentLayer === 'bivariate') return colorForBivariate(geoid);
   const res = resultFor(geoid);
   const m = marginFor(res);
   if (m === null && res && res[4]) {
@@ -782,6 +809,27 @@ function colorForRace(geoid) {
   const d = demoFor(geoid);
   if (!d) return '#D1D5DB';
   return d3.interpolatePurples(Math.min(d[5] / 100 * 1.1, 1));
+}
+
+// 3×3 bivariate palette: hue = partisan lean (R / competitive / D),
+// darkness = minority share (<30% / 30–50% / >50%)
+const BIV_COLORS = [
+  ["#E7B8AF", "#E2DCCF", "#B7C8E4"],
+  ["#CD7B6C", "#ABA08C", "#7B97C7"],
+  ["#A03D2E", "#6B5F4B", "#35598F"],
+];
+
+function colorForBivariate(geoid) {
+  const res = resultFor(geoid);
+  const demo = demoFor(geoid);
+  if (!res || !demo) return "#D1D5DB";
+  const m = marginFor(res);
+  let col;
+  if (m === null) col = res[4] === "D" ? 2 : res[4] === "R" ? 0 : 1;
+  else col = m > 7 ? 2 : m < -7 ? 0 : 1;
+  const nw = demo[5];
+  const row = nw > 50 ? 2 : nw >= 30 ? 1 : 0;
+  return BIV_COLORS[row][col];
 }
 
 // ─────────────────────────────────────────────
@@ -806,14 +854,28 @@ async function initMap() {
     .translate([width / 2, height / 2]);
 
   mapPath = d3.geoPath().projection(projection);
-  districtGroup = mapSvg.append("g").attr("class", "districts-layer");
+  mapRoot = mapSvg.append("g").attr("class", "map-root");
+  districtGroup = mapRoot.append("g").attr("class", "districts-layer");
+
+  // Programmatic-only zoom (gestures disabled — no scroll-jacking on mobile);
+  // stroke widths divide by scale so lines stay hairline when zoomed.
+  zoomBehavior = d3.zoom()
+    .scaleExtent([1, 12])
+    .filter(() => false)
+    .on("zoom", (event) => {
+      currentZoomK = event.transform.k;
+      mapRoot.attr("transform", event.transform);
+      // CSS strokes divide by --zk so lines stay hairline at any zoom
+      mapRoot.style("--zk", currentZoomK);
+    });
+  mapSvg.call(zoomBehavior);
 
   // District data + state borders load in parallel
   const dataPromise = DATA ? Promise.resolve(DATA)
     : d3.json("districts/districts-data.json");
   try {
     const statesTopo = await d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json");
-    mapSvg.append("path")
+    mapRoot.append("path")
       .datum(topojson.mesh(statesTopo, statesTopo.objects.states, (a, b) => a !== b))
       .attr("class", "state-border")
       .attr("d", mapPath);
@@ -943,6 +1005,7 @@ function updateLabels(idx) {
 //  EVENT HANDLERS
 // ─────────────────────────────────────────────
 function handleMouseMove(event, d) {
+  if (COARSE_POINTER) return;  // touch devices: info flows through the detail panel
   const geoid = d.properties.GEOID;
   const res = resultFor(geoid);
   const label = districtLabel(d.properties);
@@ -983,6 +1046,12 @@ function handleMouseMove(event, d) {
 }
 
 function handleClick(event, d) {
+  // Two-stage navigation: first click zooms to the state, a second click
+  // (while zoomed into that state) selects the district.
+  if (zoomedState !== d.properties.STATEFP) {
+    zoomToState(d.properties.STATEFP);
+    return;
+  }
   const geoid = d.properties.GEOID;
   mapSvg.selectAll(".district-path").classed("selected", false);
   if (selectedGeoid === geoid) {
@@ -1064,6 +1133,14 @@ async function setLayer(layer) {
         <span class="legend-label" style="white-space:nowrap">Majority White</span>
         <div class="legend-bar" style="background:linear-gradient(to right,#FCFBFD,#BCBDDC,#756BB1,#3F007D)"></div>
         <span class="legend-label" style="white-space:nowrap">Majority Non-White</span>`;
+    } else if (layer === 'bivariate') {
+      const cells = BIV_COLORS.map((row, ri) => row.map((c, ci) =>
+        `<rect x="${ci * 14}" y="${(2 - ri) * 14}" width="13" height="13" rx="1.5" fill="${c}"/>`).join("")).join("");
+      legendEl.innerHTML = `
+        <svg width="42" height="42" viewBox="0 0 42 42" style="flex-shrink:0">${cells}</svg>
+        <div style="font-size:10px;color:var(--text-muted);line-height:1.5">
+          → R&nbsp;·&nbsp;competitive&nbsp;·&nbsp;D<br>↑ minority share (30%, 50%)
+        </div>`;
     } else {
       legendEl.innerHTML = `
         <span class="legend-label">R+40</span>
@@ -1082,14 +1159,52 @@ function setHighlight(mode) {
 }
 
 function applyHighlight() {
-  // mm = nonWhite > 50% (vintage-matched ACS); competitive = |margin| < 7
+  // mm = nonWhite > 50% (vintage-matched ACS); competitive = |margin| < 7;
+  // while zoomed into a state, other states fade back
   districtGroup.selectAll(".district-path").each(function(d) {
     const geoid = d.properties.GEOID;
-    let dim = false;
-    if (currentHighlight === "mm") dim = !isMM(geoid);
-    if (currentHighlight === "competitive") dim = !isComp(geoid);
-    d3.select(this).style("opacity", dim ? 0.12 : 1);
+    let op = 1;
+    if (currentHighlight === "mm" && !isMM(geoid)) op = 0.12;
+    if (currentHighlight === "competitive" && !isComp(geoid)) op = 0.12;
+    if (zoomedState && d.properties.STATEFP !== zoomedState) op = Math.min(op, 0.25);
+    d3.select(this).style("opacity", op);
   });
+}
+
+function zoomToState(fips) {
+  const topo = topoCache[BOUNDARY[YEARS[currentYearIdx]]];
+  if (!topo || !mapSvg) return;
+  const objKey = Object.keys(topo.objects)[0];
+  const feats = topojson.feature(topo, topo.objects[objKey]).features
+    .filter(f => f.properties.STATEFP === fips);
+  if (!feats.length) return;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  feats.forEach(f => {
+    const b = mapPath.bounds(f);
+    if (!isFinite(b[0][0])) return;
+    x0 = Math.min(x0, b[0][0]); y0 = Math.min(y0, b[0][1]);
+    x1 = Math.max(x1, b[1][0]); y1 = Math.max(y1, b[1][1]);
+  });
+  if (!isFinite(x0)) return;
+  const vb = mapSvg.attr("viewBox").split(" ").map(Number);
+  const W = vb[2], H = vb[3];
+  const k = Math.min(12, 0.9 / Math.max((x1 - x0) / W, (y1 - y0) / H));
+  const tx = W / 2 - k * (x0 + x1) / 2, ty = H / 2 - k * (y0 + y1) / 2;
+  zoomedState = fips;
+  mapSvg.transition().duration(750)
+    .call(zoomBehavior.transform, d3.zoomIdentity.translate(tx, ty).scale(k));
+  const back = document.getElementById("zoom-back");
+  if (back) back.style.display = "";
+  applyHighlight();
+}
+
+function resetZoom() {
+  zoomedState = null;
+  mapSvg.transition().duration(600).call(zoomBehavior.transform, d3.zoomIdentity);
+  const back = document.getElementById("zoom-back");
+  if (back) back.style.display = "none";
+  applyHighlight();
+  closeDetail();
 }
 
 // Narratives for districts reshaped by the 2025-26 mid-decade wave, keyed by
@@ -1136,10 +1251,10 @@ const DETAIL_2026 = {
   }
 };
 
-function showWaveState(fips) {
+async function showWaveState(fips) {
   const idx = YEARS.indexOf(2026);
-  if (idx >= 0) onScrub(idx);
-  if (typeof zoomToState === "function") zoomToState(fips);
+  if (idx >= 0) await onScrub(idx);
+  zoomToState(fips);
   document.querySelector(".map-card").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -1268,6 +1383,9 @@ window.addEventListener("resize", () => {
     if (!mapSvg || !container || Math.abs(container.clientWidth - lastMapWidth) < 4) return;
     mapSvg.remove();
     selectedGeoid = null;
+    zoomedState = null;
+    const back = document.getElementById("zoom-back");
+    if (back) back.style.display = "none";
     closeDetail();
     await initMap();
   }, 150);
