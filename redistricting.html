@@ -258,7 +258,7 @@
     <div class="scrubber-top">
       <button class="play-btn" id="play-btn" onclick="togglePlay()" title="Play/pause">▶</button>
       <span class="scrubber-year-label" id="scrubber-label">2022 · 118th Congress</span>
-      <span class="scrubber-note">Partisan lean data shown for 2022. Boundary lines change at redistricting years.</span>
+      <span class="scrubber-note" id="scrubber-note"></span>
     </div>
     <div class="scrubber-track">
       <input type="range" min="0" max="5" value="4" id="year-scrubber" oninput="onScrub(this.value)">
@@ -310,7 +310,9 @@
     </div>
     <div class="detail-body">
       <div>
-        <div class="detail-section-title">Racial Makeup</div>
+        <div class="detail-section-title">Election History</div>
+        <div id="dp-history"></div>
+        <div class="detail-section-title" style="margin-top:18px;">Racial Makeup</div>
         <div id="dp-race"></div>
       </div>
       <div>
@@ -321,38 +323,38 @@
   </div>
 
   <!-- Efficiency Gap Table -->
-  <div class="section-header">Efficiency Gap by State — Most Gerrymandered Maps</div>
+  <div class="section-header" id="gap-header">Efficiency Gap by State</div>
   <div class="gap-table-wrap">
     <table>
       <thead>
         <tr>
           <th>State</th>
-          <th>Districts</th>
-          <th>2022 Seats (D / R)</th>
-          <th>Statewide Vote Share</th>
+          <th>Seats (D / R)</th>
+          <th>Two-Party Vote Share</th>
+          <th>Efficiency Gap</th>
           <th>Map Favors</th>
         </tr>
       </thead>
-      <tbody>
-        <tr><td><strong>Texas</strong></td><td>38</td><td>13 D / 25 R</td><td>D ~43% · R ~57%</td><td class="favors-r">Republican</td></tr>
-        <tr><td><strong>Florida</strong></td><td>28</td><td>8 D / 20 R</td><td>D ~44% · R ~56%</td><td class="favors-r">Republican</td></tr>
-        <tr><td><strong>North Carolina</strong></td><td>14</td><td>7 D / 7 R</td><td>D ~46% · R ~54%</td><td class="favors-r">Republican (contested)</td></tr>
-        <tr><td><strong>Georgia</strong></td><td>14</td><td>5 D / 9 R</td><td>D ~46% · R ~54%</td><td class="favors-r">Republican</td></tr>
-        <tr><td><strong>Ohio</strong></td><td>15</td><td>5 D / 10 R</td><td>D ~44% · R ~56%</td><td class="favors-r">Republican</td></tr>
-        <tr><td><strong>Wisconsin</strong></td><td>8</td><td>3 D / 5 R</td><td>D ~48% · R ~52%</td><td class="favors-r">Republican</td></tr>
-        <tr><td><strong>Illinois</strong></td><td>17</td><td>14 D / 3 R</td><td>D ~55% · R ~45%</td><td class="favors-d">Democratic</td></tr>
-        <tr><td><strong>Maryland</strong></td><td>8</td><td>7 D / 1 R</td><td>D ~55% · R ~45%</td><td class="favors-d">Democratic</td></tr>
-        <tr><td><strong>Massachusetts</strong></td><td>9</td><td>9 D / 0 R</td><td>D ~64% · R ~36%</td><td class="favors-d">Democratic</td></tr>
-        <tr><td><strong>Pennsylvania</strong></td><td>17</td><td>9 D / 8 R</td><td>D ~50% · R ~50%</td><td class="favors-fair">Competitive / Fair</td></tr>
-        <tr><td><strong>Michigan</strong></td><td>13</td><td>7 D / 6 R</td><td>D ~49% · R ~51%</td><td class="favors-fair">Competitive / Fair</td></tr>
-        <tr><td><strong>Arizona</strong></td><td>9</td><td>4 D / 5 R</td><td>D ~49% · R ~51%</td><td class="favors-fair">Competitive / Fair</td></tr>
-        <tr><td><strong>Virginia</strong></td><td>11</td><td>7 D / 4 R</td><td>D ~52% · R ~48%</td><td class="favors-fair">Competitive / Fair</td></tr>
+      <tbody id="gap-tbody">
+        <tr><td colspan="5" style="color:var(--text-muted);">Loading…</td></tr>
       </tbody>
     </table>
   </div>
+  <p class="source-note" id="gap-method">
+    Efficiency gap computed from certified two-party votes per Stephanopoulos &amp; McGhee (2015):
+    (wasted&nbsp;D&nbsp;votes − wasted&nbsp;R&nbsp;votes) ÷ total two-party votes; positive values favor Republicans.
+    Uncontested races are imputed as a 75/25 split of the state's median contested-district turnout.
+    Only states with 7+ districts are shown — the measure is unstable for small delegations.
+  </p>
 
   <p class="source-note">
-    District boundaries: U.S. Census Bureau TIGER/Line Cartographic Boundary Files, 118th Congress (2022). Election results: MIT Election Data and Science Lab. Efficiency gap methodology adapted from Stephanopoulos &amp; McGhee (2015). Racial demographics: U.S. Census Bureau ACS 5-Year Estimates.
+    District boundaries: U.S. Census Bureau cartographic boundary files for the 114th–119th Congresses.
+    Election results: MIT Election Data and Science Lab, U.S. House constituency returns (CC0), 2014–2018;
+    FEC "Federal Elections" official publications, 2020–2022; 2024 winners from the
+    <a href="https://github.com/unitedstates/congress-legislators">unitedstates/congress-legislators</a> project
+    (margins pending certified-returns integration).
+    Racial demographics: U.S. Census Bureau ACS 5-Year Estimates (2021 and 2022 vintages, matched to each map era's boundaries).
+    Ranked-choice races (AK, ME) use final-round tallies; Louisiana races decided in runoffs use runoff tallies.
   </p>
 
 </div>
@@ -367,215 +369,10 @@
 //  comp: competitive (|lean| < 7)
 // ─────────────────────────────────────────────
 
-const DISTRICTS = {
-  // ALABAMA
-  "0101":{lean:-28,party:"R"}, "0102":{lean:-24,party:"R"}, "0103":{lean:-28,party:"R"},
-  "0104":{lean:-50,party:"R"}, "0105":{lean:-28,party:"R"}, "0106":{lean:-32,party:"R"},
-  "0107":{lean:35,party:"D",mm:true},
-  // ALASKA (at-large)
-  "0200":{lean:-6,party:"R"},
-  // ARIZONA
-  "0401":{lean:-7,party:"R"}, "0402":{lean:-25,party:"R"}, "0403":{lean:15,party:"D"},
-  "0404":{lean:8,party:"D"}, "0405":{lean:-22,party:"R"}, "0406":{lean:-4,party:"R",comp:true},
-  "0407":{lean:25,party:"D",mm:true}, "0408":{lean:-28,party:"R"}, "0409":{lean:-28,party:"R"},
-  // ARKANSAS
-  "0501":{lean:-35,party:"R"}, "0502":{lean:-18,party:"R"}, "0503":{lean:-40,party:"R"}, "0504":{lean:-30,party:"R"},
-  // CALIFORNIA
-  "0601":{lean:-18,party:"R"}, "0602":{lean:38,party:"D"}, "0603":{lean:-10,party:"R"},
-  "0604":{lean:-8,party:"R"}, "0605":{lean:20,party:"D"}, "0606":{lean:42,party:"D",mm:true},
-  "0607":{lean:15,party:"D"}, "0608":{lean:18,party:"D"}, "0609":{lean:28,party:"D",mm:true},
-  "0610":{lean:22,party:"D"}, "0611":{lean:38,party:"D"}, "0612":{lean:45,party:"D"},
-  "0613":{lean:-5,party:"R",comp:true}, "0614":{lean:27,party:"D"}, "0615":{lean:35,party:"D"},
-  "0616":{lean:30,party:"D"}, "0617":{lean:25,party:"D"}, "0618":{lean:28,party:"D"},
-  "0619":{lean:25,party:"D"}, "0620":{lean:-7,party:"R"}, "0621":{lean:-12,party:"R"},
-  "0622":{lean:4,party:"D",comp:true}, "0623":{lean:-10,party:"R"}, "0624":{lean:14,party:"D"},
-  "0625":{lean:15,party:"D"}, "0626":{lean:12,party:"D"}, "0627":{lean:4,party:"D",comp:true},
-  "0628":{lean:28,party:"D"}, "0629":{lean:43,party:"D",mm:true}, "0630":{lean:35,party:"D"},
-  "0631":{lean:30,party:"D"}, "0632":{lean:26,party:"D"}, "0633":{lean:24,party:"D"},
-  "0634":{lean:47,party:"D",mm:true}, "0635":{lean:33,party:"D"}, "0636":{lean:27,party:"D",mm:true},
-  "0637":{lean:45,party:"D",mm:true}, "0638":{lean:22,party:"D"}, "0639":{lean:9,party:"D"},
-  "0640":{lean:-3,party:"R",comp:true}, "0641":{lean:5,party:"D",comp:true}, "0642":{lean:-14,party:"R"},
-  "0643":{lean:42,party:"D",mm:true}, "0644":{lean:44,party:"D",mm:true}, "0645":{lean:-2,party:"R",comp:true},
-  "0646":{lean:27,party:"D",mm:true}, "0647":{lean:5,party:"D",comp:true}, "0648":{lean:-5,party:"R",comp:true},
-  "0649":{lean:12,party:"D"}, "0650":{lean:-12,party:"R"}, "0651":{lean:40,party:"D",mm:true},
-  "0652":{lean:27,party:"D"},
-  // COLORADO
-  "0801":{lean:-5,party:"R",comp:true}, "0802":{lean:25,party:"D"}, "0803":{lean:-35,party:"R"},
-  "0804":{lean:-18,party:"R"}, "0805":{lean:-15,party:"R"}, "0806":{lean:-10,party:"R"},
-  "0807":{lean:12,party:"D"}, "0808":{lean:8,party:"D"},
-  // CONNECTICUT
-  "0901":{lean:10,party:"D"}, "0902":{lean:15,party:"D"}, "0903":{lean:12,party:"D"},
-  "0904":{lean:8,party:"D"}, "0905":{lean:20,party:"D"},
-  // DELAWARE
-  "1000":{lean:18,party:"D"},
-  // FLORIDA
-  "1201":{lean:-32,party:"R"}, "1202":{lean:-28,party:"R"}, "1203":{lean:-15,party:"R"},
-  "1204":{lean:-18,party:"R"}, "1205":{lean:-15,party:"R"}, "1206":{lean:-15,party:"R"},
-  "1207":{lean:-3,party:"R",comp:true}, "1208":{lean:-20,party:"R"}, "1209":{lean:-22,party:"R"},
-  "1210":{lean:18,party:"D",mm:true}, "1211":{lean:-24,party:"R"}, "1212":{lean:-22,party:"R"},
-  "1213":{lean:-28,party:"R"}, "1214":{lean:-30,party:"R"}, "1215":{lean:-28,party:"R"},
-  "1216":{lean:-22,party:"R"}, "1217":{lean:-25,party:"R"}, "1218":{lean:-28,party:"R"},
-  "1219":{lean:-10,party:"R"}, "1220":{lean:-18,party:"R"}, "1221":{lean:-20,party:"R"},
-  "1222":{lean:-22,party:"R"}, "1223":{lean:20,party:"D",mm:true}, "1224":{lean:18,party:"D",mm:true},
-  "1225":{lean:-3,party:"R",comp:true}, "1226":{lean:-25,party:"R"}, "1227":{lean:-28,party:"R"},
-  "1228":{lean:25,party:"D"},
-  // GEORGIA
-  "1301":{lean:-25,party:"R"}, "1302":{lean:14,party:"D",mm:true}, "1303":{lean:-18,party:"R"},
-  "1304":{lean:30,party:"D",mm:true}, "1305":{lean:47,party:"D",mm:true}, "1306":{lean:-15,party:"R"},
-  "1307":{lean:-15,party:"R"}, "1308":{lean:25,party:"D",mm:true}, "1309":{lean:-25,party:"R"},
-  "1310":{lean:-20,party:"R"}, "1311":{lean:-25,party:"R"}, "1312":{lean:35,party:"D",mm:true},
-  "1313":{lean:15,party:"D"}, "1314":{lean:-42,party:"R"},
-  // HAWAII
-  "1501":{lean:32,party:"D",mm:true}, "1502":{lean:40,party:"D",mm:true},
-  // IDAHO
-  "1601":{lean:-28,party:"R"}, "1602":{lean:-35,party:"R"},
-  // ILLINOIS
-  "1701":{lean:10,party:"D"}, "1702":{lean:12,party:"D"}, "1703":{lean:25,party:"D",mm:true},
-  "1704":{lean:40,party:"D",mm:true}, "1705":{lean:-15,party:"R"}, "1706":{lean:15,party:"D"},
-  "1707":{lean:44,party:"D",mm:true}, "1708":{lean:-25,party:"R"}, "1709":{lean:12,party:"D"},
-  "1710":{lean:10,party:"D"}, "1711":{lean:-8,party:"R"}, "1712":{lean:-10,party:"R"},
-  "1713":{lean:-15,party:"R"}, "1714":{lean:-20,party:"R"}, "1715":{lean:-20,party:"R"},
-  "1716":{lean:-12,party:"R"}, "1717":{lean:-15,party:"R"},
-  // INDIANA
-  "1801":{lean:-25,party:"R"}, "1802":{lean:10,party:"D"}, "1803":{lean:-12,party:"R"},
-  "1804":{lean:-18,party:"R"}, "1805":{lean:-22,party:"R"}, "1806":{lean:-15,party:"R"},
-  "1807":{lean:-20,party:"R"}, "1808":{lean:-20,party:"R"}, "1809":{lean:-22,party:"R"},
-  // IOWA
-  "1901":{lean:-8,party:"R"}, "1902":{lean:-12,party:"R"}, "1903":{lean:5,party:"D",comp:true}, "1904":{lean:-18,party:"R"},
-  // KANSAS
-  "2001":{lean:-20,party:"R"}, "2002":{lean:-18,party:"R"}, "2003":{lean:8,party:"D"}, "2004":{lean:-28,party:"R"},
-  // KENTUCKY
-  "2101":{lean:-28,party:"R"}, "2102":{lean:-25,party:"R"}, "2103":{lean:25,party:"D"},
-  "2104":{lean:-22,party:"R"}, "2105":{lean:-35,party:"R"}, "2106":{lean:-25,party:"R"},
-  // LOUISIANA
-  "2201":{lean:-28,party:"R"}, "2202":{lean:30,party:"D",mm:true}, "2203":{lean:-25,party:"R"},
-  "2204":{lean:-28,party:"R"}, "2205":{lean:-30,party:"R"}, "2206":{lean:20,party:"D",mm:true},
-  // MAINE
-  "2301":{lean:8,party:"D"}, "2302":{lean:-4,party:"R",comp:true},
-  // MARYLAND
-  "2401":{lean:-15,party:"R"}, "2402":{lean:12,party:"D"}, "2403":{lean:15,party:"D"},
-  "2404":{lean:36,party:"D",mm:true}, "2405":{lean:8,party:"D"}, "2406":{lean:18,party:"D"},
-  "2407":{lean:25,party:"D"}, "2408":{lean:40,party:"D",mm:true},
-  // MASSACHUSETTS
-  "2501":{lean:18,party:"D"}, "2502":{lean:28,party:"D"}, "2503":{lean:25,party:"D"},
-  "2504":{lean:25,party:"D"}, "2505":{lean:35,party:"D"}, "2506":{lean:30,party:"D"},
-  "2507":{lean:25,party:"D"}, "2508":{lean:15,party:"D"}, "2509":{lean:38,party:"D"},
-  // MICHIGAN
-  "2601":{lean:-5,party:"R",comp:true}, "2602":{lean:12,party:"D"}, "2603":{lean:4,party:"D",comp:true},
-  "2604":{lean:20,party:"D"}, "2605":{lean:-15,party:"R"}, "2606":{lean:-12,party:"R"},
-  "2607":{lean:3,party:"D",comp:true}, "2608":{lean:5,party:"D",comp:true}, "2609":{lean:40,party:"D",mm:true},
-  "2610":{lean:-20,party:"R"}, "2611":{lean:-10,party:"R"}, "2612":{lean:-22,party:"R"},
-  "2613":{lean:25,party:"D"},
-  // MINNESOTA
-  "2701":{lean:5,party:"D",comp:true}, "2702":{lean:-10,party:"R"}, "2703":{lean:25,party:"D"},
-  "2704":{lean:30,party:"D"}, "2705":{lean:-12,party:"R"}, "2706":{lean:-5,party:"R",comp:true},
-  "2707":{lean:-20,party:"R"}, "2708":{lean:40,party:"D",mm:true},
-  // MISSISSIPPI
-  "2801":{lean:-28,party:"R"}, "2802":{lean:25,party:"D",mm:true}, "2803":{lean:-25,party:"R"}, "2804":{lean:-35,party:"R"},
-  // MISSOURI
-  "2901":{lean:-25,party:"R"}, "2902":{lean:35,party:"D",mm:true}, "2903":{lean:-15,party:"R"},
-  "2904":{lean:-28,party:"R"}, "2905":{lean:-28,party:"R"}, "2906":{lean:-20,party:"R"},
-  "2907":{lean:-22,party:"R"}, "2908":{lean:-35,party:"R"},
-  // MONTANA
-  "3001":{lean:-12,party:"R"}, "3002":{lean:-25,party:"R"},
-  // NEBRASKA
-  "3101":{lean:-22,party:"R"}, "3102":{lean:4,party:"D",comp:true}, "3103":{lean:-35,party:"R"},
-  // NEVADA
-  "3201":{lean:8,party:"D"}, "3202":{lean:-8,party:"R"}, "3203":{lean:2,party:"D",comp:true}, "3204":{lean:6,party:"D"},
-  // NEW HAMPSHIRE
-  "3301":{lean:3,party:"D",comp:true}, "3302":{lean:8,party:"D"},
-  // NEW JERSEY
-  "3401":{lean:15,party:"D"}, "3402":{lean:30,party:"D"}, "3403":{lean:15,party:"D"},
-  "3404":{lean:35,party:"D",mm:true}, "3405":{lean:25,party:"D"}, "3406":{lean:35,party:"D",mm:true},
-  "3407":{lean:-3,party:"R",comp:true}, "3408":{lean:40,party:"D",mm:true}, "3409":{lean:12,party:"D"},
-  "3410":{lean:20,party:"D"}, "3411":{lean:22,party:"D"}, "3412":{lean:25,party:"D"},
-  // NEW MEXICO
-  "3501":{lean:12,party:"D"}, "3502":{lean:-3,party:"R",comp:true}, "3503":{lean:15,party:"D"},
-  // NEW YORK
-  "3601":{lean:5,party:"D",comp:true}, "3602":{lean:8,party:"D"}, "3603":{lean:-8,party:"R"},
-  "3604":{lean:30,party:"D",mm:true}, "3605":{lean:-3,party:"R",comp:true}, "3606":{lean:8,party:"D"},
-  "3607":{lean:-3,party:"R",comp:true}, "3608":{lean:5,party:"D",comp:true}, "3609":{lean:35,party:"D",mm:true},
-  "3610":{lean:30,party:"D",mm:true}, "3611":{lean:35,party:"D",mm:true}, "3612":{lean:20,party:"D"},
-  "3613":{lean:-6,party:"R"}, "3614":{lean:15,party:"D"}, "3615":{lean:20,party:"D"},
-  "3616":{lean:15,party:"D"}, "3617":{lean:6,party:"D",comp:true}, "3618":{lean:4,party:"D",comp:true},
-  "3619":{lean:3,party:"D",comp:true}, "3620":{lean:5,party:"D",comp:true}, "3621":{lean:8,party:"D"},
-  "3622":{lean:-5,party:"R",comp:true}, "3623":{lean:40,party:"D",mm:true}, "3624":{lean:40,party:"D",mm:true},
-  "3625":{lean:38,party:"D",mm:true}, "3626":{lean:35,party:"D",mm:true},
-  // NORTH CAROLINA
-  "3701":{lean:10,party:"D",mm:true}, "3702":{lean:-12,party:"R"}, "3703":{lean:-18,party:"R"},
-  "3704":{lean:35,party:"D",mm:true}, "3705":{lean:-25,party:"R"}, "3706":{lean:-22,party:"R"},
-  "3707":{lean:-20,party:"R"}, "3708":{lean:-15,party:"R"}, "3709":{lean:-25,party:"R"},
-  "3710":{lean:-22,party:"R"}, "3711":{lean:-28,party:"R"}, "3712":{lean:20,party:"D",mm:true},
-  "3713":{lean:-5,party:"R",comp:true}, "3714":{lean:-12,party:"R"},
-  // NORTH DAKOTA
-  "3800":{lean:-28,party:"R"},
-  // OHIO
-  "3901":{lean:-30,party:"R"}, "3902":{lean:-25,party:"R"}, "3903":{lean:35,party:"D",mm:true},
-  "3904":{lean:-25,party:"R"}, "3905":{lean:-5,party:"R",comp:true}, "3906":{lean:12,party:"D"},
-  "3907":{lean:-20,party:"R"}, "3908":{lean:-25,party:"R"}, "3909":{lean:-22,party:"R"},
-  "3910":{lean:-15,party:"R"}, "3911":{lean:40,party:"D",mm:true}, "3912":{lean:35,party:"D",mm:true},
-  "3913":{lean:-20,party:"R"}, "3914":{lean:-22,party:"R"}, "3915":{lean:-20,party:"R"},
-  // OKLAHOMA
-  "4001":{lean:-28,party:"R"}, "4002":{lean:-35,party:"R"}, "4003":{lean:-35,party:"R"},
-  "4004":{lean:-30,party:"R"}, "4005":{lean:-20,party:"R"},
-  // OREGON
-  "4101":{lean:-12,party:"R"}, "4102":{lean:25,party:"D"}, "4103":{lean:35,party:"D"},
-  "4104":{lean:15,party:"D"}, "4105":{lean:-8,party:"R"}, "4106":{lean:3,party:"D",comp:true},
-  // PENNSYLVANIA
-  "4201":{lean:-12,party:"R"}, "4202":{lean:40,party:"D",mm:true}, "4203":{lean:-12,party:"R"},
-  "4204":{lean:25,party:"D"}, "4205":{lean:-25,party:"R"}, "4206":{lean:15,party:"D"},
-  "4207":{lean:5,party:"D",comp:true}, "4208":{lean:6,party:"D",comp:true}, "4209":{lean:-18,party:"R"},
-  "4210":{lean:20,party:"D"}, "4211":{lean:-22,party:"R"}, "4212":{lean:12,party:"D"},
-  "4213":{lean:-12,party:"R"}, "4214":{lean:15,party:"D"}, "4215":{lean:-20,party:"R"},
-  "4216":{lean:12,party:"D"}, "4217":{lean:3,party:"D",comp:true},
-  // RHODE ISLAND
-  "4401":{lean:18,party:"D"}, "4402":{lean:8,party:"D"},
-  // SOUTH CAROLINA
-  "4501":{lean:-22,party:"R"}, "4502":{lean:-20,party:"R"}, "4503":{lean:-20,party:"R"},
-  "4504":{lean:-25,party:"R"}, "4505":{lean:-28,party:"R"}, "4506":{lean:22,party:"D",mm:true}, "4507":{lean:-10,party:"R"},
-  // SOUTH DAKOTA
-  "4600":{lean:-25,party:"R"},
-  // TENNESSEE
-  "4701":{lean:-28,party:"R"}, "4702":{lean:-22,party:"R"}, "4703":{lean:-28,party:"R"},
-  "4704":{lean:-22,party:"R"}, "4705":{lean:-35,party:"R"}, "4706":{lean:-15,party:"R"},
-  "4707":{lean:-20,party:"R"}, "4708":{lean:-25,party:"R"}, "4709":{lean:40,party:"D",mm:true},
-  // TEXAS
-  "4801":{lean:-42,party:"R"}, "4802":{lean:-35,party:"R"}, "4803":{lean:-25,party:"R"},
-  "4804":{lean:-28,party:"R"}, "4805":{lean:-30,party:"R"}, "4806":{lean:-35,party:"R"},
-  "4807":{lean:-20,party:"R"}, "4808":{lean:-35,party:"R"}, "4809":{lean:-22,party:"R"},
-  "4810":{lean:-12,party:"R"}, "4811":{lean:-28,party:"R"}, "4812":{lean:-30,party:"R"},
-  "4813":{lean:-22,party:"R"}, "4814":{lean:-30,party:"R"}, "4815":{lean:-8,party:"R"},
-  "4816":{lean:-22,party:"R"}, "4817":{lean:-12,party:"R"}, "4818":{lean:36,party:"D",mm:true},
-  "4819":{lean:-30,party:"R"}, "4820":{lean:-22,party:"R"}, "4821":{lean:12,party:"D"},
-  "4822":{lean:-8,party:"R"}, "4823":{lean:-35,party:"R"}, "4824":{lean:-25,party:"R"},
-  "4825":{lean:-35,party:"R"}, "4826":{lean:15,party:"D"}, "4827":{lean:-12,party:"R"},
-  "4828":{lean:-15,party:"R"}, "4829":{lean:20,party:"D",mm:true}, "4830":{lean:35,party:"D",mm:true},
-  "4831":{lean:-30,party:"R"}, "4832":{lean:12,party:"D"}, "4833":{lean:-30,party:"R"},
-  "4834":{lean:-35,party:"R"}, "4835":{lean:22,party:"D",mm:true}, "4836":{lean:-38,party:"R"},
-  "4837":{lean:-10,party:"R"}, "4838":{lean:-28,party:"R"},
-  // UTAH
-  "4901":{lean:-12,party:"R"}, "4902":{lean:-25,party:"R"}, "4903":{lean:-22,party:"R"}, "4904":{lean:-28,party:"R"},
-  // VERMONT
-  "5000":{lean:28,party:"D"},
-  // VIRGINIA
-  "5101":{lean:-12,party:"R"}, "5102":{lean:-8,party:"R"}, "5103":{lean:20,party:"D",mm:true},
-  "5104":{lean:30,party:"D",mm:true}, "5105":{lean:-25,party:"R"}, "5106":{lean:15,party:"D"},
-  "5107":{lean:5,party:"D",comp:true}, "5108":{lean:25,party:"D"}, "5109":{lean:-20,party:"R"},
-  "5110":{lean:10,party:"D"}, "5111":{lean:35,party:"D",mm:true},
-  // WASHINGTON
-  "5301":{lean:5,party:"D",comp:true}, "5302":{lean:15,party:"D"}, "5303":{lean:-5,party:"R",comp:true},
-  "5304":{lean:-8,party:"R"}, "5305":{lean:18,party:"D"}, "5306":{lean:35,party:"D",mm:true},
-  "5307":{lean:25,party:"D"}, "5308":{lean:5,party:"D",comp:true}, "5309":{lean:-15,party:"R"},
-  "5310":{lean:38,party:"D"},
-  // WEST VIRGINIA
-  "5401":{lean:-22,party:"R"}, "5402":{lean:-30,party:"R"},
-  // WISCONSIN
-  "5501":{lean:4,party:"D",comp:true}, "5502":{lean:30,party:"D"}, "5503":{lean:-25,party:"R"},
-  "5504":{lean:40,party:"D",mm:true}, "5505":{lean:-22,party:"R"}, "5506":{lean:-12,party:"R"},
-  "5507":{lean:-18,party:"R"}, "5508":{lean:-18,party:"R"},
-  // WYOMING
-  "5600":{lean:-30,party:"R"}
-};
+// District election results, demographics, members, and efficiency gaps
+// are precomputed by scripts/build-redistricting-data.py from MEDSL/FEC
+// returns, ACS summary files, and congress-legislators. Fetched in init.
+let DATA = null;
 
 // ─────────────────────────────────────────────
 //  30 KEY DISTRICTS — full detail panel data
@@ -798,9 +595,12 @@ function districtLabel(props) {
   return `${state}'s ${n}${suffix} District`;
 }
 
-function leanLabel(lean) {
-  if (lean === 0) return "EVEN";
-  return lean > 0 ? `D+${lean}` : `R+${Math.abs(lean)}`;
+function leanLabel(m) {
+  if (m === null || m === undefined) return "—";
+  if (Math.abs(m) >= 99.9) return m > 0 ? "D — uncontested" : "R — uncontested";
+  if (Math.abs(m) < 0.05) return "EVEN";
+  const v = Math.abs(m) < 10 ? Math.abs(m).toFixed(1) : Math.round(Math.abs(m));
+  return m > 0 ? `D+${v}` : `R+${v}`;
 }
 
 // ─────────────────────────────────────────────
@@ -809,13 +609,51 @@ function leanLabel(lean) {
 const YEARS    = [2014, 2016, 2018, 2020, 2022, 2024];
 const CONGRESS = [114,  115,  116,  117,  118,  119];
 const BOUNDARY = {
-  2014: "districts/2010.json",
-  2016: "districts/2010.json",
-  2018: "districts/2010.json",
-  2020: "districts/2010.json",
-  2022: "districts/2010.json",
-  2024: "districts/2020.json"
+  2014: "districts/2010.json",   // cd114
+  2016: "districts/cd115.json",  // NC/VA/FL court remaps in effect
+  2018: "districts/cd116.json",  // PA court remap in effect
+  2020: "districts/cd116.json",  // same lines as 2018
+  2022: "districts/2020.json",   // cd118 — 2020-census maps
+  2024: "districts/cd119.json"   // AL/LA/GA/NY/NC court redraws in effect
 };
+
+const YEAR_NOTES = {
+  2014: "First election on the 2010-census maps shown here.",
+  2016: "Court-ordered remaps in NC, VA and FL took effect this cycle.",
+  2018: "Pennsylvania's court-ordered remap took effect this cycle.",
+  2020: "Same district lines as 2018.",
+  2022: "First election on the 2020-census maps.",
+  2024: "Court-ordered redraws in AL, LA, GA, NY and NC took effect this cycle."
+};
+
+// ── data helpers ──
+function yearKey() { return String(YEARS[currentYearIdx]); }
+function cycleData() { return DATA && DATA.cycles[yearKey()] || null; }
+function resultFor(geoid) { const c = cycleData(); return c ? c.results[geoid] : null; }
+function marginFor(res) {
+  if (!res) return null;
+  const two = res[0] + res[1];
+  return two ? (res[0] - res[1]) / two * 100 : null;
+}
+function demoFor(geoid) {
+  const c = cycleData();
+  const d = c && DATA.demographics[c.vintage];
+  return d ? d[geoid] : null;   // [white, black, hisp, asian, other, nonWhite]
+}
+function isMM(geoid) { const d = demoFor(geoid); return !!d && d[5] > 50; }
+function isComp(geoid) {
+  const m = marginFor(resultFor(geoid));
+  return m !== null && Math.abs(m) < 7;
+}
+function raceRows(demo) {
+  return [
+    { label: "White",    pct: demo[0], color: "#9CA3AF" },
+    { label: "Black",    pct: demo[1], color: "#1D4ED8" },
+    { label: "Hispanic", pct: demo[2], color: "#10B981" },
+    { label: "Asian",    pct: demo[3], color: "#F59E0B" },
+    { label: "Other",    pct: demo[4], color: "#6B7280" },
+  ].filter(r => r.pct > 0);
+}
 
 const topoCache = {};
 let currentYearIdx = 4; // default: 2022
@@ -829,7 +667,6 @@ let mapSvg, mapPath, districtGroup;
 let currentHighlight = "all";
 let selectedGeoid = null;
 let currentLayer = 'partisan';
-let demoCache = null;
 
 const tooltip = document.getElementById("tooltip");
 
@@ -841,52 +678,13 @@ function colorForLean(lean) {
 
 function colorForDistrict(geoid) {
   if (currentLayer === 'racial') return colorForRace(geoid);
-  return colorForLean(DISTRICTS[geoid]?.lean);
+  return colorForLean(marginFor(resultFor(geoid)));
 }
 
 function colorForRace(geoid) {
-  const d = demoCache?.[geoid];
+  const d = demoFor(geoid);
   if (!d) return '#D1D5DB';
-  return d3.interpolatePurples(Math.min(d.nonWhite / 100 * 1.1, 1));
-}
-
-async function fetchDemographics() {
-  // B03002: race by Hispanic origin — gives non-Hispanic White, Black, Asian separately
-  // B03003: Hispanic or Latino total
-  const url = 'https://api.census.gov/data/2022/acs/acs5' +
-    '?get=B03002_001E,B03002_003E,B03002_004E,B03002_006E,B03003_003E' +
-    '&for=congressional%20district:*&in=state:*';
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error('Census API ' + resp.status);
-  const rows = await resp.json();
-  const h = rows[0];
-  const iTotal = h.indexOf('B03002_001E');
-  const iWhite = h.indexOf('B03002_003E');
-  const iBlack = h.indexOf('B03002_004E');
-  const iAsian = h.indexOf('B03002_006E');
-  const iHisp  = h.indexOf('B03003_003E');
-  const iState = h.indexOf('state');
-  const iCd    = h.indexOf('congressional district');
-  demoCache = {};
-  for (let i = 1; i < rows.length; i++) {
-    const r = rows[i];
-    const total = +r[iTotal];
-    if (!total) continue;
-    const geoid = r[iState] + r[iCd].padStart(2, '0');
-    const white = Math.max(0, +r[iWhite]);
-    const black = Math.max(0, +r[iBlack]);
-    const asian = Math.max(0, +r[iAsian]);
-    const hisp  = Math.max(0, +r[iHisp]);
-    const other = Math.max(0, total - white - black - asian - hisp);
-    demoCache[geoid] = {
-      white: Math.round(white / total * 100),
-      black: Math.round(black / total * 100),
-      asian: Math.round(asian / total * 100),
-      hisp:  Math.round(hisp  / total * 100),
-      other: Math.round(other / total * 100),
-      nonWhite: Math.round((total - white) / total * 100)
-    };
-  }
+  return d3.interpolatePurples(Math.min(d[5] / 100 * 1.1, 1));
 }
 
 // ─────────────────────────────────────────────
@@ -913,7 +711,9 @@ async function initMap() {
   mapPath = d3.geoPath().projection(projection);
   districtGroup = mapSvg.append("g").attr("class", "districts-layer");
 
-  // Load state borders once
+  // District data + state borders load in parallel
+  const dataPromise = DATA ? Promise.resolve(DATA)
+    : d3.json("districts/districts-data.json");
   try {
     const statesTopo = await d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json");
     mapSvg.append("path")
@@ -921,6 +721,14 @@ async function initMap() {
       .attr("class", "state-border")
       .attr("d", mapPath);
   } catch(e) {}
+
+  try {
+    DATA = await dataPromise;
+  } catch(e) {
+    document.getElementById("map-container").innerHTML =
+      '<p style="padding:40px;color:#9CA3AF;text-align:center;">District data failed to load. Please refresh.</p>';
+    return;
+  }
 
   // Load default year
   await loadYear(currentYearIdx);
@@ -946,6 +754,50 @@ async function loadYear(idx) {
 
   renderDistricts(topoCache[file]);
   updateLabels(idx);
+  renderGapTable();
+  if (selectedGeoid) {
+    // keep the open panel in sync with the newly selected year
+    const feat = topoCache[file] && findFeature(topoCache[file], selectedGeoid);
+    if (feat) showDetail(selectedGeoid, feat.properties); else closeDetail();
+  }
+}
+
+function findFeature(topo, geoid) {
+  const objKey = Object.keys(topo.objects)[0];
+  return topojson.feature(topo, topo.objects[objKey]).features
+    .find(f => f.properties.GEOID === geoid);
+}
+
+function renderGapTable() {
+  const tbody = document.getElementById("gap-tbody");
+  const header = document.getElementById("gap-header");
+  if (!tbody || !DATA) return;
+  const year = yearKey();
+  header.textContent = `Efficiency Gap by State — ${year} Election`;
+  const gaps = DATA.efficiencyGap[year];
+  if (!gaps) {
+    tbody.innerHTML = `<tr><td colspan="5" style="color:var(--text-muted);">No certified results for ${year} yet — the gap is computed from official vote totals once available.</td></tr>`;
+    return;
+  }
+  const rows = Object.entries(gaps)
+    .sort((a, b) => Math.abs(b[1][3]) - Math.abs(a[1][3]))
+    .slice(0, 10);
+  tbody.innerHTML = rows.map(([fips, [sd, sr, vsD, gap]]) => {
+    const pct = (gap * 100).toFixed(1);
+    // positive gap = more wasted D votes = map favors Republicans
+    const seatsEquiv = (Math.abs(gap) * (sd + sr)).toFixed(1);
+    let favors, cls;
+    if (Math.abs(gap) < 0.02) { favors = "Roughly balanced"; cls = "favors-fair"; }
+    else if (gap > 0) { favors = `Republicans (≈${seatsEquiv} seats)`; cls = "favors-r"; }
+    else { favors = `Democrats (≈${seatsEquiv} seats)`; cls = "favors-d"; }
+    return `<tr>
+      <td><strong>${STATE_NAMES[fips] || fips}</strong></td>
+      <td>${sd} D / ${sr} R</td>
+      <td>D ${(vsD * 100).toFixed(1)}% · R ${((1 - vsD) * 100).toFixed(1)}%</td>
+      <td>${gap > 0 ? "+" : ""}${pct} pp</td>
+      <td class="${cls}">${favors}</td>
+    </tr>`;
+  }).join("");
 }
 
 function renderDistricts(topo) {
@@ -956,7 +808,7 @@ function renderDistricts(topo) {
     .data(features, d => d.properties.GEOID)
     .join(
       enter => enter.append("path")
-        .attr("class", d => "district-path" + (DISTRICTS[d.properties.GEOID] ? "" : " uncolored"))
+        .attr("class", "district-path")
         .attr("fill", d => colorForDistrict(d.properties.GEOID))
         .attr("d", mapPath)
         .on("mousemove", handleMouseMove)
@@ -964,7 +816,8 @@ function renderDistricts(topo) {
         .on("click", handleClick),
       update => update
         .transition().duration(700).ease(d3.easeCubicInOut)
-        .attr("d", mapPath),
+        .attr("d", mapPath)
+        .attr("fill", d => colorForDistrict(d.properties.GEOID)),
       exit => exit.remove()
     );
 
@@ -977,6 +830,12 @@ function updateLabels(idx) {
   const nth = congress === 1 ? "1st" : congress === 2 ? "2nd" : `${congress}th`;
   document.getElementById("scrubber-label").textContent = `${year} · ${nth} Congress`;
   document.getElementById("year-scrubber").value = idx;
+  const note = document.getElementById("scrubber-note");
+  if (note) {
+    let txt = YEAR_NOTES[year] || "";
+    if (cycleData()?.provisional) txt += " Winners shown; vote margins pending certification data.";
+    note.textContent = txt;
+  }
   // Map card header
   const badge = document.querySelector(".congress-badge");
   if (badge) badge.innerHTML = `<span class="year-dot"></span> ${nth} Congress &nbsp;·&nbsp; ${year} Election`;
@@ -987,43 +846,35 @@ function updateLabels(idx) {
 // ─────────────────────────────────────────────
 function handleMouseMove(event, d) {
   const geoid = d.properties.GEOID;
-  const data = DISTRICTS[geoid];
+  const res = resultFor(geoid);
   const label = districtLabel(d.properties);
-  const detail = DETAIL[geoid];
+  const year = yearKey();
 
   let html = `<div class="tooltip-district">${label}</div>`;
-  if (detail) {
-    html += `<div class="tooltip-rep">${detail.rep}</div>`;
-  } else if (data) {
-    html += `<div class="tooltip-rep">${data.party === "R" ? "Republican" : "Democratic"} Representative</div>`;
+  if (res) {
+    const verb = cycleData()?.provisional ? "Rep." : `Won ${year}:`;
+    html += `<div class="tooltip-rep">${verb} ${res[3]} (${res[4]})</div>`;
   }
   if (currentLayer === 'racial') {
-    const demo = demoCache?.[geoid];
+    const demo = demoFor(geoid);
     if (demo) {
-      const bars = [
-        {label:"White",    pct:demo.white, color:"#9CA3AF"},
-        {label:"Black",    pct:demo.black, color:"#1D4ED8"},
-        {label:"Hispanic", pct:demo.hisp,  color:"#10B981"},
-        {label:"Asian",    pct:demo.asian, color:"#F59E0B"},
-        {label:"Other",    pct:demo.other, color:"#6B7280"},
-      ].filter(b => b.pct > 0);
       html += `<div class="tooltip-race-bars">` +
-        bars.map(b => `<div class="tooltip-race-row">
+        raceRows(demo).map(b => `<div class="tooltip-race-row">
           <span class="tr-label">${b.label}</span>
           <div class="tr-bar-wrap"><div class="tr-bar" style="width:${b.pct}%;background:${b.color}"></div></div>
           <span class="tr-pct">${b.pct}%</span>
         </div>`).join('') + `</div>`;
     }
-  } else if (data) {
-    const lean = data.lean;
-    const cls = lean > 0 ? "lean-d" : lean < 0 ? "lean-r" : "lean-e";
-    html += `<span class="tooltip-lean ${cls}">${leanLabel(lean)}</span>`;
-    if (data.mm) html += `<div class="tooltip-mm">Majority-Minority District</div>`;
+  } else if (res) {
+    const m = marginFor(res);
+    if (m !== null) {
+      const cls = m > 0 ? "lean-d" : m < 0 ? "lean-r" : "lean-e";
+      html += `<span class="tooltip-lean ${cls}">${leanLabel(m)}</span>`;
+    }
+    if (isMM(geoid)) html += `<div class="tooltip-mm">Majority-Minority District</div>`;
   }
-  if (!data) {
-    // Seats that only exist in this map era (eliminated or created by
-    // reapportionment) have no entry in the current dataset.
-    html += `<div class="tooltip-rep">No data for this district in this map era</div>`;
+  if (!res) {
+    html += `<div class="tooltip-rep">${cycleData()?.provisional ? "Seat currently vacant" : "No data for this district in this map era"}</div>`;
   }
   tooltip.innerHTML = html;
   tooltip.style.display = "block";
@@ -1099,26 +950,6 @@ async function setLayer(layer) {
   document.querySelectorAll(".layer-btn").forEach(b => b.classList.remove("active"));
   document.getElementById("btn-" + layer).classList.add("active");
 
-  if (layer === 'racial' && !demoCache) {
-    const btn = document.getElementById("btn-racial");
-    btn.textContent = "Loading…";
-    btn.disabled = true;
-    try {
-      await fetchDemographics();
-    } catch(e) {
-      btn.textContent = "Racial Makeup";
-      btn.disabled = false;
-      currentLayer = 'partisan';
-      document.getElementById("btn-partisan").classList.add("active");
-      btn.classList.remove("active");
-      alert("Could not load demographic data. Check your connection and try again.");
-      return;
-    }
-    btn.textContent = "Racial Makeup";
-    btn.disabled = false;
-    btn.classList.add("active");
-  }
-
   if (districtGroup) {
     districtGroup.selectAll(".district-path")
       .transition().duration(600).ease(d3.easeCubicInOut)
@@ -1150,66 +981,107 @@ function setHighlight(mode) {
 }
 
 function applyHighlight() {
+  // mm = nonWhite > 50% (vintage-matched ACS); competitive = |margin| < 7
   districtGroup.selectAll(".district-path").each(function(d) {
-    const data = DISTRICTS[d.properties.GEOID];
+    const geoid = d.properties.GEOID;
     let dim = false;
-    if (currentHighlight === "mm") dim = !data?.mm;
-    if (currentHighlight === "competitive") dim = !data?.comp;
+    if (currentHighlight === "mm") dim = !isMM(geoid);
+    if (currentHighlight === "competitive") dim = !isComp(geoid);
     d3.select(this).style("opacity", dim ? 0.12 : 1);
   });
+}
+
+function historyHtml(geoid) {
+  const bars = [];
+  for (const y of YEARS.map(String)) {
+    const c = DATA.cycles[y];
+    if (!c || c.provisional) continue;
+    bars.push({ y, m: marginFor(c.results[geoid]), boundary: c.boundary });
+  }
+  if (!bars.some(b => b.m !== null)) {
+    return '<p class="detail-generic">No election results on this map era\'s lines.</p>';
+  }
+  const W = 300, H = 88, mid = 46, bw = W / bars.length;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:340px;display:block">`;
+  svg += `<line x1="0" y1="${mid}" x2="${W}" y2="${mid}" stroke="#E5E1D8"/>`;
+  let prevBoundary = null, linesChanged = false;
+  bars.forEach((b, i) => {
+    const x = i * bw;
+    if (prevBoundary && b.boundary !== prevBoundary) {
+      svg += `<line x1="${x}" y1="6" x2="${x}" y2="${H - 14}" stroke="#D4A853" stroke-width="1.5" stroke-dasharray="3,2"/>`;
+      linesChanged = true;
+    }
+    prevBoundary = b.boundary;
+    if (b.m !== null) {
+      const mm = Math.max(-50, Math.min(50, b.m));
+      const h = Math.max(Math.abs(mm) / 50 * 32, 1.5);
+      const yTop = b.m > 0 ? mid - h : mid;
+      const lbl = Math.abs(b.m) >= 99.9 ? "unc." : leanLabel(b.m);
+      svg += `<rect x="${x + 5}" y="${yTop}" width="${bw - 10}" height="${h}" rx="1.5" fill="${b.m > 0 ? "#2563EB" : "#DC2626"}" opacity=".85"/>`;
+      svg += `<text x="${x + bw / 2}" y="${b.m > 0 ? yTop - 3 : yTop + h + 9}" text-anchor="middle" font-size="8" fill="#6B7280">${lbl}</text>`;
+    } else {
+      svg += `<text x="${x + bw / 2}" y="${mid + 3}" text-anchor="middle" font-size="8" fill="#9CA3AF">—</text>`;
+    }
+    svg += `<text x="${x + bw / 2}" y="${H - 2}" text-anchor="middle" font-size="9" fill="#6B7280">'${b.y.slice(2)}</text>`;
+  });
+  svg += `</svg>`;
+  return svg + `<p class="detail-generic" style="padding:4px 0 0;">Two-party margin by election.${linesChanged ? ' <span style="color:#D4A853">┆</span> = district lines changed — margins aren\'t directly comparable across a redraw.' : ""}</p>`;
 }
 
 function showDetail(geoid, props) {
   const panel = document.getElementById("detail-panel");
   const detail = DETAIL[geoid];
-  const distData = DISTRICTS[geoid];
-  const label = districtLabel(props);
+  const res = resultFor(geoid);
+  const cyc = cycleData();
+  const year = yearKey();
 
-  document.getElementById("dp-title").textContent = label;
+  document.getElementById("dp-title").textContent = districtLabel(props);
 
-  if (detail) {
-    document.getElementById("dp-rep").textContent = detail.rep;
-    const lean = detail.lean;
-    const leanCls = lean > 0 ? "tag-lean-d" : "tag-lean-r";
-    const mmTag = distData?.mm ? `<span class="detail-tag tag-mm">Majority-Minority</span>` : "";
-    const typeTag = `<span class="detail-tag ${detail.type.includes("Competitive") ? "tag-competitive" : "tag-safe"}">${detail.type}</span>`;
-    document.getElementById("dp-tags").innerHTML =
-      `<span class="detail-tag ${leanCls}">${leanLabel(lean)}</span>${mmTag}${typeTag}`;
-    const raceHtml = detail.race.map(r => `
+  const member = DATA.members[geoid];
+  let repLine = "";
+  if (cyc?.provisional) {
+    repLine = member ? `${member.n} (${member.p})` : "Seat currently vacant";
+  } else if (res) {
+    repLine = `Won ${year}: ${res[3]} (${res[4]})`;
+    if (cyc.congress >= 118 && member) repLine += `  ·  Current: ${member.n} (${member.p})`;
+  }
+  document.getElementById("dp-rep").textContent = repLine;
+
+  const m = marginFor(res);
+  let tags = "";
+  if (m !== null) {
+    tags += `<span class="detail-tag ${m > 0 ? "tag-lean-d" : "tag-lean-r"}">${leanLabel(m)}</span>`;
+  }
+  if (isMM(geoid)) tags += `<span class="detail-tag tag-mm">Majority-Minority</span>`;
+  if (isComp(geoid)) tags += `<span class="detail-tag tag-competitive">Competitive</span>`;
+  document.getElementById("dp-tags").innerHTML = tags;
+
+  document.getElementById("dp-history").innerHTML = historyHtml(geoid);
+
+  const demo = demoFor(geoid);
+  if (demo) {
+    const vintageNote = { cd114: "2021", cd115: "2021", cd116: "2021", cd118: "2022", cd119: "2022" }[cyc?.vintage] || "2022";
+    document.getElementById("dp-race").innerHTML = raceRows(demo).map(r => `
       <div class="race-bar-row">
         <span class="race-label">${r.label}</span>
-        <div class="race-bar-wrap">
-          <div class="race-bar" style="width:${r.pct}%;background:${r.color}"></div>
-        </div>
+        <div class="race-bar-wrap"><div class="race-bar" style="width:${r.pct}%;background:${r.color}"></div></div>
         <span class="race-pct">${r.pct}%</span>
-      </div>`).join("");
-    document.getElementById("dp-race").innerHTML = raceHtml;
-    document.getElementById("dp-note").textContent = detail.note;
+      </div>`).join("") +
+      `<p class="detail-generic" style="margin-top:8px">Source: U.S. Census Bureau ACS 5-Year Estimates (${vintageNote})</p>`;
   } else {
-    const lean = distData?.lean;
-    const leanCls = lean > 0 ? "tag-lean-d" : lean < 0 ? "tag-lean-r" : "tag-competitive";
-    document.getElementById("dp-rep").textContent = distData?.party === "D" ? "Democratic Representative" : "Republican Representative";
-    document.getElementById("dp-tags").innerHTML = lean != null
-      ? `<span class="detail-tag ${leanCls}">${leanLabel(lean)}</span>` : "";
-    const demo = demoCache?.[geoid];
-    if (demo) {
-      const raceHtml = [
-        {label:"White",    pct:demo.white, color:"#9CA3AF"},
-        {label:"Black",    pct:demo.black, color:"#1D4ED8"},
-        {label:"Hispanic", pct:demo.hisp,  color:"#10B981"},
-        {label:"Asian",    pct:demo.asian, color:"#F59E0B"},
-        {label:"Other",    pct:demo.other, color:"#6B7280"},
-      ].filter(r => r.pct > 0).map(r => `
-        <div class="race-bar-row">
-          <span class="race-label">${r.label}</span>
-          <div class="race-bar-wrap"><div class="race-bar" style="width:${r.pct}%;background:${r.color}"></div></div>
-          <span class="race-pct">${r.pct}%</span>
-        </div>`).join("");
-      document.getElementById("dp-race").innerHTML = raceHtml + `<p class="detail-generic" style="margin-top:8px">Source: U.S. Census Bureau ACS 5-Year Estimates (2022)</p>`;
-    } else {
-      document.getElementById("dp-race").innerHTML = '<p class="detail-generic">Demographic data unavailable for this district.</p>';
-    }
-    document.getElementById("dp-note").textContent = "Extended gerrymandering context available for 31 key districts. Additional districts being added.";
+    document.getElementById("dp-race").innerHTML = '<p class="detail-generic">Demographic data unavailable for this district.</p>';
+  }
+
+  // Curated narratives were written against the 2020-census lines; on older
+  // map eras the same district number can cover different territory.
+  if (detail && (cyc?.congress || 0) >= 118) {
+    document.getElementById("dp-note").textContent = detail.note;
+  } else if (detail) {
+    document.getElementById("dp-note").textContent =
+      "A curated write-up exists for this district on the current (2020-census) maps — switch the timeline to 2022 or later to read it. District numbers on this era's lines can cover different territory.";
+  } else {
+    document.getElementById("dp-note").textContent =
+      "Extended gerrymandering context available for 31 key districts. Additional districts being added.";
   }
 
   panel.classList.add("visible");
