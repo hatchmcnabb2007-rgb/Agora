@@ -787,10 +787,14 @@ const STATE_NAMES = {
 
 function districtLabel(props) {
   const state = STATE_NAMES[props.STATEFP] || props.STATEFP;
-  const cd = props.CD118FP;
-  if (cd === "00") return `${state} (At-Large)`;
+  // District number from GEOID (STATEFP + 2-digit CD) — the per-congress
+  // property name (CD114FP/CD118FP/…) varies across boundary vintages.
+  const cd = String(props.GEOID).slice(2);
+  if (cd === "00" || cd === "98") return `${state} (At-Large)`;
   const n = parseInt(cd, 10);
-  const suffix = n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th";
+  if (!Number.isFinite(n)) return state;
+  const suffix = (n % 100 >= 11 && n % 100 <= 13) ? "th"
+    : n % 10 === 1 ? "st" : n % 10 === 2 ? "nd" : n % 10 === 3 ? "rd" : "th";
   return `${state}'s ${n}${suffix} District`;
 }
 
@@ -888,10 +892,13 @@ async function fetchDemographics() {
 // ─────────────────────────────────────────────
 //  MAP INIT (runs once)
 // ─────────────────────────────────────────────
+let lastMapWidth = 0;
+
 async function initMap() {
   const container = document.getElementById("map-container");
   const width = container.clientWidth || 960;
   const height = Math.round(width * 0.55);
+  lastMapWidth = width;
 
   mapSvg = d3.select("#map-container")
     .append("svg")
@@ -1012,6 +1019,11 @@ function handleMouseMove(event, d) {
     const cls = lean > 0 ? "lean-d" : lean < 0 ? "lean-r" : "lean-e";
     html += `<span class="tooltip-lean ${cls}">${leanLabel(lean)}</span>`;
     if (data.mm) html += `<div class="tooltip-mm">Majority-Minority District</div>`;
+  }
+  if (!data) {
+    // Seats that only exist in this map era (eliminated or created by
+    // reapportionment) have no entry in the current dataset.
+    html += `<div class="tooltip-rep">No data for this district in this map era</div>`;
   }
   tooltip.innerHTML = html;
   tooltip.style.display = "block";
@@ -1197,7 +1209,7 @@ function showDetail(geoid, props) {
     } else {
       document.getElementById("dp-race").innerHTML = '<p class="detail-generic">Demographic data unavailable for this district.</p>';
     }
-    document.getElementById("dp-note").textContent = "Extended gerrymandering context available for 30 key districts. Additional districts being added.";
+    document.getElementById("dp-note").textContent = "Extended gerrymandering context available for 31 key districts. Additional districts being added.";
   }
 
   panel.classList.add("visible");
@@ -1211,6 +1223,22 @@ function closeDetail() {
 }
 
 initMap();
+
+// Rebuild the map when the container width actually changes (debounced) —
+// the SVG viewBox and projection are sized once from clientWidth, so
+// rotation/resize otherwise leaves a mis-scaled map.
+let resizeTimer = null;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(async () => {
+    const container = document.getElementById("map-container");
+    if (!mapSvg || !container || Math.abs(container.clientWidth - lastMapWidth) < 4) return;
+    mapSvg.remove();
+    selectedGeoid = null;
+    closeDetail();
+    await initMap();
+  }, 150);
+});
 </script>
 </body>
 </html>
