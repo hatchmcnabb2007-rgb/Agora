@@ -58,6 +58,21 @@ CYCLES = {
     2020: ("districts/cd116.json", 117, "cd116"),
     2022: ("districts/2020.json", 118, "cd118"),
     2024: ("districts/cd119.json", 119, "cd119"),
+    2026: ("districts/cd120.json", 120, "cd120"),
+}
+
+# 2025-26 mid-decade redraw states and the PlanScore-scored enacted plans used
+# for estimated 2026 leans (predicted two-party votes per district). The TX
+# entry scores PLANC2308, the near-final committee version of enacted
+# PLANC2333 (PlanScore has not scored 2333; differences are technical).
+MAPS_2026_AS_OF = "2026-07-14"
+PLANSCORE_2026 = {
+    "48": "20251219T184700.037794076Z",  # TX PLANC2308/2333
+    "06": "20251109T005753.161170853Z",  # CA AB 604 (Prop 50)
+    "29": "20251116T014919.269577678Z",  # MO HB 1
+    "37": "20251220T215350.341663516Z",  # NC SL 2025-95
+    "39": "20260311T232128.698847864Z",  # OH commission map
+    "49": "20251116T015247.162259523Z",  # UT court-adopted Map 1
 }
 # ACS5 vintage year -> demographics key (survey geography matches that congress)
 ACS_VINTAGES = {2015: "cd114", 2016: "cd115", 2019: "cd116", 2022: "cd118"}
@@ -440,6 +455,30 @@ def fetch_members(src=None):
     return members, term_index
 
 
+# ------------------------------------------------------------- 2026 cycle
+
+def build_2026(results_2024, skip=False):
+    """Estimated 2026 results: PlanScore predicted two-party votes for the six
+    redrawn states; 2024 results carried forward everywhere else (same lines).
+    """
+    if skip:
+        return None
+    out = {}
+    for geoid, res in results_2024.items():
+        if geoid[:2] not in PLANSCORE_2026:
+            out[geoid] = res
+    for fips, plan_id in PLANSCORE_2026.items():
+        url = f"https://planscore.s3.amazonaws.com/uploads/{plan_id}/index.json"
+        log(f"  PlanScore {fips} ← {plan_id}")
+        data = json.loads(fetch(url))
+        for dist in data["districts"]:
+            geoid = fips + str(int(dist["number"])).zfill(2)
+            t = dist["totals"]
+            dem, rep = int(t["Democratic Votes"]), int(t["Republican Votes"])
+            out[geoid] = [dem, rep, dem + rep, "", ""]
+    return out
+
+
 # -------------------------------------------------------------- validation
 
 def topology_geoids(boundary_file):
@@ -454,12 +493,12 @@ def validate(cycles_out, demographics):
         topo = topology_geoids(cyc["boundary"])
         results = cyc["results"]
         voting = [g for g in results if g[:2] in STATE_PO_TO_FIPS.values()]
-        if cyc.get("provisional"):
-            # current-membership snapshot: real vacancies are expected
+        if cyc.get("provisional") or cyc.get("estimated"):
+            # membership snapshots / estimates: real vacancies are expected
             if not 428 <= len(voting) <= 435:
-                errors.append(f"{year}: {len(voting)} voting seats (provisional; expected 428-435)")
+                errors.append(f"{year}: {len(voting)} voting seats (expected 428-435)")
             elif len(voting) < 435:
-                log(f"  note: {year} provisional cycle has {435 - len(voting)} vacant seats")
+                log(f"  note: {year} cycle has {435 - len(voting)} seats without entries (vacancies)")
         elif len(voting) != 435:
             errors.append(f"{year}: {len(voting)} voting seats (expected 435)")
         missing = [g for g in results if g not in topo]
@@ -474,7 +513,7 @@ def validate(cycles_out, demographics):
     for vintage, demo in demographics.items():
         file = {"cd114": "districts/2010.json", "cd115": "districts/cd115.json",
                 "cd116": "districts/cd116.json", "cd118": "districts/2020.json",
-                "cd119": "districts/cd119.json"}[vintage]
+                "cd119": "districts/cd119.json", "cd120": "districts/cd120.json"}[vintage]
         topo = topology_geoids(file)
         missing = [g for g in topo if g not in demo and not g.endswith(("98", "99")) and g[:2] in STATE_PO_TO_FIPS.values()]
         if len(missing) > 2:
@@ -494,6 +533,7 @@ def main():
     ap.add_argument("--acs-2022", dest="acs_2022", help="local acsdt5y2022-b03002.dat (or CD-filtered subset)")
     ap.add_argument("--acs-2021", dest="acs_2021", help="local acsdt5y2021-b03002.dat (or CD-filtered subset)")
     ap.add_argument("--census-key", help="Census API key — enables exact cd114/cd115 ACS vintages")
+    ap.add_argument("--skip-2026", action="store_true", help="omit the estimated 2026 cycle")
     ap.add_argument("--validate-only", action="store_true")
     args = ap.parse_args()
 
@@ -547,6 +587,10 @@ def main():
         log("2024: no vote data source — using legislators file for winner/party (provisional)")
         results[2024] = {g: [0, 0, 0, m["n"].split()[-1], m["p"]] for g, m in members.items()}
 
+    if not args.skip_2026 and (REPO / "districts" / "cd120.json").exists():
+        log("Building estimated 2026 cycle (PlanScore leans for redrawn states)…")
+        results[2026] = build_2026(results[2024])
+
     log("Fetching ACS demographics (table-based summary files)…")
     demographics = {}
     for vintage, (year, prefix) in ACS_SUMMARY.items():
@@ -554,6 +598,10 @@ def main():
         log(f"  {vintage} ← acs5 {year}" + (" (local file)" if local else ""))
         demographics[vintage] = fetch_acs_summary(year, prefix, local)
     demographics["cd119"] = dict(demographics["cd118"])  # no cd119 ACS geography yet
+    if 2026 in results:
+        # cd120 carries cd118-era values; redrawn-state percentages are
+        # approximate until an ACS release covers the new lines (noted in meta)
+        demographics["cd120"] = dict(demographics["cd118"])
     demo_carryover = False
     if args.census_key:
         log("  cd114 ← acs5 2015 (API), cd115 ← acs5 2016 (API)")
@@ -567,10 +615,14 @@ def main():
 
     cycles_out = {}
     for year, (boundary, congress, vintage) in CYCLES.items():
+        if year not in results:
+            continue
         cyc = {"boundary": boundary, "congress": congress, "vintage": vintage,
                "results": results[year]}
         if year == 2024 and provisional_2024:
             cyc["provisional"] = True
+        if year == 2026:
+            cyc["estimated"] = True
         cycles_out[str(year)] = cyc
 
     gaps = {str(y): efficiency_gaps(results[y]) for y in (2014, 2016, 2018, 2020, 2022)
@@ -591,6 +643,8 @@ def main():
                 "members": "unitedstates/congress-legislators",
             },
             "provisional2024": provisional_2024,
+            "maps2026AsOf": MAPS_2026_AS_OF,
+            "estimated2026Note": "2026 margins for TX/CA/MO/NC/OH/UT are PlanScore model estimates on the enacted lines; other states carry 2024 outcomes (same lines)",
             "demographicsCarryover": demo_carryover,
             "cd119DemographicsNote": "cd119 uses 2022 ACS (118th-district geography); no cd119 ACS release yet",
             "cd114cd115DemographicsNote": ("cd114/cd115 use 2021 ACS values tabulated on cd116 lines (same district numbering; shapes differ in NC/PA/VA/FL court-remap areas)" if demo_carryover else "cd114/cd115 from exact 2015/2016 ACS vintages"),

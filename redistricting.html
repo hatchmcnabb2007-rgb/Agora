@@ -184,6 +184,26 @@
     .favors-d { color: #1D4ED8; font-weight: 600; }
     .favors-fair { color: #059669; font-weight: 600; }
 
+    /* ── Mid-Decade Wave ── */
+    .wave-lede { font-size: 14px; line-height: 1.7; color: var(--text-secondary); max-width: 780px; margin-bottom: 6px; }
+    .wave-stamp { font-size: 11px; color: var(--text-muted); margin-bottom: 18px; }
+    .wave-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; }
+    .wave-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; }
+    .wave-card h4 { font-size: 15px; font-weight: 700; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 2px; }
+    .wave-shift { font-size: 11px; font-weight: 700; letter-spacing: .04em; white-space: nowrap; }
+    .wave-shift.r { color: #B91C1C; }
+    .wave-shift.d { color: #1D4ED8; }
+    .wave-by { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .wave-card p { font-size: 13px; line-height: 1.65; color: var(--text-secondary); margin-bottom: 8px; }
+    .wave-status { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; }
+    .wave-actions { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    .wave-btn {
+      font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;
+      border: 1px solid var(--border); background: var(--bg); border-radius: 6px; padding: 6px 12px;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: all .15s;
+    }
+    .wave-btn:hover { border-color: var(--accent); }
+
     /* ── Source Footer ── */
     .source-note { font-size: 11px; color: var(--text-muted); margin-top: 24px; line-height: 1.6; }
     .source-note a { color: var(--accent); }
@@ -262,16 +282,7 @@
     </div>
     <div class="scrubber-track">
       <input type="range" min="0" max="5" value="4" id="year-scrubber" oninput="onScrub(this.value)">
-      <div class="era-markers">
-        <div class="era-marker" style="left:0%">
-          <span class="era-tick"></span>
-          <span class="era-label">2014<br>2010 Census</span>
-        </div>
-        <div class="era-marker" style="left:100%">
-          <span class="era-tick"></span>
-          <span class="era-label">2024<br>2020 Census</span>
-        </div>
-      </div>
+      <div class="era-markers" id="era-markers"></div>
     </div>
   </div>
 
@@ -319,6 +330,63 @@
         <div class="detail-section-title">Gerrymandering Context</div>
         <div id="dp-note" class="detail-note"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- 2025-26 Mid-Decade Wave -->
+  <div class="section-header" id="mid-decade">The 2025–26 Mid-Decade Redistricting Wave</div>
+  <p class="wave-lede">
+    For the first time in modern history, six states redrew their congressional maps between censuses ahead of a midterm.
+    The wave began when the Justice Department urged Texas to eliminate districts it called unconstitutional "coalition
+    districts" and President Trump pressed Republican states for more favorable lines; California answered with a ballot
+    measure suspending its independent commission, and courts forced changes elsewhere. Every one of these maps survived
+    its legal challenges and governs the November 2026 election. On paper the changes create up to nine new
+    Republican-leaning seats and six Democratic-leaning ones; analysts project the realistic net effect at roughly one to
+    four seats toward Republicans, depending on the political environment.
+  </p>
+  <p class="wave-stamp">Litigation status as of <span id="wave-asof">July 2026</span>. Maps can still change for future cycles — Missouri faces a possible repeal referendum, and Virginia's counter-redistricting amendment goes to voters in November 2026.</p>
+  <div class="wave-grid">
+    <div class="wave-card">
+      <h4>Texas <span class="wave-shift r">up to +5 R</span></h4>
+      <div class="wave-by">Legislature · August 2025</div>
+      <p>Converted five Democratic-held districts — including Houston's 9th and the Austin–San Antonio 35th — into seats Trump carried by 10+ points, after a DOJ letter targeted four "coalition districts." Analysts project realistic GOP gains of 2–3 given South Texas's swing voters.</p>
+      <div class="wave-status">A federal panel found a likely racial gerrymander in Nov. 2025; the Supreme Court stayed that ruling in December and summarily reversed it in April 2026. In effect for 2026.</div>
+      <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('48')">View on map →</button><a class="wave-btn" href="https://www.texastribune.org/2025/07/30/texas-redistricting-congressional-maps-house-republicans/" target="_blank" rel="noopener">Texas Tribune</a></div>
+    </div>
+    <div class="wave-card">
+      <h4>California <span class="wave-shift d">up to +5 D</span></h4>
+      <div class="wave-by">Prop 50 ballot measure · November 2025 (64%–36%)</div>
+      <p>Voters suspended the independent citizens' commission through 2030 — an explicit response to Texas — redrawing the far-north 1st, Central Valley 22nd, and Riverside-area 41st among others. Three likely Democratic flips plus two toss-ups.</p>
+      <div class="wave-status">A federal panel upheld the map in Jan. 2026 as partisan (not racial) line-drawing; the Supreme Court declined to block it in February. In effect for 2026.</div>
+      <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('06')">View on map →</button><a class="wave-btn" href="https://en.wikipedia.org/wiki/2025_California_Proposition_50" target="_blank" rel="noopener">Prop 50</a></div>
+    </div>
+    <div class="wave-card">
+      <h4>Missouri <span class="wave-shift r">+1 R</span></h4>
+      <div class="wave-by">Legislature · September 2025</div>
+      <p>Cracked Kansas City's 5th district three ways — using Troost Avenue, the city's historic segregation line, as a boundary — and stretched it 200 miles into rural counties, flipping Emanuel Cleaver's seat from Safe D to Trump +18.</p>
+      <div class="wave-status">The Missouri Supreme Court unanimously upheld the map for 2026 in May. A citizen repeal referendum gathered 300k+ signatures; certification for a statewide vote is pending.</div>
+      <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('29')">View on map →</button><a class="wave-btn" href="https://thebeaconnews.org/stories/2026/05/15/missouri-supreme-court-upholds-gerrymandered-map/" target="_blank" rel="noopener">The Beacon</a></div>
+    </div>
+    <div class="wave-card">
+      <h4>North Carolina <span class="wave-shift r">+1 R</span></h4>
+      <div class="wave-by">Legislature · October 2025</div>
+      <p>Reshaped the northeastern 1st district — the state's historic Black Belt seat — by swapping four Democratic-leaning counties for Republican coastal ones, moving it from Trump +3 to Trump +12. Rep. Don Davis is running on the new lines as one of the House's most endangered Democrats.</p>
+      <div class="wave-status">A federal three-judge panel declined to block the map in Nov. 2025; Voting Rights Act plaintiffs dropped their suits in January. In effect for 2026.</div>
+      <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('37')">View on map →</button><a class="wave-btn" href="https://www.pbs.org/newshour/politics/judges-allow-north-carolina-to-use-a-map-drawn-in-bid-to-give-republicans-another-u-s-house-seat" target="_blank" rel="noopener">PBS</a></div>
+    </div>
+    <div class="wave-card">
+      <h4>Ohio <span class="wave-shift r">nominal +2 R</span></h4>
+      <div class="wave-by">Redistricting Commission · October 2025 (unanimous, 7–0)</div>
+      <p>Ohio's 2021 map expired by law, forcing a redraw. Unlike the partisan redraws, this map passed with both parties' commissioners in a negotiated deal: nominally 12R–3D, but Toledo's 9th (Kaptur) and Cincinnati's 1st (Landsman) are rated toss-ups, and Akron's 13th got bluer.</p>
+      <div class="wave-status">Bipartisan passage means the map lasts until 2031. No litigation pending.</div>
+      <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('39')">View on map →</button><a class="wave-btn" href="https://ohiocapitaljournal.com/2025/10/31/ohio-redistricting-commission-unanimously-passes-congressional-map-further-gop-advantage/" target="_blank" rel="noopener">Ohio Capital Journal</a></div>
+    </div>
+    <div class="wave-card">
+      <h4>Utah <span class="wave-shift d">+1 D</span></h4>
+      <div class="wave-by">Court-ordered · November 2025</div>
+      <p>The only redraw ordered by a court <em>against</em> gerrymandering: after the Utah Supreme Court ruled lawmakers couldn't gut 2018's anti-gerrymandering Prop 4, a judge voided the map splitting Salt Lake County four ways and adopted one with a Democratic-leaning 1st district. Ben McAdams is favored to return to Congress.</p>
+      <div class="wave-status">The legislature's appeals were dismissed and a federal challenge dropped by Feb. 2026. In effect for 2026.</div>
+      <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('49')">View on map →</button><a class="wave-btn" href="https://utahnewsdispatch.com/2026/02/20/utah-supreme-court-rejects-legislature-redistricting-appeal-court-ordered-map-still-stands/" target="_blank" rel="noopener">Utah News Dispatch</a></div>
     </div>
   </div>
 
@@ -606,16 +674,11 @@ function leanLabel(m) {
 // ─────────────────────────────────────────────
 //  SCRUBBER CONFIG
 // ─────────────────────────────────────────────
-const YEARS    = [2014, 2016, 2018, 2020, 2022, 2024];
-const CONGRESS = [114,  115,  116,  117,  118,  119];
-const BOUNDARY = {
-  2014: "districts/2010.json",   // cd114
-  2016: "districts/cd115.json",  // NC/VA/FL court remaps in effect
-  2018: "districts/cd116.json",  // PA court remap in effect
-  2020: "districts/cd116.json",  // same lines as 2018
-  2022: "districts/2020.json",   // cd118 — 2020-census maps
-  2024: "districts/cd119.json"   // AL/LA/GA/NY/NC court redraws in effect
-};
+// YEARS/CONGRESS/BOUNDARY derive from districts-data.json at load time —
+// adding a cycle to the data file automatically extends the scrubber.
+let YEARS = [2014, 2016, 2018, 2020, 2022, 2024];
+let CONGRESS = [114, 115, 116, 117, 118, 119];
+let BOUNDARY = {};
 
 const YEAR_NOTES = {
   2014: "First election on the 2010-census maps shown here.",
@@ -623,8 +686,36 @@ const YEAR_NOTES = {
   2018: "Pennsylvania's court-ordered remap took effect this cycle.",
   2020: "Same district lines as 2018.",
   2022: "First election on the 2020-census maps.",
-  2024: "Court-ordered redraws in AL, LA, GA, NY and NC took effect this cycle."
+  2024: "Court-ordered redraws in AL, LA, GA, NY and NC took effect this cycle.",
+  2026: "Mid-decade redraws in TX, CA, MO, NC, OH and UT — see the section below the map."
 };
+
+// Gold markers on the scrubber track: year → two-line label
+const ERA_MARKERS = {
+  2014: "2014<br>2010 Census",
+  2018: "2018<br>PA remap",
+  2022: "2022<br>2020 Census",
+  2026: "2026<br>Mid-decade wave"
+};
+
+function applyCycleConfig() {
+  YEARS = Object.keys(DATA.cycles).map(Number).sort((a, b) => a - b);
+  CONGRESS = YEARS.map(y => DATA.cycles[String(y)].congress);
+  BOUNDARY = {};
+  YEARS.forEach(y => { BOUNDARY[y] = DATA.cycles[String(y)].boundary; });
+  if (currentYearIdx >= YEARS.length) currentYearIdx = Math.max(0, YEARS.indexOf(2022));
+  const scrub = document.getElementById("year-scrubber");
+  scrub.max = YEARS.length - 1;
+  scrub.value = currentYearIdx;
+  const markers = document.getElementById("era-markers");
+  if (markers) {
+    markers.innerHTML = YEARS.map((y, i) => ERA_MARKERS[y] ? `
+      <div class="era-marker" style="left:${(i / (YEARS.length - 1) * 100).toFixed(1)}%">
+        <span class="era-tick"></span>
+        <span class="era-label">${ERA_MARKERS[y]}</span>
+      </div>` : "").join("");
+  }
+}
 
 // ── data helpers ──
 function yearKey() { return String(YEARS[currentYearIdx]); }
@@ -678,7 +769,13 @@ function colorForLean(lean) {
 
 function colorForDistrict(geoid) {
   if (currentLayer === 'racial') return colorForRace(geoid);
-  return colorForLean(marginFor(resultFor(geoid)));
+  const res = resultFor(geoid);
+  const m = marginFor(res);
+  if (m === null && res && res[4]) {
+    // winner known but no vote totals (provisional cycles, cancelled races)
+    return res[4] === "D" ? "#2166AC" : res[4] === "R" ? "#B2182B" : "#7C3AED";
+  }
+  return colorForLean(m);
 }
 
 function colorForRace(geoid) {
@@ -729,6 +826,7 @@ async function initMap() {
       '<p style="padding:40px;color:#9CA3AF;text-align:center;">District data failed to load. Please refresh.</p>';
     return;
   }
+  applyCycleConfig();
 
   // Load default year
   await loadYear(currentYearIdx);
@@ -851,8 +949,11 @@ function handleMouseMove(event, d) {
   const year = yearKey();
 
   let html = `<div class="tooltip-district">${label}</div>`;
-  if (res) {
-    const verb = cycleData()?.provisional ? "Rep." : `Won ${year}:`;
+  const cyc = cycleData();
+  if (res && cyc?.estimated) {
+    html += `<div class="tooltip-rep">First election on these lines: Nov 2026</div>`;
+  } else if (res) {
+    const verb = cyc?.provisional ? "Rep." : `Won ${year}:`;
     html += `<div class="tooltip-rep">${verb} ${res[3]} (${res[4]})</div>`;
   }
   if (currentLayer === 'racial') {
@@ -869,12 +970,12 @@ function handleMouseMove(event, d) {
     const m = marginFor(res);
     if (m !== null) {
       const cls = m > 0 ? "lean-d" : m < 0 ? "lean-r" : "lean-e";
-      html += `<span class="tooltip-lean ${cls}">${leanLabel(m)}</span>`;
+      html += `<span class="tooltip-lean ${cls}">${cyc?.estimated ? "Est. " : ""}${leanLabel(m)}</span>`;
     }
     if (isMM(geoid)) html += `<div class="tooltip-mm">Majority-Minority District</div>`;
   }
   if (!res) {
-    html += `<div class="tooltip-rep">${cycleData()?.provisional ? "Seat currently vacant" : "No data for this district in this map era"}</div>`;
+    html += `<div class="tooltip-rep">${cyc?.provisional ? "Seat currently vacant" : "No data for this district in this map era"}</div>`;
   }
   tooltip.innerHTML = html;
   tooltip.style.display = "block";
@@ -991,11 +1092,62 @@ function applyHighlight() {
   });
 }
 
+// Narratives for districts reshaped by the 2025-26 mid-decade wave, keyed by
+// GEOID on the 120th-Congress (2026) lines. Facts verified July 2026.
+const DETAIL_2026 = {
+  "4809": {
+    note: "Al Green's Houston seat was rebuilt after a July 2025 DOJ letter called it an unconstitutional 'coalition district.' The new 9th keeps roughly 2% of its old residents and adds conservative east Harris County — from one of the most Democratic seats in Texas to territory Trump carried by double digits. Green, drawn out, ran in the 18th instead."
+  },
+  "4818": {
+    note: "Houston's historic 18th — the Barbara Jordan and Sheila Jackson Lee seat, vacant after Sylvester Turner's death — went from multiracial coalition district to a just-over-half-Black majority under the 2025 map. It produced a rare Democrat-on-Democrat contest: Harris County Attorney Christian Menefee defeated Rep. Al Green 69–31 in the May 2026 runoff. Safely Democratic."
+  },
+  "4829": {
+    note: "Sylvia Garcia's east-Houston district lost its Hispanic majority in the 2025 redraw — about 43% Hispanic on the new lines. It remains solidly Democratic; Garcia won her 2026 primary with 58% despite representing little of the new territory."
+  },
+  "4833": {
+    note: "One of four districts the DOJ's July 2025 letter targeted as 'coalition districts.' The new 33rd stays strongly Democratic, but Marc Veasey was drawn out of it and left Congress to run for Tarrant County judge. Former Senate nominee Colin Allred won the May 2026 runoff for the open seat, 55–45, over Rep. Julie Johnson — herself displaced when the 32nd was made safely Republican."
+  },
+  "4835": {
+    note: "The Austin–San Antonio corridor district was dismantled: the new 35th drops more than 90% of Greg Casar's constituents and becomes a San Antonio-area seat Trump won by about 10 points. Casar moved to the Austin-based 37th, where Lloyd Doggett retired rather than force a primary between them."
+  },
+  "0601": {
+    note: "Prop 50 rebuilt the far-north district around Santa Rosa, turning safe Republican territory into a seat Harris carried by double digits. Doug LaMalfa died in January 2026; Republican James Gallagher won the June special election on the old lines and faces Democratic state Sen. Mike McGuire in November on the new ones, with Democrats favored."
+  },
+  "0622": {
+    note: "David Valadao's Central Valley swing seat shifted a few points bluer under Prop 50, gaining Democratic Fresno neighborhoods — from Trump +2 in 2024 to roughly even. A perennial toss-up made more so; Valadao faces Democrat Randy Villegas."
+  },
+  "0641": {
+    note: "Prop 50's most dramatic redraw: Ken Calvert's Riverside County seat became a Harris +14 district rebuilt around eastern Los Angeles and northern Orange County. Calvert left to challenge fellow Republican Young Kim in the 40th; the new 41st is a likely Democratic pickup."
+  },
+  "2905": {
+    note: "Emanuel Cleaver's Kansas City seat was cracked three ways in Missouri's September 2025 map — with Troost Avenue, the city's historic segregation line, as one district boundary — and stretched roughly 200 miles east into rural counties, flipping it from Safe D to Trump +18. The state supreme court upheld the map for 2026; a citizen repeal referendum awaits certification. Cleaver is running anyway."
+  },
+  "3701": {
+    note: "The northeastern Black Belt district swapped four Democratic-leaning counties for Republican-leaning coastal ones, moving from Trump +3 to Trump +12. A federal panel declined to block the map and Voting Rights Act suits were dropped. Don Davis is running on the new lines as one of the House's most endangered Democrats."
+  },
+  "3901": {
+    note: "Cincinnati's district added rural Clinton and Warren counties, moving from a Harris-won seat to Trump +2.5. Unlike the other 2025 redraws, Ohio's map passed its redistricting commission unanimously with both parties' members — part of a deal that also made Akron's 13th bluer. Greg Landsman defends a toss-up."
+  },
+  "3909": {
+    note: "Marcy Kaptur's Toledo seat — held by the longest-serving woman in congressional history — shifted about four points right, to roughly Trump +11, under the bipartisan 7–0 commission map. She faces a rematch with Derek Merrin, whom she beat by about 2,400 votes in 2024. Rated a toss-up."
+  },
+  "4901": {
+    note: "The only 2025–26 redraw ordered by a court against gerrymandering: after League of Women Voters v. Utah Legislature reinstated 2018's Prop 4 reforms, a judge voided the map that split Salt Lake County four ways and adopted a plan with a Democratic-leaning 1st district. Former Rep. Ben McAdams is favored to return to Congress."
+  }
+};
+
+function showWaveState(fips) {
+  const idx = YEARS.indexOf(2026);
+  if (idx >= 0) onScrub(idx);
+  if (typeof zoomToState === "function") zoomToState(fips);
+  document.querySelector(".map-card").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function historyHtml(geoid) {
   const bars = [];
   for (const y of YEARS.map(String)) {
     const c = DATA.cycles[y];
-    if (!c || c.provisional) continue;
+    if (!c || c.provisional || c.estimated) continue;
     bars.push({ y, m: marginFor(c.results[geoid]), boundary: c.boundary });
   }
   if (!bars.some(b => b.m !== null)) {
@@ -1039,7 +1191,9 @@ function showDetail(geoid, props) {
 
   const member = DATA.members[geoid];
   let repLine = "";
-  if (cyc?.provisional) {
+  if (cyc?.estimated) {
+    repLine = "First election on these lines: November 2026";
+  } else if (cyc?.provisional) {
     repLine = member ? `${member.n} (${member.p})` : "Seat currently vacant";
   } else if (res) {
     repLine = `Won ${year}: ${res[3]} (${res[4]})`;
@@ -1050,7 +1204,7 @@ function showDetail(geoid, props) {
   const m = marginFor(res);
   let tags = "";
   if (m !== null) {
-    tags += `<span class="detail-tag ${m > 0 ? "tag-lean-d" : "tag-lean-r"}">${leanLabel(m)}</span>`;
+    tags += `<span class="detail-tag ${m > 0 ? "tag-lean-d" : "tag-lean-r"}">${cyc?.estimated ? "Est. " : ""}${leanLabel(m)}</span>`;
   }
   if (isMM(geoid)) tags += `<span class="detail-tag tag-mm">Majority-Minority</span>`;
   if (isComp(geoid)) tags += `<span class="detail-tag tag-competitive">Competitive</span>`;
@@ -1073,8 +1227,15 @@ function showDetail(geoid, props) {
   }
 
   // Curated narratives were written against the 2020-census lines; on older
-  // map eras the same district number can cover different territory.
-  if (detail && (cyc?.congress || 0) >= 118) {
+  // map eras the same district number can cover different territory. The six
+  // 2025-26 redraw states get their own narratives on the 2026 lines.
+  const WAVE_STATES = ["48", "06", "29", "37", "39", "49"];  // TX CA MO NC OH UT
+  const redrawn2026 = cyc?.estimated && WAVE_STATES.includes(geoid.slice(0, 2));
+  const detail26 = DETAIL_2026[geoid];
+  if (redrawn2026) {
+    document.getElementById("dp-note").textContent = detail26 ? detail26.note :
+      "This district was redrawn in the 2025–26 mid-decade wave — see the section below the map for what changed in this state.";
+  } else if (detail && (cyc?.congress || 0) >= 118) {
     document.getElementById("dp-note").textContent = detail.note;
   } else if (detail) {
     document.getElementById("dp-note").textContent =
