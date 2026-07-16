@@ -277,6 +277,15 @@ def parse_fec(blob, year):
 
 # ------------------------------------------------------------ aggregation
 
+def display_case(surname):
+    """The Dataverse 1976-2024 file is ALL CAPS; the GitHub mirror and FEC
+    sheets are title case. Normalize all-caps surnames so cycles match."""
+    if not surname.isupper() or len(surname) < 2:
+        return surname
+    cased = re.sub(r"[A-Za-z]+", lambda m: m.group().capitalize(), surname)
+    return re.sub(r"\bMc([a-z])", lambda m: "Mc" + m.group(1).upper(), cased)
+
+
 def to_result(cands):
     """{candidate: [votes, party(, won)]} -> [demV, repV, totalV, winner, party]."""
     dem = rep = total = 0
@@ -297,7 +306,7 @@ def to_result(cands):
     if flagged_winner:
         winner_name, winner_party = flagged_winner
     surname = winner_name.split(",")[0].strip() if "," in winner_name else winner_name.split()[-1] if winner_name else ""
-    return [dem, rep, total, surname, winner_party]
+    return [dem, rep, total, display_case(surname), winner_party]
 
 
 def margin(res):
@@ -410,8 +419,7 @@ def fetch_acs_summary(vintage_year, geo_prefix, local_file=None):
 
 def fetch_acs_api(vintage_year, key):
     """Exact-vintage ACS via the (now key-required) Census API."""
-    path = f"{vintage_year}/acs/acs5" if vintage_year >= 2016 else f"{vintage_year}/acs5"
-    url = (f"https://api.census.gov/data/{path}"
+    url = (f"https://api.census.gov/data/{vintage_year}/acs/acs5"
            f"?get={ACS_VARS}&for=congressional%20district:*&in=state:*&key={key}")
     data = json.loads(fetch(url))
     out = {}
