@@ -359,15 +359,17 @@
   <!-- 2025-26 Mid-Decade Wave -->
   <div class="section-header" id="mid-decade">The 2025–26 Mid-Decade Redistricting Wave</div>
   <p class="wave-lede">
-    For the first time in modern history, six states redrew their congressional maps between censuses ahead of a midterm.
+    For the first time in modern history, seven states redrew their congressional maps between censuses ahead of a midterm.
     The wave began when the Justice Department urged Texas to eliminate districts it called unconstitutional "coalition
     districts" and President Trump pressed Republican states for more favorable lines; California answered with a ballot
-    measure suspending its independent commission, and courts forced changes elsewhere. Every one of these maps survived
-    its legal challenges and governs the November 2026 election. On paper the changes create up to nine new
-    Republican-leaning seats and six Democratic-leaning ones; analysts project the realistic net effect at roughly one to
+    measure suspending its independent commission, and courts forced changes elsewhere. After the Supreme Court's April 2026
+    <em>Louisiana v. Callais</em> ruling ended the Voting Rights Act mandate for majority-minority districts, Tennessee
+    became the seventh state, dismantling Memphis's majority-Black 9th District. Every one of these maps governs the
+    November 2026 election — Tennessee's while a federal challenge is still pending. On paper the changes create up to ten
+    new Republican-leaning seats and six Democratic-leaning ones; analysts project the realistic net effect at roughly one to
     four seats toward Republicans, depending on the political environment.
   </p>
-  <p class="wave-stamp">Litigation status as of <span id="wave-asof">July 2026</span>. Maps can still change for future cycles — Missouri faces a possible repeal referendum, and Virginia's counter-redistricting amendment goes to voters in November 2026.</p>
+  <p class="wave-stamp">Litigation status as of <span id="wave-asof">July 2026</span>. Maps can still change — Tennessee's faces a pending federal injunction motion, Missouri faces a possible repeal referendum, and Virginia's counter-redistricting amendment goes to voters in November 2026.</p>
   <div class="wave-grid">
     <div class="wave-card">
       <h4>Texas <span class="wave-shift r">up to +5 R</span></h4>
@@ -410,6 +412,13 @@
       <p>The only redraw ordered by a court <em>against</em> gerrymandering: after the Utah Supreme Court ruled lawmakers couldn't gut 2018's anti-gerrymandering Prop 4, a judge voided the map splitting Salt Lake County four ways and adopted one with a Democratic-leaning 1st district. Ben McAdams is favored to return to Congress.</p>
       <div class="wave-status">The legislature's appeals were dismissed and a federal challenge dropped by Feb. 2026. In effect for 2026.</div>
       <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('49')">View on map →</button><a class="wave-btn" href="https://utahnewsdispatch.com/2026/02/20/utah-supreme-court-rejects-legislature-redistricting-appeal-court-ordered-map-still-stands/" target="_blank" rel="noopener">Utah News Dispatch</a></div>
+    </div>
+    <div class="wave-card">
+      <h4>Tennessee <span class="wave-shift r">+1 R</span></h4>
+      <div class="wave-by">Legislature special session · May 2026</div>
+      <p>Eight days after the Supreme Court's <em>Louisiana v. Callais</em> ruling gutted the Voting Rights Act's majority-minority mandate, Tennessee repealed its own ban on mid-decade redistricting and split Memphis three ways among the 5th, 8th, and 9th districts — erasing the state's only majority-Black, Democratic-held seat. The new 9th stretches 250 miles into Middle Tennessee and rates roughly R+10 on 2024 results, though only R+4–6 on 2020 results. Rep. Steve Cohen retired after 20 years; state Rep. Justin J. Pearson of "Tennessee Three" fame is running to hold the seat.</p>
+      <div class="wave-status">A Tennessee court dismissed the NAACP's state suit; the NAACP's federal injunction motion (filed June 10, Middle District of Tennessee) is pending. In effect for 2026.</div>
+      <div class="wave-actions"><button class="wave-btn" onclick="showWaveState('47')">View on map →</button><a class="wave-btn" href="https://tennesseelookout.com/2026/05/07/visual-the-partisan-lean-of-tennessees-proposed-new-u-s-house-map/" target="_blank" rel="noopener">Tennessee Lookout</a></div>
     </div>
   </div>
 
@@ -1248,6 +1257,15 @@ const DETAIL_2026 = {
   },
   "4901": {
     note: "The only 2025–26 redraw ordered by a court against gerrymandering: after League of Women Voters v. Utah Legislature reinstated 2018's Prop 4 reforms, a judge voided the map that split Salt Lake County four ways and adopted a plan with a Democratic-leaning 1st district. Former Rep. Ben McAdams is favored to return to Congress."
+  },
+  "4709": {
+    note: "For five decades a Memphis-anchored, majority-Black district — Tennessee's only Democratic seat — until the May 2026 special session split Memphis three ways days after the Supreme Court's Louisiana v. Callais ruling. The new 9th keeps part of the city but stretches 250 miles into Middle Tennessee, moving from roughly D+23 to R+9–12 on 2024 results (only R+4–6 on 2020, and near-even on 2018 midterm numbers). Steve Cohen retired after 20 years rather than run on the new lines; state Rep. Justin J. Pearson — expelled and reinstated in 2023 as one of the 'Tennessee Three' — is the Democratic standard-bearer trying to organize the district anyway. The NAACP's federal challenge, alleging intentional racial discrimination, is pending."
+  },
+  "4705": {
+    note: "Nashville's district — already cracked in 2022 to unseat a Democrat — was reshaped again in May 2026 and now also takes in a slice of Memphis and Shelby County, joining two cities 200 miles apart whose voters, as the Tennessee Lookout put it, are 'spread across the state's extremes.' Rated about R+10–13 on 2024 results but only R+5–8 on 2020, making it one of three Trump-drawn Tennessee seats analysts say could come into play in a strong Democratic midterm."
+  },
+  "4708": {
+    note: "The West Tennessee 8th absorbed another piece of Memphis and Shelby County in the May 2026 redraw that dismantled the neighboring 9th. Rated around R+9–11 on 2024 presidential results — on paper the softest of the three districts now sharing Memphis, and roughly R+4–6 on 2018 midterm numbers, the kind of margin strategists watch when the president's party faces a bad environment."
   }
 };
 
@@ -1329,7 +1347,7 @@ function showDetail(geoid, props) {
 
   const demo = demoFor(geoid);
   if (demo) {
-    const vintageNote = { cd114: "2021", cd115: "2021", cd116: "2021", cd118: "2022", cd119: "2022" }[cyc?.vintage] || "2022";
+    const vintageNote = { cd114: "2015", cd115: "2016", cd116: "2021", cd118: "2022", cd119: "2022" }[cyc?.vintage] || "2022";
     document.getElementById("dp-race").innerHTML = raceRows(demo).map(r => `
       <div class="race-bar-row">
         <span class="race-label">${r.label}</span>
@@ -1342,9 +1360,9 @@ function showDetail(geoid, props) {
   }
 
   // Curated narratives were written against the 2020-census lines; on older
-  // map eras the same district number can cover different territory. The six
+  // map eras the same district number can cover different territory. The seven
   // 2025-26 redraw states get their own narratives on the 2026 lines.
-  const WAVE_STATES = ["48", "06", "29", "37", "39", "49"];  // TX CA MO NC OH UT
+  const WAVE_STATES = ["48", "06", "29", "37", "39", "49", "47"];  // TX CA MO NC OH UT TN
   const redrawn2026 = cyc?.estimated && WAVE_STATES.includes(geoid.slice(0, 2));
   const detail26 = DETAIL_2026[geoid];
   if (redrawn2026) {

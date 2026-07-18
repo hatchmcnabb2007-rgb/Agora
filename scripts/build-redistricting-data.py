@@ -65,7 +65,7 @@ CYCLES = {
 # for estimated 2026 leans (predicted two-party votes per district). The TX
 # entry scores PLANC2308, the near-final committee version of enacted
 # PLANC2333 (PlanScore has not scored 2333; differences are technical).
-MAPS_2026_AS_OF = "2026-07-14"
+MAPS_2026_AS_OF = "2026-07-16"
 PLANSCORE_2026 = {
     "48": "20251219T184700.037794076Z",  # TX PLANC2308/2333
     "06": "20251109T005753.161170853Z",  # CA AB 604 (Prop 50)
@@ -73,6 +73,14 @@ PLANSCORE_2026 = {
     "37": "20251220T215350.341663516Z",  # NC SL 2025-95
     "39": "20260311T232128.698847864Z",  # OH commission map
     "49": "20251116T015247.162259523Z",  # UT court-adopted Map 1
+}
+# Redrawn states PlanScore has not scored. Two-party R+ lean midpoints on the
+# enacted lines, from Dave's Redistricting composites of 2024 presidential
+# results as published by Tennessee Lookout (2026-05-07, updated for the final
+# HB 7003 map). Converted to synthetic two-party votes on the state's real
+# 2024 per-district average turnout.
+MANUAL_2026_LEANS = {
+    "47": {1: 29, 2: 17, 3: 18, 4: 12, 5: 11.5, 6: 13, 7: 11, 8: 10, 9: 10.5},  # TN HB 7003
 }
 # ACS5 vintage year -> demographics key (survey geography matches that congress)
 ACS_VINTAGES = {2015: "cd114", 2016: "cd115", 2019: "cd116", 2022: "cd118"}
@@ -466,14 +474,16 @@ def fetch_members(src=None):
 # ------------------------------------------------------------- 2026 cycle
 
 def build_2026(results_2024, skip=False):
-    """Estimated 2026 results: PlanScore predicted two-party votes for the six
-    redrawn states; 2024 results carried forward everywhere else (same lines).
+    """Estimated 2026 results: PlanScore predicted two-party votes for the
+    redrawn states (Dave's Redistricting-derived leans where PlanScore has no
+    score); 2024 results carried forward everywhere else (same lines).
     """
     if skip:
         return None
+    redrawn = set(PLANSCORE_2026) | set(MANUAL_2026_LEANS)
     out = {}
     for geoid, res in results_2024.items():
-        if geoid[:2] not in PLANSCORE_2026:
+        if geoid[:2] not in redrawn:
             out[geoid] = res
     for fips, plan_id in PLANSCORE_2026.items():
         url = f"https://planscore.s3.amazonaws.com/uploads/{plan_id}/index.json"
@@ -484,6 +494,15 @@ def build_2026(results_2024, skip=False):
             t = dist["totals"]
             dem, rep = int(t["Democratic Votes"]), int(t["Republican Votes"])
             out[geoid] = [dem, rep, dem + rep, "", ""]
+    for fips, leans in MANUAL_2026_LEANS.items():
+        state_two_party = [r[0] + r[1] for g, r in results_2024.items()
+                          if g[:2] == fips and r[0] + r[1] > 0]
+        avg_total = round(sum(state_two_party) / max(len(state_two_party), 1))
+        log(f"  manual leans {fips} ← Dave's Redistricting composite ({len(leans)} districts)")
+        for num, r_lean in leans.items():
+            geoid = fips + str(num).zfill(2)
+            dem = round(avg_total * (50 - r_lean / 2) / 100)
+            out[geoid] = [dem, avg_total - dem, avg_total, "", ""]
     return out
 
 
@@ -652,7 +671,7 @@ def main():
             },
             "provisional2024": provisional_2024,
             "maps2026AsOf": MAPS_2026_AS_OF,
-            "estimated2026Note": "2026 margins for TX/CA/MO/NC/OH/UT are PlanScore model estimates on the enacted lines; other states carry 2024 outcomes (same lines)",
+            "estimated2026Note": "2026 margins for TX/CA/MO/NC/OH/UT are PlanScore model estimates on the enacted lines; TN margins are Dave's Redistricting composites of 2024 presidential results on the HB 7003 lines (via Tennessee Lookout); other states carry 2024 outcomes (same lines)",
             "demographicsCarryover": demo_carryover,
             "cd119DemographicsNote": "cd119 uses 2022 ACS (118th-district geography); no cd119 ACS release yet",
             "cd114cd115DemographicsNote": ("cd114/cd115 use 2021 ACS values tabulated on cd116 lines (same district numbering; shapes differ in NC/PA/VA/FL court-remap areas)" if demo_carryover else "cd114/cd115 from exact 2015/2016 ACS vintages"),

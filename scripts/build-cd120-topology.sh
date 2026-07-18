@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build districts/cd120.json — the 120th-Congress (2026 election) district map.
 #
-# Base: Census GENZ cd119 (500k) with six mid-decade-redraw states replaced by
+# Base: Census GENZ cd119 (500k) with seven mid-decade-redraw states replaced by
 # their enacted 2026 plans (verified sources, July 2026):
 #   TX  PLANC2333 (HB 4, Aug 2025)         — Texas Legislative Council
 #   CA  AB 604 / Prop 50 (Nov 2025)        — UC Berkeley Statewide Database
@@ -10,6 +10,7 @@
 #   OH  Commission map (Oct 31, 2025)      — PlanScore mirror (state posts no GIS file;
 #                                            GeoJSON features are ordered districts 1-15)
 #   UT  Court-adopted Map 1 (Nov 10, 2025) — Utah UGRC SGID ArcGIS service
+#   TN  HB 7003 (May 7, 2026)              — TN Comptroller (NewCongressional26.zip)
 #
 # IMPORTANT: no -proj albersusa — keep lon/lat; the page's d3.geoAlbersUsa projects.
 
@@ -26,7 +27,7 @@ echo "── base: cd119 minus redrawn states"
 fetch "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_cd119_500k.zip" "$WORK/cd119.zip"
 unzip -oq "$WORK/cd119.zip" -d "$WORK/cd119"
 npx -y mapshaper "$WORK/cd119/cb_2024_us_cd119_500k.shp" \
-  -filter '"48,06,29,37,39,49".indexOf(STATEFP) === -1' \
+  -filter '"48,06,29,37,39,49,47".indexOf(STATEFP) === -1' \
   -filter-fields STATEFP,GEOID \
   -simplify visvalingam 12% keep-shapes \
   -o "$WORK/base.json" format=geojson
@@ -53,6 +54,7 @@ shape_state "https://data.capitol.texas.gov/dataset/748c952b-e926-4f44-8d01-a738
 shape_state "https://statewidedatabase.org/pub/data/d25/AB604%202025-08-16.zip" ca 06 DISTRICT
 shape_state "https://www.arcgis.com/sharing/rest/content/items/ee1971b86cce43d4b92b5ce614866a18/data" mo 29 District
 shape_state "https://webservices.ncleg.gov/ViewBillDocument/2025/7667/0/SL%202025-95%20-%20Shapefile" nc 37 DISTRICT
+shape_state "https://comptroller.tn.gov/content/dam/cot/pa/documents/district-maps/congress-districts/NewCongressional26.zip" tn 47 DISTRICT
 
 echo "── Utah (UGRC ArcGIS service)"
 fetch "https://services1.arcgis.com/99lidPhWCzftIe9K/ArcGIS/rest/services/political_us_congress_districts_2026_to_2032/FeatureServer/0/query?where=1%3D1&outFields=DISTRICT&f=geojson" "$WORK/ut_raw.json"
@@ -89,7 +91,7 @@ geoids = [g["properties"]["GEOID"] for g in obj["geometries"]]
 by_state = {}
 for g in geoids: by_state[g[:2]] = by_state.get(g[:2], 0) + 1
 assert len(geoids) == len(set(geoids)), "duplicate GEOIDs"
-for f, n in (("48", 38), ("06", 52), ("29", 8), ("37", 14), ("39", 15), ("49", 4)):
+for f, n in (("48", 38), ("06", 52), ("29", 8), ("37", 14), ("39", 15), ("49", 4), ("47", 9)):
     assert by_state.get(f) == n, f"state {f}: {by_state.get(f)} districts (expected {n})"
 print(f"OK — {len(geoids)} districts, redrawn-state counts verified")
 PY
